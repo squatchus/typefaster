@@ -74,10 +74,10 @@
 
     [self loadText];
     
-    NSCharacterSet *non_letters = [[self cyrillicLetters] invertedSet];
-    NSString *firstWord = [_source_string componentsSeparatedByCharactersInSet:non_letters][0];
-
-    _currentWordLabel.text = firstWord;
+    NSCharacterSet *white_spaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *firstWord = [_source_string componentsSeparatedByCharactersInSet:white_spaces][0];
+    [self updateCurrentWordWithText:firstWord andPosition:0];
+    
     _currentWordRange = NSMakeRange(0, firstWord.length);
     [self showOnlyKeysWithCharactersInString:firstWord];
 
@@ -98,7 +98,7 @@
 
 - (void)loadText {
     _typed_string = [[NSMutableString alloc] initWithString:@""];
-    _source_string = @"бобры загрызли буратино\nон весь в березовом соку\nлежит в траве раскинув руки\nи дятлы кружатся над ним";
+    _source_string = @"О сколько нам открытий чудных\nГотовят просвещенья дух\nИ Опыт, сын ошибок трудных,\nИ Гений, парадоксов друг,\nИ Случай, бог изобретатель";
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
     [sourceText addAttribute:NSFontAttributeName
                        value:[UIFont fontWithName:@"HelveticaNeue" size:16]
@@ -235,8 +235,10 @@
     else if ([_awaited_key isEqualToString:@"\n"])
         _currentWordLabel.text = @"[Ввод]";
     else {
-        NSString *currentWord = [_source_string substringWithRange:_currentWordRange];
-        _currentWordLabel.text = currentWord;
+        NSString *string = [_source_string substringWithRange:_currentWordRange];
+        int position = (int)(_typed_string.length-_currentWordRange.location);
+        if (position >= 0 && position < string.length)
+            [self updateCurrentWordWithText:string andPosition:position];
     }
     
     BOOL shouldBackspace = [_awaited_key isEqualToString:@""];
@@ -252,28 +254,28 @@
     [text addAttribute:NSForegroundColorAttributeName
                        value:[UIColor colorWithHexString:@"999999"]
                        range:NSMakeRange(0, text.length)];
-    // Цвет уже напечатанной части текста
+    // Цвет уже напечатанной части текста (черный)
     [text addAttribute:NSForegroundColorAttributeName
                  value:[UIColor blackColor]
                  range:NSMakeRange(0, _typed_string.length)];
 
-    // Цвет текущего слова
+    // Цвет текущего слова (зеленый)
     if (_typed_string.length-(_currentWordRange.location+_currentWordRange.length) > 0) {
         [text addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor greenColor]
+                 value:[UIColor colorWithHexString:@"009900"]
                  range:NSMakeRange(_currentWordRange.location, MAX(0, _typed_string.length-_currentWordRange.location))];
     }
     else {
         if (!shouldBackspace) {
             // next word
-            NSCharacterSet *non_letters = [[self cyrillicLetters] invertedSet];
+            NSCharacterSet *white_spaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
             NSString *trail = [_source_string substringFromIndex:_typed_string.length];
-            NSArray *words = [trail componentsSeparatedByCharactersInSet:non_letters];
+            NSArray *words = [trail componentsSeparatedByCharactersInSet:white_spaces];
             NSString *next_word;
             for (NSString *word in words) if (word.length > 0) { next_word = word; break; }
             if (next_word && [next_word hasPrefix:_awaited_key]) {
                 NSInteger next_loc = [trail rangeOfString:next_word].location + _typed_string.length;
-                _currentWordLabel.text = next_word;
+                [self updateCurrentWordWithText:next_word andPosition:0];
                 _currentWordRange = NSMakeRange(next_loc, next_word.length);
                 [self showOnlyKeysWithCharactersInString:next_word];
             }
@@ -282,12 +284,12 @@
             }
         }
     }
-    // Цвет последней буквы-опечатки
+    // Цвет последней буквы-опечатки (красный)
     if (shouldBackspace) {
         _stat_mistakes++;
         [self pulseTextViewBackgroundColor];
         [text addAttribute:NSForegroundColorAttributeName
-                     value:[UIColor redColor]
+                     value:[UIColor colorWithHexString:@"FF3333"]
                      range:NSMakeRange(_typed_string.length-1, 1)];
     }
 
@@ -300,6 +302,25 @@
     }
 }
 
+// Обновляем label с текущим словом, которое находится в процессе набора
+//
+- (void)updateCurrentWordWithText:(NSString *)string andPosition:(int)position {
+    NSMutableAttributedString *currentWord = [[NSMutableAttributedString alloc] initWithString:string];
+    [currentWord addAttribute:NSFontAttributeName
+                        value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24]
+                        range:NSMakeRange(0, currentWord.length)];
+    [currentWord addAttribute:NSForegroundColorAttributeName
+                        value:[UIColor colorWithHexString:@"A54466"]
+                        range:NSMakeRange(0, currentWord.length)];
+    if (position >= 0) {
+        [currentWord addAttribute:NSForegroundColorAttributeName
+                            value:[UIColor colorWithHexString:@"336699"]
+                            range:NSMakeRange(position, 1)];
+    }
+    
+    _currentWordLabel.attributedText = currentWord;
+}
+
 // Обновляем данные о количестве набранных символов и совершенных ошибках
 //
 - (void)updateStats {
@@ -310,9 +331,15 @@
     [text addAttribute:NSFontAttributeName
                    value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:21]
                    range:NSMakeRange(0, sep_loc)];
+    [text addAttribute:NSForegroundColorAttributeName
+                       value:[UIColor colorWithHexString:@"A54466"]
+                       range:NSMakeRange(0, sep_loc)];
     [text addAttribute:NSFontAttributeName
                    value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]
                    range:NSMakeRange(sep_loc, length)];
+    [text addAttribute:NSForegroundColorAttributeName
+                 value:[UIColor colorWithHexString:@"CCCCCC"]
+                 range:NSMakeRange(sep_loc, length)];
     _statsLabel.attributedText = text;
 }
 
