@@ -27,6 +27,9 @@
 		B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41756B61B40B419003033F3 /* TFKeyboardView.xib */; };
 		B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41756B91B40BB5D003033F3 /* TFKeyboardView.m */; };
 		B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */; };
+		B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */; };
+		B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */; };
+		B4D5D5D51B41C5F60018DCD3 /* share_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5D41B41C5F60018DCD3 /* share_button@2x.png */; };
 		B4DAF64E1B3F3C8600D39487 /* keyboard_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF64D1B3F3C8600D39487 /* keyboard_background@2x.png */; };
 		B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF64F1B3F527C00D39487 /* letter_popup@2x.png */; };
 		B4DAF65A1B3F64F400D39487 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF6511B3F64F300D39487 /* Icon.png */; };
@@ -81,6 +84,10 @@
 		B41756B91B40BB5D003033F3 /* TFKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFKeyboardView.m; sourceTree = "<group>"; };
 		B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
+		B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Texts.plist; sourceTree = "<group>"; };
+		B4D5D5D11B41BFA50018DCD3 /* ResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		B4D5D5D41B41C5F60018DCD3 /* share_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_button@2x.png"; sourceTree = "<group>"; };
 		B4DAF64D1B3F3C8600D39487 /* keyboard_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_background@2x.png"; sourceTree = "<group>"; };
 		B4DAF64F1B3F527C00D39487 /* letter_popup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letter_popup@2x.png"; sourceTree = "<group>"; };
 		B4DAF6511B3F64F300D39487 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -139,6 +146,8 @@
 				B4010C6F1B3E08C5000DF339 /* ViewController.m */,
 				B4010C911B3EDB9D000DF339 /* MenuViewController.h */,
 				B4010C921B3EDB9D000DF339 /* MenuViewController.m */,
+				B4D5D5D11B41BFA50018DCD3 /* ResultsViewController.h */,
+				B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */,
 				B41756A31B4039E2003033F3 /* KBPanGestureRecognizer.h */,
 				B41756A41B4039E2003033F3 /* KBPanGestureRecognizer.m */,
 				B4010C711B3E08C5000DF339 /* Main.storyboard */,
@@ -147,6 +156,7 @@
 				B41756B91B40BB5D003033F3 /* TFKeyboardView.m */,
 				B4010C741B3E08C5000DF339 /* Images.xcassets */,
 				B4010C761B3E08C5000DF339 /* LaunchScreen.xib */,
+				B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */,
 				B4010C671B3E08C5000DF339 /* Supporting Files */,
 			);
 			path = type.trainer;
@@ -155,6 +165,7 @@
 		B4010C671B3E08C5000DF339 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B4D5D5D41B41C5F60018DCD3 /* share_button@2x.png */,
 				B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */,
 				B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */,
 				B41756B21B405D52003033F3 /* corner_button_sel@2x.png */,
@@ -293,6 +304,7 @@
 				B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */,
 				B41756AE1B404F07003033F3 /* shift_sel@2x.png in Resources */,
 				B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */,
+				B4D5D5D51B41C5F60018DCD3 /* share_button@2x.png in Resources */,
 				B41756B01B404F07003033F3 /* backspace_sel@2x.png in Resources */,
 				B4DAF6681B3F665F00D39487 /* Icon-60@2x.png in Resources */,
 				B41756B11B404F07003033F3 /* backspace@2x.png in Resources */,
@@ -300,6 +312,7 @@
 				B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */,
 				B41756AF1B404F07003033F3 /* shift@2x.png in Resources */,
 				B41756B41B405D52003033F3 /* corner_button_sel@2x.png in Resources */,
+				B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */,
 				B4DAF6691B3F665F00D39487 /* Icon-76.png in Resources */,
 				B4DAF66C1B3F66AC00D39487 /* Icon-60@3x.png in Resources */,
 			);
@@ -322,6 +335,7 @@
 				B4010C701B3E08C5000DF339 /* ViewController.m in Sources */,
 				B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */,
 				B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */,
+				B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */,
 				B4010C6D1B3E08C5000DF339 /* AppDelegate.m in Sources */,
 				B41756A51B4039E2003033F3 /* KBPanGestureRecognizer.m in Sources */,
 				B4010C6A1B3E08C5000DF339 /* main.m in Sources */,

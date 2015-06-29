@@ -97,8 +97,11 @@
 }
 
 - (void)loadText {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Texts" ofType:@"plist"];
+    NSArray *texts = [NSArray arrayWithContentsOfFile:filePath];
+
     _typed_string = [[NSMutableString alloc] initWithString:@""];
-    _source_string = @"О сколько нам открытий чудных\nГотовят просвещенья дух\nИ Опыт, сын ошибок трудных,\nИ Гений, парадоксов друг,\nИ Случай, бог изобретатель";
+    _source_string = /*@"О сколько нам открытий чудных\nГотовят просвещенья дух\nИ Опыт сын ошибок трудных\nИ Гений парадоксов друг\nИ Случай бог изобретатель";*/texts[arc4random()%texts.count][@"text"];
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
     [sourceText addAttribute:NSFontAttributeName
                        value:[UIFont fontWithName:@"HelveticaNeue" size:16]
@@ -125,7 +128,7 @@
         }
     }
     
-    _currentWordLabel.text = @"Конец.";
+    [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
 
 #pragma mark - Keyboard Buttons Handling
