@@ -9,10 +9,25 @@
 #import "ResultsViewController.h"
 
 @interface ResultsViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *resultTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mistakesPercentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *prevResultLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *starView1;
+@property (weak, nonatomic) IBOutlet UIImageView *starView2;
+@property (weak, nonatomic) IBOutlet UIImageView *starView3;
+@property (weak, nonatomic) IBOutlet UIImageView *starView4;
+@property (weak, nonatomic) IBOutlet UIImageView *starView5;
+
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender;
+- (IBAction)onRateButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -23,6 +38,28 @@
     
     _shareButton.layer.cornerRadius = _shareButton.frame.size.height/2.0;
     _continueButton.layer.cornerRadius = _continueButton.frame.size.height/2.0;
+    
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSDictionary *level = [results lastObject][@"level"];
+    int seconds = [[results lastObject][@"seconds"] intValue];
+    int symbols = [[results lastObject][@"symbols"] intValue];
+    int mistakes = [[results lastObject][@"mistakes"] intValue];
+
+    int signsPerMin = symbols / seconds * 60;
+    int mistakesPercent = mistakes * 100 / symbols;
+    NSString *subtitle = [NSString stringWithFormat:@"%@\n%@", level[@"title"], level[@"authors"]];
+    
+    _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", signsPerMin];
+    _mistakesPercentLabel.text = [NSString stringWithFormat:@"%d", mistakesPercent];
+    _textLabel.text = level[@"text"];
+    _authorLabel.text = subtitle;
+    
+    if (results.count > 1) {
+        int prevSeconds = [results[results.count-2][@"seconds"] intValue];
+        int prevSymbols = [results[results.count-2][@"symbols"] intValue];
+        int prevSignsPerMin = prevSymbols / prevSeconds * 60;
+        _prevResultLabel.text = [NSString stringWithFormat:@"%d", prevSignsPerMin];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,5 +78,11 @@
 */
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender {
+    NSLog(@"onShareButtonPressed");
 }
+
+- (IBAction)onRateButtonPressed:(UIButton *)sender {
+    NSLog(@"onRateButtonPressed");
+}
+
 @end

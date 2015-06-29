@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457279036.127156"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "-initSession"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457288560.937354"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457288560.937354"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457288560.937354"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457288560.937354"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457288560.937354"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457288577.137252"
+            timestampString = "457302510.445358"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-loadText"
             landmarkType = "5">
          </BreakpointContent>

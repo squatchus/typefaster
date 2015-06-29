@@ -16,6 +16,8 @@
 
 @property (strong, nonatomic) TFKeyboardView *keyboardView;
 
+@property (nonatomic, strong) NSDictionary *current_level;
+
 @property (nonatomic, strong) NSTimer *session_timer;
 @property int session_seconds;
 
@@ -100,8 +102,15 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Texts" ofType:@"plist"];
     NSArray *texts = [NSArray arrayWithContentsOfFile:filePath];
 
+    int level_num = arc4random()%texts.count;
+    _current_level = texts[level_num];
+    _source_string = texts[level_num][@"text"];
     _typed_string = [[NSMutableString alloc] initWithString:@""];
-    _source_string = /*@"О сколько нам открытий чудных\nГотовят просвещенья дух\nИ Опыт сын ошибок трудных\nИ Гений парадоксов друг\nИ Случай бог изобретатель";*/texts[arc4random()%texts.count][@"text"];
+
+    
+/*@"О сколько нам открытий чудных\nГотовят просвещенья дух\nИ Опыт сын ошибок трудных\nИ Гений парадоксов друг\nИ Случай бог изобретатель";*/
+    
+//    current_level
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
     [sourceText addAttribute:NSFontAttributeName
                        value:[UIFont fontWithName:@"HelveticaNeue" size:16]
@@ -128,6 +137,14 @@
         }
     }
     
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    if (!results) results = [NSMutableArray new];
+    [results addObject:@{@"level": _current_level,
+                         @"seconds": @(_session_seconds),
+                         @"symbols": @(_stat_symbols),
+                         @"mistakes": @(_stat_mistakes)}];
+    [[NSUserDefaults standardUserDefaults] setObject:results forKey:@"results"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
 
@@ -425,7 +442,7 @@
 - (void)pulseTextViewBackgroundColor;
 {
     [UIView animateWithDuration:0.15 animations:^{
-        self.view.backgroundColor = [UIColor colorWithHexString:@"ff6666"];
+        self.view.backgroundColor = [UIColor colorWithHexString:@"ffdede"];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.15 animations:^{
             self.view.backgroundColor = [UIColor whiteColor];
