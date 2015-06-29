@@ -139,6 +139,7 @@
     
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     if (!results) results = [NSMutableArray new];
+    else results = [NSMutableArray arrayWithArray:results]; // for mutability
     [results addObject:@{@"level": _current_level,
                          @"seconds": @(_session_seconds),
                          @"symbols": @(_stat_symbols),

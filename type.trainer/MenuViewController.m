@@ -17,6 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _startTypingButton.layer.cornerRadius = _startTypingButton.frame.size.height/2.0;
+    
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    for (NSDictionary *result in results) {
+        int seconds = [result[@"seconds"] intValue];
+        int symbols = [result[@"symbols"] intValue];
+        int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
+        if (signsPerMin > [_signsPerMinLabel.text intValue])
+            _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", signsPerMin];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +42,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onRateButtonPressed:(UIButton *)sender {
+    NSLog(@"onRateButtonPressed");
+}
 
 @end

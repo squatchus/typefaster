@@ -45,9 +45,9 @@
     int symbols = [[results lastObject][@"symbols"] intValue];
     int mistakes = [[results lastObject][@"mistakes"] intValue];
 
-    int signsPerMin = symbols / seconds * 60;
+    int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
     int mistakesPercent = mistakes * 100 / symbols;
-    NSString *subtitle = [NSString stringWithFormat:@"%@\n%@", level[@"title"], level[@"authors"]];
+    NSString *subtitle = [NSString stringWithFormat:@"%@\n%@", level[@"title"], level[@"author"]];
     
     _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", signsPerMin];
     _mistakesPercentLabel.text = [NSString stringWithFormat:@"%d", mistakesPercent];
@@ -57,7 +57,7 @@
     if (results.count > 1) {
         int prevSeconds = [results[results.count-2][@"seconds"] intValue];
         int prevSymbols = [results[results.count-2][@"symbols"] intValue];
-        int prevSignsPerMin = prevSymbols / prevSeconds * 60;
+        int prevSignsPerMin = (int)((float)prevSymbols / (float)prevSeconds * 60.0);
         _prevResultLabel.text = [NSString stringWithFormat:@"%d", prevSignsPerMin];
     }
 }

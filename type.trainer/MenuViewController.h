@@ -12,8 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *yourSpeedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
-@property (weak, nonatomic) IBOutlet UILabel *wordsPerMinLabel;
-@property (weak, nonatomic) IBOutlet UILabel *mistakesPercentLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *rankLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rankHintLabel;
@@ -25,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *starView5;
 
 @property (weak, nonatomic) IBOutlet UIButton *startTypingButton;
+- (IBAction)onRateButtonPressed:(UIButton *)sender;
 
 @end
