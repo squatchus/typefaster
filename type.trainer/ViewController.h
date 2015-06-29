@@ -10,8 +10,9 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIView *keyboardView;
-
+@property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
