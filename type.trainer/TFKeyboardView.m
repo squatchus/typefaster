@@ -18,4 +18,12 @@
 }
 */
 
+- (void)playClickSound {
+    [[UIDevice currentDevice] playInputClick];
+}
+
+- (BOOL)enableInputClicksWhenVisible {
+    return YES;
+}
+
 @end

@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TFKeyboardView : UIView
+@interface TFKeyboardView : UIView <UIInputViewAudioFeedback>
 
 @property (weak, nonatomic) IBOutlet UIButton *backspaceButton;
 @property (weak, nonatomic) IBOutlet UIButton *shiftButton;
 @property (weak, nonatomic) IBOutlet UIButton *spaceButton;
 @property (weak, nonatomic) IBOutlet UIButton *enterButton;
 @property (weak, nonatomic) IBOutlet UIButton *fullKeyboardButton;
+
+- (void)playClickSound;
 
 @end

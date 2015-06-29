@@ -26,8 +26,6 @@
 		B41756B51B405D52003033F3 /* corner_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B41756B31B405D52003033F3 /* corner_button@2x.png */; };
 		B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41756B61B40B419003033F3 /* TFKeyboardView.xib */; };
 		B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41756B91B40BB5D003033F3 /* TFKeyboardView.m */; };
-		B41756BC1B40C39B003033F3 /* TFAccesoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41756BB1B40C39B003033F3 /* TFAccesoryView.xib */; };
-		B41756BF1B40C3B8003033F3 /* TFAccesoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41756BE1B40C3B8003033F3 /* TFAccesoryView.m */; };
 		B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */; };
 		B4DAF64E1B3F3C8600D39487 /* keyboard_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF64D1B3F3C8600D39487 /* keyboard_background@2x.png */; };
 		B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF64F1B3F527C00D39487 /* letter_popup@2x.png */; };
@@ -81,9 +79,6 @@
 		B41756B61B40B419003033F3 /* TFKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TFKeyboardView.xib; sourceTree = "<group>"; };
 		B41756B81B40BB5D003033F3 /* TFKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFKeyboardView.h; sourceTree = "<group>"; };
 		B41756B91B40BB5D003033F3 /* TFKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFKeyboardView.m; sourceTree = "<group>"; };
-		B41756BB1B40C39B003033F3 /* TFAccesoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TFAccesoryView.xib; sourceTree = "<group>"; };
-		B41756BD1B40C3B8003033F3 /* TFAccesoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAccesoryView.h; sourceTree = "<group>"; };
-		B41756BE1B40C3B8003033F3 /* TFAccesoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAccesoryView.m; sourceTree = "<group>"; };
 		B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		B4DAF64D1B3F3C8600D39487 /* keyboard_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_background@2x.png"; sourceTree = "<group>"; };
@@ -147,9 +142,6 @@
 				B41756A31B4039E2003033F3 /* KBPanGestureRecognizer.h */,
 				B41756A41B4039E2003033F3 /* KBPanGestureRecognizer.m */,
 				B4010C711B3E08C5000DF339 /* Main.storyboard */,
-				B41756BB1B40C39B003033F3 /* TFAccesoryView.xib */,
-				B41756BD1B40C3B8003033F3 /* TFAccesoryView.h */,
-				B41756BE1B40C3B8003033F3 /* TFAccesoryView.m */,
 				B41756B61B40B419003033F3 /* TFKeyboardView.xib */,
 				B41756B81B40BB5D003033F3 /* TFKeyboardView.h */,
 				B41756B91B40BB5D003033F3 /* TFKeyboardView.m */,
@@ -304,7 +296,6 @@
 				B41756B01B404F07003033F3 /* backspace_sel@2x.png in Resources */,
 				B4DAF6681B3F665F00D39487 /* Icon-60@2x.png in Resources */,
 				B41756B11B404F07003033F3 /* backspace@2x.png in Resources */,
-				B41756BC1B40C39B003033F3 /* TFAccesoryView.xib in Resources */,
 				B41756AC1B404F07003033F3 /* space_sel@2x.png in Resources */,
 				B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */,
 				B41756AF1B404F07003033F3 /* shift@2x.png in Resources */,
@@ -330,7 +321,6 @@
 			files = (
 				B4010C701B3E08C5000DF339 /* ViewController.m in Sources */,
 				B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */,
-				B41756BF1B40C3B8003033F3 /* TFAccesoryView.m in Sources */,
 				B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */,
 				B4010C6D1B3E08C5000DF339 /* AppDelegate.m in Sources */,
 				B41756A51B4039E2003033F3 /* KBPanGestureRecognizer.m in Sources */,

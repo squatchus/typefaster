@@ -10,13 +10,11 @@
 #import "KBPanGestureRecognizer.h"
 
 #import "TFKeyboardView.h"
-#import "TFAccesoryView.h"
 #import "UIColor+HexColor.h"
 
 @interface ViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) TFKeyboardView *keyboardView;
-@property (strong, nonatomic) TFAccesoryView *accesoryView;
 
 @property (nonatomic, strong) NSTimer *session_timer;
 @property int session_seconds;
@@ -58,12 +56,6 @@
     panRec.delegate = self;
     [panRec addTarget:self action:@selector(onKeyboardPan:)];
     [_keyboardView addGestureRecognizer:panRec];
-
-    // current word view
-    _accesoryView = [[NSBundle mainBundle] loadNibNamed:@"TFAccesoryView" owner:self options:nil][0];
-    CGRect accesoryFrame = _accesoryView.frame;
-    accesoryFrame.size.height = 54;
-    _accesoryView.frame = accesoryFrame;
     
     UIImage *popup_image = [UIImage imageNamed:@"letter_popup"];
     _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
@@ -85,20 +77,19 @@
     NSCharacterSet *non_letters = [[self cyrillicLetters] invertedSet];
     NSString *firstWord = [_source_string componentsSeparatedByCharactersInSet:non_letters][0];
 
-    _accesoryView.currentWordLabel.text = firstWord;
+    _currentWordLabel.text = firstWord;
     _currentWordRange = NSMakeRange(0, firstWord.length);
     [self showOnlyKeysWithCharactersInString:firstWord];
 
     _awaited_key = [firstWord substringWithRange:NSMakeRange(0, 1)];
     
     _textView.inputView = _keyboardView;
-    _textView.inputAccessoryView = _accesoryView;
     [_textView becomeFirstResponder];
     _textView.selectedRange = NSMakeRange(0, 0);
     
     for (NSLayoutConstraint *constraint in self.view.constraints) {
-        if (constraint.secondItem == _textView && constraint.firstItem == self.bottomLayoutGuide) {
-            CGFloat height = _keyboardView.frame.size.height + _accesoryView.frame.size.height;
+        if (constraint.firstItem == self.bottomLayoutGuide) {
+            CGFloat height = _keyboardView.frame.size.height;
             constraint.constant = height;
             break;
         }
@@ -128,13 +119,13 @@
     [_textView resignFirstResponder];
     
     for (NSLayoutConstraint *constraint in self.view.constraints) {
-        if (constraint.secondItem == _textView && constraint.firstItem == self.bottomLayoutGuide) {
+        if (constraint.firstItem == self.bottomLayoutGuide) {
             constraint.constant = 0;
             break;
         }
     }
     
-    _accesoryView.currentWordLabel.text = @"Конец.";
+    _currentWordLabel.text = @"Конец.";
 }
 
 #pragma mark - Keyboard Buttons Handling
@@ -151,6 +142,7 @@
 // Нажатие небуквенных кнопок на базовой клавиатуре
 //
 - (void)onBackspacePressed:(UIButton *)sender {
+    [_keyboardView playClickSound];
     if (_textView.selectedRange.location > 0) {
         [self updateTextViewWithKey:nil];
         [self updateStats];
@@ -158,21 +150,24 @@
 }
 
 - (void)onShiftPressed:(UIButton *)sender {
+    [_keyboardView playClickSound];
     sender.selected = !sender.selected;
 }
 
 - (void)onSpacePressed:(UIButton *)sender {
+    [_keyboardView playClickSound];
     [self onKeyTapped:@" "];
 }
 
 - (void)onEnterPressed:(UIButton *)sender {
+    [_keyboardView playClickSound];
     [self onKeyTapped:@"\n"];
 }
 
 // Переключение на стандартную клавиатуру
 //
 - (void)onFullKeyboardPressed:(UIButton *)sender {
-    NSLog(@"GoToFullKeyboard");
+    [_keyboardView playClickSound];
     [_textView resignFirstResponder];
     _textView.inputView = nil;
     [_textView becomeFirstResponder];
@@ -220,12 +215,12 @@
     }
     else { // backspace
         if ([_awaited_key isEqualToString:@""]) {
-            _stat_mistakes++;
             NSRange charPosition = NSMakeRange(_typed_string.length-1, 1);
             [_typed_string deleteCharactersInRange:charPosition];
             _awaited_key = [_source_string substringWithRange:NSMakeRange(_typed_string.length, 1)];
         }
         else {
+            // false backspace pressed
             _stat_mistakes++;
             [self pulseTextViewBackgroundColor];
         }
@@ -234,14 +229,14 @@
     _stat_symbols = (int)_typed_string.length;
     
     if ([_awaited_key isEqualToString:@""])
-        _accesoryView.currentWordLabel.text = @"[Стереть]";
+        _currentWordLabel.text = @"[Стереть]";
     else if ([_awaited_key isEqualToString:@" "])
-        _accesoryView.currentWordLabel.text = @"[Пробел]";
+        _currentWordLabel.text = @"[Пробел]";
     else if ([_awaited_key isEqualToString:@"\n"])
-        _accesoryView.currentWordLabel.text = @"[Ввод]";
+        _currentWordLabel.text = @"[Ввод]";
     else {
         NSString *currentWord = [_source_string substringWithRange:_currentWordRange];
-        _accesoryView.currentWordLabel.text = currentWord;
+        _currentWordLabel.text = currentWord;
     }
     
     BOOL shouldBackspace = [_awaited_key isEqualToString:@""];
@@ -278,7 +273,7 @@
             for (NSString *word in words) if (word.length > 0) { next_word = word; break; }
             if (next_word && [next_word hasPrefix:_awaited_key]) {
                 NSInteger next_loc = [trail rangeOfString:next_word].location + _typed_string.length;
-                _accesoryView.currentWordLabel.text = next_word;
+                _currentWordLabel.text = next_word;
                 _currentWordRange = NSMakeRange(next_loc, next_word.length);
                 [self showOnlyKeysWithCharactersInString:next_word];
             }
@@ -289,6 +284,8 @@
     }
     // Цвет последней буквы-опечатки
     if (shouldBackspace) {
+        _stat_mistakes++;
+        [self pulseTextViewBackgroundColor];
         [text addAttribute:NSForegroundColorAttributeName
                      value:[UIColor redColor]
                      range:NSMakeRange(_typed_string.length-1, 1)];
@@ -373,6 +370,8 @@
     if ([subview isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)subview;
         _popup_label.text = label.text;
+        if (recognizer.state == UIGestureRecognizerStateBegan) [_keyboardView playClickSound];
+        
         if (recognizer.state == UIGestureRecognizerStateBegan
             || recognizer.state == UIGestureRecognizerStateChanged) {
             _letter_popup.center = CGPointMake(label.center.x, label.center.y-32);
