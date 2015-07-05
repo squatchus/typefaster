@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/AppDelegate.m"
-            timestampString = "457831345.695999"
+            timestampString = "457832175.212001"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "+numberOfStarsBySpeed:"
             landmarkType = "5">
          </BreakpointContent>

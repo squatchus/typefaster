@@ -7,6 +7,7 @@
 //
 
 #import "ResultsViewController.h"
+#import "AppDelegate.h"
 
 @interface ResultsViewController ()
 
@@ -65,6 +66,24 @@
         int prevSymbols = [results[results.count-2][@"symbols"] intValue];
         int prevSignsPerMin = (int)((float)prevSymbols / (float)prevSeconds * 60.0);
         _prevResultLabel.text = [NSString stringWithFormat:@"%d", prevSignsPerMin];
+    }
+    
+    [self updateStarsBySpeed:signsPerMin];
+}
+
+- (void)updateStarsBySpeed:(int)speed {
+    float numberOfStars = [AppDelegate numberOfStarsBySpeed:speed];
+    int numberOfFullStars = (int)numberOfStars;
+    BOOL halfStar = (numberOfStars-numberOfFullStars > 0);
+    NSArray *stars = @[_starView1, _starView2, _starView3, _starView4, _starView5];
+    for (UIImageView *starView in stars) {
+        if (numberOfFullStars > 0)
+            starView.image = [UIImage imageNamed:@"star_gold.png"];
+        else if (numberOfFullStars==0 && halfStar)
+            starView.image = [UIImage imageNamed:@"star_goldgray.png"];
+        else
+            starView.image = [UIImage imageNamed:@"star_gray.png"];
+        numberOfFullStars--;
     }
 }
 
