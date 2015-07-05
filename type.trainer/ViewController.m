@@ -34,6 +34,11 @@
 @property (nonatomic, strong) NSMutableString *typed_string;
 @property NSRange currentWordRange;
 
+@property BOOL useFullKeyboard;
+@property BOOL useStrictTyping;
+
+- (IBAction)onDoneButtonPressed:(UIButton *)sender;
+
 @end
 
 @implementation ViewController
@@ -41,70 +46,98 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // custom keyboard
-    _keyboardView = [[NSBundle mainBundle] loadNibNamed:@"TFKeyboardView" owner:self options:nil][0];
-    [_keyboardView.shiftButton addTarget:self action:@selector(onShiftPressed:)
-                        forControlEvents:UIControlEventTouchUpInside];
-    [_keyboardView.backspaceButton addTarget:self action:@selector(onBackspacePressed:)
-                        forControlEvents:UIControlEventTouchUpInside];
-    [_keyboardView.enterButton addTarget:self action:@selector(onEnterPressed:)
-                        forControlEvents:UIControlEventTouchUpInside];
-    [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
-                        forControlEvents:UIControlEventTouchUpInside];
-    [_keyboardView.fullKeyboardButton addTarget:self action:@selector(onFullKeyboardPressed:)
-                        forControlEvents:UIControlEventTouchUpInside];
+    _useFullKeyboard = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
+    _useStrictTyping = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
-    panRec.delegate = self;
-    [panRec addTarget:self action:@selector(onKeyboardPan:)];
-    [_keyboardView addGestureRecognizer:panRec];
-    
-    UIImage *popup_image = [UIImage imageNamed:@"letter_popup"];
-    _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
-    _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
-    _popup_label.textAlignment = NSTextAlignmentCenter;
-    
-    if (&UIFontWeightRegular != nil) {
-        _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
-    }
-    else {
-        _popup_label.font = [UIFont systemFontOfSize:32];
-        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
+    if (_useFullKeyboard == NO) {
+        // custom keyboard
+        _keyboardView = [[NSBundle mainBundle] loadNibNamed:@"TFKeyboardView" owner:self options:nil][0];
+        [_keyboardView.shiftButton addTarget:self action:@selector(onShiftPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+        [_keyboardView.backspaceButton addTarget:self action:@selector(onBackspacePressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+        [_keyboardView.enterButton addTarget:self action:@selector(onEnterPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+        [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+        [_keyboardView.fullKeyboardButton addTarget:self action:@selector(onFullKeyboardPressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
         
-        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
+        KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
+        panRec.delegate = self;
+        [panRec addTarget:self action:@selector(onKeyboardPan:)];
+        [_keyboardView addGestureRecognizer:panRec];
+        
+        UIImage *popup_image = [UIImage imageNamed:@"letter_popup"];
+        _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
+        _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
+        _popup_label.textAlignment = NSTextAlignmentCenter;
+        
+        if (&UIFontWeightRegular != nil) {
+            _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
+        }
+        else {
+            _popup_label.font = [UIFont systemFontOfSize:32];
+            [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
+            
+            [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
+        }
+        _popup_label.text = @"К";
+        [_letter_popup addSubview:_popup_label];
     }
-    _popup_label.text = @"К";
-    [_letter_popup addSubview:_popup_label];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [self initSession];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [_textView becomeFirstResponder];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSLog(@"keyboardWillShow");
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
+    NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [self updateCurrentWordBottomMargin:keyboardFrame.size.height withDuration:duration];
+}
+
+- (void)updateCurrentWordBottomMargin:(CGFloat)margin withDuration:(NSTimeInterval)duration {
+    for (NSLayoutConstraint *constraint in self.view.constraints) {
+        if (constraint.firstItem == self.bottomLayoutGuide) {
+            CGFloat height = margin;
+            constraint.constant = height;
+            break;
+        }
+    }
+    [UIView animateWithDuration:duration animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)initSession {
     _stat_symbols = 0;
     _stat_mistakes = 0;
+    [self updateStats];
+    
+    _secondsLabel.text = [NSString stringWithFormat:@"%d:%02d", 0, 0];
 
     [self loadText];
     
     NSCharacterSet *white_spaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSString *firstWord = [_source_string componentsSeparatedByCharactersInSet:white_spaces][0];
     [self updateCurrentWordWithText:firstWord andPosition:0];
-    
     _currentWordRange = NSMakeRange(0, firstWord.length);
-    [self showOnlyKeysWithCharactersInString:firstWord];
-
     _awaited_key = [firstWord substringWithRange:NSMakeRange(0, 1)];
-    
-    _textView.inputView = _keyboardView;
-    [_textView becomeFirstResponder];
-    _textView.selectedRange = NSMakeRange(0, 0);
-    
-    for (NSLayoutConstraint *constraint in self.view.constraints) {
-        if (constraint.firstItem == self.bottomLayoutGuide) {
-            CGFloat height = _keyboardView.frame.size.height;
-            constraint.constant = height;
-            break;
-        }
+
+    if (_useFullKeyboard == NO) {
+        [self showOnlyKeysWithCharactersInString:firstWord];
+        _textView.inputView = _keyboardView;
     }
+    _textView.selectedRange = NSMakeRange(0, 0);
 }
 
 - (void)loadText {
@@ -115,9 +148,6 @@
     _current_level = texts[level_num];
     _source_string = texts[level_num][@"text"];
     _typed_string = [[NSMutableString alloc] initWithString:@""];
-
-    
-/*@"О сколько нам открытий чудных\nГотовят просвещенья дух\nИ Опыт сын ошибок трудных\nИ Гений парадоксов друг\nИ Случай бог изобретатель";*/
     
 //    current_level
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
@@ -191,17 +221,19 @@
 }
 
 - (void)onEnterPressed:(UIButton *)sender {
-    [_keyboardView playClickSound];
-    [self onKeyTapped:@"\n"];
+    NSLog(@"onEnterPressed");
+//    [_keyboardView playClickSound];
+//    [self onKeyTapped:@"\n"];
 }
 
 // Переключение на стандартную клавиатуру
 //
 - (void)onFullKeyboardPressed:(UIButton *)sender {
-    [_keyboardView playClickSound];
-    [_textView resignFirstResponder];
-    _textView.inputView = nil;
-    [_textView becomeFirstResponder];
+    NSLog(@"onFullKeyboardPressed");
+//    [_keyboardView playClickSound];
+//    [_textView resignFirstResponder];
+//    _textView.inputView = nil;
+//    [_textView becomeFirstResponder];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -390,7 +422,9 @@
 }
 
 - (void)dealloc {
+    NSLog(@"dealloc");
     if (_session_timer) [_session_timer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
 - (NSCharacterSet *)cyrillicLetters {
@@ -462,4 +496,7 @@
     }];
 }
 
+- (IBAction)onDoneButtonPressed:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

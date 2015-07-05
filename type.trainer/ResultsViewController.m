@@ -28,6 +28,7 @@
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender;
 - (IBAction)onRateButtonPressed:(UIButton *)sender;
+- (IBAction)onContinueButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -83,6 +84,10 @@
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     NSLog(@"onRateButtonPressed");
+}
+
+- (IBAction)onContinueButtonPressed:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
