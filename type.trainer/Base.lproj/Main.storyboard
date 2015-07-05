@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -41,7 +42,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Ваш лучший результат" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="n5V-XX-98H">
                                 <rect key="frame" x="16" y="53" width="568" height="17"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1374,39 +1375,87 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xd9-yC-ev7" userLabel="ShiftView">
+                                <rect key="frame" x="16" y="554" width="39" height="39"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shiftIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jbg-DD-uAf">
+                                        <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Jbg-DD-uAf" firstAttribute="top" secondItem="xd9-yC-ev7" secondAttribute="top" id="9FL-8h-A79"/>
+                                    <constraint firstAttribute="trailing" secondItem="Jbg-DD-uAf" secondAttribute="trailing" id="BX4-Oi-v0m"/>
+                                    <constraint firstAttribute="bottom" secondItem="Jbg-DD-uAf" secondAttribute="bottom" id="eMQ-kp-mQ8"/>
+                                    <constraint firstItem="Jbg-DD-uAf" firstAttribute="leading" secondItem="xd9-yC-ev7" secondAttribute="leading" id="eWy-0J-T2X"/>
+                                    <constraint firstAttribute="width" secondItem="xd9-yC-ev7" secondAttribute="height" multiplier="1:1" id="yKz-59-UKr"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="987-TH-FIa" userLabel="BackspaceView">
+                                <rect key="frame" x="545" y="554" width="39" height="39"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backspaceIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="cg0-gt-pF1">
+                                        <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="cg0-gt-pF1" secondAttribute="bottom" id="4Ir-Xv-Fp9"/>
+                                    <constraint firstAttribute="trailing" secondItem="cg0-gt-pF1" secondAttribute="trailing" id="A2A-df-gl9"/>
+                                    <constraint firstItem="cg0-gt-pF1" firstAttribute="leading" secondItem="987-TH-FIa" secondAttribute="leading" id="K4f-DE-pbm"/>
+                                    <constraint firstItem="cg0-gt-pF1" firstAttribute="top" secondItem="987-TH-FIa" secondAttribute="top" id="luo-Xt-sv9"/>
+                                    <constraint firstAttribute="width" secondItem="987-TH-FIa" secondAttribute="height" multiplier="1:1" id="xfC-y0-rdY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="fCU-lx-RdU" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="1uw-k3-lp0"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="6hI-Yx-KXA"/>
                             <constraint firstItem="u3z-5g-PjM" firstAttribute="top" secondItem="zJ5-e5-qiK" secondAttribute="bottom" id="7ur-qs-GAr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xd9-yC-ev7" secondAttribute="bottom" constant="7" id="8o5-iO-yeD"/>
                             <constraint firstItem="UDk-eh-x44" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="9Ew-Xf-ouF"/>
                             <constraint firstAttribute="centerX" secondItem="u3z-5g-PjM" secondAttribute="centerX" id="9sy-Wr-nqJ"/>
+                            <constraint firstItem="987-TH-FIa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="534" id="EwU-rd-EJ5"/>
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="top" secondItem="UDk-eh-x44" secondAttribute="bottom" constant="16" id="GRv-cB-MeW"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Hva-EW-t1c"/>
                             <constraint firstItem="UDk-eh-x44" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="If0-0P-nX3"/>
                             <constraint firstItem="fAP-8p-8Bv" firstAttribute="baseline" secondItem="URI-1f-KPK" secondAttribute="baseline" id="KSE-TL-aYb"/>
+                            <constraint firstItem="987-TH-FIa" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="MMV-MO-bAI"/>
                             <constraint firstItem="fCU-lx-RdU" firstAttribute="baseline" secondItem="URI-1f-KPK" secondAttribute="baseline" id="RWE-eV-Vtr"/>
+                            <constraint firstItem="xd9-yC-ev7" firstAttribute="top" secondItem="zJ5-e5-qiK" secondAttribute="bottom" constant="7" id="RoZ-34-IxZ"/>
+                            <constraint firstItem="xd9-yC-ev7" firstAttribute="top" secondItem="u3z-5g-PjM" secondAttribute="bottom" constant="-46" id="Svl-M0-K5i"/>
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="XWj-DH-tjz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="987-TH-FIa" secondAttribute="bottom" constant="7" id="Z0K-PW-qgf"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="bD6-Ac-ckp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UDk-eh-x44" secondAttribute="trailing" id="eae-eT-e3Z"/>
+                            <constraint firstItem="xd9-yC-ev7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gpv-sW-IUc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" constant="-16" id="h9R-3c-EL5"/>
                             <constraint firstAttribute="centerX" secondItem="URI-1f-KPK" secondAttribute="centerX" id="pHs-E3-4b5"/>
+                            <constraint firstItem="987-TH-FIa" firstAttribute="bottom" secondItem="u3z-5g-PjM" secondAttribute="bottom" constant="-7" id="rSl-29-8mv"/>
                             <constraint firstAttribute="width" secondItem="u3z-5g-PjM" secondAttribute="width" id="rtB-Rw-irs"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="u3z-5g-PjM" secondAttribute="bottom" id="sfn-YA-hH4"/>
+                            <constraint firstItem="987-TH-FIa" firstAttribute="top" secondItem="zJ5-e5-qiK" secondAttribute="bottom" constant="7" id="uHh-4h-bsC"/>
                             <constraint firstItem="fAP-8p-8Bv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="wLR-Kh-4cl"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="weL-ZF-fm4"/>
                             <constraint firstItem="fAP-8p-8Bv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="xH9-Pf-xkG"/>
+                            <constraint firstItem="xd9-yC-ev7" firstAttribute="bottom" secondItem="u3z-5g-PjM" secondAttribute="bottom" constant="-7" id="zDm-TL-MaS"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Svl-M0-K5i"/>
                                 <exclude reference="6hI-Yx-KXA"/>
+                                <exclude reference="8o5-iO-yeD"/>
+                                <exclude reference="Z0K-PW-qgf"/>
+                                <exclude reference="EwU-rd-EJ5"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="backspaceView" destination="987-TH-FIa" id="mQD-ag-dw8"/>
                         <outlet property="currentWordLabel" destination="u3z-5g-PjM" id="GDt-mK-7aa"/>
                         <outlet property="secondsLabel" destination="URI-1f-KPK" id="Mn3-Mv-szR"/>
+                        <outlet property="shiftView" destination="xd9-yC-ev7" id="qns-Yl-2ij"/>
                         <outlet property="statsLabel" destination="fCU-lx-RdU" id="ilD-27-HZ2"/>
                         <outlet property="textView" destination="2c5-gV-D3P" id="IKp-ZK-VXO"/>
                         <segue destination="zbn-g5-SSC" kind="show" identifier="showResultsVC" id="bk0-LP-gAD"/>
@@ -1418,10 +1467,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backspaceIcon.png" width="25" height="21"/>
         <image name="gamecenter.png" width="194" height="145"/>
         <image name="rateIcon.png" width="22" height="22"/>
         <image name="settingsIcon.png" width="23" height="22"/>
         <image name="share_button.png" width="23" height="34"/>
+        <image name="shiftIcon.png" width="25" height="21"/>
         <image name="star_gold.png" width="25" height="24"/>
         <image name="star_gray.png" width="25" height="24"/>
     </resources>

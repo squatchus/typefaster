@@ -22,55 +22,27 @@
 @property (weak, nonatomic) IBOutlet UIButton *categoryQuotesButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryHokkuButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryCookiesButton;
-@end
 
+@end
 
 
 @implementation SettingsViewController
 
-- (void)dealloc {
-    NSLog(@"settings dealloc: %p", self);
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"settings did load: %p", self);
     
     // Update switchers & switcher's settings in UserDefaults
     //
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"])
-        _keyboardSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_keyboardSwitch.on) forKey:@"fullKeyboard"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"])
-        _notificationSwitch.on  = [[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_notificationSwitch.on) forKey:@"notifications"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
-        _canMistakeSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_canMistakeSwitch.on) forKey:@"strictTyping"];
+    _keyboardSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
+    _notificationSwitch.on  = [[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue];
+    _canMistakeSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
     
     // Update category buttons & button's settings in UserDefaults
     //
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"])
-        _categoryClassicButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_categoryClassicButton.selected) forKey:@"categoryClassic"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"])
-        _categoryQuotesButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_categoryQuotesButton.selected) forKey:@"categoryQuotes"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"])
-        _categoryHokkuButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_categoryHokkuButton.selected) forKey:@"categoryHokku"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"])
-        _categoryCookiesButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"] boolValue];
-    else
-        [[NSUserDefaults standardUserDefaults] setValue:@(_categoryCookiesButton.selected) forKey:@"categoryCookies"];
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    _categoryClassicButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"] boolValue];
+    _categoryQuotesButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"] boolValue];
+    _categoryHokkuButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"] boolValue];
+    _categoryCookiesButton.selected = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"] boolValue];
     
     [self updateCategoryButton:_categoryClassicButton];
     [self updateCategoryButton:_categoryQuotesButton];

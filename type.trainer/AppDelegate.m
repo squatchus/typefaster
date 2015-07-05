@@ -16,7 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [self initSettings];
     return YES;
 }
 
@@ -40,6 +40,30 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)initSettings {
+    // Update switcher's settings in UserDefaults
+    //
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"notifications"];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"strictTyping"];
+    
+    // Update button's settings in UserDefaults
+    //
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryClassic"];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryQuotes"];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryHokku"];
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"])
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryCookies"];
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

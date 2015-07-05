@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UIImageView *letter_popup;
 @property (nonatomic, strong) UILabel *popup_label;
 
+// Данные о прогрессе в текущем уровне
 @property (nonatomic, strong) NSString *awaited_key;
 @property (nonatomic, strong) NSString *source_string;
 @property (nonatomic, strong) NSMutableString *typed_string;
@@ -37,18 +38,22 @@
 @property BOOL useFullKeyboard;
 @property BOOL useStrictTyping;
 
-- (IBAction)onDoneButtonPressed:(UIButton *)sender;
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
+    _shiftView.layer.cornerRadius = 4;
+    _backspaceView.layer.cornerRadius = 4;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     _useFullKeyboard = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
     _useStrictTyping = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     if (_useFullKeyboard == NO) {
         // custom keyboard
@@ -56,12 +61,8 @@
         [_keyboardView.shiftButton addTarget:self action:@selector(onShiftPressed:)
                             forControlEvents:UIControlEventTouchUpInside];
         [_keyboardView.backspaceButton addTarget:self action:@selector(onBackspacePressed:)
-                            forControlEvents:UIControlEventTouchUpInside];
-        [_keyboardView.enterButton addTarget:self action:@selector(onEnterPressed:)
-                            forControlEvents:UIControlEventTouchUpInside];
+                                forControlEvents:UIControlEventTouchUpInside];
         [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
-                            forControlEvents:UIControlEventTouchUpInside];
-        [_keyboardView.fullKeyboardButton addTarget:self action:@selector(onFullKeyboardPressed:)
                             forControlEvents:UIControlEventTouchUpInside];
         
         KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
@@ -73,22 +74,20 @@
         _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
         _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
         _popup_label.textAlignment = NSTextAlignmentCenter;
+        [_letter_popup addSubview:_popup_label];
         
-        if (&UIFontWeightRegular != nil) {
+        if (&UIFontWeightRegular != nil)
             _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
-        }
-        else {
+        else
             _popup_label.font = [UIFont systemFontOfSize:32];
+
+        if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
             [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
             
             [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
         }
-        _popup_label.text = @"К";
-        [_letter_popup addSubview:_popup_label];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
+    
     [self initSession];
 }
 
@@ -220,22 +219,6 @@
     [self onKeyTapped:@" "];
 }
 
-- (void)onEnterPressed:(UIButton *)sender {
-    NSLog(@"onEnterPressed");
-//    [_keyboardView playClickSound];
-//    [self onKeyTapped:@"\n"];
-}
-
-// Переключение на стандартную клавиатуру
-//
-- (void)onFullKeyboardPressed:(UIButton *)sender {
-    NSLog(@"onFullKeyboardPressed");
-//    [_keyboardView playClickSound];
-//    [_textView resignFirstResponder];
-//    _textView.inputView = nil;
-//    [_textView becomeFirstResponder];
-}
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     [self onKeyTapped:text];
     return NO;
@@ -291,9 +274,17 @@
     
     _stat_symbols = (int)_typed_string.length;
     
-    if ([_awaited_key isEqualToString:@""])
-        _currentWordLabel.text = @"[Стереть]";
-    else if ([_awaited_key isEqualToString:@" "])
+
+    _shiftView.hidden = YES;
+    _backspaceView.hidden = YES;
+    
+    if ([_awaited_key isEqualToString:@""]) _backspaceView.hidden = NO;
+
+    unichar character;
+    if (_awaited_key.length > 0) character = [_awaited_key characterAtIndex:0];
+    if ([[self cyrillicUppercase] characterIsMember:character]) _shiftView.hidden = NO;
+    
+    if ([_awaited_key isEqualToString:@" "])
         _currentWordLabel.text = @"\" \"";
     else if ([_awaited_key isEqualToString:@"\n"])
         [self onKeyTapped:@"\n"];
@@ -407,6 +398,8 @@
     _statsLabel.attributedText = text;
 }
 
+// Обновляем показатель таймера
+//
 - (void)updateTimer {
     _session_seconds++;
     int minutes = _session_seconds/60;
@@ -425,6 +418,18 @@
     NSLog(@"dealloc");
     if (_session_timer) [_session_timer invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+}
+
+- (NSCharacterSet *)cyrillicLowercase {
+    NSString *string = @"абвгдеёжзийклмнопрстуфхцчшщьыъэюя";
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:string];
+    return set;
+}
+
+- (NSCharacterSet *)cyrillicUppercase {
+    NSString *string = [@"абвгдеёжзийклмнопрстуфхцчшщьыъэюя" uppercaseString];
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:string];
+    return set;
 }
 
 - (NSCharacterSet *)cyrillicLetters {
@@ -463,7 +468,6 @@
     if ([subview isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)subview;
         _popup_label.text = label.text;
-//        if (recognizer.state == UIGestureRecognizerStateBegan) [_keyboardView playClickSound];
         
         if (recognizer.state == UIGestureRecognizerStateBegan
             || recognizer.state == UIGestureRecognizerStateChanged) {
@@ -485,8 +489,7 @@
     }
 }
 
-- (void)pulseTextViewBackgroundColor;
-{
+- (void)pulseTextViewBackgroundColor {
     [UIView animateWithDuration:0.15 animations:^{
         self.view.backgroundColor = [UIColor colorWithHexString:@"ffdede"];
     } completion:^(BOOL finished) {
@@ -499,4 +502,5 @@
 - (IBAction)onDoneButtonPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 @end
