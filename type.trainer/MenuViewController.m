@@ -7,6 +7,7 @@
 //
 
 #import "MenuViewController.h"
+#import "UIColor+HexColor.h"
 
 @interface MenuViewController ()
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mxu-bG-8Jk">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -701,7 +702,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2c5-gV-D3P">
-                                <rect key="frame" x="32" y="75" width="536" height="471"/>
+                                <rect key="frame" x="32" y="75" width="568" height="471"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment content="о">
@@ -1023,7 +1024,7 @@
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="XWj-DH-tjz"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="bD6-Ac-ckp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UDk-eh-x44" secondAttribute="trailing" id="eae-eT-e3Z"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" constant="16" id="h9R-3c-EL5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" constant="-16" id="h9R-3c-EL5"/>
                             <constraint firstAttribute="centerX" secondItem="URI-1f-KPK" secondAttribute="centerX" id="pHs-E3-4b5"/>
                             <constraint firstAttribute="width" secondItem="u3z-5g-PjM" secondAttribute="width" id="rtB-Rw-irs"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="u3z-5g-PjM" secondAttribute="bottom" id="sfn-YA-hH4"/>

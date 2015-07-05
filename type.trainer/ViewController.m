@@ -157,6 +157,7 @@
     if (!_session_timer) {
         [self startSession];
     }
+    [_keyboardView playClickSound];
     [self updateTextViewWithKey:keyString]; // also calculate stats
 }
 
@@ -252,9 +253,10 @@
     if ([_awaited_key isEqualToString:@""])
         _currentWordLabel.text = @"[Стереть]";
     else if ([_awaited_key isEqualToString:@" "])
-        _currentWordLabel.text = @"[Пробел]";
+        _currentWordLabel.text = @"\" \"";
     else if ([_awaited_key isEqualToString:@"\n"])
-        _currentWordLabel.text = @"[Ввод]";
+        [self onKeyTapped:@"\n"];
+//        _currentWordLabel.text = @"[Ввод]";
     else {
         NSString *string = [_source_string substringWithRange:_currentWordRange];
         int position = (int)(_typed_string.length-_currentWordRange.location);
@@ -418,7 +420,7 @@
     if ([subview isKindOfClass:[UILabel class]]) {
         UILabel *label = (UILabel *)subview;
         _popup_label.text = label.text;
-        if (recognizer.state == UIGestureRecognizerStateBegan) [_keyboardView playClickSound];
+//        if (recognizer.state == UIGestureRecognizerStateBegan) [_keyboardView playClickSound];
         
         if (recognizer.state == UIGestureRecognizerStateBegan
             || recognizer.state == UIGestureRecognizerStateChanged) {
