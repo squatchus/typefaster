@@ -26,6 +26,12 @@
 		B41756B51B405D52003033F3 /* corner_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B41756B31B405D52003033F3 /* corner_button@2x.png */; };
 		B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B41756B61B40B419003033F3 /* TFKeyboardView.xib */; };
 		B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = B41756B91B40BB5D003033F3 /* TFKeyboardView.m */; };
+		B421D1851B4975D2006F17F7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B421D1841B4975D2006F17F7 /* SettingsViewController.m */; };
+		B421D1881B4984B6006F17F7 /* rateIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421D1861B4984B6006F17F7 /* rateIcon@2x.png */; };
+		B421D1891B4984B6006F17F7 /* settingsIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421D1871B4984B6006F17F7 /* settingsIcon@2x.png */; };
+		B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */; };
+		B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */; };
+		B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */; };
 		B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */; };
 		B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */; };
 		B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */; };
@@ -83,6 +89,13 @@
 		B41756B61B40B419003033F3 /* TFKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TFKeyboardView.xib; sourceTree = "<group>"; };
 		B41756B81B40BB5D003033F3 /* TFKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFKeyboardView.h; sourceTree = "<group>"; };
 		B41756B91B40BB5D003033F3 /* TFKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFKeyboardView.m; sourceTree = "<group>"; };
+		B421D1831B4975D2006F17F7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B421D1841B4975D2006F17F7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B421D1861B4984B6006F17F7 /* rateIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rateIcon@2x.png"; sourceTree = "<group>"; };
+		B421D1871B4984B6006F17F7 /* settingsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingsIcon@2x.png"; sourceTree = "<group>"; };
+		B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
+		B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
+		B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
 		B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Texts.plist; sourceTree = "<group>"; };
@@ -148,6 +161,8 @@
 				B4010C6F1B3E08C5000DF339 /* ViewController.m */,
 				B4010C911B3EDB9D000DF339 /* MenuViewController.h */,
 				B4010C921B3EDB9D000DF339 /* MenuViewController.m */,
+				B421D1831B4975D2006F17F7 /* SettingsViewController.h */,
+				B421D1841B4975D2006F17F7 /* SettingsViewController.m */,
 				B4D5D5D11B41BFA50018DCD3 /* ResultsViewController.h */,
 				B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */,
 				B41756A31B4039E2003033F3 /* KBPanGestureRecognizer.h */,
@@ -167,6 +182,11 @@
 		B4010C671B3E08C5000DF339 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B421D1861B4984B6006F17F7 /* rateIcon@2x.png */,
+				B421D1871B4984B6006F17F7 /* settingsIcon@2x.png */,
+				B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */,
+				B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */,
+				B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */,
 				B4D5D5D61B41E8E30018DCD3 /* gamecenter@2x.png */,
 				B4D5D5D41B41C5F60018DCD3 /* share_button@2x.png */,
 				B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */,
@@ -304,9 +324,13 @@
 				B4010C751B3E08C5000DF339 /* Images.xcassets in Resources */,
 				B4DAF6671B3F665F00D39487 /* Icon-60.png in Resources */,
 				B41756B51B405D52003033F3 /* corner_button@2x.png in Resources */,
+				B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */,
 				B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */,
 				B41756AE1B404F07003033F3 /* shift_sel@2x.png in Resources */,
 				B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */,
+				B421D1891B4984B6006F17F7 /* settingsIcon@2x.png in Resources */,
+				B421D1881B4984B6006F17F7 /* rateIcon@2x.png in Resources */,
+				B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */,
 				B4D5D5D51B41C5F60018DCD3 /* share_button@2x.png in Resources */,
 				B4D5D5D71B41E8E30018DCD3 /* gamecenter@2x.png in Resources */,
 				B41756B01B404F07003033F3 /* backspace_sel@2x.png in Resources */,
@@ -314,6 +338,7 @@
 				B41756B11B404F07003033F3 /* backspace@2x.png in Resources */,
 				B41756AC1B404F07003033F3 /* space_sel@2x.png in Resources */,
 				B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */,
+				B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */,
 				B41756AF1B404F07003033F3 /* shift@2x.png in Resources */,
 				B41756B41B405D52003033F3 /* corner_button_sel@2x.png in Resources */,
 				B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */,
@@ -339,6 +364,7 @@
 				B4010C701B3E08C5000DF339 /* ViewController.m in Sources */,
 				B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */,
 				B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */,
+				B421D1851B4975D2006F17F7 /* SettingsViewController.m in Sources */,
 				B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */,
 				B4010C6D1B3E08C5000DF339 /* AppDelegate.m in Sources */,
 				B41756A51B4039E2003033F3 /* KBPanGestureRecognizer.m in Sources */,
@@ -471,6 +497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/type.trainer",
@@ -488,6 +515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/type.trainer",

@@ -23,6 +23,12 @@
 @property (weak, nonatomic) IBOutlet UIImageView *starView5;
 
 @property (weak, nonatomic) IBOutlet UIButton *startTypingButton;
+@property (weak, nonatomic) IBOutlet UIButton *gameCenterButton;
+@property (weak, nonatomic) IBOutlet UIButton *rateButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+
+
 - (IBAction)onRateButtonPressed:(UIButton *)sender;
+- (IBAction)onGameCenterButtonPressed:(UIButton *)sender;
 
 @end

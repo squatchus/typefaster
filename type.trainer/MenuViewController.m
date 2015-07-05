@@ -17,6 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _rateButton.layer.cornerRadius = _rateButton.frame.size.height/2.0;
+    _settingsButton.layer.cornerRadius = _settingsButton.frame.size.height/2.0;
+    _gameCenterButton.layer.cornerRadius = _gameCenterButton.frame.size.height/2.0;
     _startTypingButton.layer.cornerRadius = _startTypingButton.frame.size.height/2.0;
     
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
@@ -46,6 +49,9 @@
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     NSLog(@"onRateButtonPressed");
+}
+
+- (IBAction)onGameCenterButtonPressed:(UIButton *)sender {
 }
 
 @end

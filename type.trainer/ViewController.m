@@ -63,7 +63,16 @@
     _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
     _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
     _popup_label.textAlignment = NSTextAlignmentCenter;
-    _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
+    
+    if (&UIFontWeightRegular != nil) {
+        _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
+    }
+    else {
+        _popup_label.font = [UIFont systemFontOfSize:32];
+        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
+        
+        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
+    }
     _popup_label.text = @"К";
     [_letter_popup addSubview:_popup_label];
     
