@@ -8,6 +8,7 @@
 
 #import "MenuViewController.h"
 #import "UIColor+HexColor.h"
+#import "AppDelegate.h"
 
 @interface MenuViewController ()
 
@@ -41,64 +42,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSString *)rankTitleBySpeed:(int)speed {
-    if (speed < 30) return @"Новичек";              // [0..29]
-    else if (speed < 40) return @"Ученик";          // [30..39]
-    else if (speed < 55) return @"Освоившийся";     // [40..54]
-    else if (speed < 75) return @"Уверенный";       // [55..74]
-    else if (speed < 100) return @"Опытный";        // [75..99]
-    else if (speed < 130) return @"Бывалый";        // [100..129]
-    else if (speed < 165) return @"Продвинутый";    // [130..164]
-    else if (speed < 205) return @"Мастер";         // [165..204]
-    else if (speed < 250) return @"Гуру";           // [204..249]
-    else return @"Запредельный";                    // [250..250+]
-}
-
-- (int)minValueForRank:(NSString *)rankString {
-    NSDictionary *maxValues = @{@"Новичек": @0,
-                                @"Ученик": @30,
-                                @"Освоившийся": @40,
-                                @"Уверенный": @55,
-                                @"Опытный": @75,
-                                @"Бывалый": @100,
-                                @"Продвинутый": @130,
-                                @"Мастер": @165,
-                                @"Гуру": @205,
-                                @"Запредельный": @250};
-    return [maxValues[rankString] intValue];
-}
-
-- (int)maxValueForRank:(NSString *)rankString {
-    NSDictionary *maxValues = @{@"Новичек": @30,
-                                @"Ученик": @40,
-                                @"Освоившийся": @55,
-                                @"Уверенный": @75,
-                                @"Опытный": @100,
-                                @"Бывалый": @130,
-                                @"Продвинутый": @165,
-                                @"Мастер": @205,
-                                @"Гуру": @250,
-                                @"Запредельный": @300};
-    return [maxValues[rankString] intValue];
-}
-
-- (NSString *)nextRankForRank:(NSString *)rankString {
-    NSArray *ranks = @[@"Новичек", @"Ученик", @"Освоившийся", @"Уверенный", @"Опытный", @"Бывалый", @"Продвинутый", @"Мастер", @"Гуру", @"Запредельный"];
-    int index = [ranks indexOfObject:rankString];
-    index++;
-    if (index < ranks.count) return ranks[index];
-    return nil;
-}
-
 - (void)updateStarsBySpeed:(int)speed {
-    NSArray *starRatings = @[@0, @0.5, @1, @1.5, @2, @2.5, @3, @3.5, @4, @4.5, @5]; // 11
-    NSString *rankString = [self rankTitleBySpeed:[_signsPerMinLabel.text intValue]];
+    NSString *rankString = [AppDelegate rankTitleBySpeed:[_signsPerMinLabel.text intValue]];
     NSString *buttonTitle = [NSString stringWithFormat:@"Ранг - %@", rankString];
     [_gameCenterButton setTitle:buttonTitle forState:UIControlStateNormal];
-    int maxValue = [self maxValueForRank:rankString];
-    float percent = (float)speed * 100.0 / (float)maxValue;
-    int index = percent/10;
-    float numberOfStars = [starRatings[index] floatValue];
+    float numberOfStars = [AppDelegate numberOfStarsBySpeed:speed];
     int numberOfFullStars = (int)numberOfStars;
     BOOL halfStar = (numberOfStars-numberOfFullStars > 0);
     NSArray *stars = @[_starView1, _starView2, _starView3, _starView4, _starView5];
@@ -112,10 +60,10 @@
         numberOfFullStars--;
     }
     
-    NSString *nextRank = [self nextRankForRank:rankString];
+    NSString *nextRank = [AppDelegate rankAfterRank:rankString];
     if (nextRank) {
-        int nextMinValue = [self minValueForRank:nextRank];
-        int nextMaxValue = [self maxValueForRank:nextRank];
+        int nextMinValue = [AppDelegate minValueForRank:nextRank];
+        int nextMaxValue = [AppDelegate maxValueForRank:nextRank];
         _rankHintLabel.text = [NSString stringWithFormat:@"Следующая цель: %d знаков/мин.", (speed < nextMinValue)?nextMinValue:nextMaxValue];
     }
     else {

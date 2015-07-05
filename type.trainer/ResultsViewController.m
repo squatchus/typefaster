@@ -25,6 +25,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton *rateButton;
+
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender;
 - (IBAction)onRateButtonPressed:(UIButton *)sender;
@@ -39,6 +42,8 @@
     
     _shareButton.layer.cornerRadius = _shareButton.frame.size.height/2.0;
     _continueButton.layer.cornerRadius = _continueButton.frame.size.height/2.0;
+    _rateButton.layer.cornerRadius = _rateButton.frame.size.height/2.0;
+    _settingsButton.layer.cornerRadius = _settingsButton.frame.size.height/2.0;
     
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
@@ -77,6 +82,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender {
     NSLog(@"onShareButtonPressed");

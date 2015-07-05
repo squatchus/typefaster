@@ -47,23 +47,82 @@
     //
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"])
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"])
         [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"notifications"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"strictTyping"];
     
     // Update button's settings in UserDefaults
     //
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"])
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryClassic"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"])
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryQuotes"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"])
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryHokku"];
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"])
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryCookies"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (NSString *)rankTitleBySpeed:(int)speed {
+    if (speed < 30) return @"Новичек";              // [0..29]
+    else if (speed < 40) return @"Ученик";          // [30..39]
+    else if (speed < 55) return @"Освоившийся";     // [40..54]
+    else if (speed < 75) return @"Уверенный";       // [55..74]
+    else if (speed < 100) return @"Опытный";        // [75..99]
+    else if (speed < 130) return @"Бывалый";        // [100..129]
+    else if (speed < 165) return @"Продвинутый";    // [130..164]
+    else if (speed < 205) return @"Мастер";         // [165..204]
+    else if (speed < 250) return @"Гуру";           // [204..249]
+    else return @"Запредельный";                    // [250..250+]
+}
+
++ (int)minValueForRank:(NSString *)rankString {
+    NSDictionary *maxValues = @{@"Новичек": @0,
+                                @"Ученик": @30,
+                                @"Освоившийся": @40,
+                                @"Уверенный": @55,
+                                @"Опытный": @75,
+                                @"Бывалый": @100,
+                                @"Продвинутый": @130,
+                                @"Мастер": @165,
+                                @"Гуру": @205,
+                                @"Запредельный": @250};
+    return [maxValues[rankString] intValue];
+}
+
++ (int)maxValueForRank:(NSString *)rankString {
+    NSDictionary *maxValues = @{@"Новичек": @30,
+                                @"Ученик": @40,
+                                @"Освоившийся": @55,
+                                @"Уверенный": @75,
+                                @"Опытный": @100,
+                                @"Бывалый": @130,
+                                @"Продвинутый": @165,
+                                @"Мастер": @205,
+                                @"Гуру": @250,
+                                @"Запредельный": @300};
+    return [maxValues[rankString] intValue];
+}
+
++ (NSString *)rankAfterRank:(NSString *)rankString {
+    NSArray *ranks = @[@"Новичек", @"Ученик", @"Освоившийся", @"Уверенный", @"Опытный", @"Бывалый", @"Продвинутый", @"Мастер", @"Гуру", @"Запредельный"];
+    NSInteger index = [ranks indexOfObject:rankString];
+    index++;
+    if (index < ranks.count) return ranks[index];
+    return nil;
+}
+
++ (float)numberOfStarsBySpeed:(int)speed {
+    NSArray *starRatings = @[@0, @0.5, @1, @1.5, @2, @2.5, @3, @3.5, @4, @4.5, @5]; // 11
+    NSString *rankString = [self rankTitleBySpeed:speed];
+    int maxValue = [self maxValueForRank:rankString];
+    float percent = MIN(100, (float)speed * 100.0 / (float)maxValue);
+    int index = percent/10;
+    float numberOfStars = [starRatings[index] floatValue];
+    return numberOfStars;
 }
 
 @end

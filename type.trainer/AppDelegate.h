@@ -12,6 +12,12 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (NSString *)rankTitleBySpeed:(int)speed;
++ (int)minValueForRank:(NSString *)rankString;
++ (int)maxValueForRank:(NSString *)rankString;
++ (NSString *)rankAfterRank:(NSString *)rankString;
++ (float)numberOfStarsBySpeed:(int)speed;
+
 
 @end
 
