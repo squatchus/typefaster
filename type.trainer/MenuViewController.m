@@ -25,16 +25,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
-    for (NSDictionary *result in results) {
-        int seconds = [result[@"seconds"] intValue];
-        int symbols = [result[@"symbols"] intValue];
-        int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
-        if (signsPerMin > [_signsPerMinLabel.text intValue])
-            _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", signsPerMin];
-    }
-    
-    [self updateStarsBySpeed:[_signsPerMinLabel.text intValue]];
+    int bestResult = [AppDelegate bestResult];
+    [self updateStarsBySpeed:bestResult];
+    _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", bestResult];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,7 +36,7 @@
 }
 
 - (void)updateStarsBySpeed:(int)speed {
-    NSString *rankString = [AppDelegate rankTitleBySpeed:[_signsPerMinLabel.text intValue]];
+    NSString *rankString = [AppDelegate currentRank];
     NSString *buttonTitle = [NSString stringWithFormat:@"Ранг - %@", rankString];
     [_gameCenterButton setTitle:buttonTitle forState:UIControlStateNormal];
     float numberOfStars = [AppDelegate numberOfStarsBySpeed:speed];

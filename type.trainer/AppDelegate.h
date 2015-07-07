@@ -8,16 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+#define kAllKeysInKeyboard 31
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
++ (float)numberOfStarsBySpeed:(int)speed;
 + (NSString *)rankTitleBySpeed:(int)speed;
+
 + (int)minValueForRank:(NSString *)rankString;
 + (int)maxValueForRank:(NSString *)rankString;
 + (NSString *)rankAfterRank:(NSString *)rankString;
-+ (float)numberOfStarsBySpeed:(int)speed;
 
++ (int)bestResult;
++ (NSString *)currentRank;
++ (int)numberOfKeysForCurrentRank;
 
 @end
 

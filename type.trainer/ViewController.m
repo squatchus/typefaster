@@ -8,13 +8,47 @@
 
 #import "ViewController.h"
 #import "KBPanGestureRecognizer.h"
-
+#import "AppDelegate.h"
 #import "TFKeyboardView.h"
 #import "UIColor+HexColor.h"
+
+
+#pragma mark - Tokens
+
+@interface Token : NSObject
+
+@property (nonatomic, strong) NSString *string;
+@property int startIndex;
+@property int endIndex;
+
+- (id)initWithString:(NSString *)string startIndex:(int)start endIndex:(int)end;
+
+@end
+
+@implementation Token
+
+- (id)initWithString:(NSString *)string startIndex:(int)start endIndex:(int)end {
+    if (self = [super init]) {
+        _string = string;
+        _startIndex = start;
+        _endIndex = end;
+        return self;
+    }
+    return nil;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"[%@] (%d, %d)", _string, _startIndex, _endIndex];
+}
+
+@end
+
+#pragma mark - Controller
 
 @interface ViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) TFKeyboardView *keyboardView;
+@property (weak, nonatomic) UILabel *lastTouchedKey;
 
 @property (nonatomic, strong) NSDictionary *current_level;
 
@@ -30,15 +64,30 @@
 @property (nonatomic, strong) UILabel *popup_label;
 
 // Данные о прогрессе в текущем уровне
+@property (nonatomic, strong) NSMutableArray *tokens;
+@property (nonatomic, strong) Token *currentToken;
+
+// Исп-ся только в режиме строгого набора
+// Говорит о том, нажатие какой клавиши ожидает приложение
+//
 @property (nonatomic, strong) NSString *awaited_key;
+
+@property (nonatomic, strong) NSArray *text_parts;
 @property (nonatomic, strong) NSString *source_string;
 @property (nonatomic, strong) NSMutableString *typed_string;
 @property NSRange currentWordRange;
 
+@property BOOL useClassic;
+@property BOOL useCookies;
+@property BOOL useHokku;
+@property BOOL useQuotes;
+
 @property BOOL useFullKeyboard;
 @property BOOL useStrictTyping;
+@property int numberOfKeys;
 
 @end
+
 
 @implementation ViewController
 
@@ -49,45 +98,48 @@
     
     _shiftView.layer.cornerRadius = 4;
     _backspaceView.layer.cornerRadius = 4;
+    
+    // custom keyboard
+    _keyboardView = [[NSBundle mainBundle] loadNibNamed:@"TFKeyboardView" owner:self options:nil][0];
+    [_keyboardView.shiftButton addTarget:self action:@selector(onShiftPressed:)
+                        forControlEvents:UIControlEventTouchUpInside];
+    [_keyboardView.backspaceButton addTarget:self action:@selector(onBackspacePressed:)
+                            forControlEvents:UIControlEventTouchUpInside];
+    [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
+                        forControlEvents:UIControlEventTouchUpInside];
+    
+    KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
+    panRec.delegate = self;
+    [panRec addTarget:self action:@selector(onKeyboardPan:)];
+    [_keyboardView addGestureRecognizer:panRec];
+    
+    UIImage *popup_image = [UIImage imageNamed:@"letter_popup"];
+    _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
+    _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
+    _popup_label.textAlignment = NSTextAlignmentCenter;
+    [_letter_popup addSubview:_popup_label];
+    
+    if (&UIFontWeightRegular != nil)
+        _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
+    else // UIFontWeightRegular available from iOS 8.2
+        _popup_label.font = [UIFont systemFontOfSize:32];
+    
+    if (SYSTEM_VERSION_LESS_THAN(@"8.0")) { // BUG (keyboard out of view bounds)
+        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
+        
+        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    _useClassic = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"] boolValue];
+    _useCookies = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"] boolValue];
+    _useHokku = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"] boolValue];
+    _useQuotes = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryQuotes"] boolValue];
+    
     _useFullKeyboard = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
     _useStrictTyping = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
-    
-    if (_useFullKeyboard == NO) {
-        // custom keyboard
-        _keyboardView = [[NSBundle mainBundle] loadNibNamed:@"TFKeyboardView" owner:self options:nil][0];
-        [_keyboardView.shiftButton addTarget:self action:@selector(onShiftPressed:)
-                            forControlEvents:UIControlEventTouchUpInside];
-        [_keyboardView.backspaceButton addTarget:self action:@selector(onBackspacePressed:)
-                                forControlEvents:UIControlEventTouchUpInside];
-        [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
-                            forControlEvents:UIControlEventTouchUpInside];
-        
-        KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
-        panRec.delegate = self;
-        [panRec addTarget:self action:@selector(onKeyboardPan:)];
-        [_keyboardView addGestureRecognizer:panRec];
-        
-        UIImage *popup_image = [UIImage imageNamed:@"letter_popup"];
-        _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
-        _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
-        _popup_label.textAlignment = NSTextAlignmentCenter;
-        [_letter_popup addSubview:_popup_label];
-        
-        if (&UIFontWeightRegular != nil)
-            _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
-        else
-            _popup_label.font = [UIFont systemFontOfSize:32];
-
-        if (SYSTEM_VERSION_LESS_THAN(@"8.0")) {
-            [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
-            
-            [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
-        }
-    }
-    
+    _numberOfKeys = [AppDelegate numberOfKeysForCurrentRank];
     [self initSession];
 }
 
@@ -120,33 +172,49 @@
 - (void)initSession {
     _stat_symbols = 0;
     _stat_mistakes = 0;
-    [self updateStats];
+    [self updateStatsLabel];
     
     _secondsLabel.text = [NSString stringWithFormat:@"%d:%02d", 0, 0];
 
     [self loadText];
-    
-    NSCharacterSet *white_spaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    NSString *firstWord = [_source_string componentsSeparatedByCharactersInSet:white_spaces][0];
-    [self updateCurrentWordWithText:firstWord andPosition:0];
-    _currentWordRange = NSMakeRange(0, firstWord.length);
-    _awaited_key = [firstWord substringWithRange:NSMakeRange(0, 1)];
+    [self updateCurrentWord];
+    [self showOnlyKeysWithCharactersInString:_currentToken.string];
+    _awaited_key = [_currentToken.string substringWithRange:NSMakeRange(0, 1)];
 
-    if (_useFullKeyboard == NO) {
-        [self showOnlyKeysWithCharactersInString:firstWord];
+    if (_useFullKeyboard)
+        _textView.inputView = nil;
+    else
         _textView.inputView = _keyboardView;
-    }
-    _textView.selectedRange = NSMakeRange(0, 0);
 }
 
 - (void)loadText {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Texts" ofType:@"plist"];
-    NSArray *texts = [NSArray arrayWithContentsOfFile:filePath];
-
-    int level_num = arc4random()%texts.count;
-    _current_level = texts[level_num];
-    _source_string = texts[level_num][@"text"];
+    NSDictionary *texts = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    NSMutableArray *allTexts = [NSMutableArray new];
+    if (_useClassic) [allTexts addObjectsFromArray:texts[@"categoryClassic"]];
+    if (_useCookies) [allTexts addObjectsFromArray:texts[@"categoryCookies"]];
+    if (_useQuotes) [allTexts addObjectsFromArray:texts[@"categoryQuotes"]];
+    if (_useHokku) [allTexts addObjectsFromArray:texts[@"categoryHokku"]];
+    
+    int level_num = arc4random()%allTexts.count;
+    _current_level = allTexts[level_num];
+    _source_string = allTexts[level_num][@"text"];
     _typed_string = [[NSMutableString alloc] initWithString:@""];
+    if (!_useFullKeyboard) {
+        NSCharacterSet *symbols = [NSCharacterSet punctuationCharacterSet];
+        NSArray *components = [_source_string componentsSeparatedByCharactersInSet:symbols];
+        _source_string = [components componentsJoinedByString:@""];
+    }
+
+//    int numberOfLines = 8;
+//    if ([[UIScreen mainScreen] bounds].size.height == 480) numberOfLines = 4;
+//    NSCharacterSet *newlines = [NSCharacterSet newlineCharacterSet];
+//    NSArray *lines = [_source_string componentsSeparatedByCharactersInSet:newlines];
+//    NSMutableArray *firstLines = [NSMutableArray arrayWithArray:lines];
+//    [firstLines removeObjectsInRange:NSMakeRange(4, firstLines.count-4)];
+//    _source_string = [firstLines componentsJoinedByString:@"\n"];
+    
+    [self buildTokensFromString:_source_string];
     
 //    current_level
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
@@ -157,6 +225,39 @@
                        value:[UIColor colorWithHexString:@"999999"]
                        range:NSMakeRange(0, sourceText.length)];
     _textView.attributedText = sourceText;
+    _textView.selectedRange = NSMakeRange(0, 0);
+}
+
+- (void)buildTokensFromString:(NSString *)string {
+    _tokens = [NSMutableArray new];
+    NSString *curTokenString = @"";
+    int curTokenStart=-1, curTokenEnd=-1;
+    NSCharacterSet *letters = [self cyrillicLetters];
+    for (int i=0; i<_source_string.length; i++) {
+        unichar c = [_source_string characterAtIndex:i];
+        NSString *cString = [NSString stringWithCharacters:&c length:1];
+        if ([letters characterIsMember:c]) {
+            if (curTokenString.length == 0) curTokenStart = i;
+            curTokenString = [NSString stringWithFormat:@"%@%@", curTokenString, cString];
+        }
+        else {
+            if (curTokenString.length > 0) {
+                curTokenEnd = i-1;
+                Token *token = [[Token alloc] initWithString:curTokenString startIndex:curTokenStart endIndex:curTokenEnd];
+                [_tokens addObject:token];
+                curTokenString = @"";
+            }
+            Token *token = [[Token alloc] initWithString:cString startIndex:i endIndex:i];
+            [_tokens addObject:token];
+        }
+    }
+    if (curTokenString.length > 0) {
+        curTokenEnd = (int)string.length-1;
+        Token *token = [[Token alloc] initWithString:curTokenString startIndex:curTokenStart endIndex:curTokenEnd];
+        [_tokens addObject:token];
+    }
+    
+    _currentToken = _tokens.firstObject;
 }
 
 - (void)startSession {
@@ -165,8 +266,10 @@
 }
 
 - (void)endSession {
-    [_session_timer invalidate];
     [_textView resignFirstResponder];
+    
+    [_session_timer invalidate];
+    _session_timer = nil;
     
     for (NSLayoutConstraint *constraint in self.view.constraints) {
         if (constraint.firstItem == self.bottomLayoutGuide) {
@@ -175,6 +278,7 @@
         }
     }
     
+    // save results and show results controller
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     if (!results) results = [NSMutableArray new];
     else results = [NSMutableArray arrayWithArray:results]; // for mutability
@@ -182,7 +286,7 @@
                          @"seconds": @(_session_seconds),
                          @"symbols": @(_stat_symbols),
                          @"mistakes": @(_stat_mistakes)}];
-    [[NSUserDefaults standardUserDefaults] setObject:results forKey:@"results"];
+    [[NSUserDefaults standardUserDefaults] setValue:results forKey:@"results"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
@@ -203,10 +307,8 @@
 //
 - (void)onBackspacePressed:(UIButton *)sender {
     [_keyboardView playClickSound];
-    if (_textView.selectedRange.location > 0) {
-        [self updateTextViewWithKey:nil];
-        [self updateStats];
-    }
+    if (_textView.selectedRange.location > 0)
+        [self updateTextViewWithKey:@""];
 }
 
 - (void)onShiftPressed:(UIButton *)sender {
@@ -224,6 +326,295 @@
     return NO;
 }
 
+#pragma mark - Main Logic Is Here
+
+- (NSString *)getAwaitedKey {
+    if (_useStrictTyping) {
+        if (_typed_string.length == 0) return [_source_string substringToIndex:1];
+        if (_typed_string.length == _source_string.length) return nil;
+        NSString *lastTypedKey = [_typed_string substringWithRange:NSMakeRange(_typed_string.length-1, 1)];
+        NSString *supposedKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length-1, 1)];
+        if ([lastTypedKey isEqualToString:@"\n"])
+            lastTypedKey = [_typed_string substringWithRange:NSMakeRange(_typed_string.length-2, 1)];
+        if ([supposedKey isEqualToString:@"\n"])
+            supposedKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length-2, 1)];
+        BOOL keyMatched = [self key:lastTypedKey isEqualToKey:supposedKey];
+        if (keyMatched) {
+            NSString *nextKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length, 1)];
+            if ([nextKey isEqualToString:@"\n"])
+                nextKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length+1, 1)];
+            return nextKey;
+        }
+        else return @""; // awaited for backspace
+    }
+    return nil;
+}
+
+- (void)updateTextViewWithKey:(NSString *)keyString {
+    BOOL canBeTyped = [self keyCanBeTyped:keyString];
+    BOOL backspace = (keyString.length == 0);
+    
+    if (canBeTyped) {
+        if (backspace) {
+            NSRange charPosition;
+            // если курсор в начале строки
+            if ([_typed_string hasSuffix:@"\n"]) // удаляем 2 символа: '\n' + посл. букву прошлой строки
+                charPosition = NSMakeRange(_typed_string.length-2, 2);
+            else // если курсор после буквы, удаляем только саму букву
+                charPosition = NSMakeRange(_typed_string.length-1, 1);
+            [_typed_string deleteCharactersInRange:charPosition];
+            _stat_symbols--;
+        }
+        else {
+            [_typed_string appendString:keyString];
+            // если после буквы должен быть перенос
+            if ([[_source_string substringFromIndex:_typed_string.length] hasPrefix:@"\n"])
+                [_typed_string appendString:@"\n"];
+            _stat_symbols++;
+        }
+    }
+    else {
+        if (_useStrictTyping) {
+            [self pulseTextViewBackgroundColor];
+        }
+    }
+
+    // update awaited key (for strictTyping mode)
+    _awaited_key = [self getAwaitedKey];
+    // update shiftView and backspaceView
+    _backspaceView.hidden = YES;
+    _shiftView.hidden = YES;
+    if (_awaited_key) { // _awaited key exists only in strictTyping mode
+        if (_awaited_key.length == 0) {
+            _backspaceView.hidden = NO;
+            _stat_mistakes++;
+        }
+        else {
+            unichar character = [_awaited_key characterAtIndex:0];
+            if ([[self cyrillicUppercase] characterIsMember:character]) _shiftView.hidden = NO;
+        }
+    }
+    
+    int tokenPosOffset = (_awaited_key && [_awaited_key isEqualToString:@""]) ? 1 : 0;
+    if (tokenPosOffset == 1) {
+        NSString *prev = [_typed_string substringFromIndex:_typed_string.length-1];
+        if ([prev isEqualToString:@"\n"]) tokenPosOffset = 2;
+    }
+    _currentToken = [self tokenByPosition:(_typed_string.length - tokenPosOffset)];
+    if (_currentToken) {
+//        int tokenPos = _typed_string.length - _currentToken.startIndex - tokenPosOffset;
+        [self updateCurrentWord];
+        if (_useFullKeyboard == NO)
+            [self showOnlyKeysWithCharactersInString:_currentToken.string];
+    }
+    
+    // join result string
+    NSString *typed = _typed_string;
+    NSString *trail = [_source_string substringFromIndex:_typed_string.length];
+    typed = [typed stringByAppendingString:trail];
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:typed];
+    
+    // Базовый стиль текста в textView
+    [text addAttribute:NSFontAttributeName
+                 value:[UIFont fontWithName:@"HelveticaNeue" size:16]
+                 range:NSMakeRange(0, text.length)];
+    [text addAttribute:NSForegroundColorAttributeName
+                 value:[UIColor colorWithHexString:@"999999"]
+                 range:NSMakeRange(0, text.length)];
+    // Цвет уже напечатанной части текста (черный)
+    [text addAttribute:NSForegroundColorAttributeName
+                 value:[UIColor blackColor]
+                 range:NSMakeRange(0, _typed_string.length)];
+    _textView.attributedText = text;
+    _textView.selectedRange = NSMakeRange(_typed_string.length, 0);
+    
+    [self updateStatsLabel];
+    
+    if (_typed_string.length == _source_string.length) {
+        BOOL mistakeOnLastChar = [_awaited_key isEqualToString:@""];
+        if (_useStrictTyping && !mistakeOnLastChar) [self endSession];
+        if (!_useStrictTyping) [self endSession];
+    }
+}
+
+// Обновляем label с текущим словом, которое находится в процессе набора
+//
+- (void)updateCurrentWord {
+    NSString *string = _currentToken.string;
+    NSString *typed = [_typed_string substringFromIndex:_currentToken.startIndex];
+    typed = [typed stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+    NSString *trail = [string substringFromIndex:typed.length];
+    NSString *word = [typed stringByAppendingString:trail];
+    if ([word isEqualToString:@" "]) word = @"\" \"";
+    NSMutableAttributedString *currentWord = [[NSMutableAttributedString alloc] initWithString:word];
+    [currentWord addAttribute:NSFontAttributeName
+                        value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24]
+                        range:NSMakeRange(0, currentWord.length)];
+    [currentWord addAttribute:NSForegroundColorAttributeName
+                        value:[UIColor blackColor]
+                        range:NSMakeRange(0, currentWord.length)];
+    [currentWord addAttribute:NSForegroundColorAttributeName
+                        value:[UIColor colorWithHexString:@"009900"] // green
+                        range:NSMakeRange(0, typed.length)];
+    for (int i=0; i<typed.length; i++) {
+        NSString *typpedKey = [typed substringWithRange:NSMakeRange(i, 1)];
+        NSString *supposedKey = [string substringWithRange:NSMakeRange(i, 1)];
+        if ([self key:typpedKey isEqualToKey:supposedKey] == NO) {
+            [currentWord addAttribute:NSForegroundColorAttributeName
+                                value:[UIColor colorWithHexString:@"FF3333"] // red
+                                range:NSMakeRange(i, 1)];
+        }
+    }
+
+    _currentWordLabel.attributedText = currentWord;
+}
+
+// Обновление вью с текстом, который надо напечатать (расставляет аттрибуты)
+//
+//- (void)updateTextViewWithKey2:(NSString *)keyString {
+//    BOOL levelComplete = NO;
+//    
+//    
+//    if (keyString.length > 0) { // key was pressed
+//        if ([_awaited_key isEqualToString:@""] == NO &&
+//            !([_awaited_key isEqualToString:@"\n"] && ![keyString isEqualToString:@"\n"])) {
+//            [_typed_string appendString:keyString];
+//            if (![keyString isEqualToString:_awaited_key]) // not as expected
+//                _awaited_key = @""; // wait for backspace
+//            else if (_typed_string.length < _source_string.length) {
+//                NSRange range = NSMakeRange(_typed_string.length, 1);
+//                _awaited_key = [_source_string substringWithRange:range];
+//            }
+//            else
+//                levelComplete = YES;
+//        }
+//        else {
+//            _stat_mistakes++;
+//            [self pulseTextViewBackgroundColor];
+//        }
+//    }
+//    else { // backspace
+//        if ([_awaited_key isEqualToString:@""]) {
+//            NSRange charPosition = NSMakeRange(_typed_string.length-1, 1);
+//            [_typed_string deleteCharactersInRange:charPosition];
+//            _awaited_key = [_source_string substringWithRange:NSMakeRange(_typed_string.length, 1)];
+//        }
+//        else {
+//            // false backspace pressed
+//            _stat_mistakes++;
+//            [self pulseTextViewBackgroundColor];
+//        }
+//    }
+//    
+//    _stat_symbols = (int)_typed_string.length;
+//    
+//
+//    _shiftView.hidden = YES;
+//    _backspaceView.hidden = YES;
+//    
+//    if ([_awaited_key isEqualToString:@""]) _backspaceView.hidden = NO;
+//
+//    unichar character;
+//    if (_awaited_key.length > 0) character = [_awaited_key characterAtIndex:0];
+//    if ([[self cyrillicUppercase] characterIsMember:character]) _shiftView.hidden = NO;
+//    
+//    if ([_awaited_key isEqualToString:@" "])
+//        _currentWordLabel.text = @"\" \"";
+//    else if ([_awaited_key isEqualToString:@"\n"])
+//        [self onKeyTapped:@"\n"];
+//    else {
+//        NSString *string = [_source_string substringWithRange:_currentWordRange];
+//        int position = (int)(_typed_string.length-_currentWordRange.location);
+//        if (position >= 0 && position < string.length)
+//            [self updateCurrentWordWithText:string andPosition:position];
+//    }
+//    
+//    BOOL shouldBackspace = [_awaited_key isEqualToString:@""];
+//    NSString *typed = _typed_string;
+//    NSString *trail = [_source_string substringFromIndex:_typed_string.length];
+//    typed = [typed stringByAppendingString:trail];
+//    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:typed];
+//    
+//    // Базовый стиль текста в textView
+//    [text addAttribute:NSFontAttributeName
+//                       value:[UIFont fontWithName:@"HelveticaNeue" size:16]
+//                       range:NSMakeRange(0, text.length)];
+//    [text addAttribute:NSForegroundColorAttributeName
+//                       value:[UIColor colorWithHexString:@"999999"]
+//                       range:NSMakeRange(0, text.length)];
+//    // Цвет уже напечатанной части текста (черный)
+//    [text addAttribute:NSForegroundColorAttributeName
+//                 value:[UIColor blackColor]
+//                 range:NSMakeRange(0, _typed_string.length)];
+//
+//    // Цвет текущего слова (зеленый)
+//    if (_typed_string.length-(_currentWordRange.location+_currentWordRange.length) > 0) {
+//        [text addAttribute:NSForegroundColorAttributeName
+//                 value:[UIColor colorWithHexString:@"009900"]
+//                 range:NSMakeRange(_currentWordRange.location, MAX(0, _typed_string.length-_currentWordRange.location))];
+//    }
+//    else {
+//        if (!shouldBackspace) {
+//            // next word
+//            NSCharacterSet *white_spaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+//            NSString *trail = [_source_string substringFromIndex:_typed_string.length];
+//            NSArray *words = [trail componentsSeparatedByCharactersInSet:white_spaces];
+//            NSString *next_word;
+//            for (NSString *word in words) if (word.length > 0) { next_word = word; break; }
+//            if (next_word && [next_word hasPrefix:_awaited_key]) {
+//                NSInteger next_loc = [trail rangeOfString:next_word].location + _typed_string.length;
+//                [self updateCurrentWordWithText:next_word andPosition:0];
+//                _currentWordRange = NSMakeRange(next_loc, next_word.length);
+//                [self showOnlyKeysWithCharactersInString:next_word];
+//            }
+//            else {
+//                _currentWordRange = NSMakeRange(_typed_string.length, 1);
+//            }
+//        }
+//    }
+//    // Цвет последней буквы-опечатки (красный)
+//    if (shouldBackspace) {
+//        _stat_mistakes++;
+//        [self pulseTextViewBackgroundColor];
+//        [text addAttribute:NSForegroundColorAttributeName
+//                     value:[UIColor colorWithHexString:@"FF3333"]
+//                     range:NSMakeRange(_typed_string.length-1, 1)];
+//    }
+//
+//    _textView.attributedText = text;
+//    _textView.selectedRange = NSMakeRange(_typed_string.length, 0);
+//    
+//    [self updateStatsLabel];
+//    if (levelComplete) {
+//        [self endSession];
+//    }
+//}
+
+- (BOOL)keyCanBeTyped:(NSString *)keyString {
+    if (keyString.length == 0 && _typed_string.length == 0) // backspace on start
+        return NO;
+    if (keyString.length != 0 && _typed_string.length == _source_string.length) // level complete
+        return NO;
+    if (_useStrictTyping) {
+        if ([self key:keyString isEqualToKey:_awaited_key]) // backspace or key match
+            return YES;
+        else if (keyString.length !=0 && _awaited_key.length != 0) // type 1 wrong key
+            return YES;
+        else return NO;
+    }
+    else return YES;
+}
+
+- (BOOL)key:(NSString *)typedKey isEqualToKey:(NSString *)awaitedKey {
+//    if (_useFullKeyboard == NO) { // на тренеровочной клавиатуре разрешаем 
+    if ([awaitedKey isEqualToString:@"ё"] && [typedKey isEqualToString:@"е"])
+        return YES;
+    if ([awaitedKey isEqualToString:@"Ё"] && [typedKey isEqualToString:@"Е"])
+        return YES;
+//    }
+    return [typedKey isEqualToString:awaitedKey];
+}
+
 #pragma mark - Update User Interface
 
 // Оставляет на кастомной клавиатуре, только буквы из указанной строки
@@ -237,148 +628,9 @@
     }
 }
 
-// Обновление вью с текстом, который надо напечатать (расставляет аттрибуты)
-//
-- (void)updateTextViewWithKey:(NSString *)keyString {
-    BOOL levelComplete = NO;
-    
-    if (keyString.length > 0) { // key was pressed
-        if ([_awaited_key isEqualToString:@""] == NO &&
-            !([_awaited_key isEqualToString:@"\n"] && ![keyString isEqualToString:@"\n"])) {
-            [_typed_string appendString:keyString];
-
-            NSRange range = NSMakeRange(_typed_string.length, 1);
-            if (![keyString isEqualToString:_awaited_key]) _awaited_key = @"";
-            else if (range.location < _source_string.length)
-                _awaited_key = [_source_string substringWithRange:range];
-            else
-                levelComplete = YES;
-        }
-        else {
-            _stat_mistakes++;
-            [self pulseTextViewBackgroundColor];
-        }
-    }
-    else { // backspace
-        if ([_awaited_key isEqualToString:@""]) {
-            NSRange charPosition = NSMakeRange(_typed_string.length-1, 1);
-            [_typed_string deleteCharactersInRange:charPosition];
-            _awaited_key = [_source_string substringWithRange:NSMakeRange(_typed_string.length, 1)];
-        }
-        else {
-            // false backspace pressed
-            _stat_mistakes++;
-            [self pulseTextViewBackgroundColor];
-        }
-    }
-    
-    _stat_symbols = (int)_typed_string.length;
-    
-
-    _shiftView.hidden = YES;
-    _backspaceView.hidden = YES;
-    
-    if ([_awaited_key isEqualToString:@""]) _backspaceView.hidden = NO;
-
-    unichar character;
-    if (_awaited_key.length > 0) character = [_awaited_key characterAtIndex:0];
-    if ([[self cyrillicUppercase] characterIsMember:character]) _shiftView.hidden = NO;
-    
-    if ([_awaited_key isEqualToString:@" "])
-        _currentWordLabel.text = @"\" \"";
-    else if ([_awaited_key isEqualToString:@"\n"])
-        [self onKeyTapped:@"\n"];
-//        _currentWordLabel.text = @"[Ввод]";
-    else {
-        NSString *string = [_source_string substringWithRange:_currentWordRange];
-        int position = (int)(_typed_string.length-_currentWordRange.location);
-        if (position >= 0 && position < string.length)
-            [self updateCurrentWordWithText:string andPosition:position];
-    }
-    
-    BOOL shouldBackspace = [_awaited_key isEqualToString:@""];
-    NSString *typed = _typed_string;
-    NSString *trail = [_source_string substringFromIndex:_typed_string.length];
-    typed = [typed stringByAppendingString:trail];
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:typed];
-    
-    // Базовый стиль текста в textView
-    [text addAttribute:NSFontAttributeName
-                       value:[UIFont fontWithName:@"HelveticaNeue" size:16]
-                       range:NSMakeRange(0, text.length)];
-    [text addAttribute:NSForegroundColorAttributeName
-                       value:[UIColor colorWithHexString:@"999999"]
-                       range:NSMakeRange(0, text.length)];
-    // Цвет уже напечатанной части текста (черный)
-    [text addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor blackColor]
-                 range:NSMakeRange(0, _typed_string.length)];
-
-    // Цвет текущего слова (зеленый)
-    if (_typed_string.length-(_currentWordRange.location+_currentWordRange.length) > 0) {
-        [text addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor colorWithHexString:@"009900"]
-                 range:NSMakeRange(_currentWordRange.location, MAX(0, _typed_string.length-_currentWordRange.location))];
-    }
-    else {
-        if (!shouldBackspace) {
-            // next word
-            NSCharacterSet *white_spaces = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-            NSString *trail = [_source_string substringFromIndex:_typed_string.length];
-            NSArray *words = [trail componentsSeparatedByCharactersInSet:white_spaces];
-            NSString *next_word;
-            for (NSString *word in words) if (word.length > 0) { next_word = word; break; }
-            if (next_word && [next_word hasPrefix:_awaited_key]) {
-                NSInteger next_loc = [trail rangeOfString:next_word].location + _typed_string.length;
-                [self updateCurrentWordWithText:next_word andPosition:0];
-                _currentWordRange = NSMakeRange(next_loc, next_word.length);
-                [self showOnlyKeysWithCharactersInString:next_word];
-            }
-            else {
-                _currentWordRange = NSMakeRange(_typed_string.length, 1);
-            }
-        }
-    }
-    // Цвет последней буквы-опечатки (красный)
-    if (shouldBackspace) {
-        _stat_mistakes++;
-        [self pulseTextViewBackgroundColor];
-        [text addAttribute:NSForegroundColorAttributeName
-                     value:[UIColor colorWithHexString:@"FF3333"]
-                     range:NSMakeRange(_typed_string.length-1, 1)];
-    }
-
-    _textView.attributedText = text;
-    _textView.selectedRange = NSMakeRange(_typed_string.length, 0);
-
-    [self updateStats];
-    if (levelComplete) {
-        [self endSession];
-    }
-}
-
-// Обновляем label с текущим словом, которое находится в процессе набора
-//
-- (void)updateCurrentWordWithText:(NSString *)string andPosition:(int)position {
-    NSMutableAttributedString *currentWord = [[NSMutableAttributedString alloc] initWithString:string];
-    [currentWord addAttribute:NSFontAttributeName
-                        value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24]
-                        range:NSMakeRange(0, currentWord.length)];
-    [currentWord addAttribute:NSForegroundColorAttributeName
-                        value:[UIColor colorWithHexString:@"A54466"]
-                        range:NSMakeRange(0, currentWord.length)];
-    if (position >= 0) {
-        [currentWord addAttribute:NSForegroundColorAttributeName
-                            value:[UIColor colorWithHexString:@"336699"]
-                            range:NSMakeRange(position, 1)];
-    }
-    
-    _currentWordLabel.attributedText = currentWord;
-}
-
 // Обновляем данные о количестве набранных символов и совершенных ошибках
 //
-- (void)updateStats {
+- (void)updateStatsLabel {
     NSString *statString = [NSString stringWithFormat:@"%d/%d", _stat_symbols, _stat_mistakes];
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:statString];
     NSInteger sep_loc = [statString rangeOfString:@"/"].location;
@@ -409,13 +661,7 @@
 
 #pragma mark - Helpers
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)dealloc {
-    NSLog(@"dealloc");
     if (_session_timer) [_session_timer invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
@@ -465,27 +711,25 @@
     CGPoint location = [recognizer locationInView:view];
     UIView *subview = [view hitTest:location withEvent:nil];
     
-    if ([subview isKindOfClass:[UILabel class]]) {
-        UILabel *label = (UILabel *)subview;
-        _popup_label.text = label.text;
-        
-        if (recognizer.state == UIGestureRecognizerStateBegan
-            || recognizer.state == UIGestureRecognizerStateChanged) {
-            _letter_popup.center = CGPointMake(label.center.x, label.center.y-32);
+    if (recognizer.state == UIGestureRecognizerStateBegan
+        || recognizer.state == UIGestureRecognizerStateChanged) {
+        if ([subview isKindOfClass:[UILabel class]]) {
+            _lastTouchedKey = (UILabel *)subview;
+            _popup_label.text = _lastTouchedKey.text;
+
+            _letter_popup.center = CGPointMake(_lastTouchedKey.center.x, _lastTouchedKey.center.y-32);
             if (!_letter_popup.superview)
                 [_keyboardView addSubview:_letter_popup];
         }
-        else { // pan ended
-            [_letter_popup removeFromSuperview];
-            if (_keyboardView.shiftButton.selected)
-                [self onKeyTapped:[label.text uppercaseString]];
-            else
-                [self onKeyTapped:[label.text lowercaseString]];
-            _keyboardView.shiftButton.selected = NO;
-        }
     }
-    else { // not label
+    else { // pan ended
         [_letter_popup removeFromSuperview];
+        if (_keyboardView.shiftButton.selected)
+            [self onKeyTapped:[_lastTouchedKey.text uppercaseString]];
+        else
+            [self onKeyTapped:[_lastTouchedKey.text lowercaseString]];
+        _lastTouchedKey = nil;
+        _keyboardView.shiftButton.selected = NO;
     }
 }
 
@@ -501,6 +745,13 @@
 
 - (IBAction)onDoneButtonPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (Token *)tokenByPosition:(int)position {
+    for (Token *t in _tokens) {
+        if (position >= t.startIndex && position <= t.endIndex) return t;
+    }
+    return nil;
 }
 
 @end

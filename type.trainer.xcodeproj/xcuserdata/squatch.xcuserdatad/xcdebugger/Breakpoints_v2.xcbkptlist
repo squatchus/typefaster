@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457827855.629091"
+            timestampString = "458000543.48243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-keyboardWillShow:"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "457827855.629091"
+            timestampString = "458000543.48243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "420"
-            endingLineNumber = "420"
-            landmarkName = "-dealloc"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
+            landmarkName = "-getAwaitedKey"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "type.trainer/AppDelegate.m"
-            timestampString = "457832175.212001"
+            filePath = "type.trainer/ViewController.m"
+            timestampString = "458001300.479177"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "+numberOfStarsBySpeed:"
+            startingLineNumber = "450"
+            endingLineNumber = "450"
+            landmarkName = "-updateCurrentWord"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

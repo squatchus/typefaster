@@ -118,12 +118,40 @@
 
 + (float)numberOfStarsBySpeed:(int)speed {
     NSArray *starRatings = @[@0, @0.5, @1, @1.5, @2, @2.5, @3, @3.5, @4, @4.5, @5]; // 11
-    NSString *rankString = [self rankTitleBySpeed:speed];
+    NSString *rankString = [self currentRank];
     int maxValue = [self maxValueForRank:rankString];
     float percent = MIN(100, (float)speed * 100.0 / (float)maxValue);
     int index = percent/10;
     float numberOfStars = [starRatings[index] floatValue];
     return numberOfStars;
+}
+
++ (int)bestResult {
+    int maxSpeed = 0;
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    for (NSDictionary *result in results) {
+        int seconds = [result[@"seconds"] intValue];
+        int symbols = [result[@"symbols"] intValue];
+        int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
+        if (signsPerMin > maxSpeed)
+            maxSpeed = signsPerMin;
+    }
+    return maxSpeed;
+}
+
++ (NSString *)currentRank {
+    return [self rankTitleBySpeed:[self bestResult]];
+}
+
++ (int)numberOfKeysForCurrentRank {
+    NSDictionary *numberOfKeys = @{ @"Новичек": @4,
+                                    @"Ученик": @10,
+                                    @"Освоившийся": @16,
+                                    @"Уверенный": @22,
+                                    @"Опытный": @28 };
+    NSNumber* num = numberOfKeys[[self currentRank]];
+    if (num) return [num intValue];
+    return kAllKeysInKeyboard;
 }
 
 @end
