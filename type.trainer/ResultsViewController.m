@@ -48,17 +48,18 @@
     
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
+    NSString *text = level[@"text"];
     int seconds = [[results lastObject][@"seconds"] intValue];
     int symbols = [[results lastObject][@"symbols"] intValue];
     int mistakes = [[results lastObject][@"mistakes"] intValue];
 
     int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
-    int mistakesPercent = mistakes * 100 / symbols;
+    int mistakesPercent = mistakes * 100 / (text.length - ([text componentsSeparatedByString:@"\n"].count-1));
     NSString *subtitle = [NSString stringWithFormat:@"%@\n%@", level[@"title"], level[@"author"]];
     
     _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", signsPerMin];
     _mistakesPercentLabel.text = [NSString stringWithFormat:@"%d", mistakesPercent];
-    _textLabel.text = level[@"text"];
+    _textLabel.text = text;
     _authorLabel.text = subtitle;
     
     if (results.count > 1) {

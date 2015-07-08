@@ -144,11 +144,11 @@
 }
 
 + (int)numberOfKeysForCurrentRank {
-    NSDictionary *numberOfKeys = @{ @"Новичек": @4,
-                                    @"Ученик": @10,
-                                    @"Освоившийся": @16,
-                                    @"Уверенный": @22,
-                                    @"Опытный": @28 };
+    NSDictionary *numberOfKeys = @{ @"Новичек": @0, //@4,
+                                    @"Ученик": @5, //@10,
+                                    @"Освоившийся": @10, //@16,
+                                    @"Уверенный": @17, //@22,
+                                    @"Опытный": @25}; //@28 };
     NSNumber* num = numberOfKeys[[self currentRank]];
     if (num) return [num intValue];
     return kAllKeysInKeyboard;

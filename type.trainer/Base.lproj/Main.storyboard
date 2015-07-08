@@ -1111,7 +1111,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2c5-gV-D3P">
-                                <rect key="frame" x="32" y="75" width="568" height="471"/>
+                                <rect key="frame" x="32" y="59" width="552" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment content="о">
@@ -1459,7 +1459,7 @@
                             <constraint firstItem="UDk-eh-x44" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="9Ew-Xf-ouF"/>
                             <constraint firstAttribute="centerX" secondItem="u3z-5g-PjM" secondAttribute="centerX" id="9sy-Wr-nqJ"/>
                             <constraint firstItem="987-TH-FIa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="534" id="EwU-rd-EJ5"/>
-                            <constraint firstItem="2c5-gV-D3P" firstAttribute="top" secondItem="UDk-eh-x44" secondAttribute="bottom" constant="16" id="GRv-cB-MeW"/>
+                            <constraint firstItem="2c5-gV-D3P" firstAttribute="top" secondItem="UDk-eh-x44" secondAttribute="bottom" id="GRv-cB-MeW"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Hva-EW-t1c"/>
                             <constraint firstItem="UDk-eh-x44" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="If0-0P-nX3"/>
                             <constraint firstItem="fAP-8p-8Bv" firstAttribute="baseline" secondItem="URI-1f-KPK" secondAttribute="baseline" id="KSE-TL-aYb"/>
@@ -1472,7 +1472,7 @@
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="bD6-Ac-ckp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UDk-eh-x44" secondAttribute="trailing" id="eae-eT-e3Z"/>
                             <constraint firstItem="xd9-yC-ev7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gpv-sW-IUc"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" constant="-16" id="h9R-3c-EL5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" id="h9R-3c-EL5"/>
                             <constraint firstAttribute="centerX" secondItem="URI-1f-KPK" secondAttribute="centerX" id="pHs-E3-4b5"/>
                             <constraint firstItem="987-TH-FIa" firstAttribute="bottom" secondItem="u3z-5g-PjM" secondAttribute="bottom" constant="-7" id="rSl-29-8mv"/>
                             <constraint firstAttribute="width" secondItem="u3z-5g-PjM" secondAttribute="width" id="rtB-Rw-irs"/>
