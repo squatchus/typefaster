@@ -36,6 +36,8 @@
 		B421D1C11B49BE67006F17F7 /* backspaceIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421D1BF1B49BE67006F17F7 /* backspaceIcon@2x.png */; };
 		B421D1C21B49BE67006F17F7 /* shiftIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421D1C01B49BE67006F17F7 /* shiftIcon@2x.png */; };
 		B421D1C41B49E3F9006F17F7 /* star_goldgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421D1C31B49E3F9006F17F7 /* star_goldgray@2x.png */; };
+		B449FAC81B4EB621000EEF4B /* TFShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B449FAC71B4EB621000EEF4B /* TFShareView.xib */; };
+		B449FACB1B4EC2B7000EEF4B /* TFShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = B449FACA1B4EC2B7000EEF4B /* TFShareView.m */; };
 		B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */; };
 		B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */; };
 		B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */; };
@@ -107,6 +109,9 @@
 		B421D1BF1B49BE67006F17F7 /* backspaceIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backspaceIcon@2x.png"; sourceTree = "<group>"; };
 		B421D1C01B49BE67006F17F7 /* shiftIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shiftIcon@2x.png"; sourceTree = "<group>"; };
 		B421D1C31B49E3F9006F17F7 /* star_goldgray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_goldgray@2x.png"; sourceTree = "<group>"; };
+		B449FAC71B4EB621000EEF4B /* TFShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TFShareView.xib; sourceTree = "<group>"; };
+		B449FAC91B4EC2B7000EEF4B /* TFShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFShareView.h; sourceTree = "<group>"; };
+		B449FACA1B4EC2B7000EEF4B /* TFShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFShareView.m; sourceTree = "<group>"; };
 		B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
 		B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
 		B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
@@ -182,6 +187,9 @@
 				B41756A31B4039E2003033F3 /* KBPanGestureRecognizer.h */,
 				B41756A41B4039E2003033F3 /* KBPanGestureRecognizer.m */,
 				B4010C711B3E08C5000DF339 /* Main.storyboard */,
+				B449FAC71B4EB621000EEF4B /* TFShareView.xib */,
+				B449FAC91B4EC2B7000EEF4B /* TFShareView.h */,
+				B449FACA1B4EC2B7000EEF4B /* TFShareView.m */,
 				B41756B61B40B419003033F3 /* TFKeyboardView.xib */,
 				B41756B81B40BB5D003033F3 /* TFKeyboardView.h */,
 				B41756B91B40BB5D003033F3 /* TFKeyboardView.m */,
@@ -338,6 +346,7 @@
 				B4010C731B3E08C5000DF339 /* Main.storyboard in Resources */,
 				B4010C781B3E08C5000DF339 /* LaunchScreen.xib in Resources */,
 				B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */,
+				B449FAC81B4EB621000EEF4B /* TFShareView.xib in Resources */,
 				B4DAF64E1B3F3C8600D39487 /* keyboard_background@2x.png in Resources */,
 				B4DAF6711B3F6A4400D39487 /* star_gray@2x.png in Resources */,
 				B413AADD1B4D50CF00C800C4 /* new_result.wav in Resources */,
@@ -393,6 +402,7 @@
 				B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */,
 				B41756BA1B40BB5D003033F3 /* TFKeyboardView.m in Sources */,
 				B421D1851B4975D2006F17F7 /* SettingsViewController.m in Sources */,
+				B449FACB1B4EC2B7000EEF4B /* TFShareView.m in Sources */,
 				B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */,
 				B4010C6D1B3E08C5000DF339 /* AppDelegate.m in Sources */,
 				B41756A51B4039E2003033F3 /* KBPanGestureRecognizer.m in Sources */,

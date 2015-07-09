@@ -8,8 +8,11 @@
 
 #import "ResultsViewController.h"
 #import "AppDelegate.h"
+#import "TFShareView.h"
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <UIAlertViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *signsPerMinTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *resultTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
@@ -63,23 +66,52 @@
     _textLabel.text = text;
     _authorLabel.text = subtitle;
     
+    int lastDigit = signsPerMin % 10;
+    NSString *ending = (lastDigit == 1)?@"":((lastDigit > 1 && lastDigit < 5)?@"а":@"ов");
+    _signsPerMinTitleLabel.text = [NSString stringWithFormat:@"знак%@\nв минуту", ending];
+    
     int bestResult = [AppDelegate bestResult];
     _bestResultLabel.text = [NSString stringWithFormat:@"%d", bestResult];
 
+    BOOL switchToFullKeyboardJustHappened = NO;
     NSString *currentRank = [AppDelegate currentRank];
     if (signsPerMin < bestResult) {
         _resultTitleLabel.text = @"Ваш результат";
     }
     else if ([currentRank isEqualToString:[AppDelegate prevRank]]) {
-        _resultTitleLabel.text = @"Новый рекорд!";
+        _resultTitleLabel.text = @"Новый рекорд!"; // в текущем ранге
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewResultSound];
     }
-    else {
+    else { // новый ранг
         _resultTitleLabel.text = [NSString stringWithFormat:@"Новый ранг - %@!", currentRank];
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewRankSound];
+        if (signsPerMin >= 100) { // switch to full keyboard
+            if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue]) {
+                [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
+                switchToFullKeyboardJustHappened = YES;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ура!" message:@"Вы преодолели тренеровочный этап! Продолжайте увеличивать скорость\nна полной клавиатуре (включающей знаки препинания)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+    }
+    
+    if (!switchToFullKeyboardJustHappened) {
+        if ([AppDelegate numberOfHighestScores] == 3) {
+            if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue]) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Напоминания" message:@"Регулярные тренеровки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Напоминать", nil];
+                [alert show];
+            }
+        }
     }
     
     [self updateStarsBySpeed:signsPerMin];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"notifications"];
+        [AppDelegate enableNotifications];
+    }
 }
 
 - (void)updateStarsBySpeed:(int)speed {
@@ -119,7 +151,13 @@
 
     NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/id436693646/"];
-    UIImage *image = [UIImage imageNamed:@"keyboard_background.png"];
+    
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSDictionary *level = [results lastObject][@"level"];
+    TFShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"TFShareView" owner:self options:nil][0];
+    shareView.frame = self.view.frame;
+    [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[_signsPerMinLabel.text intValue]];
+    UIImage *image = [shareView renderImage];
     
     UIActivityViewController *controller =
     [[UIActivityViewController alloc]
@@ -141,7 +179,8 @@
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-    NSLog(@"onRateButtonPressed");
+    NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 - (IBAction)onContinueButtonPressed:(UIButton *)sender {

@@ -28,6 +28,9 @@
     int bestResult = [AppDelegate bestResult];
     [self updateStarsBySpeed:bestResult];
     _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", bestResult];
+    int lastDigit = bestResult % 10;
+    NSString *ending = (lastDigit == 1)?@"":((lastDigit > 1 && lastDigit < 5)?@"а":@"ов");
+    _signsPerMinTitleLabel.text = [NSString stringWithFormat:@"знак%@ в минуту", ending];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,7 +69,8 @@
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-    NSLog(@"onRateButtonPressed");
+    NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 - (IBAction)onGameCenterButtonPressed:(UIButton *)sender {

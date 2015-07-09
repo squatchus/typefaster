@@ -16,7 +16,6 @@
 - (IBAction)onCategoryButtonPressed:(UIButton *)sender;
 - (IBAction)onDoneButtonPressed:(UIButton *)sender;
 
-@property (weak, nonatomic) IBOutlet UISwitch *keyboardSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *canMistakeSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *categoryClassicButton;
@@ -34,7 +33,6 @@
     
     // Update switchers & switcher's settings in UserDefaults
     //
-    _keyboardSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
     _notificationSwitch.on  = [[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue];
     _canMistakeSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
     
@@ -66,10 +64,11 @@
 }
 
 - (IBAction)onSwitchValueChanged:(UISwitch *)sender {
-    if (sender == _keyboardSwitch)
-        [[NSUserDefaults standardUserDefaults] setValue:@(_keyboardSwitch.on) forKey:@"fullKeyboard"];
-    else if (sender == _notificationSwitch)
+    if (sender == _notificationSwitch) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_notificationSwitch.on) forKey:@"notifications"];
+        if (_notificationSwitch.on) [AppDelegate enableNotifications];
+        else [AppDelegate disableNotifications];
+    }
     else if (sender == _canMistakeSwitch)
         [[NSUserDefaults standardUserDefaults] setValue:@(_canMistakeSwitch.on) forKey:@"strictTyping"];
     

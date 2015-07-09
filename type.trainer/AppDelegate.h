@@ -27,11 +27,15 @@
 + (NSString *)prevRank;
 
 + (int)numberOfKeysForCurrentRank;
++ (int)numberOfHighestScores;
 
 - (void)playButtonClickSound;
 - (void)playErrorSound;
 - (void)playNewResultSound;
 - (void)playNewRankSound;
+
++ (void)enableNotifications;
++ (void)disableNotifications;
 
 @end
 

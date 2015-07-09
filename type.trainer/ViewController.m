@@ -177,7 +177,11 @@
     [self loadText];
     [self updateCurrentWord];
     [self showOnlyKeysWithCharactersInString:_currentToken.string];
-    _awaited_key = [_currentToken.string substringWithRange:NSMakeRange(0, 1)];
+    if (_useStrictTyping)
+        _awaited_key = [_currentToken.string substringWithRange:NSMakeRange(0, 1)];
+
+    unichar character = [_currentToken.string characterAtIndex:0];
+    if ([[self cyrillicUppercase] characterIsMember:character]) _shiftView.hidden = NO;
 
     if (_useFullKeyboard)
         _textView.inputView = nil;
@@ -270,6 +274,7 @@
 }
 
 - (void)startSession {
+    _secondsLabel.textColor = [UIColor colorWithHexString:@"A54466"];
     _session_seconds = 0;
     _session_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 }
@@ -277,6 +282,7 @@
 - (void)endSession {
     [_textView resignFirstResponder];
     
+    _secondsLabel.textColor = [UIColor colorWithHexString:@"CCCCCC"];
     [_session_timer invalidate];
     _session_timer = nil;
     
@@ -457,8 +463,16 @@
                                     value:[UIColor colorWithHexString:@"FF3333"] // red
                                     range:NSMakeRange(token.startIndex, length)];
         }
-        if (mistakes > _stat_mistakes)
+        _shiftView.hidden = YES;
+        _backspaceView.hidden = YES;
+        if (mistakes > _stat_mistakes) { // was a mistake in non strict typing mode
             [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playErrorSound];
+            _backspaceView.hidden = NO;
+        }
+        else if (_typed_string.length < _source_string.length) {
+            unichar character = [_source_string characterAtIndex:_typed_string.length];
+            if ([[self cyrillicUppercase] characterIsMember:character]) _shiftView.hidden = NO;
+        }
         _stat_mistakes = mistakes;
     }
     
@@ -657,13 +671,14 @@
     else { // pan ended
         [_letter_popup removeFromSuperview];
         if (_lastTouchedKey) {
-            if (_keyboardView.shiftButton.selected)
+            if (_keyboardView.shiftButton.selected) {
                 [self onKeyTapped:[_lastTouchedKey.text uppercaseString]];
+                _keyboardView.shiftButton.selected = NO;
+            }
             else
                 [self onKeyTapped:[_lastTouchedKey.text lowercaseString]];
         }
         _lastTouchedKey = nil;
-        _keyboardView.shiftButton.selected = NO;
     }
 }
 

@@ -39,10 +39,12 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -53,7 +55,7 @@
     // Update switcher's settings in UserDefaults
     //
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"])
-        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
+        [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"fullKeyboard"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"])
         [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"notifications"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
@@ -192,8 +194,23 @@
     return kAllKeysInKeyboard;
 }
 
++ (int)numberOfHighestScores {
+    int maxSpeed = 0;
+    int number = 0;
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    for (NSDictionary *result in results) {
+        int seconds = [result[@"seconds"] intValue];
+        int symbols = [result[@"symbols"] intValue];
+        int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
+        if (signsPerMin > maxSpeed) {
+            maxSpeed = signsPerMin; number++;
+        }
+    }
+    return number;
+}
+
 - (void)playButtonClickSound {
-//    AudioServicesPlaySystemSound(_buttonClickSound);
+    AudioServicesPlaySystemSound(_buttonClickSound);
 }
 - (void)playErrorSound {
     AudioServicesPlaySystemSound(_errorSound);
@@ -212,5 +229,35 @@
     AudioServicesDisposeSystemSoundID(_errorSound);
 }
 
++ (void)enableNotifications {
+    // New for iOS 8 - Register the notifications
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+
+    NSDate *tomorrow = [[NSDate date] dateByAddingTimeInterval:86400];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:tomorrow];
+    [components setMinute:00];
+    [components setHour:20];
+    [components setTimeZone:[NSTimeZone defaultTimeZone]];
+    NSDate *notificationDate = [calendar dateFromComponents:components];
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = notificationDate;
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.applicationIconBadgeNumber = 1;
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.repeatInterval = NSCalendarUnitDay;
+    notification.alertTitle = @"Печатай быстрее";
+    notification.alertBody = @"Потренеруйтесь в скорости печати!";
+    
+    // this will schedule the notification to fire at the fire date
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
++ (void)disableNotifications {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
 
 @end

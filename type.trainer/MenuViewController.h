@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *yourSpeedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signsPerMinTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *rankButton;
 @property (weak, nonatomic) IBOutlet UILabel *rankHintLabel;
