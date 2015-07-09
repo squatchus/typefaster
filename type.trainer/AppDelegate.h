@@ -22,8 +22,16 @@
 + (NSString *)rankAfterRank:(NSString *)rankString;
 
 + (int)bestResult;
++ (int)prevBestResult;
 + (NSString *)currentRank;
++ (NSString *)prevRank;
+
 + (int)numberOfKeysForCurrentRank;
+
+- (void)playButtonClickSound;
+- (void)playErrorSound;
+- (void)playNewResultSound;
+- (void)playNewRankSound;
 
 @end
 

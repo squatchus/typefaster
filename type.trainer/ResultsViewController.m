@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *resultTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mistakesPercentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *prevResultLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bestResultLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *starView1;
 @property (weak, nonatomic) IBOutlet UIImageView *starView2;
 @property (weak, nonatomic) IBOutlet UIImageView *starView3;
@@ -33,6 +33,7 @@
 - (IBAction)onShareButtonPressed:(UIButton *)sender;
 - (IBAction)onRateButtonPressed:(UIButton *)sender;
 - (IBAction)onContinueButtonPressed:(UIButton *)sender;
+- (IBAction)onSettingsButtonPressed:(UIButton *)sender;
 
 @end
 
@@ -62,11 +63,20 @@
     _textLabel.text = text;
     _authorLabel.text = subtitle;
     
-    if (results.count > 1) {
-        int prevSeconds = [results[results.count-2][@"seconds"] intValue];
-        int prevSymbols = [results[results.count-2][@"symbols"] intValue];
-        int prevSignsPerMin = (int)((float)prevSymbols / (float)prevSeconds * 60.0);
-        _prevResultLabel.text = [NSString stringWithFormat:@"%d", prevSignsPerMin];
+    int bestResult = [AppDelegate bestResult];
+    _bestResultLabel.text = [NSString stringWithFormat:@"%d", bestResult];
+
+    NSString *currentRank = [AppDelegate currentRank];
+    if (signsPerMin < bestResult) {
+        _resultTitleLabel.text = @"Ваш результат";
+    }
+    else if ([currentRank isEqualToString:[AppDelegate prevRank]]) {
+        _resultTitleLabel.text = @"Новый рекорд!";
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewResultSound];
+    }
+    else {
+        _resultTitleLabel.text = [NSString stringWithFormat:@"Новый ранг - %@!", currentRank];
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewRankSound];
     }
     
     [self updateStarsBySpeed:signsPerMin];
@@ -105,15 +115,43 @@
 
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender {
-    NSLog(@"onShareButtonPressed");
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+
+    NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/id436693646/"];
+    UIImage *image = [UIImage imageNamed:@"keyboard_background.png"];
+    
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[text, url, image]
+     applicationActivities:nil];
+    
+    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                         UIActivityTypePrint,
+                                         UIActivityTypeCopyToPasteboard,
+                                         UIActivityTypeAssignToContact,
+                                         UIActivityTypeSaveToCameraRoll,
+                                         UIActivityTypeAddToReadingList,
+                                         UIActivityTypePostToVimeo,
+                                         UIActivityTypePostToTencentWeibo,
+                                         UIActivityTypeAirDrop];
+    
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSLog(@"onRateButtonPressed");
 }
 
 - (IBAction)onContinueButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)onSettingsButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+    [self performSegueWithIdentifier:@"resultsToSettings" sender:self];
 }
 
 @end

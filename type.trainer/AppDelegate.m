@@ -7,8 +7,14 @@
 //
 
 #import "AppDelegate.h"
+@import AudioToolbox;
 
 @interface AppDelegate ()
+
+@property SystemSoundID errorSound;
+@property SystemSoundID buttonClickSound;
+@property SystemSoundID newResultSound;
+@property SystemSoundID newRankSound;
 
 @end
 
@@ -65,6 +71,20 @@
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryCookies"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    CFBundleRef mainBundle = CFBundleGetMainBundle ();
+    
+    CFURLRef soundFileURLRef  = CFBundleCopyResourceURL (mainBundle, CFSTR ("error"), CFSTR ("wav"), NULL);
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &_errorSound);
+    
+    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("click"), CFSTR ("wav"), NULL);
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &_buttonClickSound);
+    
+    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_rank"), CFSTR ("wav"), NULL);
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newRankSound);
+
+    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_result"), CFSTR ("wav"), NULL);
+    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newResultSound);
 }
 
 + (NSString *)rankTitleBySpeed:(int)speed {
@@ -139,8 +159,26 @@
     return maxSpeed;
 }
 
++ (int)prevBestResult {
+    int maxSpeed = 0;
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    for (NSDictionary *result in results) {
+        if (result == results.lastObject) break;
+        int seconds = [result[@"seconds"] intValue];
+        int symbols = [result[@"symbols"] intValue];
+        int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
+        if (signsPerMin > maxSpeed)
+            maxSpeed = signsPerMin;
+    }
+    return maxSpeed;
+}
+
 + (NSString *)currentRank {
     return [self rankTitleBySpeed:[self bestResult]];
+}
+
++ (NSString *)prevRank {
+    return [self rankTitleBySpeed:[self prevBestResult]];
 }
 
 + (int)numberOfKeysForCurrentRank {
@@ -153,5 +191,26 @@
     if (num) return [num intValue];
     return kAllKeysInKeyboard;
 }
+
+- (void)playButtonClickSound {
+//    AudioServicesPlaySystemSound(_buttonClickSound);
+}
+- (void)playErrorSound {
+    AudioServicesPlaySystemSound(_errorSound);
+}
+- (void)playNewResultSound {
+    AudioServicesPlaySystemSound(_newResultSound);
+}
+- (void)playNewRankSound {
+    AudioServicesPlaySystemSound(_newRankSound);
+}
+
+- (void)dealloc {
+    AudioServicesDisposeSystemSoundID(_buttonClickSound);
+    AudioServicesDisposeSystemSoundID(_newResultSound);
+    AudioServicesDisposeSystemSoundID(_newRankSound);
+    AudioServicesDisposeSystemSoundID(_errorSound);
+}
+
 
 @end

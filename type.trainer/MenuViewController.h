@@ -30,5 +30,7 @@
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender;
 - (IBAction)onGameCenterButtonPressed:(UIButton *)sender;
+- (IBAction)onSettingsButtonPressed:(UIButton *)sender;
+- (IBAction)onPlayButtonPressed:(UIButton *)sender;
 
 @end

@@ -12,21 +12,18 @@
 #import "TFKeyboardView.h"
 #import "UIColor+HexColor.h"
 
+#define kBaseFontSize 16
+#define kBaseFontName @"HelveticaNeue"
 
 #pragma mark - Tokens
 
 @interface Token : NSObject
-
 @property (nonatomic, strong) NSString *string;
 @property int startIndex;
 @property int endIndex;
-
 - (id)initWithString:(NSString *)string startIndex:(int)start endIndex:(int)end;
-
 @end
-
 @implementation Token
-
 - (id)initWithString:(NSString *)string startIndex:(int)start endIndex:(int)end {
     if (self = [super init]) {
         _string = string;
@@ -36,12 +33,12 @@
     }
     return nil;
 }
-
 - (NSString *)description {
     return [NSString stringWithFormat:@"[%@] (%d, %d)", _string, _startIndex, _endIndex];
 }
-
 @end
+
+
 
 #pragma mark - Controller
 
@@ -98,6 +95,8 @@
     
     _shiftView.layer.cornerRadius = 4;
     _backspaceView.layer.cornerRadius = 4;
+    _textView.scrollEnabled = NO;
+
     
     // custom keyboard
     _keyboardView = [[NSBundle mainBundle] loadNibNamed:@"TFKeyboardView" owner:self options:nil][0];
@@ -148,7 +147,6 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    NSLog(@"keyboardWillShow");
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
@@ -219,30 +217,24 @@
 //    current_level
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
     [sourceText addAttribute:NSFontAttributeName
-                       value:[UIFont fontWithName:@"HelveticaNeue" size:16]
+                       value:[UIFont fontWithName:kBaseFontName size:kBaseFontSize]//@"HelveticaNeue" size:kBaseFontSize]
                        range:NSMakeRange(0, sourceText.length)];
     [sourceText addAttribute:NSForegroundColorAttributeName
                        value:[UIColor colorWithHexString:@"999999"]
                        range:NSMakeRange(0, sourceText.length)];
     _textView.attributedText = sourceText;
     _textView.selectedRange = NSMakeRange(0, 0);
-//    _textView.backgroundColor = [UIColor redColor];
-//    _keyboardView.alpha = 0.5;
-//    _currentWordLabel.alpha = 0.5;
-    
-//    CGSize size = [_textView sizeThatFits:CGSizeMake(_textView.frame.size.width, CGFLOAT_MAX)];
-//    CGRect viewRect = _textView.frame;
-//    viewRect.size = size;
-//    UIView *view = [[UIView alloc] initWithFrame:viewRect];
-//    view.backgroundColor = [UIColor greenColor];
-//    view.alpha = 0.5;
-//    [self.view addSubview:view];
-//    for (NSLayoutConstraint *c in self.view.constraints) {
-//        if (c.firstItem == _textView && c.firstAttribute == NSLayoutAttributeTop) {
-//            c.constant = (_textView.frame.size.height-216.0-54.0 - size.height)/4.0;
-//            break;
-//        }
-//    }
+
+    [self.view layoutIfNeeded];
+    CGSize size = [_textView sizeThatFits:CGSizeMake(self.view.frame.size.width-32, CGFLOAT_MAX)];
+    for (NSLayoutConstraint *c in _textView.constraints) {
+        if (c.firstAttribute == NSLayoutAttributeHeight) {
+            c.constant = size.height;
+        }
+        if (c.firstAttribute == NSLayoutAttributeWidth) {
+            c.constant = size.width + 16;
+        }
+    }
 }
 
 - (void)buildTokensFromString:(NSString *)string {
@@ -324,8 +316,7 @@
 //
 - (void)onBackspacePressed:(UIButton *)sender {
     [_keyboardView playClickSound];
-    if (_textView.selectedRange.location > 0)
-        [self updateTextViewWithKey:@""];
+    [self updateTextViewWithKey:@""];
 }
 
 - (void)onShiftPressed:(UIButton *)sender {
@@ -339,7 +330,8 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    [self onKeyTapped:text];
+    if ([text isEqualToString:@"\n"] == NO)
+        [self onKeyTapped:text];
     return NO;
 }
 
@@ -404,6 +396,7 @@
     if (_awaited_key) { // _awaited key exists only in strictTyping mode
         if (_awaited_key.length == 0) {
             _backspaceView.hidden = NO;
+            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playErrorSound];
             _stat_mistakes++;
         }
         else {
@@ -433,7 +426,7 @@
     
     // Базовый стиль текста в textView
     [text addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:@"HelveticaNeue" size:16]
+                 value:[UIFont fontWithName:kBaseFontName size:kBaseFontSize]//@"HelveticaNeue" size:kBaseFontSize]
                  range:NSMakeRange(0, text.length)];
     [text addAttribute:NSForegroundColorAttributeName
                  value:[UIColor colorWithHexString:@"999999"] // gray
@@ -446,7 +439,7 @@
     
     if (_useStrictTyping == NO) {
         _stat_symbols = 0;
-        _stat_mistakes = 0;
+        int mistakes = 0;
         for (Token *token in _tokens) {
             if (token.startIndex >= _typed_string.length) break;
             int length = MIN((int)_typed_string.length-token.startIndex, token.endIndex-token.startIndex+1);
@@ -455,7 +448,7 @@
             for (int i=0; i<typed.length; i++) {
                 NSString *typedKey = [typed substringWithRange:NSMakeRange(i, 1)];
                 NSString *supposedKey = [token.string substringWithRange:NSMakeRange(i, 1)];
-                if ([self key:typedKey isEqualToKey:supposedKey] == NO) _stat_mistakes++;
+                if ([self key:typedKey isEqualToKey:supposedKey] == NO) mistakes++;
             }
             if ([token.string hasPrefix:typed] && ![typed isEqualToString:@"\n"])
                 _stat_symbols+=length;
@@ -464,6 +457,9 @@
                                     value:[UIColor colorWithHexString:@"FF3333"] // red
                                     range:NSMakeRange(token.startIndex, length)];
         }
+        if (mistakes > _stat_mistakes)
+            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playErrorSound];
+        _stat_mistakes = mistakes;
     }
     
     _textView.attributedText = text;
@@ -682,6 +678,7 @@
 }
 
 - (IBAction)onDoneButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

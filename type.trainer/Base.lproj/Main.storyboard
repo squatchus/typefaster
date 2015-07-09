@@ -195,7 +195,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="zEH-Dz-qlx"/>
+                                    <action selector="onPlayButtonPressed:" destination="mxu-bG-8Jk" eventType="touchUpInside" id="cAc-15-KKx"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seh-Qx-QYR" userLabel="SepView7">
@@ -247,7 +247,7 @@
                                     <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IkZ-qz-xar" kind="show" id="qtW-JU-ZvR"/>
+                                    <action selector="onSettingsButtonPressed:" destination="mxu-bG-8Jk" eventType="touchUpInside" id="YSF-bN-hDp"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sX-8R-zBX" userLabel="ViewAboveButtons">
@@ -350,6 +350,8 @@
                         <outlet property="starView5" destination="SPS-hb-ffa" id="Bee-yL-lDh"/>
                         <outlet property="startTypingButton" destination="3t7-TJ-0iS" id="0uB-4i-tob"/>
                         <outlet property="yourSpeedLabel" destination="n5V-XX-98H" id="G84-Tv-W3u"/>
+                        <segue destination="IkZ-qz-xar" kind="show" identifier="menuToSettings" id="mpL-qs-cmp"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="menuToGame" id="8FE-Ry-hdw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKa-44-YTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -707,7 +709,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="a5v-Aa-bG4">
                                         <rect key="frame" x="144" y="58" width="70" height="34"/>
-                                        <string key="text">прошлый
+                                        <string key="text">лучший
 результат</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -924,7 +926,7 @@
                                     <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IkZ-qz-xar" kind="show" id="1zk-Gn-0mT"/>
+                                    <action selector="onSettingsButtonPressed:" destination="zbn-g5-SSC" eventType="touchUpInside" id="dPl-yU-A5W"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsf-46-ev0" userLabel="Оценить">
@@ -1054,9 +1056,9 @@
                     </view>
                     <connections>
                         <outlet property="authorLabel" destination="zZc-pq-tPo" id="Csm-Y4-svx"/>
+                        <outlet property="bestResultLabel" destination="L91-wr-Mx0" id="wc6-zN-XCU"/>
                         <outlet property="continueButton" destination="IiP-l5-Imk" id="FcE-RJ-0nv"/>
                         <outlet property="mistakesPercentLabel" destination="pay-2J-b5j" id="ZHZ-d8-BHC"/>
-                        <outlet property="prevResultLabel" destination="L91-wr-Mx0" id="LN0-MT-yuj"/>
                         <outlet property="rateButton" destination="xsf-46-ev0" id="zXt-HN-pam"/>
                         <outlet property="resultTitleLabel" destination="CIm-RQ-pvZ" id="gJh-Iz-lSH"/>
                         <outlet property="settingsButton" destination="S91-fz-lJD" id="JBL-jC-eS5"/>
@@ -1068,6 +1070,7 @@
                         <outlet property="starView4" destination="bTw-t0-f8A" id="8Gd-OG-8dA"/>
                         <outlet property="starView5" destination="YFG-fk-KJA" id="d1N-eL-zkc"/>
                         <outlet property="textLabel" destination="Pww-30-1Lv" id="Qcl-Qy-SYh"/>
+                        <segue destination="IkZ-qz-xar" kind="show" identifier="resultsToSettings" id="iw2-Gg-fJd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ER-QT-2bL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1111,264 +1114,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2c5-gV-D3P">
-                                <rect key="frame" x="32" y="59" width="552" height="487"/>
+                                <rect key="frame" x="200" y="203" width="200" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="5NM-PU-eYN"/>
+                                    <constraint firstAttribute="height" constant="200" id="9kj-Gf-J6G"/>
+                                </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="о">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
                                     <fragment>
-                                        <string key="content"> сколько нам открытий чудных
-</string>
+                                        <string key="content">о сколько нам открытий чудных
+готовят просвещенья дух
+и опыт сын ошибок трудных
+и гений парадоксов друг
+и случай бог изобретатель</string>
                                         <attributes>
                                             <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                            <font key="NSFont" size="16" name="CourierNewPSMT"/>
                                             <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="г">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">отовят просвещенья дух
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="и">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="о">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="пыт">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">сын ошибок трудных
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="и">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="г">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="ений">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="парадоксов">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">друг
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="и">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content=" ">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="с">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="лучай бог изобретатель">
-                                        <attributes>
-                                            <color key="NSColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <font key="NSOriginalFont" size="16" name="HelveticaNeue"/>
+                                            <font key="NSOriginalFont" size="16" name="CourierNewPSMT"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
                                                 <tabStops/>
                                             </paragraphStyle>
@@ -1449,6 +1212,14 @@
                                     <constraint firstAttribute="width" secondItem="987-TH-FIa" secondAttribute="height" multiplier="1:1" id="xfC-y0-rdY"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGs-22-Uqw" userLabel="SepViewTop">
+                                <rect key="frame" x="16" y="59" width="568" height="144"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qA-RL-JP7" userLabel="SepViewBottom">
+                                <rect key="frame" x="16" y="403" width="568" height="143"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -1458,10 +1229,15 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xd9-yC-ev7" secondAttribute="bottom" constant="7" id="8o5-iO-yeD"/>
                             <constraint firstItem="UDk-eh-x44" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="9Ew-Xf-ouF"/>
                             <constraint firstAttribute="centerX" secondItem="u3z-5g-PjM" secondAttribute="centerX" id="9sy-Wr-nqJ"/>
+                            <constraint firstItem="6qA-RL-JP7" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="EDA-S2-N5q"/>
+                            <constraint firstItem="6qA-RL-JP7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="EOH-rk-9Lm"/>
                             <constraint firstItem="987-TH-FIa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="534" id="EwU-rd-EJ5"/>
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="top" secondItem="UDk-eh-x44" secondAttribute="bottom" id="GRv-cB-MeW"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Hva-EW-t1c"/>
+                            <constraint firstItem="AGs-22-Uqw" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="IAE-QU-DQc"/>
                             <constraint firstItem="UDk-eh-x44" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="If0-0P-nX3"/>
+                            <constraint firstItem="2c5-gV-D3P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JJw-M7-8lx"/>
+                            <constraint firstItem="6qA-RL-JP7" firstAttribute="height" secondItem="AGs-22-Uqw" secondAttribute="height" id="JkY-Ta-d0B"/>
                             <constraint firstItem="fAP-8p-8Bv" firstAttribute="baseline" secondItem="URI-1f-KPK" secondAttribute="baseline" id="KSE-TL-aYb"/>
                             <constraint firstItem="987-TH-FIa" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="MMV-MO-bAI"/>
                             <constraint firstItem="fCU-lx-RdU" firstAttribute="baseline" secondItem="URI-1f-KPK" secondAttribute="baseline" id="RWE-eV-Vtr"/>
@@ -1470,9 +1246,16 @@
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="XWj-DH-tjz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="987-TH-FIa" secondAttribute="bottom" constant="7" id="Z0K-PW-qgf"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="bD6-Ac-ckp"/>
+                            <constraint firstItem="AGs-22-Uqw" firstAttribute="top" secondItem="UDk-eh-x44" secondAttribute="bottom" id="dSk-E6-lHX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UDk-eh-x44" secondAttribute="trailing" id="eae-eT-e3Z"/>
+                            <constraint firstItem="2c5-gV-D3P" firstAttribute="top" secondItem="AGs-22-Uqw" secondAttribute="bottom" id="gOP-ts-OTw"/>
                             <constraint firstItem="xd9-yC-ev7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gpv-sW-IUc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" id="h9R-3c-EL5"/>
+                            <constraint firstItem="6qA-RL-JP7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="hft-LJ-Lba"/>
+                            <constraint firstItem="AGs-22-Uqw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ju4-ec-6rf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2c5-gV-D3P" secondAttribute="trailing" id="lZN-LG-bBj"/>
+                            <constraint firstItem="zJ5-e5-qiK" firstAttribute="top" secondItem="6qA-RL-JP7" secondAttribute="bottom" id="oZY-Gb-hcw"/>
+                            <constraint firstAttribute="centerX" secondItem="2c5-gV-D3P" secondAttribute="centerX" id="pDR-U0-oYO"/>
                             <constraint firstAttribute="centerX" secondItem="URI-1f-KPK" secondAttribute="centerX" id="pHs-E3-4b5"/>
                             <constraint firstItem="987-TH-FIa" firstAttribute="bottom" secondItem="u3z-5g-PjM" secondAttribute="bottom" constant="-7" id="rSl-29-8mv"/>
                             <constraint firstAttribute="width" secondItem="u3z-5g-PjM" secondAttribute="width" id="rtB-Rw-irs"/>
@@ -1485,6 +1268,12 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="GRv-cB-MeW"/>
+                                <exclude reference="JJw-M7-8lx"/>
+                                <exclude reference="XWj-DH-tjz"/>
+                                <exclude reference="h9R-3c-EL5"/>
+                                <exclude reference="lZN-LG-bBj"/>
+                                <exclude reference="bD6-Ac-ckp"/>
                                 <exclude reference="Svl-M0-K5i"/>
                                 <exclude reference="6hI-Yx-KXA"/>
                                 <exclude reference="8o5-iO-yeD"/>
@@ -1519,6 +1308,6 @@
         <image name="star_gray.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1zk-Gn-0mT"/>
+        <segue reference="iw2-Gg-fJd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "UIColor+HexColor.h"
+#import "AppDelegate.h"
 
 @interface SettingsViewController ()
 
@@ -65,8 +66,6 @@
 }
 
 - (IBAction)onSwitchValueChanged:(UISwitch *)sender {
-    NSLog(@"onSwitchValueChanged");
-    
     if (sender == _keyboardSwitch)
         [[NSUserDefaults standardUserDefaults] setValue:@(_keyboardSwitch.on) forKey:@"fullKeyboard"];
     else if (sender == _notificationSwitch)
@@ -78,7 +77,6 @@
 }
 
 - (IBAction)onCategoryButtonPressed:(UIButton *)sender {
-    NSLog(@"onCategoryButtonPressed");
     sender.selected = !sender.selected;
     
     if (sender == _categoryClassicButton)
@@ -92,6 +90,7 @@
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self updateCategoryButton:sender];
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
 }
 
 - (void)updateCategoryButton:(UIButton *)sender {
@@ -102,6 +101,7 @@
 }
 
 - (IBAction)onDoneButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

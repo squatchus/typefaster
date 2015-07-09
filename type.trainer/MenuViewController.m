@@ -65,11 +65,23 @@
 }
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSLog(@"onRateButtonPressed");
 }
 
 - (IBAction)onGameCenterButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSLog(@"onGameCenterButtonPressed");
+}
+
+- (IBAction)onSettingsButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+    [self performSegueWithIdentifier:@"menuToSettings" sender:self];
+}
+
+- (IBAction)onPlayButtonPressed:(UIButton *)sender {
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+    [self performSegueWithIdentifier:@"menuToGame" sender:self];
 }
 
 @end

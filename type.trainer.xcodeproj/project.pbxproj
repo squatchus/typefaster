@@ -15,6 +15,10 @@
 		B4010C781B3E08C5000DF339 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4010C761B3E08C5000DF339 /* LaunchScreen.xib */; };
 		B4010C841B3E08C5000DF339 /* type_trainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4010C831B3E08C5000DF339 /* type_trainerTests.m */; };
 		B4010C931B3EDB9D000DF339 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4010C921B3EDB9D000DF339 /* MenuViewController.m */; };
+		B413AAD71B4D4C1200C800C4 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = B413AAD61B4D4C1200C800C4 /* error.wav */; };
+		B413AADB1B4D50CF00C800C4 /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = B413AAD81B4D50CF00C800C4 /* click.wav */; };
+		B413AADC1B4D50CF00C800C4 /* new_rank.wav in Resources */ = {isa = PBXBuildFile; fileRef = B413AAD91B4D50CF00C800C4 /* new_rank.wav */; };
+		B413AADD1B4D50CF00C800C4 /* new_result.wav in Resources */ = {isa = PBXBuildFile; fileRef = B413AADA1B4D50CF00C800C4 /* new_result.wav */; };
 		B41756A51B4039E2003033F3 /* KBPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B41756A41B4039E2003033F3 /* KBPanGestureRecognizer.m */; };
 		B41756AC1B404F07003033F3 /* space_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B41756A61B404F07003033F3 /* space_sel@2x.png */; };
 		B41756AD1B404F07003033F3 /* space@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B41756A71B404F07003033F3 /* space@2x.png */; };
@@ -79,6 +83,10 @@
 		B4010C831B3E08C5000DF339 /* type_trainerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = type_trainerTests.m; sourceTree = "<group>"; };
 		B4010C911B3EDB9D000DF339 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		B4010C921B3EDB9D000DF339 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		B413AAD61B4D4C1200C800C4 /* error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = error.wav; sourceTree = "<group>"; };
+		B413AAD81B4D50CF00C800C4 /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		B413AAD91B4D50CF00C800C4 /* new_rank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = new_rank.wav; sourceTree = "<group>"; };
+		B413AADA1B4D50CF00C800C4 /* new_result.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = new_result.wav; sourceTree = "<group>"; };
 		B41756A31B4039E2003033F3 /* KBPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBPanGestureRecognizer.h; sourceTree = "<group>"; };
 		B41756A41B4039E2003033F3 /* KBPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBPanGestureRecognizer.m; sourceTree = "<group>"; };
 		B41756A61B404F07003033F3 /* space_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "space_sel@2x.png"; sourceTree = "<group>"; };
@@ -188,6 +196,10 @@
 		B4010C671B3E08C5000DF339 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B413AAD81B4D50CF00C800C4 /* click.wav */,
+				B413AAD91B4D50CF00C800C4 /* new_rank.wav */,
+				B413AADA1B4D50CF00C800C4 /* new_result.wav */,
+				B413AAD61B4D4C1200C800C4 /* error.wav */,
 				B421D1BF1B49BE67006F17F7 /* backspaceIcon@2x.png */,
 				B421D1C01B49BE67006F17F7 /* shiftIcon@2x.png */,
 				B421D1861B4984B6006F17F7 /* rateIcon@2x.png */,
@@ -328,6 +340,7 @@
 				B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */,
 				B4DAF64E1B3F3C8600D39487 /* keyboard_background@2x.png in Resources */,
 				B4DAF6711B3F6A4400D39487 /* star_gray@2x.png in Resources */,
+				B413AADD1B4D50CF00C800C4 /* new_result.wav in Resources */,
 				B41756AD1B404F07003033F3 /* space@2x.png in Resources */,
 				B4DAF6701B3F6A4400D39487 /* star_gold@2x.png in Resources */,
 				B4010C751B3E08C5000DF339 /* Images.xcassets in Resources */,
@@ -336,6 +349,7 @@
 				B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */,
 				B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */,
 				B41756AE1B404F07003033F3 /* shift_sel@2x.png in Resources */,
+				B413AADC1B4D50CF00C800C4 /* new_rank.wav in Resources */,
 				B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */,
 				B421D1891B4984B6006F17F7 /* settingsIcon@2x.png in Resources */,
 				B421D1881B4984B6006F17F7 /* rateIcon@2x.png in Resources */,
@@ -349,6 +363,8 @@
 				B421D1C11B49BE67006F17F7 /* backspaceIcon@2x.png in Resources */,
 				B41756AC1B404F07003033F3 /* space_sel@2x.png in Resources */,
 				B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */,
+				B413AADB1B4D50CF00C800C4 /* click.wav in Resources */,
+				B413AAD71B4D4C1200C800C4 /* error.wav in Resources */,
 				B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */,
 				B41756AF1B404F07003033F3 /* shift@2x.png in Resources */,
 				B421D1C41B49E3F9006F17F7 /* star_goldgray@2x.png in Resources */,
