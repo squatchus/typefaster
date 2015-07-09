@@ -9,6 +9,7 @@
 #import "MenuViewController.h"
 #import "UIColor+HexColor.h"
 #import "AppDelegate.h"
+#import "Flurry.h"
 
 @interface MenuViewController ()
 
@@ -71,21 +72,24 @@
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    [Flurry logEvent:@"RateButton clicked"];
 }
 
 - (IBAction)onGameCenterButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-    NSLog(@"onGameCenterButtonPressed");
+
 }
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToSettings" sender:self];
+    [Flurry logEvent:@"SettingsButton clicked"];
 }
 
 - (IBAction)onPlayButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToGame" sender:self];
+    [Flurry logEvent:@"PlayButton clicked"];
 }
 
 @end

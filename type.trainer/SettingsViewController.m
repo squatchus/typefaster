@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "UIColor+HexColor.h"
 #import "AppDelegate.h"
+#import "Flurry.h"
 
 @interface SettingsViewController ()
 
@@ -68,9 +69,12 @@
         [[NSUserDefaults standardUserDefaults] setValue:@(_notificationSwitch.on) forKey:@"notifications"];
         if (_notificationSwitch.on) [AppDelegate enableNotifications];
         else [AppDelegate disableNotifications];
+        [Flurry logEvent:@"Notifications switched" withParameters:@{@"state": @(_notificationSwitch.on)}];
     }
-    else if (sender == _canMistakeSwitch)
+    else if (sender == _canMistakeSwitch) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_canMistakeSwitch.on) forKey:@"strictTyping"];
+        [Flurry logEvent:@"StrictTyping switched" withParameters:@{@"state": @(_canMistakeSwitch.on)}];
+    }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -78,14 +82,24 @@
 - (IBAction)onCategoryButtonPressed:(UIButton *)sender {
     sender.selected = !sender.selected;
     
-    if (sender == _categoryClassicButton)
+    NSDictionary *params;
+    if (sender == _categoryClassicButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryClassicButton.selected) forKey:@"categoryClassic"];
-    if (sender == _categoryQuotesButton)
+        params = @{@"state": @(_categoryClassicButton.selected), @"name":@"categoryClassic"};
+    }
+    if (sender == _categoryQuotesButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryQuotesButton.selected) forKey:@"categoryQuotes"];
-    if (sender == _categoryHokkuButton)
+        params = @{@"state": @(_categoryQuotesButton.selected), @"name":@"categoryQuotes"};
+    }
+    if (sender == _categoryHokkuButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryHokkuButton.selected) forKey:@"categoryHokku"];
-    if (sender == _categoryCookiesButton)
+        params = @{@"state": @(_categoryHokkuButton.selected), @"name":@"categoryHokku"};
+    }
+    if (sender == _categoryCookiesButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryCookiesButton.selected) forKey:@"categoryCookies"];
+        params = @{@"state": @(_categoryCookiesButton.selected), @"name":@"categoryCookies"};
+    }
+    [Flurry logEvent:@"ContentCategory switched" withParameters:params];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self updateCategoryButton:sender];

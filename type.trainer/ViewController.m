@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "TFKeyboardView.h"
 #import "UIColor+HexColor.h"
+#import "Flurry.h"
 
 #define kBaseFontSize 16
 #define kBaseFontName @"HelveticaNeue"
@@ -277,6 +278,13 @@
     _secondsLabel.textColor = [UIColor colorWithHexString:@"A54466"];
     _session_seconds = 0;
     _session_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
+
+    NSDictionary *params = @{@"author": _current_level[@"author"],
+                             @"text": _current_level[@"text"],
+                             @"category": [AppDelegate categoryByText:_current_level[@"text"]],
+                             @"rankAtStart": [AppDelegate currentRank] };
+    
+    [Flurry logEvent:@"TrainingSession started" withParameters:params timed:YES];
 }
 
 - (void)endSession {
@@ -304,6 +312,8 @@
     [[NSUserDefaults standardUserDefaults] setValue:results forKey:@"results"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self performSegueWithIdentifier:@"showResultsVC" sender:self];
+    NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes)};
+    [Flurry endTimedEvent:@"TrainingSession started" withParameters:params];
 }
 
 #pragma mark - Keyboard Buttons Handling

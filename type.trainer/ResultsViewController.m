@@ -9,6 +9,7 @@
 #import "ResultsViewController.h"
 #import "AppDelegate.h"
 #import "TFShareView.h"
+#import "Flurry.h"
 
 @interface ResultsViewController () <UIAlertViewDelegate>
 
@@ -85,6 +86,12 @@
     else { // новый ранг
         _resultTitleLabel.text = [NSString stringWithFormat:@"Новый ранг - %@!", currentRank];
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewRankSound];
+        
+        NSDictionary *params = @{@"rank": currentRank,
+                                 @"highestScores": @([AppDelegate numberOfHighestScores]),
+                                 @"summaryTime": @([AppDelegate summaryTimeOfAllTrainings])};
+        [Flurry logEvent:@"NewRank achieved" withParameters:params];
+        
         if (signsPerMin >= 100) { // switch to full keyboard
             if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue]) {
                 [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
@@ -175,22 +182,29 @@
                                          UIActivityTypeAirDrop];
     
     [self presentViewController:controller animated:YES completion:nil];
+    NSDictionary *params = @{@"author": level[@"author"],
+                             @"text": level[@"text"],
+                             @"category": [AppDelegate categoryByText:level[@"text"]]};
+    [Flurry logEvent:@"ShareButton clicked" withParameters:params];
 }
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+    [Flurry logEvent:@"RateButton clicked"];
 }
 
 - (IBAction)onContinueButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
+    [Flurry logEvent:@"ContinueButton clicked"];
 }
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"resultsToSettings" sender:self];
+    [Flurry logEvent:@"SettingsButton clicked"];
 }
 
 @end

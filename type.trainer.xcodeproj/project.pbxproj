@@ -38,6 +38,9 @@
 		B421D1C41B49E3F9006F17F7 /* star_goldgray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B421D1C31B49E3F9006F17F7 /* star_goldgray@2x.png */; };
 		B449FAC81B4EB621000EEF4B /* TFShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B449FAC71B4EB621000EEF4B /* TFShareView.xib */; };
 		B449FACB1B4EC2B7000EEF4B /* TFShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = B449FACA1B4EC2B7000EEF4B /* TFShareView.m */; };
+		B449FAD01B4EED4D000EEF4B /* libFlurry_6.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FACF1B4EED4D000EEF4B /* libFlurry_6.6.0.a */; };
+		B449FAD21B4EED93000EEF4B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */; };
+		B449FAD41B4EED99000EEF4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FAD31B4EED99000EEF4B /* Security.framework */; };
 		B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */; };
 		B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */; };
 		B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */; };
@@ -112,6 +115,11 @@
 		B449FAC71B4EB621000EEF4B /* TFShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TFShareView.xib; sourceTree = "<group>"; };
 		B449FAC91B4EC2B7000EEF4B /* TFShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFShareView.h; sourceTree = "<group>"; };
 		B449FACA1B4EC2B7000EEF4B /* TFShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFShareView.m; sourceTree = "<group>"; };
+		B449FACD1B4EED4D000EEF4B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		B449FACE1B4EED4D000EEF4B /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
+		B449FACF1B4EED4D000EEF4B /* libFlurry_6.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.6.0.a; sourceTree = "<group>"; };
+		B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B449FAD31B4EED99000EEF4B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
 		B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
 		B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
@@ -140,6 +148,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B449FAD41B4EED99000EEF4B /* Security.framework in Frameworks */,
+				B449FAD21B4EED93000EEF4B /* SystemConfiguration.framework in Frameworks */,
+				B449FAD01B4EED4D000EEF4B /* libFlurry_6.6.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +167,8 @@
 		B4010C5B1B3E08C4000DF339 = {
 			isa = PBXGroup;
 			children = (
+				B449FAD31B4EED99000EEF4B /* Security.framework */,
+				B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */,
 				B4010C661B3E08C5000DF339 /* type.trainer */,
 				B4010C801B3E08C5000DF339 /* type.trainerTests */,
 				B4010C651B3E08C5000DF339 /* Products */,
@@ -204,6 +217,7 @@
 		B4010C671B3E08C5000DF339 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B449FACC1B4EED4D000EEF4B /* Flurry */,
 				B413AAD81B4D50CF00C800C4 /* click.wav */,
 				B413AAD91B4D50CF00C800C4 /* new_rank.wav */,
 				B413AADA1B4D50CF00C800C4 /* new_result.wav */,
@@ -260,6 +274,16 @@
 				B4010C821B3E08C5000DF339 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B449FACC1B4EED4D000EEF4B /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				B449FACD1B4EED4D000EEF4B /* Flurry.h */,
+				B449FACE1B4EED4D000EEF4B /* FlurryWatch.h */,
+				B449FACF1B4EED4D000EEF4B /* libFlurry_6.6.0.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -543,6 +567,10 @@
 				INFOPLIST_FILE = type.trainer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/type.trainer/Flurry",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -561,6 +589,10 @@
 				INFOPLIST_FILE = type.trainer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/type.trainer/Flurry",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

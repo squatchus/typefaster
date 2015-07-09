@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Flurry.h"
 @import AudioToolbox;
 
 @interface AppDelegate ()
@@ -23,6 +24,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [NSThread sleepForTimeInterval:1.0];
+//    [Flurry setDebugLogEnabled:YES];
+    [Flurry startSession:@"DXG36J5Z73XT554MZMFD"];
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
+        NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        [[NSUserDefaults standardUserDefaults] setValue:idfv forKey:@"userID"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [Flurry setUserID:idfv];
+    }
     [self initSettings];
     return YES;
 }
@@ -230,10 +239,11 @@
 }
 
 + (void)enableNotifications {
-    // New for iOS 8 - Register the notifications
-    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    if (SYSTEM_VERSION_GREATER_THAN(@"8.0")) {
+        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    }
 
     NSDate *tomorrow = [[NSDate date] dateByAddingTimeInterval:86400];
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -248,8 +258,8 @@
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.applicationIconBadgeNumber = 1;
     notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.repeatInterval = NSCalendarUnitDay;
-    notification.alertTitle = @"Печатай быстрее";
+    notification.repeatInterval = NSCalendarUnitMinute;
+    if (SYSTEM_VERSION_GREATER_THAN(@"8.2")) notification.alertTitle = @"Печатай быстрее";
     notification.alertBody = @"Потренеруйтесь в скорости печати!";
     
     // this will schedule the notification to fire at the fire date
@@ -258,6 +268,26 @@
 
 + (void)disableNotifications {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+}
+
++ (NSString *)categoryByText:(NSString *)text {
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Texts" ofType:@"plist"];
+    NSDictionary *levels = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    for (NSString *catName in [levels allKeys]) {
+        NSArray *catLevels = levels[catName];
+        for (NSDictionary *level in catLevels)
+            if ([text isEqualToString:level[@"text"]]) return catName;
+    }
+    return nil;
+}
+
++ (int)summaryTimeOfAllTrainings {
+    int seconds = 0;
+    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    for (NSDictionary *result in results) {
+        seconds += [result[@"seconds"] intValue];
+    }
+    return seconds;
 }
 
 @end
