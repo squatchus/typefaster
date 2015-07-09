@@ -107,6 +107,9 @@
                             forControlEvents:UIControlEventTouchUpInside];
     [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
                         forControlEvents:UIControlEventTouchUpInside];
+    [_keyboardView.enterButton addTarget:self action:@selector(onEnterPressed:)
+                        forControlEvents:UIControlEventTouchUpInside];
+
     
     KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
     panRec.delegate = self;
@@ -321,18 +324,28 @@
 // Обработчик нажатий на кнопки клавиатуры (с буквой)
 //
 - (void)onKeyTapped:(NSString *)keyString {
-    if (!_session_timer) {
-        [self startSession];
-    }
+    if (!_session_timer) [self startSession];
     [_keyboardView playClickSound];
+    
+    if (_typed_string.length < _source_string.length) {
+        unichar character = [_source_string characterAtIndex:_typed_string.length];
+        // if next char is '\n'
+        if ([[NSCharacterSet newlineCharacterSet] characterIsMember:character]) {
+            BOOL isSpace = [keyString isEqualToString:@" "];
+            BOOL isBackspcae = keyString.length == 0;
+            BOOL isNewline = [keyString isEqualToString:@"\n"];
+            if (isSpace) keyString = @"\n";
+            else if (!isNewline && !isBackspcae) keyString = nil;
+        }
+    }
+    
     [self updateTextViewWithKey:keyString]; // also calculate stats
 }
 
 // Нажатие небуквенных кнопок на базовой клавиатуре
 //
 - (void)onBackspacePressed:(UIButton *)sender {
-    [_keyboardView playClickSound];
-    [self updateTextViewWithKey:@""];
+    [self onKeyTapped:@""];
 }
 
 - (void)onShiftPressed:(UIButton *)sender {
@@ -341,13 +354,28 @@
 }
 
 - (void)onSpacePressed:(UIButton *)sender {
-    [_keyboardView playClickSound];
     [self onKeyTapped:@" "];
 }
 
+- (void)onEnterPressed:(UIButton *)sender {
+    if (_typed_string.length < _source_string.length) {
+        unichar character = [_source_string characterAtIndex:_typed_string.length];
+        if ([[NSCharacterSet newlineCharacterSet] characterIsMember:character]) [self onKeyTapped:@"\n"];
+        else [_keyboardView playClickSound];
+    }
+    else [_keyboardView playClickSound];
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"] == NO)
+    if ([text isEqualToString:@"\n"] == NO) // if not '\n' - just type
         [self onKeyTapped:text];
+    else if (_typed_string.length < _source_string.length) { // if it is '\n'
+        unichar character = [_source_string characterAtIndex:_typed_string.length];
+        // and it on it's own spot
+        if ([[NSCharacterSet newlineCharacterSet] characterIsMember:character])
+            [self onKeyTapped:@"\n"]; // type '\n'
+    }
+    else [_keyboardView playClickSound]; // prevent from typing '\n' in the middle of the line
     return NO;
 }
 
@@ -358,16 +386,16 @@
         if (_typed_string.length == 0) return [_source_string substringToIndex:1];
         NSString *lastTypedKey = [_typed_string substringWithRange:NSMakeRange(_typed_string.length-1, 1)];
         NSString *supposedKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length-1, 1)];
-        if ([lastTypedKey isEqualToString:@"\n"])
-            lastTypedKey = [_typed_string substringWithRange:NSMakeRange(_typed_string.length-2, 1)];
-        if ([supposedKey isEqualToString:@"\n"])
-            supposedKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length-2, 1)];
+//        if ([lastTypedKey isEqualToString:@"\n"])
+//            lastTypedKey = [_typed_string substringWithRange:NSMakeRange(_typed_string.length-2, 1)];
+//        if ([supposedKey isEqualToString:@"\n"])
+//            supposedKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length-2, 1)];
         BOOL keyMatched = [self key:lastTypedKey isEqualToKey:supposedKey];
         if (keyMatched) {
             if (_typed_string.length == _source_string.length) return nil;
             NSString *nextKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length, 1)];
-            if ([nextKey isEqualToString:@"\n"])
-                nextKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length+1, 1)];
+//            if ([nextKey isEqualToString:@"\n"])
+//                nextKey = [_source_string substringWithRange:NSMakeRange(_typed_string.length+1, 1)];
             return nextKey;
         }
         else return @""; // awaited for backspace
@@ -375,33 +403,35 @@
     return nil;
 }
 
+
+// keyString == nil     - can't be typed (not '\n' || ' ', when '\n' expected)
+// keyString == @""     - backspace
+//
 - (void)updateTextViewWithKey:(NSString *)keyString {
     BOOL canBeTyped = [self keyCanBeTyped:keyString];
-    BOOL backspace = (keyString.length == 0);
+    BOOL backspace = (keyString && keyString.length == 0);
     
     if (canBeTyped) {
         if (backspace) {
             NSRange charPosition;
             // если курсор в начале строки
-            if ([_typed_string hasSuffix:@"\n"]) // удаляем 2 символа: '\n' + посл. букву прошлой строки
-                charPosition = NSMakeRange(_typed_string.length-2, 2);
-            else // если курсор после буквы, удаляем только саму букву
+//            if ([_typed_string hasSuffix:@"\n"]) // удаляем 2 символа: '\n' + посл. букву прошлой строки
+//                charPosition = NSMakeRange(_typed_string.length-2, 2);
+//            else // если курсор после буквы, удаляем только саму букву
                 charPosition = NSMakeRange(_typed_string.length-1, 1);
             [_typed_string deleteCharactersInRange:charPosition];
             _stat_symbols--;
         }
         else {
             [_typed_string appendString:keyString];
-            // если после буквы должен быть перенос
-            if ([[_source_string substringFromIndex:_typed_string.length] hasPrefix:@"\n"])
-                [_typed_string appendString:@"\n"];
+//            // если после буквы должен быть перенос
+//            if ([[_source_string substringFromIndex:_typed_string.length] hasPrefix:@"\n"])
+//                [_typed_string appendString:@"\n"];
             _stat_symbols++;
         }
     }
     else {
-        if (_useStrictTyping) {
-            [self pulseTextViewBackgroundColor];
-        }
+        [self pulseTextViewBackgroundColor];
     }
 
     // update awaited key (for strictTyping mode)
@@ -410,7 +440,7 @@
     _backspaceView.hidden = YES;
     _shiftView.hidden = YES;
     if (_awaited_key) { // _awaited key exists only in strictTyping mode
-        if (_awaited_key.length == 0) {
+        if (_awaited_key.length == 0) { // backspace show if we made a mistake
             _backspaceView.hidden = NO;
             [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playErrorSound];
             _stat_mistakes++;
@@ -422,10 +452,10 @@
     }
     
     int tokenPosOffset = (_awaited_key && [_awaited_key isEqualToString:@""]) ? 1 : 0;
-    if (tokenPosOffset == 1) {
-        NSString *prev = [_typed_string substringFromIndex:_typed_string.length-1];
-        if ([prev isEqualToString:@"\n"]) tokenPosOffset = 2;
-    }
+//    if (tokenPosOffset == 1) {
+//        NSString *prev = [_typed_string substringFromIndex:_typed_string.length-1];
+//        if ([prev isEqualToString:@"\n"]) tokenPosOffset = 2;
+//    }
     Token *prevToken = _currentToken;
     _currentToken = [self tokenByPosition:((int)_typed_string.length - tokenPosOffset)];
     if (_currentToken) {
@@ -466,7 +496,7 @@
                 NSString *supposedKey = [token.string substringWithRange:NSMakeRange(i, 1)];
                 if ([self key:typedKey isEqualToKey:supposedKey] == NO) mistakes++;
             }
-            if ([token.string hasPrefix:typed] && ![typed isEqualToString:@"\n"])
+            if ([token.string hasPrefix:typed]/* && ![typed isEqualToString:@"\n"]*/)
                 _stat_symbols+=length;
             else
                 [text addAttribute:NSForegroundColorAttributeName
@@ -508,7 +538,8 @@
     typed = [typed stringByReplacingOccurrencesOfString:@" " withString:@"_"];
     NSString *trail = [string substringFromIndex:typed.length];
     NSString *word = [typed stringByAppendingString:trail];
-    if ([word isEqualToString:@" "]) word = @"\" \"";
+    if ([word isEqualToString:@" "] || [word isEqualToString:@"\n"]) word = @"\" \"";
+    
     NSMutableAttributedString *currentWord = [[NSMutableAttributedString alloc] initWithString:word];
     [currentWord addAttribute:NSFontAttributeName
                         value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24]
@@ -533,6 +564,8 @@
 }
 
 - (BOOL)keyCanBeTyped:(NSString *)keyString {
+    if (!keyString)
+        return NO;
     if (keyString.length == 0 && _typed_string.length == 0) // backspace on start
         return NO;
     if (keyString.length != 0 && _typed_string.length == _source_string.length) // level complete
@@ -540,7 +573,7 @@
     if (_useStrictTyping) {
         if ([self key:keyString isEqualToKey:_awaited_key]) // backspace or key match
             return YES;
-        else if (keyString.length !=0 && _awaited_key.length != 0) // type 1 wrong key
+        else if (keyString.length !=0 && _awaited_key.length != 0 && ![_awaited_key isEqualToString:@"\n"]) // type 1 wrong key
             return YES;
         else return NO;
     }
@@ -552,6 +585,8 @@
         return YES;
     if ([awaitedKey isEqualToString:@"Ё"] && [typedKey isEqualToString:@"Е"])
         return YES;
+    if ([awaitedKey isEqualToString:@"\n"] && [typedKey isEqualToString:@" "])
+        return YES;
     return [typedKey isEqualToString:awaitedKey];
 }
 
@@ -560,6 +595,8 @@
 // Оставляет на кастомной клавиатуре, только буквы из указанной строки
 //
 - (void)showOnlyKeysWithCharactersInString:(NSString *)string {
+    if ([string isEqualToString:@"\n"]) string = @" ";
+    
     NSMutableArray *not_visible = [NSMutableArray new];
     NSMutableArray *visible = [NSMutableArray new];
     

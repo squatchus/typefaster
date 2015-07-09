@@ -226,13 +226,14 @@
                     </state>
                     <state key="highlighted" backgroundImage="space_sel.png"/>
                 </button>
-                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYf-M3-dmc">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYf-M3-dmc">
                     <rect key="frame" x="243" y="167" width="77" height="49"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal">
+                    <state key="normal" title="Ввод" backgroundImage="corner_button.png">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <state key="highlighted" backgroundImage="corner_button_sel.png"/>
                 </button>
                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1M-Xd-XCl">
                     <rect key="frame" x="0.0" y="167" width="77" height="49"/>
@@ -423,6 +424,8 @@
     <resources>
         <image name="backspace.png" width="30" height="54"/>
         <image name="backspace_sel.png" width="30" height="54"/>
+        <image name="corner_button.png" width="80" height="49"/>
+        <image name="corner_button_sel.png" width="80" height="49"/>
         <image name="keyboard_background.png" width="320" height="216"/>
         <image name="shift.png" width="30" height="54"/>
         <image name="shift_sel.png" width="30" height="54"/>
