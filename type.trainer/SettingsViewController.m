@@ -18,7 +18,9 @@
 - (IBAction)onDoneButtonPressed:(UIButton *)sender;
 
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *notificationDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *canMistakeSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *strictTypingDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *categoryClassicButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryQuotesButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryHokkuButton;
@@ -36,6 +38,15 @@
     //
     _notificationSwitch.on  = [[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue];
     _canMistakeSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
+    
+    NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyles.alignment = NSTextAlignmentJustified;
+    paragraphStyles.firstLineHeadIndent = 1.0;
+    NSDictionary *attributes = @{NSParagraphStyleAttributeName: paragraphStyles};
+    NSAttributedString *notificationText = [[NSAttributedString alloc] initWithString: _notificationDescriptionLabel.text attributes:attributes];
+    _notificationDescriptionLabel.attributedText = notificationText;
+    NSAttributedString *strictTypingText = [[NSAttributedString alloc] initWithString: _strictTypingDescriptionLabel.text attributes:attributes];
+    _strictTypingDescriptionLabel.attributedText = strictTypingText;
     
     // Update category buttons & button's settings in UserDefaults
     //

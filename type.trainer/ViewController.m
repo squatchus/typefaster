@@ -127,11 +127,12 @@
     else // UIFontWeightRegular available from iOS 8.2
         _popup_label.font = [UIFont systemFontOfSize:32];
     
-    if (SYSTEM_VERSION_LESS_THAN(@"8.0")) { // BUG (keyboard out of view bounds)
-        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
-        
-        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
-    }
+//    if (SYSTEM_VERSION_LESS_THAN(@"8.0")) { // BUG (keyboard out of view bounds)
+//        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:320]];
+//        
+//        [_keyboardView addConstraint:[NSLayoutConstraint constraintWithItem:_keyboardView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:216]];
+//        [_keyboardView layoutIfNeeded];
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

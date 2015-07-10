@@ -23,7 +23,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [NSThread sleepForTimeInterval:1.0];
+    [NSThread sleepForTimeInterval:1.5];
 //    [Flurry setDebugLogEnabled:YES];
     [Flurry startSession:@"DXG36J5Z73XT554MZMFD"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
@@ -258,7 +258,7 @@
     notification.timeZone = [NSTimeZone defaultTimeZone];
     notification.applicationIconBadgeNumber = 1;
     notification.soundName = UILocalNotificationDefaultSoundName;
-    notification.repeatInterval = NSCalendarUnitMinute;
+    notification.repeatInterval = NSCalendarUnitDay;
     if (SYSTEM_VERSION_GREATER_THAN(@"8.2")) notification.alertTitle = @"Печатай быстрее";
     notification.alertBody = @"Потренеруйтесь в скорости печати!";
     
