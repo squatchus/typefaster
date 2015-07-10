@@ -28,6 +28,8 @@
 + (int)maxValueForRank:(NSString *)rankString;
 + (NSString *)rankAfterRank:(NSString *)rankString;
 
++ (int)firstResult;
+
 + (int)bestResult;
 + (int)prevBestResult;
 + (NSString *)currentRank;

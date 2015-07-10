@@ -32,6 +32,14 @@
     int lastDigit = bestResult % 10;
     NSString *ending = (lastDigit == 1)?@"":((lastDigit > 1 && lastDigit < 5)?@"а":@"ов");
     _signsPerMinTitleLabel.text = [NSString stringWithFormat:@"знак%@ в минуту", ending];
+    
+    int firstResult = [AppDelegate firstResult];
+    if (firstResult > 0) {
+        if (firstResult == bestResult)
+            _firstResultLabel.text = @"продолжайте тренероваться";
+        else
+            _firstResultLabel.text = [NSString stringWithFormat:@"а начинали со скорости %d", firstResult];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

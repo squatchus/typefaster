@@ -55,6 +55,8 @@
 		B449FAEC1B4F46A9000EEF4B /* corner_button_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B449FAEB1B4F46A9000EEF4B /* corner_button_left@2x.png */; };
 		B45E7A471B50050E006C3A67 /* keyboard_background_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */; };
 		B45E7A491B50174D006C3A67 /* letter_popup_iphone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */; };
+		B45E7A4C1B50297F006C3A67 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A4A1B50297F006C3A67 /* iTunesArtwork.png */; };
+		B45E7A4D1B50297F006C3A67 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A4B1B50297F006C3A67 /* iTunesArtwork@2x.png */; };
 		B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */; };
 		B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */; };
 		B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */; };
@@ -148,6 +150,8 @@
 		B449FAEB1B4F46A9000EEF4B /* corner_button_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner_button_left@2x.png"; sourceTree = "<group>"; };
 		B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_background_iphone6.png; sourceTree = "<group>"; };
 		B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letter_popup_iphone6@2x.png"; sourceTree = "<group>"; };
+		B45E7A4A1B50297F006C3A67 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		B45E7A4B1B50297F006C3A67 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
 		B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
 		B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
@@ -295,6 +299,8 @@
 				B4DAF6651B3F665F00D39487 /* Icon-76.png */,
 				B4DAF6661B3F665F00D39487 /* Icon-76@2x.png */,
 				B4DAF6511B3F64F300D39487 /* Icon.png */,
+				B45E7A4A1B50297F006C3A67 /* iTunesArtwork.png */,
+				B45E7A4B1B50297F006C3A67 /* iTunesArtwork@2x.png */,
 				B4010C681B3E08C5000DF339 /* Info.plist */,
 				B4010C691B3E08C5000DF339 /* main.m */,
 			);
@@ -450,9 +456,11 @@
 				B421D1C21B49BE67006F17F7 /* shiftIcon@2x.png in Resources */,
 				B421D1C11B49BE67006F17F7 /* backspaceIcon@2x.png in Resources */,
 				B41756AC1B404F07003033F3 /* space_sel@2x.png in Resources */,
+				B45E7A4C1B50297F006C3A67 /* iTunesArtwork.png in Resources */,
 				B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */,
 				B413AADB1B4D50CF00C800C4 /* click.wav in Resources */,
 				B413AAD71B4D4C1200C800C4 /* error.wav in Resources */,
+				B45E7A4D1B50297F006C3A67 /* iTunesArtwork@2x.png in Resources */,
 				B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */,
 				B41756AF1B404F07003033F3 /* shift_button@2x.png in Resources */,
 				B45E7A471B50050E006C3A67 /* keyboard_background_iphone6.png in Resources */,

@@ -172,7 +172,7 @@
     UIImage *image = [shareView renderImage];
     
     NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/id436693646/"];
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/id1013588476"];
     UIActivityViewController *controller =
     [[UIActivityViewController alloc]
      initWithActivityItems:@[text, url, image]

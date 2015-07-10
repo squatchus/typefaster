@@ -454,8 +454,15 @@
                  value:[UIColor blackColor]
                  range:NSMakeRange(0, _typed_string.length)];
     
-    
-    if (_useStrictTyping == NO) {
+    // Контроль ошибок
+    if (_useStrictTyping) {
+        if (_awaited_key && _awaited_key.length == 0) {
+            [text addAttribute:NSForegroundColorAttributeName
+                         value:[UIColor colorWithHexString:@"FF3333"] // red
+                         range:NSMakeRange(_typed_string.length-1, 1)];
+        }
+    }
+    else {
         _stat_symbols = 0;
         int mistakes = 0;
         for (Token *token in _tokens) {

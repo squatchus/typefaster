@@ -48,13 +48,22 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    application.applicationIconBadgeNumber = 0;
+    BOOL bagesAccess = YES;
+    if (SYSTEM_VERSION_GREATER_THAN(@"8.0")) {
+        UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        bagesAccess = (currentSettings.types & UIUserNotificationTypeBadge) != 0;
+    }
+    if (bagesAccess) application.applicationIconBadgeNumber = 0;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    application.applicationIconBadgeNumber = 0;
-}
+    BOOL bagesAccess = YES;
+    if (SYSTEM_VERSION_GREATER_THAN(@"8.0")) {
+        UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        bagesAccess = (currentSettings.types & UIUserNotificationTypeBadge) != 0;
+    }
+    if (bagesAccess) application.applicationIconBadgeNumber = 0;}
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -157,9 +166,20 @@
     return numberOfStars;
 }
 
++ (int)firstResult {
+    NSArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    if (results && results.count > 0) {
+        int seconds = [[results firstObject][@"seconds"] intValue];
+        int symbols = [[results firstObject][@"symbols"] intValue];
+        int signsPerMin = (int)((float)symbols / (float)seconds * 60.0);
+        return signsPerMin;
+    }
+    return 0;
+}
+
 + (int)bestResult {
     int maxSpeed = 0;
-    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     for (NSDictionary *result in results) {
         int seconds = [result[@"seconds"] intValue];
         int symbols = [result[@"symbols"] intValue];
@@ -172,7 +192,7 @@
 
 + (int)prevBestResult {
     int maxSpeed = 0;
-    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     for (NSDictionary *result in results) {
         if (result == results.lastObject) break;
         int seconds = [result[@"seconds"] intValue];
@@ -206,7 +226,7 @@
 + (int)numberOfHighestScores {
     int maxSpeed = 0;
     int number = 0;
-    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     for (NSDictionary *result in results) {
         int seconds = [result[@"seconds"] intValue];
         int symbols = [result[@"symbols"] intValue];

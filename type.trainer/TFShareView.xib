@@ -14,53 +14,47 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tDg-ll-TjQ" userLabel="GrayView">
                     <rect key="frame" x="8" y="8" width="584" height="584"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="79T-rH-Gkz" userLabel="BottomLabel">
-                            <rect key="frame" x="0.0" y="552" width="584" height="24"/>
-                            <string key="text">Увеличте скорость печати
-с приложением "Печатай быстрее"</string>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
-                            <color key="textColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Скорость набора 150 знаков в мин." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bs1-dD-93h" userLabel="SpeedLabel">
-                            <rect key="frame" x="0.0" y="492" width="584" height="12"/>
+                            <rect key="frame" x="0.0" y="524" width="584" height="12"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
                             <color key="textColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="© dubovik_sergey" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vdU-Vg-5ze" userLabel="AuthorLabel">
-                            <rect key="frame" x="32" y="464" width="522" height="12"/>
+                            <rect key="frame" x="32" y="496" width="522" height="12"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="WWm-EV-Drx">
-                            <rect key="frame" x="280" y="520" width="24" height="24"/>
+                            <rect key="frame" x="280" y="552" width="24" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="sJh-Nk-Axn"/>
                                 <constraint firstAttribute="height" constant="24" id="vsR-A5-o1g"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lmW-nA-poK" userLabel="RightSeparator">
-                            <rect key="frame" x="314" y="531" width="240" height="2"/>
+                            <rect key="frame" x="314" y="563" width="240" height="2"/>
                             <color key="backgroundColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="uQa-hc-Lk0"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVG-lr-4N8" userLabel="LeftSeparator">
-                            <rect key="frame" x="32" y="531" width="240" height="2"/>
+                            <rect key="frame" x="32" y="563" width="240" height="2"/>
                             <color key="backgroundColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="9ye-X7-FKt"/>
                             </constraints>
                         </view>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAF-YC-hsy">
-                            <rect key="frame" x="32" y="30" width="522" height="426"/>
+                            <rect key="frame" x="32" y="30" width="522" height="458"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="240" id="2zK-xL-ZfW"/>
                                 <constraint firstAttribute="height" constant="128" id="iDX-rj-Dim"/>
                             </constraints>
-                            <string key="text">Бережно грабли кладуПеред дверью соседа.Ошибкам учиться хочу.</string>
+                            <string key="text">Бережно грабли кладу
+Перед дверью соседа.
+Ошибкам учиться хочу.</string>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             <variation key="default">
@@ -73,8 +67,6 @@
                     </subviews>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="79T-rH-Gkz" firstAttribute="leading" secondItem="tDg-ll-TjQ" secondAttribute="leading" id="1Bu-Ou-gNI"/>
-                        <constraint firstItem="79T-rH-Gkz" firstAttribute="top" secondItem="WWm-EV-Drx" secondAttribute="bottom" constant="8" id="4y4-XF-zzG"/>
                         <constraint firstItem="WWm-EV-Drx" firstAttribute="centerY" secondItem="aVG-lr-4N8" secondAttribute="centerY" id="5BO-mC-kd5"/>
                         <constraint firstItem="vdU-Vg-5ze" firstAttribute="leading" secondItem="aVG-lr-4N8" secondAttribute="leading" id="6Ce-QG-ZpK"/>
                         <constraint firstItem="vdU-Vg-5ze" firstAttribute="trailing" secondItem="lmW-nA-poK" secondAttribute="trailing" id="A4u-t9-Hcl"/>
@@ -87,21 +79,18 @@
                         <constraint firstItem="aVG-lr-4N8" firstAttribute="leading" secondItem="tDg-ll-TjQ" secondAttribute="leading" constant="32" id="H4E-RN-Z9M"/>
                         <constraint firstAttribute="centerX" secondItem="zAF-YC-hsy" secondAttribute="centerX" id="Qly-I6-rxn"/>
                         <constraint firstItem="vdU-Vg-5ze" firstAttribute="trailing" secondItem="zAF-YC-hsy" secondAttribute="trailing" id="Qmi-MI-mUS"/>
+                        <constraint firstAttribute="bottom" secondItem="WWm-EV-Drx" secondAttribute="bottom" constant="8" id="SAM-9K-0E7"/>
                         <constraint firstItem="lmW-nA-poK" firstAttribute="centerY" secondItem="WWm-EV-Drx" secondAttribute="centerY" id="YFt-75-hkG"/>
-                        <constraint firstAttribute="centerX" secondItem="79T-rH-Gkz" secondAttribute="centerX" id="biC-V5-Euj"/>
-                        <constraint firstAttribute="bottom" secondItem="79T-rH-Gkz" secondAttribute="bottom" constant="8" id="cLJ-7t-yKg"/>
                         <constraint firstAttribute="trailing" secondItem="Bs1-dD-93h" secondAttribute="trailing" id="hsp-Kk-azE"/>
                         <constraint firstItem="WWm-EV-Drx" firstAttribute="top" secondItem="Bs1-dD-93h" secondAttribute="bottom" constant="16" id="iBc-N3-fBg"/>
                         <constraint firstItem="vdU-Vg-5ze" firstAttribute="leading" secondItem="zAF-YC-hsy" secondAttribute="leading" id="rU3-m6-LiX"/>
                         <constraint firstItem="Bs1-dD-93h" firstAttribute="top" secondItem="vdU-Vg-5ze" secondAttribute="bottom" constant="16" id="sed-qo-hX7"/>
                         <constraint firstAttribute="trailing" secondItem="lmW-nA-poK" secondAttribute="trailing" constant="30" id="vcb-oj-TJo"/>
                         <constraint firstItem="WWm-EV-Drx" firstAttribute="top" secondItem="tDg-ll-TjQ" secondAttribute="top" constant="507" id="xDp-T1-hF4"/>
-                        <constraint firstAttribute="trailing" secondItem="79T-rH-Gkz" secondAttribute="trailing" id="z6A-sB-ytW"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="Qly-I6-rxn"/>
-                            <exclude reference="biC-V5-Euj"/>
                             <exclude reference="xDp-T1-hF4"/>
                         </mask>
                     </variation>

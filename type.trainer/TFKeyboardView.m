@@ -29,7 +29,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    NSLog(@"awakeFromNib");
     
     _popupLabelHeight = 54;
     _popupViewOffsetY = 32;
