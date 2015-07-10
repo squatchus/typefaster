@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "KBPanGestureRecognizer.h"
 #import "AppDelegate.h"
 #import "TFKeyboardView.h"
 #import "UIColor+HexColor.h"
@@ -43,10 +42,9 @@
 
 #pragma mark - Controller
 
-@interface ViewController () <UITextViewDelegate, UIGestureRecognizerDelegate>
+@interface ViewController () <UITextViewDelegate, TFKeyboardDelegate>
 
 @property (strong, nonatomic) TFKeyboardView *keyboardView;
-@property (weak, nonatomic) UILabel *lastTouchedKey;
 
 @property (nonatomic, strong) NSDictionary *current_level;
 
@@ -55,11 +53,6 @@
 
 @property int stat_symbols;
 @property int stat_mistakes;
-
-// popup, всплывающий над нажатой кнопкой клавиатуры
-//
-@property (nonatomic, strong) UIImageView *letter_popup;
-@property (nonatomic, strong) UILabel *popup_label;
 
 // Данные о прогрессе в текущем уровне
 @property (nonatomic, strong) NSMutableArray *tokens;
@@ -82,7 +75,6 @@
 
 @property BOOL useFullKeyboard;
 @property BOOL useStrictTyping;
-@property int numberOfKeys;
 
 @end
 
@@ -101,6 +93,8 @@
     
     // custom keyboard
     _keyboardView = [[NSBundle mainBundle] loadNibNamed:@"TFKeyboardView" owner:self options:nil][0];
+    _keyboardView.delegate = self;
+    
     [_keyboardView.shiftButton addTarget:self action:@selector(onShiftPressed:)
                         forControlEvents:UIControlEventTouchUpInside];
     [_keyboardView.backspaceButton addTarget:self action:@selector(onBackspacePressed:)
@@ -108,24 +102,7 @@
     [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
                         forControlEvents:UIControlEventTouchUpInside];
     [_keyboardView.enterButton addTarget:self action:@selector(onEnterPressed:)
-                        forControlEvents:UIControlEventTouchUpInside];
-
-    
-    KBPanGestureRecognizer *panRec = [KBPanGestureRecognizer new];
-    panRec.delegate = self;
-    [panRec addTarget:self action:@selector(onKeyboardPan:)];
-    [_keyboardView addGestureRecognizer:panRec];
-    
-    UIImage *popup_image = [UIImage imageNamed:@"letter_popup"];
-    _letter_popup = [[UIImageView alloc] initWithImage:popup_image];
-    _popup_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 54, 54)];
-    _popup_label.textAlignment = NSTextAlignmentCenter;
-    [_letter_popup addSubview:_popup_label];
-    
-    if (&UIFontWeightRegular != nil)
-        _popup_label.font = [UIFont systemFontOfSize:32 weight:UIFontWeightRegular];
-    else // UIFontWeightRegular available from iOS 8.2
-        _popup_label.font = [UIFont systemFontOfSize:32];    
+                        forControlEvents:UIControlEventTouchUpInside];    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -136,7 +113,6 @@
     
     _useFullKeyboard = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
     _useStrictTyping = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
-    _numberOfKeys = [AppDelegate numberOfKeysForCurrentRank];
     [self initSession];
 }
 
@@ -174,7 +150,7 @@
 
     [self loadText];
     [self updateCurrentWord];
-    [self showOnlyKeysWithCharactersInString:_currentToken.string];
+    [_keyboardView showOnlyKeysWithCharactersInString:_currentToken.string];
     if (_useStrictTyping)
         _awaited_key = [_currentToken.string substringWithRange:NSMakeRange(0, 1)];
 
@@ -308,9 +284,11 @@
                          @"mistakes": @(_stat_mistakes)}];
     [[NSUserDefaults standardUserDefaults] setValue:results forKey:@"results"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    [self performSegueWithIdentifier:@"showResultsVC" sender:self];
+
     NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes)};
     [Flurry endTimedEvent:@"TrainingSession started" withParameters:params];
+    
+    [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
 
 #pragma mark - Keyboard Buttons Handling
@@ -455,7 +433,7 @@
     if (_currentToken) {
         [self updateCurrentWord];
         if (_useFullKeyboard == NO && prevToken != _currentToken)
-            [self showOnlyKeysWithCharactersInString:_currentToken.string];
+            [_keyboardView showOnlyKeysWithCharactersInString:_currentToken.string];
     }
     
     // join result string
@@ -586,35 +564,6 @@
 
 #pragma mark - Update User Interface
 
-// Оставляет на кастомной клавиатуре, только буквы из указанной строки
-//
-- (void)showOnlyKeysWithCharactersInString:(NSString *)string {
-    if ([string isEqualToString:@"\n"]) string = @" ";
-    
-    NSMutableArray *not_visible = [NSMutableArray new];
-    NSMutableArray *visible = [NSMutableArray new];
-    
-    for (UILabel *label in _keyboardView.subviews) {
-        if (![label isKindOfClass:[UILabel class]]) continue;
-        NSRange range = [[string uppercaseString] rangeOfString:[label.text uppercaseString]];
-        if (range.location == NSNotFound) { label.hidden = YES; [not_visible addObject:label]; }
-        else { label.hidden = NO; [visible addObject:label]; }
-    }
-    
-    if (visible.count < _numberOfKeys && ![string isEqualToString:@" "]) {
-        int additionalKeys = _numberOfKeys - (int)visible.count;
-        for (int i=0; i<not_visible.count; i++) {
-            int remainingCount = (int)not_visible.count - i;
-            int exchangeIndex = i + arc4random_uniform((u_int32_t )remainingCount);
-            [not_visible exchangeObjectAtIndex:i withObjectAtIndex:exchangeIndex];
-        }
-        for (int i=0; i<additionalKeys; i++) {
-            UILabel *label = not_visible[i];
-            label.hidden = NO;
-        }
-    }
-}
-
 // Обновляем данные о количестве набранных символов и совершенных ошибках
 //
 - (void)updateStatsLabel {
@@ -684,42 +633,6 @@
         NSString *string = @"";
         NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:string];
         return [set invertedSet]; // all possible characters
-    }
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-       shouldReceiveTouch:(UITouch *)touch {
-    if ([touch.view isKindOfClass:[UIButton class]]) return NO;
-    return YES;
-}
-
-- (void)onKeyboardPan:(UIPanGestureRecognizer *)recognizer {
-    UIView* view = recognizer.view;
-    CGPoint location = [recognizer locationInView:view];
-    UIView *subview = [view hitTest:location withEvent:nil];
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan
-        || recognizer.state == UIGestureRecognizerStateChanged) {
-        if ([subview isKindOfClass:[UILabel class]]) {
-            _lastTouchedKey = (UILabel *)subview;
-            _popup_label.text = _lastTouchedKey.text;
-
-            _letter_popup.center = CGPointMake(_lastTouchedKey.center.x, _lastTouchedKey.center.y-32);
-            if (!_letter_popup.superview)
-                [_keyboardView addSubview:_letter_popup];
-        }
-    }
-    else { // pan ended
-        [_letter_popup removeFromSuperview];
-        if (_lastTouchedKey) {
-            if (_keyboardView.shiftButton.selected) {
-                [self onKeyTapped:[_lastTouchedKey.text uppercaseString]];
-                _keyboardView.shiftButton.selected = NO;
-            }
-            else
-                [self onKeyTapped:[_lastTouchedKey.text lowercaseString]];
-        }
-        _lastTouchedKey = nil;
     }
 }
 

@@ -155,56 +155,54 @@
 
 - (IBAction)onShareButtonPressed:(UIButton *)sender {
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-
-    NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/id436693646/"];
     
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
+    
+    NSDictionary *params = @{@"author": level[@"author"],
+                             @"text": level[@"text"],
+                             @"category": [AppDelegate categoryByText:level[@"text"]]};
+    [Flurry logEvent:@"ShareButton clicked" withParameters:params];
+
+    
+    
     TFShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"TFShareView" owner:self options:nil][0];
     shareView.frame = self.view.frame;
     [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[_signsPerMinLabel.text intValue]];
     UIImage *image = [shareView renderImage];
     
+    NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/id436693646/"];
     UIActivityViewController *controller =
     [[UIActivityViewController alloc]
      initWithActivityItems:@[text, url, image]
      applicationActivities:nil];
     
-    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo,
-                                         UIActivityTypePrint,
-                                         UIActivityTypeCopyToPasteboard,
-                                         UIActivityTypeAssignToContact,
-                                         UIActivityTypeSaveToCameraRoll,
-                                         UIActivityTypeAddToReadingList,
-                                         UIActivityTypePostToVimeo,
-                                         UIActivityTypePostToTencentWeibo,
-                                         UIActivityTypeAirDrop];
+    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
     
     [self presentViewController:controller animated:YES completion:nil];
-    NSDictionary *params = @{@"author": level[@"author"],
-                             @"text": level[@"text"],
-                             @"category": [AppDelegate categoryByText:level[@"text"]]};
-    [Flurry logEvent:@"ShareButton clicked" withParameters:params];
 }
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
+    [Flurry logEvent:@"RateButton clicked"];
+    
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-    [Flurry logEvent:@"RateButton clicked"];
 }
 
 - (IBAction)onContinueButtonPressed:(UIButton *)sender {
+    [Flurry logEvent:@"ContinueButton clicked"];
+    
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
-    [Flurry logEvent:@"ContinueButton clicked"];
 }
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
+    [Flurry logEvent:@"SettingsButton clicked"];
+    
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"resultsToSettings" sender:self];
-    [Flurry logEvent:@"SettingsButton clicked"];
 }
 
 @end

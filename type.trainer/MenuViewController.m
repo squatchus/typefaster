@@ -69,10 +69,11 @@
 }
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
+    [Flurry logEvent:@"RateButton clicked"];
+
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-    [Flurry logEvent:@"RateButton clicked"];
 }
 
 - (IBAction)onGameCenterButtonPressed:(UIButton *)sender {
@@ -81,15 +82,17 @@
 }
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
+    [Flurry logEvent:@"SettingsButton clicked"];
+
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToSettings" sender:self];
-    [Flurry logEvent:@"SettingsButton clicked"];
 }
 
 - (IBAction)onPlayButtonPressed:(UIButton *)sender {
+    [Flurry logEvent:@"PlayButton clicked"];
+    
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToGame" sender:self];
-    [Flurry logEvent:@"PlayButton clicked"];
 }
 
 @end
