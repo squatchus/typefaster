@@ -255,6 +255,7 @@
     AudioServicesPlaySystemSound(_buttonClickSound);
 }
 - (void)playErrorSound {
+    NSLog(@"playErrorSound");
     AudioServicesPlaySystemSound(_errorSound);
 }
 - (void)playNewResultSound {

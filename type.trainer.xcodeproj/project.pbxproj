@@ -68,6 +68,7 @@
 		B47063E71B554FE900BD942B /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DC1B554FE900BD942B /* LaunchImage~960@2x.png */; };
 		B47063E81B554FE900BD942B /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DD1B554FE900BD942B /* LaunchImage~1136@2x.png */; };
 		B47063E91B554FE900BD942B /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DE1B554FE900BD942B /* LaunchScreenBackground@2x.png */; };
+		B47063EB1B555A8500BD942B /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = B47063EA1B555A8500BD942B /* Levels.plist */; };
 		B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */; };
 		B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */; };
 		B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */; };
@@ -165,6 +166,7 @@
 		B47063DC1B554FE900BD942B /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
 		B47063DD1B554FE900BD942B /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
 		B47063DE1B554FE900BD942B /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
+		B47063EA1B555A8500BD942B /* Levels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Levels.plist; sourceTree = "<group>"; };
 		B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Texts.plist; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				B41756B81B40BB5D003033F3 /* TFKeyboardView.h */,
 				B41756B91B40BB5D003033F3 /* TFKeyboardView.m */,
 				B4010C741B3E08C5000DF339 /* Images.xcassets */,
+				B47063EA1B555A8500BD942B /* Levels.plist */,
 				B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */,
 				B47063D11B554FDB00BD942B /* LaunchScreen.xib */,
 				B4010C671B3E08C5000DF339 /* Supporting Files */,
@@ -475,6 +478,7 @@
 				B41756B51B405D52003033F3 /* corner_button_right@2x.png in Resources */,
 				B449FAE61B4F44DF000EEF4B /* corner_button_right_sel@3x.png in Resources */,
 				B47063E61B554FE900BD942B /* iTunesArtwork@2x.png in Resources */,
+				B47063EB1B555A8500BD942B /* Levels.plist in Resources */,
 				B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */,
 				B41756AE1B404F07003033F3 /* shift_button_sel@2x.png in Resources */,
 				B449FADD1B4F4139000EEF4B /* backspace_sel@3x.png in Resources */,

@@ -160,13 +160,11 @@
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
     
-    NSDictionary *params = @{@"author": level[@"author"],
-                             @"text": level[@"text"],
+    NSDictionary *params = @{@"author": level[@"author"], @"text": level[@"text"],
                              @"category": [AppDelegate categoryByText:level[@"text"]]};
-    [Flurry logEvent:@"ShareButton clicked" withParameters:params];
+    FlurryEventRecordStatus status = [Flurry logEvent:@"ShareButton clicked" withParameters:params];
+    NSLog(@"flurry (ShareButton clicked) status: %d", status);
 
-    
-    
     TFShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"TFShareView" owner:self options:nil][0];
     shareView.frame = self.view.frame;
     [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[AppDelegate bestResult]];

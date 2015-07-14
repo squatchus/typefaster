@@ -170,6 +170,7 @@
 }
 
 - (void)playClickSound {
+    NSLog(@"playClickSound");
     [[UIDevice currentDevice] playInputClick];
 }
 

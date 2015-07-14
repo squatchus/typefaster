@@ -96,21 +96,24 @@
     NSDictionary *params;
     if (sender == _categoryClassicButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryClassicButton.selected) forKey:@"categoryClassic"];
-        params = @{@"state": @(_categoryClassicButton.selected), @"name":@"categoryClassic"};
+        params = @{@"name":@"categoryClassic"};
     }
     if (sender == _categoryQuotesButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryQuotesButton.selected) forKey:@"categoryQuotes"];
-        params = @{@"state": @(_categoryQuotesButton.selected), @"name":@"categoryQuotes"};
+        params = @{@"name":@"categoryQuotes"};
     }
     if (sender == _categoryHokkuButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryHokkuButton.selected) forKey:@"categoryHokku"];
-        params = @{@"state": @(_categoryHokkuButton.selected), @"name":@"categoryHokku"};
+        params = @{@"name":@"categoryHokku"};
     }
     if (sender == _categoryCookiesButton) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryCookiesButton.selected) forKey:@"categoryCookies"];
-        params = @{@"state": @(_categoryCookiesButton.selected), @"name":@"categoryCookies"};
+        params = @{@"name":@"categoryCookies"};
     }
-    [Flurry logEvent:@"ContentCategory switched" withParameters:params];
+    if (sender.selected)
+        [Flurry logEvent:@"ContentCategory enabled" withParameters:params];
+    else
+        [Flurry logEvent:@"ContentCategory disabled" withParameters:params];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self updateCategoryButton:sender];

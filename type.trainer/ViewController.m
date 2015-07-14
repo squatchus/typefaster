@@ -164,17 +164,40 @@
 }
 
 - (void)loadText {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Texts" ofType:@"plist"];
-    NSDictionary *texts = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    NSMutableArray *allTexts = [NSMutableArray new];
-    if (_useClassic) [allTexts addObjectsFromArray:texts[@"categoryClassic"]];
-    if (_useCookies) [allTexts addObjectsFromArray:texts[@"categoryCookies"]];
-    if (_useQuotes) [allTexts addObjectsFromArray:texts[@"categoryQuotes"]];
-    if (_useHokku) [allTexts addObjectsFromArray:texts[@"categoryHokku"]];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
+    NSMutableArray *allLevels = [[NSArray arrayWithContentsOfFile:filePath] mutableCopy];
+    NSMutableArray *allowedLevels = [NSMutableArray new];
     
-    int level_num = arc4random()%allTexts.count;
-    _current_level = allTexts[level_num];
-    _source_string = allTexts[level_num][@"text"];
+    NSMutableArray *disabledCategories = [NSMutableArray new];
+    if (!_useClassic) [disabledCategories addObject:@"categoryClassic"];
+    if (!_useCookies) [disabledCategories addObject:@"categoryCookies"];
+    if (!_useQuotes) [disabledCategories addObject:@"categoryQuotes"];
+    if (!_useHokku) [disabledCategories addObject:@"categoryHokku"];
+    for (NSDictionary *level in allLevels) {
+        BOOL allowed = YES;
+        for (NSString *disabled in disabledCategories)
+            if ([level[@"category"] isEqualToString:disabled]) {
+                allowed = NO;
+                break;
+            }
+        if (allowed || disabledCategories.count == 4)
+            [allowedLevels addObject:level];
+    }
+    
+    int level_num = 0;
+    NSNumber *prev_num = [[NSUserDefaults standardUserDefaults] valueForKey:@"prevLevel"];
+    if (prev_num) {
+        int new_num = [prev_num intValue]+1;
+        if (new_num < allowedLevels.count) {
+            level_num = new_num;
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setValue:@(level_num) forKey:@"prevLevel"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"LEVEL LOADED: %d (%@)", level_num, allowedLevels[level_num][@"category"]);
+    
+    _current_level = allowedLevels[level_num];
+    _source_string = allowedLevels[level_num][@"text"];
     _typed_string = [[NSMutableString alloc] initWithString:@""];
     if (!_useFullKeyboard) {
         NSCharacterSet *symbols = [NSCharacterSet punctuationCharacterSet];
@@ -255,9 +278,9 @@
     NSDictionary *params = @{@"author": _current_level[@"author"],
                              @"text": _current_level[@"text"],
                              @"category": [AppDelegate categoryByText:_current_level[@"text"]],
-                             @"rankAtStart": [AppDelegate currentRank] };
+                             @"rankAtStart": [AppDelegate currentRank], @"status":@"complete" };
     
-    [Flurry logEvent:@"TrainingSession started" withParameters:params timed:YES];
+    [Flurry logEvent:@"TrainingRound" withParameters:params timed:YES];
 }
 
 - (void)endSession {
@@ -286,7 +309,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes)};
-    [Flurry endTimedEvent:@"TrainingSession started" withParameters:params];
+    [Flurry endTimedEvent:@"TrainingRound" withParameters:params];
     
     [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
@@ -297,7 +320,6 @@
 //
 - (void)onKeyTapped:(NSString *)keyString {
     if (!_session_timer) [self startSession];
-    [_keyboardView playClickSound];
     
     if (_typed_string.length < _source_string.length) {
         unichar character = [_source_string characterAtIndex:_typed_string.length];
@@ -382,6 +404,7 @@
 - (void)updateTextViewWithKey:(NSString *)keyString {
     BOOL canBeTyped = [self keyCanBeTyped:keyString];
     BOOL backspace = (keyString && keyString.length == 0);
+    BOOL playErrorSound = NO;
     
     if (canBeTyped) {
         if (backspace) {
@@ -414,7 +437,7 @@
     if (_awaited_key) { // _awaited key exists only in strictTyping mode
         if (_awaited_key.length == 0) { // backspace show if we made a mistake
             _backspaceView.hidden = NO;
-            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playErrorSound];
+            playErrorSound = YES;
             _stat_mistakes++;
         }
         else {
@@ -485,7 +508,7 @@
         _shiftView.hidden = YES;
         _backspaceView.hidden = YES;
         if (mistakes > _stat_mistakes) { // was a mistake in non strict typing mode
-            [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playErrorSound];
+            playErrorSound = YES;
             _backspaceView.hidden = NO;
         }
         else if (_typed_string.length < _source_string.length) {
@@ -499,6 +522,12 @@
     _textView.selectedRange = NSMakeRange(_typed_string.length, 0);
     
     [self updateStatsLabel];
+
+    [_keyboardView playClickSound];
+    if (playErrorSound) {
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [delegate performSelector:@selector(playErrorSound) withObject:nil afterDelay:0.05];
+    }
     
     if (_typed_string.length == _source_string.length) {
         BOOL mistakeOnLastChar = [_awaited_key isEqualToString:@""];
@@ -654,6 +683,10 @@
 }
 
 - (IBAction)onDoneButtonPressed:(UIButton *)sender {
+    NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols),
+                             @"mistakes":@(_stat_mistakes), @"status":@"aborted"};
+    [Flurry endTimedEvent:@"TrainingRound" withParameters:params];
+    
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
 }
