@@ -239,7 +239,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "244"
             endingLineNumber = "244"
-            landmarkName = "-playErrorSound"
+            landmarkName = "+numberOfHighestScores"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import "VKSdk.h"
 @import AudioToolbox;
 
 @interface AppDelegate ()
@@ -24,7 +25,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [NSThread sleepForTimeInterval:1.5];
-//    [Flurry setDebugLogEnabled:YES];
+    [VKSdk initializeWithDelegate:nil andAppId:@"4995337"];
+    if ([VKSdk wakeUpSession])
+    {
+        //Start working
+    }
+    
+    
     [Flurry startSession:@"DXG36J5Z73XT554MZMFD"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
         NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -33,6 +40,12 @@
         [Flurry setUserID:idfv];
     }
     [self initSettings];
+    return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return YES;
 }
 

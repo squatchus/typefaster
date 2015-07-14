@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "TFShareView.h"
 #import "Flurry.h"
+#import "VKSdk.h"
 
 @interface ResultsViewController () <UIAlertViewDelegate>
 
@@ -173,10 +174,13 @@
     
     NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/id1013588476"];
+    
     UIActivityViewController *controller =
     [[UIActivityViewController alloc]
      initWithActivityItems:@[text, url, image]
-     applicationActivities:nil];
+     applicationActivities:@[[VKActivity new]]];
+    
+    [controller setValue:@"VK SDK" forKey:@"subject"];
     
     controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
     
