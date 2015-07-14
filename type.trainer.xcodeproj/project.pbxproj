@@ -13,7 +13,6 @@
 		B4010C701B3E08C5000DF339 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4010C6F1B3E08C5000DF339 /* ViewController.m */; };
 		B4010C731B3E08C5000DF339 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4010C711B3E08C5000DF339 /* Main.storyboard */; };
 		B4010C751B3E08C5000DF339 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4010C741B3E08C5000DF339 /* Images.xcassets */; };
-		B4010C781B3E08C5000DF339 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4010C761B3E08C5000DF339 /* LaunchScreen.xib */; };
 		B4010C841B3E08C5000DF339 /* type_trainerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4010C831B3E08C5000DF339 /* type_trainerTests.m */; };
 		B4010C931B3EDB9D000DF339 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4010C921B3EDB9D000DF339 /* MenuViewController.m */; };
 		B413AAD71B4D4C1200C800C4 /* error.wav in Resources */ = {isa = PBXBuildFile; fileRef = B413AAD61B4D4C1200C800C4 /* error.wav */; };
@@ -56,12 +55,7 @@
 		B449FAEC1B4F46A9000EEF4B /* corner_button_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B449FAEB1B4F46A9000EEF4B /* corner_button_left@2x.png */; };
 		B45E7A471B50050E006C3A67 /* keyboard_background_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */; };
 		B45E7A491B50174D006C3A67 /* letter_popup_iphone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */; };
-		B45E7A4C1B50297F006C3A67 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A4A1B50297F006C3A67 /* iTunesArtwork.png */; };
-		B45E7A4D1B50297F006C3A67 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A4B1B50297F006C3A67 /* iTunesArtwork@2x.png */; };
 		B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45E7A4E1B504090006C3A67 /* GameKit.framework */; };
-		B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */; };
-		B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */; };
-		B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */; };
 		B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */; };
 		B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */; };
 		B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */; };
@@ -69,12 +63,6 @@
 		B4D5D5D71B41E8E30018DCD3 /* gamecenter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5D61B41E8E30018DCD3 /* gamecenter@2x.png */; };
 		B4DAF64E1B3F3C8600D39487 /* keyboard_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF64D1B3F3C8600D39487 /* keyboard_background@2x.png */; };
 		B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF64F1B3F527C00D39487 /* letter_popup@2x.png */; };
-		B4DAF65A1B3F64F400D39487 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF6511B3F64F300D39487 /* Icon.png */; };
-		B4DAF6671B3F665F00D39487 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF6631B3F665F00D39487 /* Icon-60.png */; };
-		B4DAF6681B3F665F00D39487 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF6641B3F665F00D39487 /* Icon-60@2x.png */; };
-		B4DAF6691B3F665F00D39487 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF6651B3F665F00D39487 /* Icon-76.png */; };
-		B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF6661B3F665F00D39487 /* Icon-76@2x.png */; };
-		B4DAF66C1B3F66AC00D39487 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF66B1B3F66AC00D39487 /* Icon-60@3x.png */; };
 		B4DAF6701B3F6A4400D39487 /* star_gold@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF66D1B3F6A4400D39487 /* star_gold@2x.png */; };
 		B4DAF6711B3F6A4400D39487 /* star_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF66E1B3F6A4400D39487 /* star_gray@2x.png */; };
 		B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4DAF66F1B3F6A4400D39487 /* progress_icon@2x.png */; };
@@ -101,7 +89,6 @@
 		B4010C6F1B3E08C5000DF339 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B4010C721B3E08C5000DF339 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B4010C741B3E08C5000DF339 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B4010C771B3E08C5000DF339 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B4010C7D1B3E08C5000DF339 /* type.trainerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = type.trainerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4010C821B3E08C5000DF339 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4010C831B3E08C5000DF339 /* type_trainerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = type_trainerTests.m; sourceTree = "<group>"; };
@@ -153,12 +140,7 @@
 		B449FAEB1B4F46A9000EEF4B /* corner_button_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "corner_button_left@2x.png"; sourceTree = "<group>"; };
 		B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_background_iphone6.png; sourceTree = "<group>"; };
 		B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letter_popup_iphone6@2x.png"; sourceTree = "<group>"; };
-		B45E7A4A1B50297F006C3A67 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		B45E7A4B1B50297F006C3A67 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		B45E7A4E1B504090006C3A67 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
-		B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
-		B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
 		B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Texts.plist; sourceTree = "<group>"; };
@@ -168,12 +150,6 @@
 		B4D5D5D61B41E8E30018DCD3 /* gamecenter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gamecenter@2x.png"; sourceTree = "<group>"; };
 		B4DAF64D1B3F3C8600D39487 /* keyboard_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_background@2x.png"; sourceTree = "<group>"; };
 		B4DAF64F1B3F527C00D39487 /* letter_popup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letter_popup@2x.png"; sourceTree = "<group>"; };
-		B4DAF6511B3F64F300D39487 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		B4DAF6631B3F665F00D39487 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
-		B4DAF6641B3F665F00D39487 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
-		B4DAF6651B3F665F00D39487 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
-		B4DAF6661B3F665F00D39487 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
-		B4DAF66B1B3F66AC00D39487 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
 		B4DAF66D1B3F6A4400D39487 /* star_gold@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_gold@2x.png"; sourceTree = "<group>"; };
 		B4DAF66E1B3F6A4400D39487 /* star_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_gray@2x.png"; sourceTree = "<group>"; };
 		B4DAF66F1B3F6A4400D39487 /* progress_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress_icon@2x.png"; sourceTree = "<group>"; };
@@ -267,7 +243,6 @@
 				B41756B81B40BB5D003033F3 /* TFKeyboardView.h */,
 				B41756B91B40BB5D003033F3 /* TFKeyboardView.m */,
 				B4010C741B3E08C5000DF339 /* Images.xcassets */,
-				B4010C761B3E08C5000DF339 /* LaunchScreen.xib */,
 				B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */,
 				B4010C671B3E08C5000DF339 /* Supporting Files */,
 			);
@@ -310,9 +285,6 @@
 				B421D1C01B49BE67006F17F7 /* shiftIcon@2x.png */,
 				B421D1861B4984B6006F17F7 /* rateIcon@2x.png */,
 				B421D1871B4984B6006F17F7 /* settingsIcon@2x.png */,
-				B4613AA41B494D1900D35691 /* LaunchScreenBackground@2x.png */,
-				B4613AA01B494BAD00D35691 /* LaunchImage~1136@2x.png */,
-				B4613AA11B494BAD00D35691 /* LaunchImage~960@2x.png */,
 				B4D5D5D61B41E8E30018DCD3 /* gamecenter@2x.png */,
 				B4D5D5D41B41C5F60018DCD3 /* share_button@2x.png */,
 				B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */,
@@ -321,14 +293,6 @@
 				B4DAF66E1B3F6A4400D39487 /* star_gray@2x.png */,
 				B421D1C31B49E3F9006F17F7 /* star_goldgray@2x.png */,
 				B4DAF66F1B3F6A4400D39487 /* progress_icon@2x.png */,
-				B4DAF6631B3F665F00D39487 /* Icon-60.png */,
-				B4DAF6641B3F665F00D39487 /* Icon-60@2x.png */,
-				B4DAF66B1B3F66AC00D39487 /* Icon-60@3x.png */,
-				B4DAF6651B3F665F00D39487 /* Icon-76.png */,
-				B4DAF6661B3F665F00D39487 /* Icon-76@2x.png */,
-				B4DAF6511B3F64F300D39487 /* Icon.png */,
-				B45E7A4A1B50297F006C3A67 /* iTunesArtwork.png */,
-				B45E7A4B1B50297F006C3A67 /* iTunesArtwork@2x.png */,
 				B4010C681B3E08C5000DF339 /* Info.plist */,
 				B4010C691B3E08C5000DF339 /* main.m */,
 			);
@@ -451,10 +415,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B45E7A491B50174D006C3A67 /* letter_popup_iphone6@2x.png in Resources */,
-				B4DAF65A1B3F64F400D39487 /* Icon.png in Resources */,
 				B449FAE91B4F45C4000EEF4B /* space_sel@3x.png in Resources */,
 				B4010C731B3E08C5000DF339 /* Main.storyboard in Resources */,
-				B4010C781B3E08C5000DF339 /* LaunchScreen.xib in Resources */,
 				B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */,
 				B449FAC81B4EB621000EEF4B /* TFShareView.xib in Resources */,
 				B449FAE11B4F4139000EEF4B /* corner_button_left@3x.png in Resources */,
@@ -466,10 +428,8 @@
 				B4DAF6701B3F6A4400D39487 /* star_gold@2x.png in Resources */,
 				B4010C751B3E08C5000DF339 /* Images.xcassets in Resources */,
 				B449FADF1B4F4139000EEF4B /* shift_button_sel@3x.png in Resources */,
-				B4DAF6671B3F665F00D39487 /* Icon-60.png in Resources */,
 				B41756B51B405D52003033F3 /* corner_button_right@2x.png in Resources */,
 				B449FAE61B4F44DF000EEF4B /* corner_button_right_sel@3x.png in Resources */,
-				B4613AA51B494D1900D35691 /* LaunchScreenBackground@2x.png in Resources */,
 				B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */,
 				B41756AE1B404F07003033F3 /* shift_button_sel@2x.png in Resources */,
 				B449FADD1B4F4139000EEF4B /* backspace_sel@3x.png in Resources */,
@@ -481,30 +441,22 @@
 				B421D1891B4984B6006F17F7 /* settingsIcon@2x.png in Resources */,
 				B449FAE01B4F4139000EEF4B /* shift_button@3x.png in Resources */,
 				B421D1881B4984B6006F17F7 /* rateIcon@2x.png in Resources */,
-				B4613AA21B494BAD00D35691 /* LaunchImage~1136@2x.png in Resources */,
 				B449FAE41B4F4329000EEF4B /* letter_popup@3x.png in Resources */,
 				B4D5D5D51B41C5F60018DCD3 /* share_button@2x.png in Resources */,
 				B4D5D5D71B41E8E30018DCD3 /* gamecenter@2x.png in Resources */,
 				B41756B01B404F07003033F3 /* backspace_sel@2x.png in Resources */,
-				B4DAF6681B3F665F00D39487 /* Icon-60@2x.png in Resources */,
 				B41756B11B404F07003033F3 /* backspace@2x.png in Resources */,
 				B449FAEA1B4F45C4000EEF4B /* space@3x.png in Resources */,
 				B421D1C21B49BE67006F17F7 /* shiftIcon@2x.png in Resources */,
 				B421D1C11B49BE67006F17F7 /* backspaceIcon@2x.png in Resources */,
 				B41756AC1B404F07003033F3 /* space_sel@2x.png in Resources */,
-				B45E7A4C1B50297F006C3A67 /* iTunesArtwork.png in Resources */,
-				B4DAF66A1B3F665F00D39487 /* Icon-76@2x.png in Resources */,
 				B413AADB1B4D50CF00C800C4 /* click.wav in Resources */,
 				B413AAD71B4D4C1200C800C4 /* error.wav in Resources */,
-				B45E7A4D1B50297F006C3A67 /* iTunesArtwork@2x.png in Resources */,
-				B4613AA31B494BAD00D35691 /* LaunchImage~960@2x.png in Resources */,
 				B41756AF1B404F07003033F3 /* shift_button@2x.png in Resources */,
 				B45E7A471B50050E006C3A67 /* keyboard_background_iphone6.png in Resources */,
 				B421D1C41B49E3F9006F17F7 /* star_goldgray@2x.png in Resources */,
 				B41756B41B405D52003033F3 /* corner_button_right_sel@2x.png in Resources */,
 				B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */,
-				B4DAF6691B3F665F00D39487 /* Icon-76.png in Resources */,
-				B4DAF66C1B3F66AC00D39487 /* Icon-60@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,14 +545,6 @@
 				B4010C721B3E08C5000DF339 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B4010C761B3E08C5000DF339 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B4010C771B3E08C5000DF339 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
