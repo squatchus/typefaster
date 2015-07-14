@@ -56,6 +56,18 @@
 		B45E7A471B50050E006C3A67 /* keyboard_background_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */; };
 		B45E7A491B50174D006C3A67 /* letter_popup_iphone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */; };
 		B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45E7A4E1B504090006C3A67 /* GameKit.framework */; };
+		B47063D31B554FDB00BD942B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B47063D11B554FDB00BD942B /* LaunchScreen.xib */; };
+		B47063DF1B554FE900BD942B /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D41B554FE900BD942B /* Icon-60.png */; };
+		B47063E01B554FE900BD942B /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D51B554FE900BD942B /* Icon-60@2x.png */; };
+		B47063E11B554FE900BD942B /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D61B554FE900BD942B /* Icon-60@3x.png */; };
+		B47063E21B554FE900BD942B /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D71B554FE900BD942B /* Icon-76.png */; };
+		B47063E31B554FE900BD942B /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D81B554FE900BD942B /* Icon-76@2x.png */; };
+		B47063E41B554FE900BD942B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D91B554FE900BD942B /* Icon.png */; };
+		B47063E51B554FE900BD942B /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DA1B554FE900BD942B /* iTunesArtwork.png */; };
+		B47063E61B554FE900BD942B /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DB1B554FE900BD942B /* iTunesArtwork@2x.png */; };
+		B47063E71B554FE900BD942B /* LaunchImage~960@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DC1B554FE900BD942B /* LaunchImage~960@2x.png */; };
+		B47063E81B554FE900BD942B /* LaunchImage~1136@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DD1B554FE900BD942B /* LaunchImage~1136@2x.png */; };
+		B47063E91B554FE900BD942B /* LaunchScreenBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063DE1B554FE900BD942B /* LaunchScreenBackground@2x.png */; };
 		B4D5D5CE1B412D960018DCD3 /* UIColor+HexColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */; };
 		B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */; };
 		B4D5D5D31B41BFA50018DCD3 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D5D5D21B41BFA50018DCD3 /* ResultsViewController.m */; };
@@ -141,6 +153,18 @@
 		B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_background_iphone6.png; sourceTree = "<group>"; };
 		B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letter_popup_iphone6@2x.png"; sourceTree = "<group>"; };
 		B45E7A4E1B504090006C3A67 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		B47063D21B554FDB00BD942B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		B47063D41B554FE900BD942B /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
+		B47063D51B554FE900BD942B /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		B47063D61B554FE900BD942B /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		B47063D71B554FE900BD942B /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		B47063D81B554FE900BD942B /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		B47063D91B554FE900BD942B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B47063DA1B554FE900BD942B /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		B47063DB1B554FE900BD942B /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		B47063DC1B554FE900BD942B /* LaunchImage~960@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~960@2x.png"; sourceTree = "<group>"; };
+		B47063DD1B554FE900BD942B /* LaunchImage~1136@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchImage~1136@2x.png"; sourceTree = "<group>"; };
+		B47063DE1B554FE900BD942B /* LaunchScreenBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreenBackground@2x.png"; sourceTree = "<group>"; };
 		B4D5D5CC1B412D960018DCD3 /* UIColor+HexColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexColor.h"; sourceTree = "<group>"; };
 		B4D5D5CD1B412D960018DCD3 /* UIColor+HexColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexColor.m"; sourceTree = "<group>"; };
 		B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Texts.plist; sourceTree = "<group>"; };
@@ -244,6 +268,7 @@
 				B41756B91B40BB5D003033F3 /* TFKeyboardView.m */,
 				B4010C741B3E08C5000DF339 /* Images.xcassets */,
 				B4D5D5CF1B41A86A0018DCD3 /* Texts.plist */,
+				B47063D11B554FDB00BD942B /* LaunchScreen.xib */,
 				B4010C671B3E08C5000DF339 /* Supporting Files */,
 			);
 			path = type.trainer;
@@ -281,6 +306,17 @@
 				B413AAD91B4D50CF00C800C4 /* new_rank.wav */,
 				B413AADA1B4D50CF00C800C4 /* new_result.wav */,
 				B413AAD61B4D4C1200C800C4 /* error.wav */,
+				B47063D41B554FE900BD942B /* Icon-60.png */,
+				B47063D51B554FE900BD942B /* Icon-60@2x.png */,
+				B47063D61B554FE900BD942B /* Icon-60@3x.png */,
+				B47063D71B554FE900BD942B /* Icon-76.png */,
+				B47063D81B554FE900BD942B /* Icon-76@2x.png */,
+				B47063D91B554FE900BD942B /* Icon.png */,
+				B47063DA1B554FE900BD942B /* iTunesArtwork.png */,
+				B47063DB1B554FE900BD942B /* iTunesArtwork@2x.png */,
+				B47063DC1B554FE900BD942B /* LaunchImage~960@2x.png */,
+				B47063DD1B554FE900BD942B /* LaunchImage~1136@2x.png */,
+				B47063DE1B554FE900BD942B /* LaunchScreenBackground@2x.png */,
 				B421D1BF1B49BE67006F17F7 /* backspaceIcon@2x.png */,
 				B421D1C01B49BE67006F17F7 /* shiftIcon@2x.png */,
 				B421D1861B4984B6006F17F7 /* rateIcon@2x.png */,
@@ -415,10 +451,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B45E7A491B50174D006C3A67 /* letter_popup_iphone6@2x.png in Resources */,
+				B47063E91B554FE900BD942B /* LaunchScreenBackground@2x.png in Resources */,
 				B449FAE91B4F45C4000EEF4B /* space_sel@3x.png in Resources */,
+				B47063E41B554FE900BD942B /* Icon.png in Resources */,
 				B4010C731B3E08C5000DF339 /* Main.storyboard in Resources */,
 				B41756B71B40B419003033F3 /* TFKeyboardView.xib in Resources */,
 				B449FAC81B4EB621000EEF4B /* TFShareView.xib in Resources */,
+				B47063DF1B554FE900BD942B /* Icon-60.png in Resources */,
 				B449FAE11B4F4139000EEF4B /* corner_button_left@3x.png in Resources */,
 				B4DAF64E1B3F3C8600D39487 /* keyboard_background@2x.png in Resources */,
 				B4DAF6711B3F6A4400D39487 /* star_gray@2x.png in Resources */,
@@ -426,14 +465,21 @@
 				B41756AD1B404F07003033F3 /* space@2x.png in Resources */,
 				B449FADE1B4F4139000EEF4B /* backspace@3x.png in Resources */,
 				B4DAF6701B3F6A4400D39487 /* star_gold@2x.png in Resources */,
+				B47063E01B554FE900BD942B /* Icon-60@2x.png in Resources */,
+				B47063E11B554FE900BD942B /* Icon-60@3x.png in Resources */,
 				B4010C751B3E08C5000DF339 /* Images.xcassets in Resources */,
 				B449FADF1B4F4139000EEF4B /* shift_button_sel@3x.png in Resources */,
+				B47063E51B554FE900BD942B /* iTunesArtwork.png in Resources */,
+				B47063E21B554FE900BD942B /* Icon-76.png in Resources */,
+				B47063E31B554FE900BD942B /* Icon-76@2x.png in Resources */,
 				B41756B51B405D52003033F3 /* corner_button_right@2x.png in Resources */,
 				B449FAE61B4F44DF000EEF4B /* corner_button_right_sel@3x.png in Resources */,
+				B47063E61B554FE900BD942B /* iTunesArtwork@2x.png in Resources */,
 				B4DAF6721B3F6A4400D39487 /* progress_icon@2x.png in Resources */,
 				B41756AE1B404F07003033F3 /* shift_button_sel@2x.png in Resources */,
 				B449FADD1B4F4139000EEF4B /* backspace_sel@3x.png in Resources */,
 				B449FAD61B4F3E29000EEF4B /* keyboard_background@3x.png in Resources */,
+				B47063D31B554FDB00BD942B /* LaunchScreen.xib in Resources */,
 				B449FAE21B4F4139000EEF4B /* corner_button_right@3x.png in Resources */,
 				B413AADC1B4D50CF00C800C4 /* new_rank.wav in Resources */,
 				B4DAF6501B3F527C00D39487 /* letter_popup@2x.png in Resources */,
@@ -446,6 +492,7 @@
 				B4D5D5D71B41E8E30018DCD3 /* gamecenter@2x.png in Resources */,
 				B41756B01B404F07003033F3 /* backspace_sel@2x.png in Resources */,
 				B41756B11B404F07003033F3 /* backspace@2x.png in Resources */,
+				B47063E81B554FE900BD942B /* LaunchImage~1136@2x.png in Resources */,
 				B449FAEA1B4F45C4000EEF4B /* space@3x.png in Resources */,
 				B421D1C21B49BE67006F17F7 /* shiftIcon@2x.png in Resources */,
 				B421D1C11B49BE67006F17F7 /* backspaceIcon@2x.png in Resources */,
@@ -457,6 +504,7 @@
 				B421D1C41B49E3F9006F17F7 /* star_goldgray@2x.png in Resources */,
 				B41756B41B405D52003033F3 /* corner_button_right_sel@2x.png in Resources */,
 				B4D5D5D01B41A86A0018DCD3 /* Texts.plist in Resources */,
+				B47063E71B554FE900BD942B /* LaunchImage~960@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +593,14 @@
 				B4010C721B3E08C5000DF339 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B47063D11B554FDB00BD942B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B47063D21B554FDB00BD942B /* Base */,
+			);
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
