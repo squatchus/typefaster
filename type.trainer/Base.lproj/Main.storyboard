@@ -1170,7 +1170,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xd9-yC-ev7" userLabel="ShiftView">
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xd9-yC-ev7" userLabel="ShiftView">
                                 <rect key="frame" x="16" y="554" width="39" height="39"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shiftIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jbg-DD-uAf">
@@ -1186,7 +1186,7 @@
                                     <constraint firstAttribute="width" secondItem="xd9-yC-ev7" secondAttribute="height" multiplier="1:1" id="yKz-59-UKr"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="987-TH-FIa" userLabel="BackspaceView">
+                            <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="987-TH-FIa" userLabel="BackspaceView">
                                 <rect key="frame" x="545" y="554" width="39" height="39"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backspaceIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="cg0-gt-pF1">

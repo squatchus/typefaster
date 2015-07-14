@@ -26,7 +26,7 @@
     
     int lastDigit = speed % 10;
     NSString *ending = (lastDigit == 1)?@"":((lastDigit > 1 && lastDigit < 5)?@"а":@"ов");
-    _speedLabel.text = [NSString stringWithFormat:@"Скорость набора - %d знак%@ в мин.", speed, ending];
+    _speedLabel.text = [NSString stringWithFormat:@"Мой лучший результат - %d знак%@ в мин.", speed, ending];
     _authorLabel.text = [NSString stringWithFormat:@"© %@", author];
     
     [self layoutIfNeeded];

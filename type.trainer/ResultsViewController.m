@@ -168,7 +168,7 @@
     
     TFShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"TFShareView" owner:self options:nil][0];
     shareView.frame = self.view.frame;
-    [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[_signsPerMinLabel.text intValue]];
+    [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[AppDelegate bestResult]];
     UIImage *image = [shareView renderImage];
     
     NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
