@@ -28,6 +28,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Star Per</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Сакуры белая ветвь
+Тихо на землю легла.
+Доволен я новой пилой.</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Darth Rkoff</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -36,19 +48,6 @@
 когда в сберкассе шум и гам
 а вы с ружьём и в чёрной маске
 к деньгам</string>
-		<key>title</key>
-		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>al cogol</string>
-		<key>category</key>
-		<string>categoryCookies</string>
-		<key>text</key>
-		<string>я иностранец из нью йорка
-и вот что я хочу спросить
-вот эта надпись на заборе
-как переводится она</string>
 		<key>title</key>
 		<string>Пирожки</string>
 	</dict>
@@ -68,58 +67,6 @@
 	</dict>
 	<dict>
 		<key>author</key>
-		<string>ironichna-osoba</string>
-		<key>category</key>
-		<string>categoryCookies</string>
-		<key>text</key>
-		<string>две параллельные прямые
-живут в эвклидовом мирке
-и бегают пересекаться
-в мир лобачевского тайком</string>
-		<key>title</key>
-		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>the axy</string>
-		<key>category</key>
-		<string>categoryCookies</string>
-		<key>text</key>
-		<string>бог создал труд и обезьяну
-чтоб получился человек
-а вот пингвина он не трогал
-тот сразу вышел хорошо</string>
-		<key>title</key>
-		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>bucho</string>
-		<key>category</key>
-		<string>categoryCookies</string>
-		<key>text</key>
-		<string>ребята лезут оживлённо
-в большую круглую трубу
-а николай стоит квадратный
-и слезы льются по щекам</string>
-		<key>title</key>
-		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>оксана</string>
-		<key>category</key>
-		<string>categoryCookies</string>
-		<key>text</key>
-		<string>а это воздух настоящий
-учитель баночку достал
-и от восторга запотели
-противогазы у ребят</string>
-		<key>title</key>
-		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
 		<string>Роберт Энтони</string>
 		<key>category</key>
 		<string>categoryQuotes</string>
@@ -127,32 +74,6 @@
 		<string>С точки зрения вечности мы ничем на самом деле не владеем, а лишь берем во временное пользование.</string>
 		<key>title</key>
 		<string>Цитаты</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>соловей</string>
-		<key>category</key>
-		<string>categoryCookies</string>
-		<key>text</key>
-		<string>я моль я тише вашей смерти
-я шарфов ужас шубы боль
-царица шкафа бог комода
-я моль</string>
-		<key>title</key>
-		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>А.С. Пушкин</string>
-		<key>category</key>
-		<string>categoryClassic</string>
-		<key>text</key>
-		<string>В тот год осенняя погода
-Стояла долго на дворе,
-Зимы ждала, ждала природа.
-Снег выпал только в январе.</string>
-		<key>title</key>
-		<string>Евгений Онегин</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -195,16 +116,13 @@
 	</dict>
 	<dict>
 		<key>author</key>
-		<string>djFedos</string>
+		<string>Стивен Кови</string>
 		<key>category</key>
-		<string>categoryCookies</string>
+		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>мужик идёт с конем по полю
-и конь внезапно говорит
-не надо петь про это песню
-пусть это будет наш секрет</string>
+		<string>Большинство людей слушают вас не с желанием понять, они слушают вас с желанием ответить.</string>
 		<key>title</key>
-		<string>Пирожки</string>
+		<string>Цитаты</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -221,16 +139,6 @@
 	</dict>
 	<dict>
 		<key>author</key>
-		<string>Стивен Кови</string>
-		<key>category</key>
-		<string>categoryQuotes</string>
-		<key>text</key>
-		<string>Большинство людей слушают вас не с желанием понять, они слушают вас с желанием ответить.</string>
-		<key>title</key>
-		<string>Цитаты</string>
-	</dict>
-	<dict>
-		<key>author</key>
 		<string>Л.Н. Толстой</string>
 		<key>category</key>
 		<string>categoryQuotes</string>
@@ -239,6 +147,18 @@
 Ложь всегда бывает сложна, вычурна и многословна.</string>
 		<key>title</key>
 		<string>Цитаты</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>dubovik_sergey</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Бережно грабли кладу
+Перед дверью соседа.
+Ошибкам учиться хочу.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -275,6 +195,19 @@
 ты помнишь как в палеолит
 креветы сдерживали натиск
 улит</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>соловей</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>я моль я тише вашей смерти
+я шарфов ужас шубы боль
+царица шкафа бог комода
+я моль</string>
 		<key>title</key>
 		<string>Пирожки</string>
 	</dict>
@@ -332,18 +265,6 @@
 	</dict>
 	<dict>
 		<key>author</key>
-		<string>dubovik_sergey</string>
-		<key>category</key>
-		<string>categoryHokku</string>
-		<key>text</key>
-		<string>Бережно грабли кладу
-Перед дверью соседа.
-Ошибкам учиться хочу.</string>
-		<key>title</key>
-		<string>Хокку</string>
-	</dict>
-	<dict>
-		<key>author</key>
 		<string>i-mel</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -380,6 +301,19 @@
 То заплачет, как дитя.</string>
 		<key>title</key>
 		<string>Зимний вечер</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>оксана</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>а это воздух настоящий
+учитель баночку достал
+и от восторга запотели
+противогазы у ребят</string>
+		<key>title</key>
+		<string>Пирожки</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -516,6 +450,32 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>djFedos</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>мужик идёт с конем по полю
+и конь внезапно говорит
+не надо петь про это песню
+пусть это будет наш секрет</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>djFedos</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>мужик идёт с конем по полю
+и конь внезапно говорит
+не надо петь про это песню
+пусть это будет наш секрет</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>crazy_grant &amp; zrbvjd</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -555,6 +515,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Кобаяси Исса</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>В зарослях сорной травы,
+Смотрите, какие прекрасные
+Бабочки родились!</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Znake</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -565,6 +537,44 @@
 блины</string>
 		<key>title</key>
 		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>the axy</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>бог создал труд и обезьяну
+чтоб получился человек
+а вот пингвина он не трогал
+тот сразу вышел хорошо</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>ironichna-osoba</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>две параллельные прямые
+живут в эвклидовом мирке
+и бегают пересекаться
+в мир лобачевского тайком</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Мацуо Басё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Жизнь свою обвил
+Вкруг висячего моста
+Этот дикий плющ.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -607,6 +617,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Мацуо Басё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Тебе нужно увидеть самому,
+Стоящий на воде тростник,
+Залитый лунным светом..</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Тумми</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -640,6 +662,18 @@
 да где же этому конец</string>
 		<key>title</key>
 		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Сико</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>О кленовые листья!
+Крылья вы обжигаете
+Пролетающим птицам.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -681,6 +715,31 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Бусон</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Прохладный ветерок.
+Колокол покинув,
+Плывёт вечерний звон.</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>al cogol</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>я иностранец из нью йорка
+и вот что я хочу спросить
+вот эта надпись на заборе
+как переводится она</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Уистен Хью Оден</string>
 		<key>category</key>
 		<string>categoryQuotes</string>
@@ -701,6 +760,18 @@
 И гонит со двора.</string>
 		<key>title</key>
 		<string>Зима недаром злится</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Бусон</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>С запада ветер летит,
+Кружит, гонит к востоку
+Ворох опавшей листвы.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -739,6 +810,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Мацуо Басё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Сначала покинул траву...
+Потом деревья покинул...
+Жаворонка полёт.</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>nik-aragua</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -762,6 +845,18 @@
 седло</string>
 		<key>title</key>
 		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Тайша</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Шаг мой один -
+Что ведает он о Целом Пути?
+Что ведаю я?</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -801,6 +896,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Кобаяси Исса</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>О, с какой тоской
+Птица из клетки глядит
+На полёт мотылька!</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>MastaLomasta</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -837,6 +944,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Кобаяси Исса</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Чужих меж нами нет!
+Мы все друг другу братья
+Под вишнями в цвету.</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Нисаргадатта Махарадж</string>
 		<key>category</key>
 		<string>categoryQuotes</string>
@@ -867,6 +986,18 @@
 и вместо яблока утюг</string>
 		<key>title</key>
 		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Кобаяси Исса</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Так кричит фазан,
+Будто это он открыл
+Первую звезду.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -906,6 +1037,31 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Тиё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>О светлая луна!
+Я шла и шла к тебе,
+А ты всё далеко.</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>bucho</string>
+		<key>category</key>
+		<string>categoryCookies</string>
+		<key>text</key>
+		<string>ребята лезут оживлённо
+в большую круглую трубу
+а николай стоит квадратный
+и слезы льются по щекам</string>
+		<key>title</key>
+		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Генри Миллер</string>
 		<key>category</key>
 		<string>categoryQuotes</string>
@@ -926,6 +1082,18 @@
 собаки только антураж</string>
 		<key>title</key>
 		<string>Пирожки</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Такахама Кёси</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Вот и ты познаёшь
+Печаль,что извечно сокрыта
+В осени уходящей</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -962,6 +1130,19 @@
 В Россию можно только верить.</string>
 		<key>title</key>
 		<string>Умом Россию не понять</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Сайге</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Куда унеслось ты, сердце мое?
+Погоди!
+Горные вишни осыплются,
+Ты опять вернешься в свое жилище.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -1002,6 +1183,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Еса Бусон</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Грузный колокол
+А на самом его краю
+Дремлет бабочка</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Тихомиров</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -1015,6 +1208,19 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>А.С. Пушкин</string>
+		<key>category</key>
+		<string>categoryClassic</string>
+		<key>text</key>
+		<string>В тот год осенняя погода
+Стояла долго на дворе,
+Зимы ждала, ждала природа.
+Снег выпал только в январе.</string>
+		<key>title</key>
+		<string>Евгений Онегин</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>А. С. Пушкин</string>
 		<key>category</key>
 		<string>categoryClassic</string>
@@ -1025,6 +1231,18 @@
 Как гений чистой красоты.</string>
 		<key>title</key>
 		<string>К *** Керн</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Мацуо Басё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Крылья бабочек!
+Разбудите поляну
+Для встречи солнца.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -1059,6 +1277,18 @@
 		<string>Если хочешь построить корабль, то не собирай людей, чтобы они принесли лес, и не распределяй задания, а лучше пробуди в них тоску по бескрайней дали моря.</string>
 		<key>title</key>
 		<string>Цитаты</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Сайге</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Когда б ещё нашелся человек
+Кому уединение не в тягость
+Кто любит тишину!</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -1101,6 +1331,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Кобаяси Исса</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Тихо-тихо ползи,
+Улитка, по склону Фудзи
+Вверх, до самых высот!</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>Шри Ауробиндо</string>
 		<key>category</key>
 		<string>categoryQuotes</string>
@@ -1133,6 +1375,18 @@
 Она одолжена тобой у твоих детей.</string>
 		<key>title</key>
 		<string>Цитаты</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Мацуо Басё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Старый пруд
+Прыгнула в воду лягушка
+Всплеск в тишине</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -1172,6 +1426,18 @@
 	</dict>
 	<dict>
 		<key>author</key>
+		<string>Кобаяси Исса</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Наша жизнь - росинка
+Пусть лишь капелька росы
+Наша жизнь - и всё же…</string>
+		<key>title</key>
+		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
 		<string>zh</string>
 		<key>category</key>
 		<string>categoryCookies</string>
@@ -1182,18 +1448,6 @@
 что все у парня хорошо</string>
 		<key>title</key>
 		<string>Пирожки</string>
-	</dict>
-	<dict>
-		<key>author</key>
-		<string>Star Per</string>
-		<key>category</key>
-		<string>categoryHokku</string>
-		<key>text</key>
-		<string>Сакуры белая ветвь
-Тихо на землю легла.
-Доволен я новой пилой.</string>
-		<key>title</key>
-		<string>Хокку</string>
 	</dict>
 	<dict>
 		<key>author</key>
@@ -1220,6 +1474,18 @@
 По лазури весело играя.</string>
 		<key>title</key>
 		<string>Утёс</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Мацуо Басё</string>
+		<key>category</key>
+		<string>categoryHokku</string>
+		<key>text</key>
+		<string>Верь в лучшие дни!
+Деревцо сливы верит:
+Весной зацветет.</string>
+		<key>title</key>
+		<string>Хокку</string>
 	</dict>
 </array>
 </plist>

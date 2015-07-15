@@ -141,6 +141,11 @@
 //
 - (void)showOnlyKeysWithCharactersInString:(NSString *)string {
     if ([string isEqualToString:@"\n"]) string = @" ";
+    if ([string rangeOfString:@"Ё"].location != NSNotFound)
+        string = [string stringByReplacingOccurrencesOfString:@"Ё" withString:@"Е"];
+    if ([string rangeOfString:@"ё"].location != NSNotFound)
+        string = [string stringByReplacingOccurrencesOfString:@"ё" withString:@"е"];
+
     
     NSMutableArray *not_visible = [NSMutableArray new];
     NSMutableArray *visible = [NSMutableArray new];
@@ -171,7 +176,9 @@
 
 - (void)playClickSound {
     NSLog(@"playClickSound");
-    [[UIDevice currentDevice] playInputClick];
+//    [[UIDevice currentDevice] playInputClick];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate playKeyboardClickSound];
 }
 
 - (BOOL)enableInputClicksWhenVisible {

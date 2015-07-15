@@ -85,6 +85,7 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange) name:UITextInputCurrentInputModeDidChangeNotification object:nil];
     
     _shiftView.layer.cornerRadius = 4;
     _backspaceView.layer.cornerRadius = 4;
@@ -360,7 +361,12 @@
     else [_keyboardView playClickSound];
 }
 
+- (void)inputModeDidChange {
+    NSLog(@"inputModeDidChange");
+}
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if (text.length > 1) return NO;
     if ([text isEqualToString:@"\n"] == NO) // if not '\n' - just type
         [self onKeyTapped:text];
     else if (_typed_string.length < _source_string.length) { // if it is '\n'
@@ -523,10 +529,11 @@
     
     [self updateStatsLabel];
 
-    [_keyboardView playClickSound];
+    if (!_useFullKeyboard)
+        [_keyboardView playClickSound];
     if (playErrorSound) {
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [delegate performSelector:@selector(playErrorSound) withObject:nil afterDelay:0.05];
+        [delegate playErrorSound];
     }
     
     if (_typed_string.length == _source_string.length) {

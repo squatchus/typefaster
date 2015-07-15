@@ -10,9 +10,13 @@
 #import "Flurry.h"
 #import "VKSdk.h"
 @import AudioToolbox;
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) AVAudioPlayer *errorPlayer;
+@property (nonatomic, strong) AVAudioPlayer *clickPlayer;
 @property SystemSoundID errorSound;
 @property SystemSoundID buttonClickSound;
 @property SystemSoundID newResultSound;
@@ -251,12 +255,29 @@
     return number;
 }
 
+- (void)playKeyboardClickSound {
+//    NSString *path = [[NSBundle bundleWithIdentifier:@"com.apple.UIKit"] pathForResource:@"Tock" ofType:nil];
+//    SystemSoundID soundID;
+//    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+//    AudioServicesPlaySystemSound(1104);
+//    AudioServicesDisposeSystemSoundID(soundID);
+    
+    NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"Tock" ofType:@"caf"];
+    NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    _clickPlayer.volume = 0.1;
+    [_clickPlayer play];
+}
+
 - (void)playButtonClickSound {
     AudioServicesPlaySystemSound(_buttonClickSound);
 }
 - (void)playErrorSound {
     NSLog(@"playErrorSound");
-    AudioServicesPlaySystemSound(_errorSound);
+    NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"wav"];
+    NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _errorPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    [_errorPlayer play];
 }
 - (void)playNewResultSound {
     AudioServicesPlaySystemSound(_newResultSound);

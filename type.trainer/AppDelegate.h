@@ -38,6 +38,7 @@
 + (int)numberOfKeysForCurrentRank;
 + (int)numberOfHighestScores;
 
+- (void)playKeyboardClickSound;
 - (void)playButtonClickSound;
 - (void)playErrorSound;
 - (void)playNewResultSound;
