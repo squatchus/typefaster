@@ -47,7 +47,6 @@
 + (void)enableNotifications;
 + (void)disableNotifications;
 
-+ (NSString *)categoryByText:(NSString *)text;
 + (int)summaryTimeOfAllTrainings;
 
 @end

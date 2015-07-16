@@ -104,7 +104,12 @@
     }
     
     if (!switchToFullKeyboardJustHappened) {
-        if ([AppDelegate numberOfHighestScores] == 3) {
+        if (results.count == 1 && signsPerMin < 100) {
+            [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"fullKeyboard"];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Результат" message:@"Ваш результат меньше 100 знаков в минуту. Попробуйте его улучшить на тренировочной клавиатуре (без знаков препинания)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
+            [alert show];
+        }
+        else if ([AppDelegate numberOfHighestScores] == 3) {
             if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Напоминания" message:@"Регулярные тренеровки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Напоминать", nil];
                 [alert show];
@@ -161,7 +166,7 @@
     NSDictionary *level = [results lastObject][@"level"];
     
     NSDictionary *params = @{@"author": level[@"author"], @"text": level[@"text"],
-                             @"category": [AppDelegate categoryByText:level[@"text"]]};
+                             @"category": level[@"category"]};
     FlurryEventRecordStatus status = [Flurry logEvent:@"ShareButton clicked" withParameters:params];
     NSLog(@"flurry (ShareButton clicked) status: %d", status);
 

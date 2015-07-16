@@ -195,15 +195,22 @@
     }
     [[NSUserDefaults standardUserDefaults] setValue:@(level_num) forKey:@"prevLevel"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"LEVEL LOADED: %d (%@)", level_num, allowedLevels[level_num][@"category"]);
+    NSLog(@"LEVEL LOADED: %d/%d (%@)", level_num, (int)allowedLevels.count, allowedLevels[level_num][@"category"]);
     
     _current_level = allowedLevels[level_num];
     _source_string = allowedLevels[level_num][@"text"];
     _typed_string = [[NSMutableString alloc] initWithString:@""];
     if (!_useFullKeyboard) {
+        _source_string = [_source_string stringByReplacingOccurrencesOfString:@"как-нибудь"
+                                                                   withString:@"как нибудь"];
+        _source_string = [_source_string stringByReplacingOccurrencesOfString:@"по-настоящему"
+                                                                   withString:@"по настоящему"];
+        _source_string = [_source_string stringByReplacingOccurrencesOfString:@"что-то"
+                                                                   withString:@"что то"];
         NSCharacterSet *symbols = [NSCharacterSet punctuationCharacterSet];
         NSArray *components = [_source_string componentsSeparatedByCharactersInSet:symbols];
         _source_string = [components componentsJoinedByString:@""];
+        _source_string = [_source_string stringByReplacingOccurrencesOfString:@"  " withString:@" "];
     }
 
 //    int numberOfLines = 8;
@@ -278,8 +285,9 @@
 
     NSDictionary *params = @{@"author": _current_level[@"author"],
                              @"text": _current_level[@"text"],
-                             @"category": [AppDelegate categoryByText:_current_level[@"text"]],
-                             @"rankAtStart": [AppDelegate currentRank], @"status":@"complete" };
+                             @"category": _current_level[@"category"],
+                             @"rankAtStart": [AppDelegate currentRank],
+                             @"status": @"complete" };
     
     [Flurry logEvent:@"TrainingRound" withParameters:params timed:YES];
 }

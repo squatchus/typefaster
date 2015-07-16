@@ -90,7 +90,7 @@
     // Update switcher's settings in UserDefaults
     //
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"])
-        [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"fullKeyboard"];
+        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"])
         [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"notifications"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
@@ -256,12 +256,6 @@
 }
 
 - (void)playKeyboardClickSound {
-//    NSString *path = [[NSBundle bundleWithIdentifier:@"com.apple.UIKit"] pathForResource:@"Tock" ofType:nil];
-//    SystemSoundID soundID;
-//    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
-//    AudioServicesPlaySystemSound(1104);
-//    AudioServicesDisposeSystemSoundID(soundID);
-    
     NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"Tock" ofType:@"caf"];
     NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
     _clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
@@ -323,17 +317,6 @@
 
 + (void)disableNotifications {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-}
-
-+ (NSString *)categoryByText:(NSString *)text {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Texts" ofType:@"plist"];
-    NSDictionary *levels = [NSDictionary dictionaryWithContentsOfFile:filePath];
-    for (NSString *catName in [levels allKeys]) {
-        NSArray *catLevels = levels[catName];
-        for (NSDictionary *level in catLevels)
-            if ([text isEqualToString:level[@"text"]]) return catName;
-    }
-    return nil;
 }
 
 + (int)summaryTimeOfAllTrainings {

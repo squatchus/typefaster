@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "394"
-            endingLineNumber = "394"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "-getAwaitedKey"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "559"
-            endingLineNumber = "559"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
             landmarkName = "-updateCurrentWord"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
+            startingLineNumber = "557"
+            endingLineNumber = "557"
             landmarkName = "-updateCurrentWord"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,7 +74,55 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "-updateTextViewWithKey:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "type.trainer/ViewController.m"
+            timestampString = "458758949.437725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "503"
+            endingLineNumber = "503"
+            landmarkName = "-updateTextViewWithKey:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "type.trainer/ViewController.m"
+            timestampString = "458758949.437725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
+            landmarkName = "-endSession"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "type.trainer/ViewController.m"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "496"
@@ -90,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "-endSession"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "-updateTextViewWithKey:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,59 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "527"
-            endingLineNumber = "527"
-            landmarkName = "-updateTextViewWithKey:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
-            landmarkName = "-endSession"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
-            landmarkName = "-updateTextViewWithKey:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "type.trainer/ViewController.m"
-            timestampString = "458676554.390792"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "683"
-            endingLineNumber = "683"
+            startingLineNumber = "691"
+            endingLineNumber = "691"
             landmarkName = "-pulseTextViewBackgroundColor"
             landmarkType = "5">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-loadText"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ResultsViewController.m"
-            timestampString = "458168469.245282"
+            timestampString = "458759757.895664"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
             landmarkName = "-endSession"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
             landmarkType = "5">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-onSpacePressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "type.trainer/ViewController.m"
-            timestampString = "458673815.396454"
+            timestampString = "458758949.437725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-onKeyTapped:"
             landmarkType = "5">
          </BreakpointContent>

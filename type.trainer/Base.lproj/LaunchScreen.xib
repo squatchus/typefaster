@@ -24,18 +24,9 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="П" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBc-sx-UJs">
-                    <rect key="frame" x="203" y="90" width="61" height="99"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="83"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="П" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLm-yJ-Kxv">
-                    <rect key="frame" x="196" y="90" width="61" height="99"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="83"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="eVr-Fw-Twl">
+                    <rect key="frame" x="166" y="64" width="149" height="152"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xil-1Z-737" userLabel="SepView2">
                     <rect key="frame" x="0.0" y="189" width="480" height="89"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -69,7 +60,6 @@ suricatum@gmail.com</string>
                 <constraint firstItem="Xil-1Z-737" firstAttribute="height" secondItem="7FR-hq-hDz" secondAttribute="height" id="2Hk-jF-Xbk"/>
                 <constraint firstItem="L6M-Q5-368" firstAttribute="bottom" secondItem="7FR-hq-hDz" secondAttribute="bottom" constant="209" id="3GV-XC-phV"/>
                 <constraint firstItem="rYZ-Bn-gQp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3o9-AT-zun"/>
-                <constraint firstItem="L6M-Q5-368" firstAttribute="centerY" secondItem="hLm-yJ-Kxv" secondAttribute="centerY" id="7WM-T3-R4F"/>
                 <constraint firstItem="7Fn-Rq-ZaL" firstAttribute="top" secondItem="Xil-1Z-737" secondAttribute="bottom" id="7rc-Sk-sxY"/>
                 <constraint firstAttribute="trailing" secondItem="rYZ-Bn-gQp" secondAttribute="trailing" id="ApW-a9-HPn"/>
                 <constraint firstItem="hKR-Rn-kKe" firstAttribute="top" secondItem="rYZ-Bn-gQp" secondAttribute="bottom" id="Flx-My-Vce"/>
@@ -77,10 +67,9 @@ suricatum@gmail.com</string>
                 <constraint firstAttribute="trailing" secondItem="7FR-hq-hDz" secondAttribute="trailing" id="IF0-AA-jSM"/>
                 <constraint firstItem="Xil-1Z-737" firstAttribute="height" secondItem="rYZ-Bn-gQp" secondAttribute="height" id="JiZ-Ka-o8y"/>
                 <constraint firstAttribute="bottom" secondItem="hKR-Rn-kKe" secondAttribute="bottom" constant="20" id="KhV-Th-rsn"/>
-                <constraint firstItem="L6M-Q5-368" firstAttribute="centerY" secondItem="zBc-sx-UJs" secondAttribute="centerY" id="Mpz-sC-b7K"/>
+                <constraint firstItem="L6M-Q5-368" firstAttribute="centerY" secondItem="eVr-Fw-Twl" secondAttribute="centerY" constant="-0.5" id="Ldr-Hs-zp7"/>
                 <constraint firstAttribute="trailing" secondItem="Xil-1Z-737" secondAttribute="trailing" id="Q6I-uX-Mpy"/>
                 <constraint firstAttribute="centerX" secondItem="7Fn-Rq-ZaL" secondAttribute="centerX" id="S2h-IU-5Dc"/>
-                <constraint firstItem="L6M-Q5-368" firstAttribute="centerX" secondItem="zBc-sx-UJs" secondAttribute="centerX" constant="7" id="TAQ-pm-pGe"/>
                 <constraint firstAttribute="trailing" secondItem="rap-LM-SGf" secondAttribute="trailing" id="VLa-KX-Lh5"/>
                 <constraint firstAttribute="trailing" secondItem="7Fn-Rq-ZaL" secondAttribute="trailing" id="Vcg-T3-RgZ"/>
                 <constraint firstItem="L6M-Q5-368" firstAttribute="top" secondItem="7FR-hq-hDz" secondAttribute="bottom" id="WBP-HJ-1Ey"/>
@@ -88,12 +77,12 @@ suricatum@gmail.com</string>
                 <constraint firstAttribute="bottom" secondItem="rap-LM-SGf" secondAttribute="bottom" id="ZxH-R1-d9u"/>
                 <constraint firstAttribute="trailing" secondItem="hKR-Rn-kKe" secondAttribute="trailing" constant="20" id="aXg-NY-pNA"/>
                 <constraint firstItem="rap-LM-SGf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bL3-Fc-OZO"/>
+                <constraint firstItem="L6M-Q5-368" firstAttribute="centerX" secondItem="eVr-Fw-Twl" secondAttribute="centerX" constant="0.5" id="gye-xB-fuE"/>
                 <constraint firstItem="hKR-Rn-kKe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="hjE-B4-5bk"/>
                 <constraint firstItem="7FR-hq-hDz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mFx-rc-lW2"/>
                 <constraint firstItem="7FR-hq-hDz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nwd-jS-qls"/>
                 <constraint firstItem="7FR-hq-hDz" firstAttribute="top" secondItem="L6M-Q5-368" secondAttribute="bottom" id="pSd-or-tjp"/>
                 <constraint firstItem="Xil-1Z-737" firstAttribute="top" secondItem="L6M-Q5-368" secondAttribute="bottom" id="qyO-ZX-jBY"/>
-                <constraint firstItem="L6M-Q5-368" firstAttribute="centerX" secondItem="hLm-yJ-Kxv" secondAttribute="centerX" constant="14" id="rKy-PA-N0h"/>
                 <constraint firstItem="7Fn-Rq-ZaL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="siu-vp-tvn"/>
                 <constraint firstItem="rap-LM-SGf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vzc-TY-TUI"/>
             </constraints>
@@ -111,5 +100,6 @@ suricatum@gmail.com</string>
     </objects>
     <resources>
         <image name="LaunchScreenBackground.png" width="320" height="568"/>
+        <image name="p-logo.png" width="149" height="152"/>
     </resources>
 </document>
