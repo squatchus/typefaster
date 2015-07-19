@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@import GameKit;
 
-@interface MenuViewController : UIViewController
+@interface MenuViewController : UIViewController <GKGameCenterControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *yourSpeedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;

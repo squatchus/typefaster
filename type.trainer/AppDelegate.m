@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "MenuViewController.h"
 #import "Flurry.h"
 #import "VKSdk.h"
 @import AudioToolbox;
 #import <AVFoundation/AVFoundation.h>
-
 
 @interface AppDelegate ()
 
@@ -35,7 +35,6 @@
         //Start working
     }
     
-    
     [Flurry startSession:@"DXG36J5Z73XT554MZMFD"];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
         NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -44,7 +43,59 @@
         [Flurry setUserID:idfv];
     }
     [self initSettings];
+    [self authenticateLocalPlayer];
     return YES;
+}
+
+-(void)authenticateLocalPlayer {
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    
+    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+        if (viewController != nil) {
+            [self.window.rootViewController presentViewController:viewController animated:YES completion:nil];
+        }
+        else{
+            if ([GKLocalPlayer localPlayer].authenticated) {
+                _gameCenterEnabled = YES;
+                [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+                    if (error != nil) NSLog(@"%@", [error localizedDescription]);
+                    else {
+                        _leaderboardIdentifier = leaderboardIdentifier;
+                        
+                        GKLeaderboard *leaderboardRequest = [[GKLeaderboard alloc] init];
+                        leaderboardRequest.identifier = leaderboardIdentifier;
+                        if (leaderboardRequest != nil) {
+                            [leaderboardRequest loadScoresWithCompletionHandler:^(NSArray *scores, NSError *error){
+                                if (error != nil) NSLog(@"%@", [error localizedDescription]);
+                                else {
+                                    _gameCenterScore = (int)leaderboardRequest.localPlayerScore.value;
+                                    [[NSUserDefaults standardUserDefaults] setValue:@(_gameCenterScore) forKey:@"gameCenterScore"];
+                                    [[NSUserDefaults standardUserDefaults] synchronize];
+                                    [[NSNotificationCenter defaultCenter] postNotificationName:@"bestScoreUpdated" object:nil];
+                                }
+                            }];
+                        }
+                        
+                        [self reportScore];
+                    }
+                }];
+            }
+            else _gameCenterEnabled = NO;
+        }
+    };
+}
+
+-(void)reportScore {
+    if (_gameCenterEnabled) {
+        GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+        score.value = [AppDelegate bestResult];
+        
+        [GKScore reportScores:@[score] withCompletionHandler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+        }];
+    }
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -87,6 +138,11 @@
 }
 
 - (void)initSettings {
+    // Load game center cached score
+    //
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"gameCenterScore"])
+        _gameCenterScore = [[[NSUserDefaults standardUserDefaults] valueForKey:@"gameCenterScore"] intValue];
+    
     // Update switcher's settings in UserDefaults
     //
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"])
@@ -122,6 +178,17 @@
 
     soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_result"), CFSTR ("wav"), NULL);
     AudioServicesCreateSystemSoundID(soundFileURLRef, &_newResultSound);
+    
+    NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"Tock" ofType:@"caf"];
+    NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    _clickPlayer.volume = 0.1;
+    [_clickPlayer prepareToPlay];
+
+    toneFilename = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"wav"];
+    toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _errorPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    [_errorPlayer prepareToPlay];
 }
 
 + (NSString *)rankTitleBySpeed:(int)speed {
@@ -204,7 +271,9 @@
         if (signsPerMin > maxSpeed)
             maxSpeed = signsPerMin;
     }
-    return maxSpeed;
+    
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    return MAX(maxSpeed,delegate.gameCenterScore);
 }
 
 + (int)prevBestResult {
@@ -256,11 +325,10 @@
 }
 
 - (void)playKeyboardClickSound {
-    NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"Tock" ofType:@"caf"];
-    NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
-    _clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
-    _clickPlayer.volume = 0.1;
-    [_clickPlayer play];
+    if (_clickPlayer.isPlaying)
+        _clickPlayer.currentTime = 0;
+    else
+        [_clickPlayer play];
 }
 
 - (void)playButtonClickSound {
@@ -268,10 +336,10 @@
 }
 - (void)playErrorSound {
     NSLog(@"playErrorSound");
-    NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"wav"];
-    NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
-    _errorPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
-    [_errorPlayer play];
+    if (_errorPlayer.isPlaying)
+        _errorPlayer.currentTime = 0;
+    else
+        [_errorPlayer play];
 }
 - (void)playNewResultSound {
     AudioServicesPlaySystemSound(_newResultSound);
@@ -309,7 +377,7 @@
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.repeatInterval = NSCalendarUnitDay;
     if (SYSTEM_VERSION_GREATER_THAN(@"8.2")) notification.alertTitle = @"Печатай быстрее";
-    notification.alertBody = @"Потренеруйтесь в скорости печати!";
+    notification.alertBody = @"Потренируйтесь в скорости печати!";
     
     // this will schedule the notification to fire at the fire date
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];

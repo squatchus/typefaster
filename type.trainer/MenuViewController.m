@@ -23,6 +23,8 @@
     _settingsButton.layer.cornerRadius = _settingsButton.frame.size.height/2.0;
     _gameCenterButton.layer.cornerRadius = _gameCenterButton.frame.size.height/2.0;
     _startTypingButton.layer.cornerRadius = _startTypingButton.frame.size.height/2.0;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillAppear:) name:@"bestScoreUpdated" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -36,7 +38,7 @@
     int firstResult = [AppDelegate firstResult];
     if (firstResult > 0) {
         if (firstResult == bestResult)
-            _firstResultLabel.text = @"продолжайте тренероваться";
+            _firstResultLabel.text = @"продолжайте тренироваться";
         else
             _firstResultLabel.text = [NSString stringWithFormat:@"а начинали со скорости %d", firstResult];
     }
@@ -85,8 +87,19 @@
 }
 
 - (IBAction)onGameCenterButtonPressed:(UIButton *)sender {
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [delegate playButtonClickSound];
+    if (delegate.gameCenterEnabled && delegate.leaderboardIdentifier) {
+        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+        gcViewController.gameCenterDelegate = self;
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        gcViewController.leaderboardIdentifier = delegate.leaderboardIdentifier;
+        [self presentViewController:gcViewController animated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Таблица рекордов" message:@"Для доступа к таблице рекордов, необходимо войти в Game Center. Откройте 'Настройки' -> 'Game Center' и введите данные своей учётной записи" delegate:nil cancelButtonTitle:@"Ок" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
@@ -101,6 +114,11 @@
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToGame" sender:self];
+}
+
+-(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

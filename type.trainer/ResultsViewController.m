@@ -83,10 +83,12 @@
     else if ([currentRank isEqualToString:[AppDelegate prevRank]]) {
         _resultTitleLabel.text = @"Новый рекорд!"; // в текущем ранге
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewResultSound];
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) reportScore];
     }
     else { // новый ранг
         _resultTitleLabel.text = [NSString stringWithFormat:@"Новый ранг - %@!", currentRank];
         [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewRankSound];
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) reportScore];
         
         NSDictionary *params = @{@"rank": currentRank,
                                  @"highestScores": @([AppDelegate numberOfHighestScores]),
@@ -97,7 +99,7 @@
             if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue]) {
                 [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
                 switchToFullKeyboardJustHappened = YES;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ура!" message:@"Вы преодолели тренеровочный этап! Продолжайте увеличивать скорость\nна полной клавиатуре (включающей знаки препинания)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ура!" message:@"Вы преодолели этап обучения! Продолжайте увеличивать скорость\nна полной клавиатуре (включающей знаки препинания)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
                 [alert show];
             }
         }
@@ -106,12 +108,12 @@
     if (!switchToFullKeyboardJustHappened) {
         if (results.count == 1 && signsPerMin < 100) {
             [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"fullKeyboard"];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Результат" message:@"Ваш результат меньше 100 знаков в минуту. Попробуйте его улучшить на тренировочной клавиатуре (без знаков препинания)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Результат" message:@"Ваш результат меньше 100 знаков в минуту. Попробуйте его улучшить в режиме обучения\n(нет знаков препинания, количество букв ограничено)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
             [alert show];
         }
         else if ([AppDelegate numberOfHighestScores] == 3) {
             if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Напоминания" message:@"Регулярные тренеровки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Напоминать", nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Напоминания" message:@"Регулярные тренировки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Напоминать", nil];
                 [alert show];
             }
         }

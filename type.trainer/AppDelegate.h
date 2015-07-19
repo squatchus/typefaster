@@ -21,6 +21,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+@property (nonatomic, strong) NSString* leaderboardIdentifier;
+@property BOOL gameCenterEnabled;
+@property int gameCenterScore;
+
 + (float)numberOfStarsBySpeed:(int)speed;
 + (NSString *)rankTitleBySpeed:(int)speed;
 
@@ -43,6 +47,9 @@
 - (void)playErrorSound;
 - (void)playNewResultSound;
 - (void)playNewRankSound;
+
+- (void)authenticateLocalPlayer;
+- (void)reportScore;
 
 + (void)enableNotifications;
 + (void)disableNotifications;

@@ -145,7 +145,7 @@
 - (void)initSession {
     _stat_symbols = 0;
     _stat_mistakes = 0;
-    [self updateStatsLabel];
+    _statsLabel.text = [NSString stringWithFormat:@"%d", _stat_symbols];
     
     _secondsLabel.text = [NSString stringWithFormat:@"%d:%02d", 0, 0];
 
@@ -535,7 +535,7 @@
     _textView.attributedText = text;
     _textView.selectedRange = NSMakeRange(_typed_string.length, 0);
     
-    [self updateStatsLabel];
+    _statsLabel.text = [NSString stringWithFormat:@"%d", _stat_symbols];
 
     if (!_useFullKeyboard)
         [_keyboardView playClickSound];
@@ -614,28 +614,6 @@
 }
 
 #pragma mark - Update User Interface
-
-// Обновляем данные о количестве набранных символов и совершенных ошибках
-//
-- (void)updateStatsLabel {
-    NSString *statString = [NSString stringWithFormat:@"%d/%d", _stat_symbols, _stat_mistakes];
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:statString];
-    NSInteger sep_loc = [statString rangeOfString:@"/"].location;
-    NSInteger length = [statString substringFromIndex:sep_loc].length;
-    [text addAttribute:NSFontAttributeName
-                   value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:21]
-                   range:NSMakeRange(0, sep_loc)];
-    [text addAttribute:NSForegroundColorAttributeName
-                       value:[UIColor colorWithHexString:@"A54466"]
-                       range:NSMakeRange(0, sep_loc)];
-    [text addAttribute:NSFontAttributeName
-                   value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16]
-                   range:NSMakeRange(sep_loc, length)];
-    [text addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor colorWithHexString:@"CCCCCC"]
-                 range:NSMakeRange(sep_loc, length)];
-    _statsLabel.attributedText = text;
-}
 
 // Обновляем показатель таймера
 //

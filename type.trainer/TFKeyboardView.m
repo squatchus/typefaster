@@ -55,7 +55,7 @@
         
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_enterButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:93]];
         
-        popup_image = [self imageNamed:@"letter_popup_iphone6.png"];
+        popup_image = [self imageNamed:@"letter_popup_iphone6@2x.png"];
         _popupLabelHeight = 64;
         _popupViewOffsetY = 26;
     }
@@ -64,7 +64,7 @@
         _keysTopMarginConstraint.constant = 3;
         _keysLeftMarginConstraint.constant = 1.75;
         _keysRightMarginConstraint.constant = 1.75;
-        _popupViewOffsetY = 30;
+        _popupViewOffsetY = 28;
         _popupLabelHeight = 64;
         [self layoutIfNeeded];
     }
