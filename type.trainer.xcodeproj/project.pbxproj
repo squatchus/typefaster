@@ -49,7 +49,6 @@
 		B4457CCA1B580DCF003C27A9 /* star_gray@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4457CC21B580DCF003C27A9 /* star_gray@3x.png */; };
 		B449FAC81B4EB621000EEF4B /* TFShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B449FAC71B4EB621000EEF4B /* TFShareView.xib */; };
 		B449FACB1B4EC2B7000EEF4B /* TFShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = B449FACA1B4EC2B7000EEF4B /* TFShareView.m */; };
-		B449FAD01B4EED4D000EEF4B /* libFlurry_6.6.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FACF1B4EED4D000EEF4B /* libFlurry_6.6.0.a */; };
 		B449FAD21B4EED93000EEF4B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */; };
 		B449FAD41B4EED99000EEF4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FAD31B4EED99000EEF4B /* Security.framework */; };
 		B449FAD61B4F3E29000EEF4B /* keyboard_background@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B449FAD51B4F3E29000EEF4B /* keyboard_background@3x.png */; };
@@ -67,6 +66,7 @@
 		B45E7A471B50050E006C3A67 /* keyboard_background_iphone6.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */; };
 		B45E7A491B50174D006C3A67 /* letter_popup_iphone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */; };
 		B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45E7A4E1B504090006C3A67 /* GameKit.framework */; };
+		B46823261B5C61D3004F9B92 /* libFlurry_6.5.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B46823251B5C61D3004F9B92 /* libFlurry_6.5.0.a */; };
 		B47063D31B554FDB00BD942B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B47063D11B554FDB00BD942B /* LaunchScreen.xib */; };
 		B47063DF1B554FE900BD942B /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D41B554FE900BD942B /* Icon-60.png */; };
 		B47063E01B554FE900BD942B /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47063D51B554FE900BD942B /* Icon-60@2x.png */; };
@@ -158,7 +158,6 @@
 		B449FACA1B4EC2B7000EEF4B /* TFShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFShareView.m; sourceTree = "<group>"; };
 		B449FACD1B4EED4D000EEF4B /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		B449FACE1B4EED4D000EEF4B /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
-		B449FACF1B4EED4D000EEF4B /* libFlurry_6.6.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.6.0.a; sourceTree = "<group>"; };
 		B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B449FAD31B4EED99000EEF4B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B449FAD51B4F3E29000EEF4B /* keyboard_background@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_background@3x.png"; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		B45E7A461B50050E006C3A67 /* keyboard_background_iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keyboard_background_iphone6.png; sourceTree = "<group>"; };
 		B45E7A481B50174D006C3A67 /* letter_popup_iphone6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "letter_popup_iphone6@2x.png"; sourceTree = "<group>"; };
 		B45E7A4E1B504090006C3A67 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		B46823251B5C61D3004F9B92 /* libFlurry_6.5.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_6.5.0.a; sourceTree = "<group>"; };
 		B47063D21B554FDB00BD942B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B47063D41B554FE900BD942B /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		B47063D51B554FE900BD942B /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
@@ -211,9 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4457CB61B56BFA6003C27A9 /* AVFoundation.framework in Frameworks */,
+				B46823261B5C61D3004F9B92 /* libFlurry_6.5.0.a in Frameworks */,
 				B449FAD41B4EED99000EEF4B /* Security.framework in Frameworks */,
 				B449FAD21B4EED93000EEF4B /* SystemConfiguration.framework in Frameworks */,
-				B449FAD01B4EED4D000EEF4B /* libFlurry_6.6.0.a in Frameworks */,
 				B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */,
 				77B7FEC27DFC7566E0830B37 /* libPods.a in Frameworks */,
 			);
@@ -392,9 +392,9 @@
 		B449FACC1B4EED4D000EEF4B /* Flurry */ = {
 			isa = PBXGroup;
 			children = (
+				B46823251B5C61D3004F9B92 /* libFlurry_6.5.0.a */,
 				B449FACD1B4EED4D000EEF4B /* Flurry.h */,
 				B449FACE1B4EED4D000EEF4B /* FlurryWatch.h */,
-				B449FACF1B4EED4D000EEF4B /* libFlurry_6.6.0.a */,
 			);
 			path = Flurry;
 			sourceTree = "<group>";

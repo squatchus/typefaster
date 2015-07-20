@@ -13,6 +13,8 @@
 #import "Flurry.h"
 
 #define kBaseFontSize 16
+#define kBaseFontSizeIPhone6 18
+#define kBaseFontSizeIPhone6p 20
 #define kBaseFontName @"HelveticaNeue"
 
 #pragma mark - Tokens
@@ -76,6 +78,8 @@
 @property BOOL useFullKeyboard;
 @property BOOL useStrictTyping;
 
+@property int textFontSize;
+
 @end
 
 
@@ -85,7 +89,8 @@
     [super viewDidLoad];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputModeDidChange) name:UITextInputCurrentInputModeDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     
     _shiftView.layer.cornerRadius = 4;
     _backspaceView.layer.cornerRadius = 4;
@@ -114,6 +119,11 @@
     
     _useFullKeyboard = [[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue];
     _useStrictTyping = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
+    
+    if (IS_IPHONE_6P) _textFontSize = kBaseFontSizeIPhone6p;
+    else if (IS_IPHONE_6) _textFontSize = kBaseFontSizeIPhone6;
+    else _textFontSize = kBaseFontSize;
+    
     [self initSession];
 }
 
@@ -127,6 +137,11 @@
     CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
     NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     [self updateCurrentWordBottomMargin:keyboardFrame.size.height withDuration:duration];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSTimeInterval duration = [[[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    [self updateCurrentWordBottomMargin:0 withDuration:duration];
 }
 
 - (void)updateCurrentWordBottomMargin:(CGFloat)margin withDuration:(NSTimeInterval)duration {
@@ -226,7 +241,7 @@
 //    current_level
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:_source_string];
     [sourceText addAttribute:NSFontAttributeName
-                       value:[UIFont fontWithName:kBaseFontName size:kBaseFontSize]//@"HelveticaNeue" size:kBaseFontSize]
+                       value:[UIFont fontWithName:kBaseFontName size:_textFontSize]
                        range:NSMakeRange(0, sourceText.length)];
     [sourceText addAttribute:NSForegroundColorAttributeName
                        value:[UIColor colorWithHexString:@"999999"]
@@ -234,15 +249,26 @@
     _textView.attributedText = sourceText;
     _textView.selectedRange = NSMakeRange(0, 0);
 
-    [self.view layoutIfNeeded];
-    CGSize size = [_textView sizeThatFits:CGSizeMake(self.view.frame.size.width-32, CGFLOAT_MAX)];
+    // update TextView Layout
+    //
     for (NSLayoutConstraint *c in _textView.constraints) {
-        if (c.firstAttribute == NSLayoutAttributeHeight) {
-            c.constant = size.height;
-        }
-        if (c.firstAttribute == NSLayoutAttributeWidth) {
-            c.constant = size.width + 16;
-        }
+        if (c.firstAttribute == NSLayoutAttributeHeight) c.constant = 200;
+        if (c.firstAttribute == NSLayoutAttributeWidth) c.constant = 200;
+    }
+    [self.view layoutIfNeeded];
+    CGSize size = CGSizeZero;
+    NSString *category = allowedLevels[level_num][@"category"];
+    if ([category rangeOfString:@"Quotes"].location != NSNotFound) {
+        size = [_textView sizeThatFits:CGSizeMake(self.view.frame.size.width-64, CGFLOAT_MAX)];
+        if (size.height > _textView.frame.size.height)
+            size = [_textView sizeThatFits:CGSizeMake(self.view.frame.size.width - 32, CGFLOAT_MAX)];
+    }
+    else
+        size = [_textView sizeThatFits:CGSizeMake(self.view.frame.size.width - 32, CGFLOAT_MAX)];
+
+    for (NSLayoutConstraint *c in _textView.constraints) {
+        if (c.firstAttribute == NSLayoutAttributeHeight) c.constant = size.height;
+        if (c.firstAttribute == NSLayoutAttributeWidth) c.constant = size.width + 16;
     }
 }
 
@@ -369,10 +395,6 @@
     else [_keyboardView playClickSound];
 }
 
-- (void)inputModeDidChange {
-    NSLog(@"inputModeDidChange");
-}
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if (text.length > 1) return NO;
     if ([text isEqualToString:@"\n"] == NO) // if not '\n' - just type
@@ -481,7 +503,7 @@
     
     // Базовый стиль текста в textView
     [text addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:kBaseFontName size:kBaseFontSize]//@"HelveticaNeue" size:kBaseFontSize]
+                 value:[UIFont fontWithName:kBaseFontName size:kBaseFontSize]
                  range:NSMakeRange(0, text.length)];
     [text addAttribute:NSForegroundColorAttributeName
                  value:[UIColor colorWithHexString:@"999999"] // gray
@@ -629,6 +651,7 @@
 - (void)dealloc {
     if (_session_timer) [_session_timer invalidate];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (NSCharacterSet *)cyrillicLowercase {

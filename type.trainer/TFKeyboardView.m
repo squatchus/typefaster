@@ -175,8 +175,6 @@
 }
 
 - (void)playClickSound {
-    NSLog(@"playClickSound");
-//    [[UIDevice currentDevice] playInputClick];
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate playKeyboardClickSound];
 }

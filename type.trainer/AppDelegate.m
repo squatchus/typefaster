@@ -13,14 +13,18 @@
 @import AudioToolbox;
 #import <AVFoundation/AVFoundation.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () <FlurryDelegate>
 
 @property (nonatomic, strong) AVAudioPlayer *errorPlayer;
 @property (nonatomic, strong) AVAudioPlayer *clickPlayer;
-@property SystemSoundID errorSound;
-@property SystemSoundID buttonClickSound;
-@property SystemSoundID newResultSound;
-@property SystemSoundID newRankSound;
+@property (nonatomic, strong) AVAudioPlayer *rankPlayer;
+@property (nonatomic, strong) AVAudioPlayer *resultPlayer;
+@property (nonatomic, strong) AVAudioPlayer *buttonPlayer;
+
+//@property SystemSoundID errorSound;
+//@property SystemSoundID buttonClickSound;
+//@property SystemSoundID newResultSound;
+//@property SystemSoundID newRankSound;
 
 @end
 
@@ -34,17 +38,33 @@
     {
         //Start working
     }
-    
-    [Flurry startSession:@"DXG36J5Z73XT554MZMFD"];
+
+//    [Flurry setLogLevel:FlurryLogLevelAll];
+//    [Flurry setDebugLogEnabled:YES];
+//    [Flurry setEventLoggingEnabled:YES];
+//    [Flurry setSessionReportsOnCloseEnabled:YES];
+//    [Flurry setSessionReportsOnPauseEnabled:YES];
+    [Flurry setDelegate:self];
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:@"DXG36J5Z73XT554MZMFD" withOptions:launchOptions];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
         NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         [[NSUserDefaults standardUserDefaults] setValue:idfv forKey:@"userID"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [Flurry setUserID:idfv];
     }
+    else {
+        NSString *idfv = [[NSUserDefaults standardUserDefaults] valueForKey:@"userID"];
+        [Flurry setUserID:idfv];
+    }
+    
     [self initSettings];
     [self authenticateLocalPlayer];
     return YES;
+}
+
+- (void)flurrySessionDidCreateWithInfo:(NSDictionary*)info {
+    NSLog(@"flurrySessionDidCreateWithInfo: %@", info);
 }
 
 -(void)authenticateLocalPlayer {
@@ -165,19 +185,15 @@
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    CFBundleRef mainBundle = CFBundleGetMainBundle ();
-    
-    CFURLRef soundFileURLRef  = CFBundleCopyResourceURL (mainBundle, CFSTR ("error"), CFSTR ("wav"), NULL);
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &_errorSound);
-    
-    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("click"), CFSTR ("wav"), NULL);
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &_buttonClickSound);
-    
-    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_rank"), CFSTR ("wav"), NULL);
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newRankSound);
-
-    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_result"), CFSTR ("wav"), NULL);
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newResultSound);
+//    CFBundleRef mainBundle = CFBundleGetMainBundle ();
+//    CFURLRef soundFileURLRef  = CFBundleCopyResourceURL (mainBundle, CFSTR ("error"), CFSTR ("wav"), NULL);
+//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_errorSound);
+//    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("click"), CFSTR ("wav"), NULL);
+//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_buttonClickSound);
+//    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_rank"), CFSTR ("wav"), NULL);
+//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newRankSound);
+//    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_result"), CFSTR ("wav"), NULL);
+//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newResultSound);
     
     NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"Tock" ofType:@"caf"];
     NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
@@ -189,6 +205,21 @@
     toneURLRef = [NSURL fileURLWithPath:toneFilename];
     _errorPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
     [_errorPlayer prepareToPlay];
+    
+    toneFilename = [[NSBundle mainBundle] pathForResource:@"click" ofType:@"wav"];
+    toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _buttonPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    [_buttonPlayer prepareToPlay];
+
+    toneFilename = [[NSBundle mainBundle] pathForResource:@"new_result" ofType:@"wav"];
+    toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _resultPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    [_resultPlayer prepareToPlay];
+
+    toneFilename = [[NSBundle mainBundle] pathForResource:@"new_rank" ofType:@"wav"];
+    toneURLRef = [NSURL fileURLWithPath:toneFilename];
+    _rankPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: toneURLRef error: nil];
+    [_rankPlayer prepareToPlay];
 }
 
 + (NSString *)rankTitleBySpeed:(int)speed {
@@ -332,27 +363,38 @@
 }
 
 - (void)playButtonClickSound {
-    AudioServicesPlaySystemSound(_buttonClickSound);
+//    AudioServicesPlaySystemSound(_buttonClickSound);
+    if (_buttonPlayer.isPlaying)
+        _buttonPlayer.currentTime = 0;
+    else
+        [_buttonPlayer play];
 }
 - (void)playErrorSound {
-    NSLog(@"playErrorSound");
     if (_errorPlayer.isPlaying)
         _errorPlayer.currentTime = 0;
     else
         [_errorPlayer play];
 }
 - (void)playNewResultSound {
-    AudioServicesPlaySystemSound(_newResultSound);
+//    AudioServicesPlaySystemSound(_newResultSound);
+    if (_resultPlayer.isPlaying)
+        _resultPlayer.currentTime = 0;
+    else
+        [_resultPlayer play];
 }
 - (void)playNewRankSound {
-    AudioServicesPlaySystemSound(_newRankSound);
+//    AudioServicesPlaySystemSound(_newRankSound);
+    if (_rankPlayer.isPlaying)
+        _rankPlayer.currentTime = 0;
+    else
+        [_rankPlayer play];
 }
 
 - (void)dealloc {
-    AudioServicesDisposeSystemSoundID(_buttonClickSound);
-    AudioServicesDisposeSystemSoundID(_newResultSound);
-    AudioServicesDisposeSystemSoundID(_newRankSound);
-    AudioServicesDisposeSystemSoundID(_errorSound);
+//    AudioServicesDisposeSystemSoundID(_buttonClickSound);
+//    AudioServicesDisposeSystemSoundID(_newResultSound);
+//    AudioServicesDisposeSystemSoundID(_newRankSound);
+//    AudioServicesDisposeSystemSoundID(_errorSound);
 }
 
 + (void)enableNotifications {

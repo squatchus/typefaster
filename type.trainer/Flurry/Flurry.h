@@ -260,14 +260,14 @@ typedef enum {
 
 
 /*!
- *  @brief Returns true if a session currently exists and is active.
+ *  @brief Start a Flurry session for the project denoted by @c apiKey.
  *  @since 6.0.0
  *
  * @code
  *  - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
  {
  // Optional Flurry startup methods
- [Flurry activeSessionExists];
+ [Flurry activeSessionExists:@"YOUR_API_KEY" withOptions:launchOptions];
  // ....
  }
  * @endcode
@@ -276,7 +276,7 @@ typedef enum {
 + (BOOL)activeSessionExists;
 
 /*!
- *  @brief Returns the session ID of the current active session.
+ *  @brief Start a Flurry session for the project denoted by @c apiKey.
  *  @since 6.3.0
  *
  * @code

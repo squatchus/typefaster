@@ -104,7 +104,7 @@
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"SettingsButton clicked"];
-
+    
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToSettings" sender:self];
 }
