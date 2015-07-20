@@ -28,6 +28,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     int bestResult = [AppDelegate bestResult];
     [self updateStarsBySpeed:bestResult];
     _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", bestResult];

@@ -80,6 +80,10 @@
 
 @property int textFontSize;
 
+@property int wordTaps;
+@property int backspaceTaps;
+@property int shiftTaps;
+
 @end
 
 
@@ -108,10 +112,34 @@
     [_keyboardView.spaceButton addTarget:self action:@selector(onSpacePressed:)
                         forControlEvents:UIControlEventTouchUpInside];
     [_keyboardView.enterButton addTarget:self action:@selector(onEnterPressed:)
-                        forControlEvents:UIControlEventTouchUpInside];    
+                        forControlEvents:UIControlEventTouchUpInside];
+    
+    UITapGestureRecognizer *tapRecShift = [[UITapGestureRecognizer alloc]
+                                           initWithTarget:self action:@selector(shiftViewTapped)];
+    UITapGestureRecognizer *tapRecBackspace = [[UITapGestureRecognizer alloc]
+                                               initWithTarget:self action:@selector(backspaceViewTapped)];
+    UITapGestureRecognizer *tapRecCurrentWord = [[UITapGestureRecognizer alloc]
+                                               initWithTarget:self action:@selector(currentWordLabelTapped)];
+    [_shiftView addGestureRecognizer:tapRecShift];
+    [_backspaceView addGestureRecognizer:tapRecBackspace];
+    [_currentWordLabel addGestureRecognizer:tapRecCurrentWord];
+}
+
+- (void)shiftViewTapped {
+    _shiftTaps++;
+}
+
+- (void)backspaceViewTapped {
+    _backspaceTaps++;
+}
+
+- (void)currentWordLabelTapped {
+    _wordTaps++;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     _useClassic = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"] boolValue];
     _useCookies = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryCookies"] boolValue];
     _useHokku = [[[NSUserDefaults standardUserDefaults] valueForKey:@"categoryHokku"] boolValue];
@@ -128,6 +156,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [_textView becomeFirstResponder];
 }
 
@@ -158,6 +187,10 @@
 }
 
 - (void)initSession {
+    _wordTaps = 0;
+    _backspaceTaps = 0;
+    _shiftTaps = 0;
+    
     _stat_symbols = 0;
     _stat_mistakes = 0;
     _statsLabel.text = [NSString stringWithFormat:@"%d", _stat_symbols];
@@ -312,10 +345,9 @@
     NSDictionary *params = @{@"author": _current_level[@"author"],
                              @"text": _current_level[@"text"],
                              @"category": _current_level[@"category"],
-                             @"rankAtStart": [AppDelegate currentRank],
-                             @"status": @"complete" };
+                             @"rankAtStart": [AppDelegate currentRank]};
     
-    [Flurry logEvent:@"TrainingRound" withParameters:params timed:YES];
+    [Flurry logEvent:@"TrainingRound" withParameters:[params mutableCopy] timed:YES];
 }
 
 - (void)endSession {
@@ -343,8 +375,29 @@
     [[NSUserDefaults standardUserDefaults] setValue:results forKey:@"results"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes)};
+    int progressSpeed = -1;
+    if (results.count > 3) {
+        int sumOfSeconds = 0;
+        float firstAvg = 0, lastAvg = 0;
+        for (int i=0; i<results.count; i++) {
+            int symbols = [results[i][@"symbols"] intValue];
+            int seconds = [results[i][@"seconds"] intValue];
+            int speed = (int)((float)symbols / (float)seconds * 60.0);
+            sumOfSeconds += seconds;
+            if (i < 3) firstAvg += speed;
+            if (i >= results.count-3) lastAvg += speed;
+        }
+        progressSpeed = (lastAvg/3.0 - firstAvg/3.0) * 1000.0 / sumOfSeconds;
+    }
+    
+    NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols),
+                             @"mistakes":@(_stat_mistakes), @"progressSpeed": @(progressSpeed),
+                             @"status": @"complete"};
     [Flurry endTimedEvent:@"TrainingRound" withParameters:params];
+    
+    [Flurry logEvent:@"WrongTaps" withParameters:@{@"shiftTaps": @(_shiftTaps),
+                                                   @"backspaceTaps": @(_backspaceTaps),
+                                                   @"wordTaps": @(_wordTaps)}];
     
     [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
@@ -702,6 +755,10 @@
     NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols),
                              @"mistakes":@(_stat_mistakes), @"status":@"aborted"};
     [Flurry endTimedEvent:@"TrainingRound" withParameters:params];
+    
+    [Flurry logEvent:@"WrongTaps" withParameters:@{@"shiftTaps": @(_shiftTaps),
+                                                   @"backspaceTaps": @(_backspaceTaps),
+                                                   @"wordTaps": @(_wordTaps)}];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];

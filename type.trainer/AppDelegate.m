@@ -13,7 +13,7 @@
 @import AudioToolbox;
 #import <AVFoundation/AVFoundation.h>
 
-@interface AppDelegate () <FlurryDelegate>
+@interface AppDelegate ()
 
 @property (nonatomic, strong) AVAudioPlayer *errorPlayer;
 @property (nonatomic, strong) AVAudioPlayer *clickPlayer;
@@ -44,9 +44,9 @@
 //    [Flurry setEventLoggingEnabled:YES];
 //    [Flurry setSessionReportsOnCloseEnabled:YES];
 //    [Flurry setSessionReportsOnPauseEnabled:YES];
-    [Flurry setDelegate:self];
+//    [Flurry setDelegate:self];
     [Flurry setCrashReportingEnabled:YES];
-    [Flurry startSession:@"DXG36J5Z73XT554MZMFD" withOptions:launchOptions];
+    [Flurry startSession:@"GHWGV2G29YDC9YHTYGZS" withOptions:launchOptions];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
         NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         [[NSUserDefaults standardUserDefaults] setValue:idfv forKey:@"userID"];
@@ -61,10 +61,6 @@
     [self initSettings];
     [self authenticateLocalPlayer];
     return YES;
-}
-
-- (void)flurrySessionDidCreateWithInfo:(NSDictionary*)info {
-    NSLog(@"flurrySessionDidCreateWithInfo: %@", info);
 }
 
 -(void)authenticateLocalPlayer {
