@@ -139,8 +139,8 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gamecenter.png" translatesAutoresizingMaskIntoConstraints="NO" id="MrK-QV-Nfj">
                                         <rect key="frame" x="259" y="0.0" width="51" height="38"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="9iI-9e-SyF"/>
                                             <constraint firstAttribute="width" constant="51" id="XZA-WM-Z2g"/>
+                                            <constraint firstAttribute="width" secondItem="MrK-QV-Nfj" secondAttribute="height" multiplier="51:38" id="e6E-3o-wRL"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Есть к чему стремиться!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdN-Uh-09W">
@@ -351,16 +351,21 @@
                     <connections>
                         <outlet property="firstResultLabel" destination="Vv3-Lc-1eH" id="lVA-8y-7jE"/>
                         <outlet property="gameCenterButton" destination="hIn-yv-rYr" id="JuP-Xa-Q3X"/>
+                        <outlet property="leaderboardWidthConstraint" destination="XZA-WM-Z2g" id="XQH-P1-mia"/>
+                        <outlet property="rankBottomSpaceConstraint" destination="69u-Cg-PdP" id="q13-rJ-lZR"/>
                         <outlet property="rankHintLabel" destination="cdN-Uh-09W" id="jmX-js-wFa"/>
+                        <outlet property="rankTopSpaceConstraint" destination="SI5-1I-ks5" id="oTe-Cj-Xmv"/>
                         <outlet property="rateButton" destination="xzD-Um-euf" id="BEg-XW-VH5"/>
                         <outlet property="settingsButton" destination="3Z1-Sq-wmu" id="Fel-DI-2xZ"/>
                         <outlet property="signsPerMinLabel" destination="WhD-rA-bou" id="DdE-cF-Wq1"/>
                         <outlet property="signsPerMinTitleLabel" destination="TXI-yU-MeN" id="4hN-s8-yzZ"/>
+                        <outlet property="starHeightConstraint" destination="3DS-hC-Pps" id="Soz-i7-Vvo"/>
                         <outlet property="starView1" destination="yUR-eZ-Ppb" id="jRt-qf-zRB"/>
                         <outlet property="starView2" destination="83s-aO-LRd" id="9BU-TO-J0X"/>
                         <outlet property="starView3" destination="gcZ-O8-uv2" id="nGa-co-jVO"/>
                         <outlet property="starView4" destination="tiu-5j-UWX" id="Hhr-rF-ut0"/>
                         <outlet property="starView5" destination="SPS-hb-ffa" id="Bee-yL-lDh"/>
+                        <outlet property="starWidthConstraint" destination="Qfh-1l-2za" id="Gc6-Fl-WSP"/>
                         <outlet property="startTypingButton" destination="3t7-TJ-0iS" id="0uB-4i-tob"/>
                         <outlet property="yourSpeedLabel" destination="n5V-XX-98H" id="G84-Tv-W3u"/>
                         <segue destination="IkZ-qz-xar" kind="show" identifier="menuToSettings" id="mpL-qs-cmp"/>
@@ -520,7 +525,7 @@
                                     <action selector="onSwitchValueChanged:" destination="IkZ-qz-xar" eventType="valueChanged" id="zvV-1A-Rx0"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Строгий режим проверки" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="SgE-aY-p9g">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Строгий режим набора" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="SgE-aY-p9g">
                                 <rect key="frame" x="179" y="244" width="186" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -630,9 +635,13 @@
                         <outlet property="categoryCookiesButton" destination="zgf-az-RdV" id="e3F-c3-kXB"/>
                         <outlet property="categoryHokkuButton" destination="jje-FJ-8Dk" id="y0F-FJ-nRz"/>
                         <outlet property="categoryQuotesButton" destination="C19-7D-oCf" id="MSr-dx-WhM"/>
+                        <outlet property="doneWidthConstraint" destination="uII-LG-FNM" id="A54-lu-rSn"/>
                         <outlet property="notificationDescriptionLabel" destination="Abm-TT-K3C" id="2ZO-Vo-hA4"/>
                         <outlet property="notificationSwitch" destination="AfN-C2-Udy" id="4cm-mu-fUI"/>
+                        <outlet property="notificationTitleLabel" destination="Igv-iW-9dc" id="S1d-aw-SRP"/>
+                        <outlet property="settingsTitleLabel" destination="yOa-w2-2Ho" id="JGW-94-psc"/>
                         <outlet property="strictTypingDescriptionLabel" destination="FgF-Yt-z8h" id="pP9-j5-kFd"/>
+                        <outlet property="strictTypingTitleLabel" destination="SgE-aY-p9g" id="nYZ-km-9nF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8JF-Nn-qCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -652,21 +661,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRx-4L-Usf" userLabel="SepView1">
-                                <rect key="frame" x="16" y="20" width="568" height="27"/>
+                                <rect key="frame" x="16" y="20" width="568" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="Ваш новый результат" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIm-RQ-pvZ">
-                                <rect key="frame" x="16" y="47" width="568" height="17"/>
+                                <rect key="frame" x="16" y="48" width="568" height="17"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tpm-Mh-Sb7" userLabel="SepView2">
-                                <rect key="frame" x="16" y="64" width="568" height="27"/>
+                                <rect key="frame" x="16" y="65" width="568" height="29"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqy-XK-RTM" userLabel="Stats">
-                                <rect key="frame" x="16" y="91" width="568" height="92"/>
+                                <rect key="frame" x="16" y="94" width="568" height="92"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="235" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNZ-eG-XP7">
                                         <rect key="frame" x="244" y="0.0" width="81" height="58"/>
@@ -743,11 +752,11 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VGJ-N7-zuU" userLabel="SepView3">
-                                <rect key="frame" x="16" y="183" width="568" height="26"/>
+                                <rect key="frame" x="16" y="186" width="568" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hm-jU-ZCC" userLabel="Rating">
-                                <rect key="frame" x="16" y="209" width="568" height="24"/>
+                                <rect key="frame" x="16" y="214" width="568" height="24"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_gold.png" translatesAutoresizingMaskIntoConstraints="NO" id="X5d-bU-ky0" userLabel="star1_gold.png">
                                         <rect key="frame" x="206" y="0.0" width="25" height="24"/>
@@ -793,22 +802,22 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBS-iA-DpH" userLabel="SepView4">
-                                <rect key="frame" x="16" y="233" width="568" height="27"/>
+                                <rect key="frame" x="16" y="238" width="568" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JJt-PE-sKA" userLabel="Separator">
-                                <rect key="frame" x="36" y="260" width="528" height="2"/>
+                                <rect key="frame" x="36" y="266" width="528" height="2"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="FRa-iy-dxc"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gSl-Qd-UcJ" userLabel="SepView5">
-                                <rect key="frame" x="16" y="262" width="568" height="27"/>
+                                <rect key="frame" x="16" y="268" width="568" height="29"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="Pww-30-1Lv">
-                                <rect key="frame" x="32" y="289" width="536" height="75"/>
+                                <rect key="frame" x="32" y="297" width="536" height="75"/>
                                 <string key="text">Буря мглою небо кроет, 
 Вихри снежные крутя; 
 То, как зверь, она завоет,
@@ -818,11 +827,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9D-TH-ChB" userLabel="SepView6">
-                                <rect key="frame" x="16" y="364" width="568" height="27"/>
+                                <rect key="frame" x="16" y="372" width="568" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="zZc-pq-tPo">
-                                <rect key="frame" x="32" y="391" width="536" height="26"/>
+                                <rect key="frame" x="32" y="400" width="536" height="26"/>
                                 <string key="text">"Долгий зимний вечер"
 А.С. Пушкин</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
@@ -830,11 +839,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQK-e0-zh0" userLabel="SepView7">
-                                <rect key="frame" x="16" y="417" width="568" height="26"/>
+                                <rect key="frame" x="16" y="426" width="568" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNh-ee-z2z" userLabel="ViewBelowButtons">
-                                <rect key="frame" x="209" y="443" width="80" height="65"/>
+                                <rect key="frame" x="209" y="454" width="80" height="65"/>
                                 <color key="backgroundColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="5XU-c4-Lyi"/>
@@ -842,7 +851,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwV-tu-OFH" userLabel="Share">
-                                <rect key="frame" x="176" y="443" width="65" height="65"/>
+                                <rect key="frame" x="176" y="454" width="65" height="65"/>
                                 <color key="backgroundColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="0PQ-V1-Kcd"/>
@@ -857,7 +866,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IiP-l5-Imk">
-                                <rect key="frame" x="244" y="443" width="178" height="65"/>
+                                <rect key="frame" x="244" y="454" width="178" height="65"/>
                                 <color key="backgroundColor" red="0.64705882349999999" green="0.2666666667" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="TjD-sb-8ji"/>
@@ -873,20 +882,20 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8MO-BV-wvv" userLabel="ViewAboveButtons">
-                                <rect key="frame" x="238" y="443" width="2" height="65"/>
+                                <rect key="frame" x="238" y="454" width="2" height="65"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="2" id="6aN-4o-fLV"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCV-xe-g2e" userLabel="SepView8">
-                                <rect key="frame" x="16" y="508" width="568" height="27"/>
+                                <rect key="frame" x="16" y="519" width="568" height="15"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pm-VC-1H9" userLabel="SepView9">
-                                <rect key="frame" x="16" y="573" width="568" height="27"/>
+                                <rect key="frame" x="16" y="572" width="568" height="28"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STV-Nk-xHo" userLabel="ViewBelowButtons">
-                                <rect key="frame" x="260" y="535" width="80" height="38"/>
+                                <rect key="frame" x="260" y="534" width="80" height="38"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="Uy3-CG-fA8"/>
@@ -899,7 +908,7 @@
                                 </variation>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S91-fz-lJD">
-                                <rect key="frame" x="176" y="535" width="122" height="38"/>
+                                <rect key="frame" x="176" y="534" width="122" height="38"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="o1r-By-TgO"/>
@@ -919,7 +928,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsf-46-ev0" userLabel="Оценить">
-                                <rect key="frame" x="298" y="535" width="121" height="38"/>
+                                <rect key="frame" x="298" y="534" width="121" height="38"/>
                                 <color key="backgroundColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                 <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -936,7 +945,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJq-j3-Okx" userLabel="ViewAboveButtons">
-                                <rect key="frame" x="299" y="535" width="2" height="38"/>
+                                <rect key="frame" x="299" y="534" width="2" height="38"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="2" id="fOs-5b-Nse"/>
@@ -992,6 +1001,7 @@
                             <constraint firstItem="Qqy-XK-RTM" firstAttribute="leading" secondItem="T1r-Sw-fNj" secondAttribute="leadingMargin" id="Wu8-yp-gXP"/>
                             <constraint firstItem="zZc-pq-tPo" firstAttribute="top" secondItem="i9D-TH-ChB" secondAttribute="bottom" id="X3f-ey-w8l"/>
                             <constraint firstItem="BCV-xe-g2e" firstAttribute="top" secondItem="IiP-l5-Imk" secondAttribute="bottom" id="XMz-Pl-T9y"/>
+                            <constraint firstItem="BCV-xe-g2e" firstAttribute="height" secondItem="qQK-e0-zh0" secondAttribute="height" multiplier="0.5" id="YOv-Wi-5Tv"/>
                             <constraint firstItem="Yhx-NT-ZXz" firstAttribute="top" secondItem="1pm-VC-1H9" secondAttribute="bottom" id="ZO4-sh-CrG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CIm-RQ-pvZ" secondAttribute="trailing" id="ZXk-Sr-g4n"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gSl-Qd-UcJ" secondAttribute="trailing" id="b2q-eT-DsS"/>
@@ -1021,6 +1031,7 @@
                             <constraint firstItem="9hm-jU-ZCC" firstAttribute="leading" secondItem="T1r-Sw-fNj" secondAttribute="leadingMargin" id="kke-PQ-Now"/>
                             <constraint firstItem="mBS-iA-DpH" firstAttribute="height" secondItem="VGJ-N7-zuU" secondAttribute="height" id="kuZ-96-mJF"/>
                             <constraint firstItem="xsf-46-ev0" firstAttribute="centerY" secondItem="S91-fz-lJD" secondAttribute="centerY" id="lce-aA-U9U"/>
+                            <constraint firstItem="qQK-e0-zh0" firstAttribute="height" secondItem="1pm-VC-1H9" secondAttribute="height" id="miw-uW-tAs"/>
                             <constraint firstItem="IiP-l5-Imk" firstAttribute="leading" secondItem="HNh-ee-z2z" secondAttribute="trailing" constant="-45" id="nJP-H6-46G"/>
                             <constraint firstItem="hwV-tu-OFH" firstAttribute="centerY" secondItem="IiP-l5-Imk" secondAttribute="centerY" id="ov1-fi-jRB"/>
                             <constraint firstItem="Pww-30-1Lv" firstAttribute="top" secondItem="gSl-Qd-UcJ" secondAttribute="bottom" id="qsL-To-94m"/>
@@ -1040,25 +1051,31 @@
                                 <exclude reference="RVO-YT-CCF"/>
                                 <exclude reference="z2R-gL-1vw"/>
                                 <exclude reference="TQC-98-j8T"/>
+                                <exclude reference="4Q0-ab-J99"/>
+                                <exclude reference="eHz-Hm-APS"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="authorLabel" destination="zZc-pq-tPo" id="Csm-Y4-svx"/>
                         <outlet property="bestResultLabel" destination="L91-wr-Mx0" id="wc6-zN-XCU"/>
+                        <outlet property="bestResultTitleLabel" destination="a5v-Aa-bG4" id="62k-1s-lxl"/>
                         <outlet property="continueButton" destination="IiP-l5-Imk" id="FcE-RJ-0nv"/>
                         <outlet property="mistakesPercentLabel" destination="pay-2J-b5j" id="ZHZ-d8-BHC"/>
+                        <outlet property="mistakesPercentTitleLabel" destination="Ybw-fY-D9c" id="DKB-WM-eUY"/>
                         <outlet property="rateButton" destination="xsf-46-ev0" id="zXt-HN-pam"/>
                         <outlet property="resultTitleLabel" destination="CIm-RQ-pvZ" id="gJh-Iz-lSH"/>
                         <outlet property="settingsButton" destination="S91-fz-lJD" id="JBL-jC-eS5"/>
                         <outlet property="shareButton" destination="hwV-tu-OFH" id="qAy-FX-UCp"/>
                         <outlet property="signsPerMinLabel" destination="uNZ-eG-XP7" id="qYG-Ry-pgR"/>
                         <outlet property="signsPerMinTitleLabel" destination="p8c-5Z-UuL" id="okW-hq-c1J"/>
+                        <outlet property="starHeightConstraint" destination="9XJ-rC-raz" id="CDc-W9-wew"/>
                         <outlet property="starView1" destination="X5d-bU-ky0" id="YXZ-aC-N6N"/>
                         <outlet property="starView2" destination="PW5-tA-E9g" id="fQv-BB-qhy"/>
                         <outlet property="starView3" destination="Sjf-uI-BSA" id="pOT-Dr-kUJ"/>
                         <outlet property="starView4" destination="bTw-t0-f8A" id="8Gd-OG-8dA"/>
                         <outlet property="starView5" destination="YFG-fk-KJA" id="d1N-eL-zkc"/>
+                        <outlet property="starWidthConstraint" destination="Et6-8R-9mg" id="Aq2-4h-tAa"/>
                         <outlet property="textLabel" destination="Pww-30-1Lv" id="Qcl-Qy-SYh"/>
                         <segue destination="IkZ-qz-xar" kind="show" identifier="resultsToSettings" id="iw2-Gg-fJd"/>
                     </connections>
@@ -1168,6 +1185,7 @@
                                     <constraint firstItem="Jbg-DD-uAf" firstAttribute="top" secondItem="xd9-yC-ev7" secondAttribute="top" id="9FL-8h-A79"/>
                                     <constraint firstAttribute="trailing" secondItem="Jbg-DD-uAf" secondAttribute="trailing" id="BX4-Oi-v0m"/>
                                     <constraint firstAttribute="bottom" secondItem="Jbg-DD-uAf" secondAttribute="bottom" id="eMQ-kp-mQ8"/>
+                                    <constraint firstAttribute="height" constant="39" id="eWj-j6-v93"/>
                                     <constraint firstItem="Jbg-DD-uAf" firstAttribute="leading" secondItem="xd9-yC-ev7" secondAttribute="leading" id="eWy-0J-T2X"/>
                                     <constraint firstAttribute="width" secondItem="xd9-yC-ev7" secondAttribute="height" multiplier="1:1" id="yKz-59-UKr"/>
                                 </constraints>
@@ -1183,6 +1201,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="cg0-gt-pF1" secondAttribute="bottom" id="4Ir-Xv-Fp9"/>
                                     <constraint firstAttribute="trailing" secondItem="cg0-gt-pF1" secondAttribute="trailing" id="A2A-df-gl9"/>
+                                    <constraint firstAttribute="height" constant="39" id="BFL-Sv-zcD"/>
                                     <constraint firstItem="cg0-gt-pF1" firstAttribute="leading" secondItem="987-TH-FIa" secondAttribute="leading" id="K4f-DE-pbm"/>
                                     <constraint firstItem="cg0-gt-pF1" firstAttribute="top" secondItem="987-TH-FIa" secondAttribute="top" id="luo-Xt-sv9"/>
                                     <constraint firstAttribute="width" secondItem="987-TH-FIa" secondAttribute="height" multiplier="1:1" id="xfC-y0-rdY"/>
@@ -1221,8 +1240,10 @@
                             <constraint firstItem="xd9-yC-ev7" firstAttribute="top" secondItem="u3z-5g-PjM" secondAttribute="bottom" constant="-46" id="Svl-M0-K5i"/>
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="XWj-DH-tjz"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="987-TH-FIa" secondAttribute="bottom" constant="7" id="Z0K-PW-qgf"/>
+                            <constraint firstItem="u3z-5g-PjM" firstAttribute="centerY" secondItem="987-TH-FIa" secondAttribute="centerY" id="asY-Xe-ePL"/>
                             <constraint firstItem="zJ5-e5-qiK" firstAttribute="top" secondItem="2c5-gV-D3P" secondAttribute="bottom" id="bD6-Ac-ckp"/>
                             <constraint firstItem="AGs-22-Uqw" firstAttribute="top" secondItem="UDk-eh-x44" secondAttribute="bottom" id="dSk-E6-lHX"/>
+                            <constraint firstItem="u3z-5g-PjM" firstAttribute="centerY" secondItem="xd9-yC-ev7" secondAttribute="centerY" id="eCb-z4-qks"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UDk-eh-x44" secondAttribute="trailing" id="eae-eT-e3Z"/>
                             <constraint firstItem="2c5-gV-D3P" firstAttribute="top" secondItem="AGs-22-Uqw" secondAttribute="bottom" id="gOP-ts-OTw"/>
                             <constraint firstItem="xd9-yC-ev7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gpv-sW-IUc"/>
@@ -1250,16 +1271,21 @@
                                 <exclude reference="h9R-3c-EL5"/>
                                 <exclude reference="lZN-LG-bBj"/>
                                 <exclude reference="bD6-Ac-ckp"/>
+                                <exclude reference="RoZ-34-IxZ"/>
                                 <exclude reference="Svl-M0-K5i"/>
+                                <exclude reference="zDm-TL-MaS"/>
                                 <exclude reference="6hI-Yx-KXA"/>
                                 <exclude reference="8o5-iO-yeD"/>
                                 <exclude reference="Z0K-PW-qgf"/>
                                 <exclude reference="EwU-rd-EJ5"/>
+                                <exclude reference="rSl-29-8mv"/>
+                                <exclude reference="uHh-4h-bsC"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="backspaceView" destination="987-TH-FIa" id="mQD-ag-dw8"/>
+                        <outlet property="currentWordHeightConstraint" destination="4rL-7u-CwQ" id="0DC-So-d9b"/>
                         <outlet property="currentWordLabel" destination="u3z-5g-PjM" id="GDt-mK-7aa"/>
                         <outlet property="secondsLabel" destination="URI-1f-KPK" id="Mn3-Mv-szR"/>
                         <outlet property="shiftView" destination="xd9-yC-ev7" id="qns-Yl-2ij"/>
@@ -1284,6 +1310,6 @@
         <image name="star_gray.png" width="25" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mpL-qs-cmp"/>
+        <segue reference="iw2-Gg-fJd"/>
     </inferredMetricsTieBreakers>
 </document>

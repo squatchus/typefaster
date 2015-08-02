@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *firstResultLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *rankButton;
 @property (weak, nonatomic) IBOutlet UILabel *rankHintLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *starView1;
@@ -24,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *starView3;
 @property (weak, nonatomic) IBOutlet UIImageView *starView4;
 @property (weak, nonatomic) IBOutlet UIImageView *starView5;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leaderboardWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankTopSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankBottomSpaceConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *startTypingButton;
 @property (weak, nonatomic) IBOutlet UIButton *gameCenterButton;

@@ -10,6 +10,7 @@
 #import "UIColor+HexColor.h"
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface MenuViewController ()
 
@@ -43,6 +44,22 @@
             _firstResultLabel.text = @"продолжайте тренироваться";
         else
             _firstResultLabel.text = [NSString stringWithFormat:@"а начинали со скорости %d", firstResult];
+    }
+    
+    if (IS_IPHONE_6 || IS_IPHONE_6P) {
+        _yourSpeedLabel.font = [_yourSpeedLabel.font fontWithSize:16];
+        _signsPerMinTitleLabel.font = [_signsPerMinTitleLabel.font fontWithSize:16];
+        _firstResultLabel.font = [_firstResultLabel.font fontWithSize:16];
+        _rankHintLabel.font = [_rankHintLabel.font fontWithSize:16];
+        _gameCenterButton.titleLabel.font = [_gameCenterButton.titleLabel.font fontWithSize:16];
+        _rateButton.titleLabel.font = [_rateButton.titleLabel.font fontWithSize:14];
+        _settingsButton.titleLabel.font = [_settingsButton.titleLabel.font fontWithSize:14];
+        _starWidthConstraint.constant = 35;
+        _starHeightConstraint.constant = 32;
+        _rankTopSpaceConstraint.constant = 16;
+        _rankBottomSpaceConstraint.constant = 16;
+        _leaderboardWidthConstraint.constant = 64;
+        [_settingsButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     }
 }
 
@@ -82,6 +99,7 @@
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"RateButton clicked"];
+    [Answers logCustomEventWithName:@"RateButton clicked" customAttributes:nil];
 
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
@@ -106,6 +124,7 @@
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"SettingsButton clicked"];
+    [Answers logCustomEventWithName:@"SettingsButton clicked" customAttributes:nil];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToSettings" sender:self];
@@ -113,6 +132,7 @@
 
 - (IBAction)onPlayButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"PlayButton clicked"];
+    [Answers logCustomEventWithName:@"PlayButton clicked" customAttributes:nil];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToGame" sender:self];

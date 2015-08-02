@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-Crashlytics.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Fabric.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-VK-ios-sdk.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8F77FD211CE99F68679E64DB</key>
+		<key>19B337C72394F7BECD24D3E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E75DF9FC7A3743AE07CEA1A7</key>
+		<key>94CD4250DE41B8C954AB7008</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA0649784387BC6D08EE82E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE38CFF4CFB13D581E5A76D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

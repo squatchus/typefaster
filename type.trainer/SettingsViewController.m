@@ -10,12 +10,18 @@
 #import "UIColor+HexColor.h"
 #import "AppDelegate.h"
 #import "Flurry.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface SettingsViewController ()
 
 - (IBAction)onSwitchValueChanged:(UISwitch *)sender;
 - (IBAction)onCategoryButtonPressed:(UIButton *)sender;
 - (IBAction)onDoneButtonPressed:(UIButton *)sender;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *doneWidthConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *settingsTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *notificationTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *strictTypingTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *notificationSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *notificationDescriptionLabel;
@@ -39,14 +45,16 @@
     _notificationSwitch.on  = [[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue];
     _canMistakeSwitch.on = [[[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"] boolValue];
     
-    NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyles.alignment = NSTextAlignmentJustified;
-    paragraphStyles.firstLineHeadIndent = 1.0;
-    NSDictionary *attributes = @{NSParagraphStyleAttributeName: paragraphStyles};
-    NSAttributedString *notificationText = [[NSAttributedString alloc] initWithString: _notificationDescriptionLabel.text attributes:attributes];
-    _notificationDescriptionLabel.attributedText = notificationText;
-    NSAttributedString *strictTypingText = [[NSAttributedString alloc] initWithString: _strictTypingDescriptionLabel.text attributes:attributes];
-    _strictTypingDescriptionLabel.attributedText = strictTypingText;
+//    if (IS_IPHONE_5 || IS_IPHONE_4_OR_LESS) {
+        NSMutableParagraphStyle *paragraphStyles = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyles.alignment = NSTextAlignmentJustified;
+        paragraphStyles.firstLineHeadIndent = 1.0;
+        NSDictionary *attributes = @{NSParagraphStyleAttributeName: paragraphStyles};
+        NSAttributedString *notificationText = [[NSAttributedString alloc] initWithString: _notificationDescriptionLabel.text attributes:attributes];
+        _notificationDescriptionLabel.attributedText = notificationText;
+        NSAttributedString *strictTypingText = [[NSAttributedString alloc] initWithString: _strictTypingDescriptionLabel.text attributes:attributes];
+        _strictTypingDescriptionLabel.attributedText = strictTypingText;
+//    }
     
     // Update category buttons & button's settings in UserDefaults
     //
@@ -68,6 +76,23 @@
             switcher.onTintColor = [UIColor colorWithHexString:@"c55c77"];
         }
     }
+    
+    if (IS_IPHONE_6 || IS_IPHONE_6P) {
+        _settingsTitleLabel.font = [_settingsTitleLabel.font fontWithSize:16];
+        _notificationTitleLabel.font = [_notificationTitleLabel.font fontWithSize:16];
+        _notificationDescriptionLabel.font = [_notificationDescriptionLabel.font fontWithSize:16];
+        _strictTypingTitleLabel.font = [_strictTypingTitleLabel.font fontWithSize:16];
+        _strictTypingDescriptionLabel.font = [_strictTypingDescriptionLabel.font fontWithSize:16];
+        _categoryClassicButton.titleLabel.font = [_categoryClassicButton.titleLabel.font fontWithSize:16];
+        _categoryQuotesButton.titleLabel.font = [_categoryQuotesButton.titleLabel.font fontWithSize:16];
+        _categoryHokkuButton.titleLabel.font = [_categoryHokkuButton.titleLabel.font fontWithSize:16];
+        _categoryCookiesButton.titleLabel.font = [_categoryCookiesButton.titleLabel.font fontWithSize:16];
+        _doneWidthConstraint.constant = 280;
+//        NSAttributedString *notificationText = [[NSAttributedString alloc] initWithString:@"Если хотите заниматься регулярно, мы можем напоминать вам раз в день о предстоящей тренировке" attributes:attributes];
+//        _notificationDescriptionLabel.attributedText = notificationText;
+//        NSAttributedString *strictTypingText = [[NSAttributedString alloc] initWithString:@"Не позволяет Вам набирать текст, пока не исправлена ошибка. По началу  раздражает, но очень дисциплинирует" attributes:attributes];
+//        _strictTypingDescriptionLabel.attributedText = strictTypingText;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,13 +103,21 @@
 - (IBAction)onSwitchValueChanged:(UISwitch *)sender {
     if (sender == _notificationSwitch) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_notificationSwitch.on) forKey:@"notifications"];
-        if (_notificationSwitch.on) [AppDelegate enableNotifications];
-        else [AppDelegate disableNotifications];
-        [Flurry logEvent:@"Notifications switched" withParameters:@{@"state": @(_notificationSwitch.on)}];
+        if (_notificationSwitch.on)
+            [AppDelegate enableNotifications];
+        else
+            [AppDelegate disableNotifications];
+        
+        NSNumber *state = @(_notificationSwitch.on);
+        [Flurry logEvent:@"Notifications switched" withParameters:@{@"state": state}];
+        [Answers logCustomEventWithName:@"Notifications switched" customAttributes:@{@"state": state}];
     }
     else if (sender == _canMistakeSwitch) {
         [[NSUserDefaults standardUserDefaults] setValue:@(_canMistakeSwitch.on) forKey:@"strictTyping"];
-        [Flurry logEvent:@"StrictTyping switched" withParameters:@{@"state": @(_canMistakeSwitch.on)}];
+        
+        NSNumber *state = @(_canMistakeSwitch.on);
+        [Flurry logEvent:@"StrictTyping switched" withParameters:@{@"state": state}];
+        [Answers logCustomEventWithName:@"StrictTyping switched" customAttributes:@{@"state": state}];
     }
     
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -110,10 +143,15 @@
         [[NSUserDefaults standardUserDefaults] setValue:@(_categoryCookiesButton.selected) forKey:@"categoryCookies"];
         params = @{@"name":@"categoryCookies"};
     }
-    if (sender.selected)
+    
+    if (sender.selected) {
         [Flurry logEvent:@"ContentCategory enabled" withParameters:params];
-    else
+        [Answers logCustomEventWithName:@"ContentCategory enabled" customAttributes:params];
+    }
+    else {
         [Flurry logEvent:@"ContentCategory disabled" withParameters:params];
+        [Answers logCustomEventWithName:@"ContentCategory disabled" customAttributes:params];
+    }
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self updateCategoryButton:sender];

@@ -11,20 +11,27 @@
 #import "TFShareView.h"
 #import "Flurry.h"
 #import "VKSdk.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface ResultsViewController () <UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *signsPerMinTitleLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *resultTitleLabel;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
+@property (weak, nonatomic) IBOutlet UILabel *signsPerMinTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mistakesPercentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mistakesPercentTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bestResultLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bestResultTitleLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *starView1;
 @property (weak, nonatomic) IBOutlet UIImageView *starView2;
 @property (weak, nonatomic) IBOutlet UIImageView *starView3;
 @property (weak, nonatomic) IBOutlet UIImageView *starView4;
 @property (weak, nonatomic) IBOutlet UIImageView *starView5;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
@@ -94,6 +101,7 @@
                                  @"highestScores": @([AppDelegate numberOfHighestScores]),
                                  @"summaryTime": @([AppDelegate summaryTimeOfAllTrainings])};
         [Flurry logEvent:@"NewRank achieved" withParameters:params];
+        [Answers logCustomEventWithName:@"NewRank achieved" customAttributes:params];
         
         if (signsPerMin >= 100) { // switch to full keyboard
             if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue]) {
@@ -111,7 +119,7 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Результат" message:@"Ваш результат меньше 100 знаков в минуту. Попробуйте его улучшить в режиме обучения\n(нет знаков препинания, количество букв ограничено)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
             [alert show];
         }
-        else if ([AppDelegate numberOfHighestScores] == 3) {
+        else if (results.count == 3) {
             if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue]) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Напоминания" message:@"Регулярные тренировки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Напоминать", nil];
                 [alert show];
@@ -120,12 +128,31 @@
     }
     
     [self updateStarsBySpeed:signsPerMin];
+    
+    if (IS_IPHONE_6 || IS_IPHONE_6P) {
+        _resultTitleLabel.font = [_resultTitleLabel.font fontWithSize:16];
+        
+        _bestResultTitleLabel.font = [_bestResultTitleLabel.font fontWithSize:16];
+        _signsPerMinTitleLabel.font = [_signsPerMinTitleLabel.font fontWithSize:16];
+        _mistakesPercentTitleLabel.font = [_mistakesPercentTitleLabel.font fontWithSize:16];
+        _authorLabel.font = [_authorLabel.font fontWithSize:14];
+    
+        _rateButton.titleLabel.font = [_rateButton.titleLabel.font fontWithSize:14];
+        _settingsButton.titleLabel.font = [_settingsButton.titleLabel.font fontWithSize:14];
+        _starWidthConstraint.constant = 35;
+        _starHeightConstraint.constant = 32;
+        [_settingsButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"notifications"];
         [AppDelegate enableNotifications];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"notifications"];
+        [AppDelegate disableNotifications];
     }
 }
 
@@ -167,11 +194,6 @@
     NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
     
-    NSDictionary *params = @{@"author": level[@"author"], @"text": level[@"text"],
-                             @"category": level[@"category"]};
-    FlurryEventRecordStatus status = [Flurry logEvent:@"ShareButton clicked" withParameters:params];
-    NSLog(@"flurry (ShareButton clicked) status: %d", status);
-
     TFShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"TFShareView" owner:self options:nil][0];
     shareView.frame = self.view.frame;
     [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[AppDelegate bestResult]];
@@ -185,15 +207,26 @@
      initWithActivityItems:@[text, url, image]
      applicationActivities:@[[VKActivity new]]];
     
-    [controller setValue:@"VK SDK" forKey:@"subject"];
-    
     controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
+
+    NSNumber *contentId = @([AppDelegate levelIdentifierByText:level[@"text"]]);
+    NSInteger firstNewLine = [level[@"text"] rangeOfString:@"\n"].location;
+    NSString *contentName = [level[@"text"] substringToIndex:MIN(30, firstNewLine)];
+    
+    [Flurry logEvent:@"ShareButton Clicked" withParameters:@{@"author": level[@"author"], @"text": level[@"text"], @"category": level[@"category"]}];
+    [Answers logCustomEventWithName:@"ShareButton Clicked" customAttributes:@{@"name": contentName, @"type": level[@"category"], @"id": contentId}];
+    
+    [controller setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        [Flurry logEvent:@"ContentShared" withParameters:@{@"share-method": activityType, @"name": contentName, @"type": level[@"category"], @"id": contentId, @"completed": @(completed)}];
+        [Answers logShareWithMethod:activityType contentName:@"" contentType:level[@"category"] contentId:[contentId stringValue] customAttributes:@{@"completed": @(completed)}];
+    }];
     
     [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (IBAction)onRateButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"RateButton clicked"];
+    [Answers logCustomEventWithName:@"RateButton clicked" customAttributes:nil];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
@@ -202,6 +235,7 @@
 
 - (IBAction)onContinueButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"ContinueButton clicked"];
+    [Answers logCustomEventWithName:@"ContinueButton clicked" customAttributes:nil];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
@@ -209,6 +243,7 @@
 
 - (IBAction)onSettingsButtonPressed:(UIButton *)sender {
     [Flurry logEvent:@"SettingsButton clicked"];
+    [Answers logCustomEventWithName:@"SettingsButton clicked" customAttributes:nil];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self performSegueWithIdentifier:@"resultsToSettings" sender:self];

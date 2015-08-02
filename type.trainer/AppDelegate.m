@@ -12,6 +12,8 @@
 #import "VKSdk.h"
 @import AudioToolbox;
 #import <AVFoundation/AVFoundation.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -20,11 +22,6 @@
 @property (nonatomic, strong) AVAudioPlayer *rankPlayer;
 @property (nonatomic, strong) AVAudioPlayer *resultPlayer;
 @property (nonatomic, strong) AVAudioPlayer *buttonPlayer;
-
-//@property SystemSoundID errorSound;
-//@property SystemSoundID buttonClickSound;
-//@property SystemSoundID newResultSound;
-//@property SystemSoundID newRankSound;
 
 @end
 
@@ -38,6 +35,9 @@
     {
         //Start working
     }
+    
+    [Fabric with:@[CrashlyticsKit]];
+
 
 //    [Flurry setLogLevel:FlurryLogLevelAll];
 //    [Flurry setDebugLogEnabled:YES];
@@ -168,6 +168,10 @@
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"strictTyping"])
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"strictTyping"];
     
+    if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue]) {
+        [AppDelegate disableNotifications];
+    }
+    
     // Update button's settings in UserDefaults
     //
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"categoryClassic"])
@@ -180,16 +184,6 @@
         [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"categoryCookies"];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-//    CFBundleRef mainBundle = CFBundleGetMainBundle ();
-//    CFURLRef soundFileURLRef  = CFBundleCopyResourceURL (mainBundle, CFSTR ("error"), CFSTR ("wav"), NULL);
-//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_errorSound);
-//    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("click"), CFSTR ("wav"), NULL);
-//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_buttonClickSound);
-//    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_rank"), CFSTR ("wav"), NULL);
-//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newRankSound);
-//    soundFileURLRef = CFBundleCopyResourceURL (mainBundle, CFSTR ("new_result"), CFSTR ("wav"), NULL);
-//    AudioServicesCreateSystemSoundID(soundFileURLRef, &_newResultSound);
     
     NSString *toneFilename = [[NSBundle mainBundle] pathForResource:@"Tock" ofType:@"caf"];
     NSURL *toneURLRef = [NSURL fileURLWithPath:toneFilename];
@@ -359,7 +353,6 @@
 }
 
 - (void)playButtonClickSound {
-//    AudioServicesPlaySystemSound(_buttonClickSound);
     if (_buttonPlayer.isPlaying)
         _buttonPlayer.currentTime = 0;
     else
@@ -372,25 +365,16 @@
         [_errorPlayer play];
 }
 - (void)playNewResultSound {
-//    AudioServicesPlaySystemSound(_newResultSound);
     if (_resultPlayer.isPlaying)
         _resultPlayer.currentTime = 0;
     else
         [_resultPlayer play];
 }
 - (void)playNewRankSound {
-//    AudioServicesPlaySystemSound(_newRankSound);
     if (_rankPlayer.isPlaying)
         _rankPlayer.currentTime = 0;
     else
         [_rankPlayer play];
-}
-
-- (void)dealloc {
-//    AudioServicesDisposeSystemSoundID(_buttonClickSound);
-//    AudioServicesDisposeSystemSoundID(_newResultSound);
-//    AudioServicesDisposeSystemSoundID(_newRankSound);
-//    AudioServicesDisposeSystemSoundID(_errorSound);
 }
 
 + (void)enableNotifications {
@@ -432,6 +416,17 @@
         seconds += [result[@"seconds"] intValue];
     }
     return seconds;
+}
+
++ (NSInteger)levelIdentifierByText:(NSString *)text{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
+    NSArray *allLevels = [NSArray arrayWithContentsOfFile:filePath];
+    for (NSInteger i=0; i<allLevels.count; i++) {
+        NSDictionary *level = allLevels[i];
+        NSString *levelText = level[@"text"];
+        if ([levelText isEqualToString:text]) return i;
+    }
+    return -1;
 }
 
 @end

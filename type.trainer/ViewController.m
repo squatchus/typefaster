@@ -11,6 +11,7 @@
 #import "TFKeyboardView.h"
 #import "UIColor+HexColor.h"
 #import "Flurry.h"
+#import <Crashlytics/Crashlytics.h>
 
 #define kBaseFontSize 16
 #define kBaseFontSizeIPhone6 18
@@ -46,6 +47,7 @@
 
 @interface ViewController () <UITextViewDelegate, TFKeyboardDelegate>
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *currentWordHeightConstraint;
 @property (strong, nonatomic) TFKeyboardView *keyboardView;
 
 @property (nonatomic, strong) NSDictionary *current_level;
@@ -123,6 +125,9 @@
     [_shiftView addGestureRecognizer:tapRecShift];
     [_backspaceView addGestureRecognizer:tapRecBackspace];
     [_currentWordLabel addGestureRecognizer:tapRecCurrentWord];
+    
+    if (IS_IPHONE_6 || IS_IPHONE_6P)
+        _currentWordHeightConstraint.constant = 64;
 }
 
 - (void)shiftViewTapped {
@@ -342,12 +347,13 @@
     _session_seconds = 0;
     _session_timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateTimer) userInfo:nil repeats:YES];
 
-    NSDictionary *params = @{@"author": _current_level[@"author"],
-                             @"text": _current_level[@"text"],
-                             @"category": _current_level[@"category"],
-                             @"rankAtStart": [AppDelegate currentRank]};
+    [Flurry logEvent:@"TrainingRound" withParameters:
+        @{@"author": _current_level[@"author"], @"text": _current_level[@"text"], @"category": _current_level[@"category"], @"rankAtStart": [AppDelegate currentRank]} timed:YES];
     
-    [Flurry logEvent:@"TrainingRound" withParameters:[params mutableCopy] timed:YES];
+    NSInteger firstNewLine = [_current_level[@"text"] rangeOfString:@"\n"].location;
+    NSString *contentName = [_current_level[@"text"] substringToIndex:MIN(30, firstNewLine)];
+    [Answers logLevelStart:contentName customAttributes:
+        @{@"category": _current_level[@"category"], @"rankAtStart": [AppDelegate currentRank]}];
 }
 
 - (void)endSession {
@@ -390,14 +396,16 @@
         progressSpeed = (lastAvg/3.0 - firstAvg/3.0) * 1000.0 / sumOfSeconds;
     }
     
-    NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols),
-                             @"mistakes":@(_stat_mistakes), @"progressSpeed": @(progressSpeed),
-                             @"status": @"complete"};
-    [Flurry endTimedEvent:@"TrainingRound" withParameters:params];
+    [Flurry endTimedEvent:@"TrainingRound" withParameters:
+        @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes), @"progressSpeed": @(progressSpeed), @"status": @"complete"}];
     
-    [Flurry logEvent:@"WrongTaps" withParameters:@{@"shiftTaps": @(_shiftTaps),
-                                                   @"backspaceTaps": @(_backspaceTaps),
-                                                   @"wordTaps": @(_wordTaps)}];
+    NSInteger firstNewLine = [_current_level[@"text"] rangeOfString:@"\n"].location;
+    NSString *contentName = [_current_level[@"text"] substringToIndex:MIN(30, firstNewLine)];
+    NSNumber *signsPerMin = @((int)((float)_stat_symbols / (float)_session_seconds * 60.0));
+    [Answers logLevelEnd:contentName score:signsPerMin success:@(0) customAttributes:@{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes)}];
+    
+    [Flurry logEvent:@"WrongTaps" withParameters:@{@"shiftTaps": @(_shiftTaps), @"backspaceTaps": @(_backspaceTaps), @"wordTaps": @(_wordTaps)}];
+    [Answers logCustomEventWithName:@"WrongTaps" customAttributes:@{@"shiftTaps": @(_shiftTaps), @"backspaceTaps": @(_backspaceTaps), @"wordTaps": @(_wordTaps)}];
     
     [self performSegueWithIdentifier:@"showResultsVC" sender:self];
 }
@@ -556,7 +564,7 @@
     
     // Базовый стиль текста в textView
     [text addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:kBaseFontName size:kBaseFontSize]
+                 value:[UIFont fontWithName:kBaseFontName size:_textFontSize]
                  range:NSMakeRange(0, text.length)];
     [text addAttribute:NSForegroundColorAttributeName
                  value:[UIColor colorWithHexString:@"999999"] // gray
@@ -752,13 +760,15 @@
 }
 
 - (IBAction)onDoneButtonPressed:(UIButton *)sender {
-    NSDictionary *params = @{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols),
-                             @"mistakes":@(_stat_mistakes), @"status":@"aborted"};
-    [Flurry endTimedEvent:@"TrainingRound" withParameters:params];
+    [Flurry endTimedEvent:@"TrainingRound" withParameters:@{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes), @"status":@"aborted"}];
     
-    [Flurry logEvent:@"WrongTaps" withParameters:@{@"shiftTaps": @(_shiftTaps),
-                                                   @"backspaceTaps": @(_backspaceTaps),
-                                                   @"wordTaps": @(_wordTaps)}];
+    NSInteger firstNewLine = [_current_level[@"text"] rangeOfString:@"\n"].location;
+    NSString *contentName = [_current_level[@"text"] substringToIndex:MIN(30, firstNewLine)];
+    NSNumber *signsPerMin = @((int)((float)_stat_symbols / (float)_session_seconds * 60.0));
+    [Answers logLevelEnd:contentName score:signsPerMin success:@(0) customAttributes:@{@"seconds": @(_session_seconds), @"symbols":@(_stat_symbols), @"mistakes":@(_stat_mistakes)}];
+    
+    [Flurry logEvent:@"WrongTaps" withParameters:@{@"shiftTaps": @(_shiftTaps), @"backspaceTaps": @(_backspaceTaps), @"wordTaps": @(_wordTaps)}];
+    [Answers logCustomEventWithName:@"WrongTaps" customAttributes:@{@"shiftTaps": @(_shiftTaps), @"backspaceTaps": @(_backspaceTaps), @"wordTaps": @(_wordTaps)}];
     
     [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
