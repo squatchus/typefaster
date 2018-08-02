@@ -1,0 +1,1 @@
+../../../../YandexMobileMetricaPush/static/YandexMobileMetricaPush.framework/Versions/A/Headers/YMPVersion.h

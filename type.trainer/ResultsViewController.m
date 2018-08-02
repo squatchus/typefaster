@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "TFShareView.h"
 #import "Flurry.h"
-#import "VKSdk.h"
 #import <Crashlytics/Crashlytics.h>
 
 @interface ResultsViewController () <UIAlertViewDelegate>
@@ -205,7 +204,7 @@
     UIActivityViewController *controller =
     [[UIActivityViewController alloc]
      initWithActivityItems:@[text, url, image]
-     applicationActivities:@[[VKActivity new]]];
+     applicationActivities:nil];
     
     controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
 

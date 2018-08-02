@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "Flurry.h"
 #import <Crashlytics/Crashlytics.h>
+#import "Sentry.h"
 
 @interface MenuViewController ()
 

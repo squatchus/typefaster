@@ -9,11 +9,17 @@
 #import "AppDelegate.h"
 #import "MenuViewController.h"
 #import "Flurry.h"
-#import "VKSdk.h"
+
 @import AudioToolbox;
+
 #import <AVFoundation/AVFoundation.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "Sentry.h"
+
+@import YandexMobileMetrica;
+@import YandexMobileMetricaPush;
+@import UserNotifications;
 
 @interface AppDelegate ()
 
@@ -27,25 +33,54 @@
 
 @implementation AppDelegate
 
++ (void)initialize {
+    if ([self class] == [AppDelegate class]) {
+        YMMYandexMetricaConfiguration *configuration = [[YMMYandexMetricaConfiguration alloc] initWithApiKey:@"307bb2dc-788c-42b5-b7b3-b32579ae0191"];
+        [YMMYandexMetrica activateWithConfiguration:configuration];
+    }
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Если до этого шага не была инициализирована библиотека AppMetrica SDK, вызов метода приведет к аварийной остановке приложения.
+#ifdef DEBUG
+    YMPYandexMetricaPushEnvironment pushEnvironment = YMPYandexMetricaPushEnvironmentDevelopment;
+#else
+    YMPYandexMetricaPushEnvironment pushEnvironment = YMPYandexMetricaPushEnvironmentProduction;
+#endif
+    [YMPYandexMetricaPush setDeviceTokenFromData:deviceToken pushEnvironment:pushEnvironment];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [YMPYandexMetricaPush handleRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [YMPYandexMetricaPush handleRemoteNotification:userInfo];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [NSThread sleepForTimeInterval:1.5];
-    [VKSdk initializeWithDelegate:nil andAppId:@"4995337"];
-    if ([VKSdk wakeUpSession])
-    {
-        //Start working
-    }
     
     [Fabric with:@[CrashlyticsKit]];
 
-
+    NSError *error = nil;
+    SentryClient *client = [[SentryClient alloc] initWithDsn:@"https://67f93b5f48a945588aefc55d2eebad12@sentry.io/1254794" didFailWithError:&error];
+    SentryClient.sharedClient = client;
+    [SentryClient.sharedClient startCrashHandlerWithError:&error];
+    if (nil != error) {
+        NSLog(@"%@", error);
+    }
+    
 //    [Flurry setLogLevel:FlurryLogLevelAll];
 //    [Flurry setDebugLogEnabled:YES];
 //    [Flurry setEventLoggingEnabled:YES];
 //    [Flurry setSessionReportsOnCloseEnabled:YES];
 //    [Flurry setSessionReportsOnPauseEnabled:YES];
 //    [Flurry setDelegate:self];
-    [Flurry setCrashReportingEnabled:YES];
+//    [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"GHWGV2G29YDC9YHTYGZS" withOptions:launchOptions];
     if (![[NSUserDefaults standardUserDefaults] valueForKey:@"userID"]) {
         NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
@@ -60,6 +95,36 @@
     
     [self initSettings];
     [self authenticateLocalPlayer];
+    
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        if (NSClassFromString(@"UNUserNotificationCenter") != Nil) {
+            [UNUserNotificationCenter currentNotificationCenter].delegate = [YMPYandexMetricaPush userNotificationCenterDelegate];
+            
+            // iOS 10.0 and above
+            UNAuthorizationOptions options =
+            UNAuthorizationOptionAlert |
+            UNAuthorizationOptionBadge |
+            UNAuthorizationOptionSound;
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError *error) {
+                // Enable or disable features based on authorization.
+            }];
+        }
+        else {
+            // iOS 8 and iOS 9
+            UIUserNotificationType userNotificationTypes =
+            UIUserNotificationTypeAlert |
+            UIUserNotificationTypeBadge |
+            UIUserNotificationTypeSound;
+            UIUserNotificationSettings *settings =
+            [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+            [application registerUserNotificationSettings:settings];
+        }
+        [application registerForRemoteNotifications];
+    }
+    
+    [YMPYandexMetricaPush handleApplicationDidFinishLaunchingWithOptions:launchOptions];
+    
     return YES;
 }
 
@@ -116,7 +181,6 @@
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return YES;
 }
 
@@ -222,7 +286,8 @@
     else if (speed < 165) return @"Продвинутый";    // [130..164]
     else if (speed < 205) return @"Мастер";         // [165..204]
     else if (speed < 250) return @"Гуру";           // [204..249]
-    else return @"Запредельный";                    // [250..250+]
+    else if (speed < 300) return @"Запредельный";   // [250..299]
+    else return @"Ну очень быстрый";
 }
 
 + (int)minValueForRank:(NSString *)rankString {
@@ -235,7 +300,8 @@
                                 @"Продвинутый": @130,
                                 @"Мастер": @165,
                                 @"Гуру": @205,
-                                @"Запредельный": @250};
+                                @"Запредельный": @250,
+                                @"Ну очень быстрый": @350};
     return [maxValues[rankString] intValue];
 }
 
@@ -249,12 +315,13 @@
                                 @"Продвинутый": @165,
                                 @"Мастер": @205,
                                 @"Гуру": @250,
-                                @"Запредельный": @300};
+                                @"Запредельный": @300,
+                                @"Ну очень быстрый": @400};
     return [maxValues[rankString] intValue];
 }
 
 + (NSString *)rankAfterRank:(NSString *)rankString {
-    NSArray *ranks = @[@"Новичек", @"Ученик", @"Освоившийся", @"Уверенный", @"Опытный", @"Бывалый", @"Продвинутый", @"Мастер", @"Гуру", @"Запредельный"];
+    NSArray *ranks = @[@"Новичек", @"Ученик", @"Освоившийся", @"Уверенный", @"Опытный", @"Бывалый", @"Продвинутый", @"Мастер", @"Гуру", @"Запредельный", @"Ну очень быстрый"];
     NSInteger index = [ranks indexOfObject:rankString];
     index++;
     if (index < ranks.count) return ranks[index];
@@ -320,11 +387,11 @@
 }
 
 + (int)numberOfKeysForCurrentRank {
-    NSDictionary *numberOfKeys = @{ @"Новичек": @0, //@4,
-                                    @"Ученик": @5, //@10,
-                                    @"Освоившийся": @10, //@16,
-                                    @"Уверенный": @17, //@22,
-                                    @"Опытный": @25}; //@28 };
+    NSDictionary *numberOfKeys = @{ @"Новичек": @0,
+                                    @"Ученик": @3,
+                                    @"Освоившийся": @7,
+                                    @"Уверенный": @15,
+                                    @"Опытный": @25};
     NSNumber* num = numberOfKeys[[self currentRank]];
     if (num) return [num intValue];
     return kAllKeysInKeyboard;
