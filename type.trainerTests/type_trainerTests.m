@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Suricatum. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import <XCTest/XCTest.h>
 
 @interface type_trainerTests : XCTestCase

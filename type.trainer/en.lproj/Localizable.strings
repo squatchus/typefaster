@@ -1,0 +1,126 @@
+/* Нет */
+"alert.button.no" = "No";
+
+/* Ок */
+"alert.button.ok" = "Ok";
+
+/* Напоминать */
+"alert.button.remind" = "Remind me";
+
+/* Для доступа к таблице рекордов, необходимо войти в Game Center. Откройте 'Настройки' -> 'Game Center' и введите данные своей учётной записи */
+"alert.leaderboard.message" = "You need to login to Game Center to access to Leaderboards. Open 'Settings' -> 'Game Center' and login with your account.";
+
+/* Таблица рекордов */
+"alert.leaderboard.title" = "Leaderboards";
+
+/* Регулярные тренировки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день? */
+"alert.reminder.message" = "Regular practice will improve your progress. Do you want us to remind you about trainings?";
+
+/* No comment provided by engineer. */
+"button.done" = "Done";
+
+/* в минуту */
+"common.per.minute" = "per minute ";
+
+/* Оценить */
+"common.rate" = "Rate";
+
+/* Напоминания */
+"common.reminders" = "Reminders";
+
+/* Настройки */
+"common.settings" = "Settings";
+
+/* а начинали со скорости */
+"menu.vm.began.with" = "and began with a speed: ";
+
+/* Ваш лучший результат */
+"menu.vm.best.result" = "Your best result";
+
+/* пройдите первую тренировку */
+"menu.vm.complete.first" = "complete the first training ";
+
+/* Вы бесподобны :) */
+"menu.vm.incredible" = "You are incredible :)";
+
+/* продолжайте тренироваться */
+"menu.vm.keep.training" = "keep training ";
+
+/* мин. */
+"menu.vm.min" = "min.";
+
+/* Следующая цель: */
+"menu.vm.next.goal" = "Next goal:";
+
+/* Ранг */
+"menu.vm.rank" = "Rank";
+
+/* Печатать быстрее! */
+"menu.vm.type.faster" = "Type faster!";
+
+/* Новичек */
+"rank.lvl.0" = "Novice";
+
+/* Ученик */
+"rank.lvl.1" = "Beginner";
+
+/* Освоившийся */
+"rank.lvl.2" = "Competent";
+
+/* Уверенный */
+"rank.lvl.3" = "Proficient";
+
+/* Опытный */
+"rank.lvl.4" = "Expert";
+
+/* Бывалый */
+"rank.lvl.5" = "Rock star";
+
+/* Продвинутый */
+"rank.lvl.6" = "Unstoppable";
+
+/* Мастер */
+"rank.lvl.7" = "Master";
+
+/* Гуру */
+"rank.lvl.8" = "Guru";
+
+/* Запредельный */
+"rank.lvl.9" = "Outstanding";
+
+/* Ну очень быстрый */
+"rank.lvl.10" = "Faster than light";
+
+/* Потренируйтесь в скорости печати! */
+"reminder.message" = "Time to practice some typing!";
+
+/* Печатай быстрее */
+"reminder.title" = "Type faster";
+
+/* лучший\nрезультат */
+"results.vm.best.result" = "best\\nresult";
+
+/* Продолжить */
+"results.vm.continue" = "Continue";
+
+/* процент\nошибок */
+"results.vm.mistakes" = "typo\\npercentage";
+
+/* Новый ранг */
+"results.vm.new.rank" = "New rank";
+
+/* Новый рекорд! */
+"results.vm.new.record" = "New record!";
+
+/* Ваш результат */
+"results.vm.your.result" = "Your result";
+
+/* Если хотите заниматься регулярно, мы можем напоминать вам раз в день о предстоящей тренировке */
+"settings.vm.reminders.info" = "If you want to practice regularly we can remind you about training once in a day.";
+
+/* Строгий режим набора */
+"settings.vm.strict.typing" = "Strict typing mode";
+
+/* Не позволяет Вам набирать текст, пока не исправлена ошибка. По началу  раздражает, но очень дисциплинирует */
+"settings.vm.strict.typing.info" = "If there is a typo you won't be able to keep typing until you fix it. It can be frustrating at the beginning but will speed up your progress.";
+

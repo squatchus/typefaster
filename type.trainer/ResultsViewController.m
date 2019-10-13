@@ -6,16 +6,14 @@
 //  Copyright (c) 2015 Suricatum. All rights reserved.
 //
 
-#import "ResultsViewController.h"
-#import "AppDelegate.h"
-#import "TFShareView.h"
-#import "Flurry.h"
-#import <Crashlytics/Crashlytics.h>
+#import "TFResultsVC.h"
 
-@interface ResultsViewController () <UIAlertViewDelegate>
+#import "TFAppDelegate.h"
+#import "UIAlertController+Alerts.h"
+
+@interface TFResultsVC ()
 
 @property (weak, nonatomic) IBOutlet UILabel *resultTitleLabel;
-
 
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *signsPerMinTitleLabel;
@@ -40,17 +38,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UIButton *rateButton;
 
-
-- (IBAction)onShareButtonPressed:(UIButton *)sender;
-- (IBAction)onRateButtonPressed:(UIButton *)sender;
-- (IBAction)onContinueButtonPressed:(UIButton *)sender;
-- (IBAction)onSettingsButtonPressed:(UIButton *)sender;
-
 @end
 
-@implementation ResultsViewController
+@implementation TFResultsVC
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     _shareButton.layer.cornerRadius = _shareButton.frame.size.height/2.0;
@@ -58,7 +51,7 @@
     _rateButton.layer.cornerRadius = _rateButton.frame.size.height/2.0;
     _settingsButton.layer.cornerRadius = _settingsButton.frame.size.height/2.0;
     
-    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSMutableArray *results = [NSUserDefaults.standardUserDefaults objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
     NSString *text = level[@"text"];
     int seconds = [[results lastObject][@"seconds"] intValue];
@@ -78,85 +71,44 @@
     NSString *ending = (lastDigit == 1)?@"":((lastDigit > 1 && lastDigit < 5)?@"а":@"ов");
     _signsPerMinTitleLabel.text = [NSString stringWithFormat:@"знак%@\nв минуту", ending];
     
-    int bestResult = [AppDelegate bestResult];
+    int bestResult = [APP.data bestResult];
     _bestResultLabel.text = [NSString stringWithFormat:@"%d", bestResult];
 
-    BOOL switchToFullKeyboardJustHappened = NO;
-    NSString *currentRank = [AppDelegate currentRank];
+    NSString *currentRank = [APP.data currentRank];
     if (signsPerMin < bestResult) {
-        _resultTitleLabel.text = @"Ваш результат";
+        _resultTitleLabel.text = NSLocalizedString(@"Ваш результат", nil);
     }
-    else if ([currentRank isEqualToString:[AppDelegate prevRank]]) {
-        _resultTitleLabel.text = @"Новый рекорд!"; // в текущем ранге
-        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewResultSound];
-        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) reportScore];
+    else if ([currentRank isEqualToString:[APP.data prevRank]]) {
+        _resultTitleLabel.text = NSLocalizedString(@"Новый рекорд!", nil); // в текущем ранге
+        [APP.sounds playNewResultSound];
+        [APP submitBestResultToLeaderboard];
     }
     else { // новый ранг
         _resultTitleLabel.text = [NSString stringWithFormat:@"Новый ранг - %@!", currentRank];
-        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playNewRankSound];
-        [((AppDelegate *)[[UIApplication sharedApplication] delegate]) reportScore];
-        
-        NSDictionary *params = @{@"rank": currentRank,
-                                 @"highestScores": @([AppDelegate numberOfHighestScores]),
-                                 @"summaryTime": @([AppDelegate summaryTimeOfAllTrainings])};
-        [Flurry logEvent:@"NewRank achieved" withParameters:params];
-        [Answers logCustomEventWithName:@"NewRank achieved" customAttributes:params];
-        
-        if (signsPerMin >= 100) { // switch to full keyboard
-            if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"fullKeyboard"] boolValue]) {
-                [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"fullKeyboard"];
-                switchToFullKeyboardJustHappened = YES;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ура!" message:@"Вы преодолели этап обучения! Продолжайте увеличивать скорость\nна полной клавиатуре (включающей знаки препинания)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
-                [alert show];
+        [APP.sounds playNewRankSound];
+        [APP submitBestResultToLeaderboard];
+    }
+        if (results.count == 3) {
+            if (!APP.settings.notifications) {
+                [UIAlertController showReminMeAlertWithHandler:^(BOOL remind) {
+                    if (remind) {
+                        APP.settings.notifications = YES;
+                        [APP.reminder enableNotifications];
+                    }
+                    else {
+                        APP.settings.notifications = NO;
+                        [APP.reminder disableNotifications];
+                    }
+                }];
             }
         }
-    }
-    
-    if (!switchToFullKeyboardJustHappened) {
-        if (results.count == 1 && signsPerMin < 100) {
-            [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"fullKeyboard"];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Результат" message:@"Ваш результат меньше 100 знаков в минуту. Попробуйте его улучшить в режиме обучения\n(нет знаков препинания, количество букв ограничено)" delegate:nil cancelButtonTitle:@"Поехали!" otherButtonTitles: nil];
-            [alert show];
-        }
-        else if (results.count == 3) {
-            if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"notifications"] boolValue]) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Напоминания" message:@"Регулярные тренировки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles: @"Напоминать", nil];
-                [alert show];
-            }
-        }
-    }
     
     [self updateStarsBySpeed:signsPerMin];
-    
-    if (IS_IPHONE_6 || IS_IPHONE_6P) {
-        _resultTitleLabel.font = [_resultTitleLabel.font fontWithSize:16];
-        
-        _bestResultTitleLabel.font = [_bestResultTitleLabel.font fontWithSize:16];
-        _signsPerMinTitleLabel.font = [_signsPerMinTitleLabel.font fontWithSize:16];
-        _mistakesPercentTitleLabel.font = [_mistakesPercentTitleLabel.font fontWithSize:16];
-        _authorLabel.font = [_authorLabel.font fontWithSize:14];
-    
-        _rateButton.titleLabel.font = [_rateButton.titleLabel.font fontWithSize:14];
-        _settingsButton.titleLabel.font = [_settingsButton.titleLabel.font fontWithSize:14];
-        _starWidthConstraint.constant = 35;
-        _starHeightConstraint.constant = 32;
-        [_settingsButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
-    }
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        [[NSUserDefaults standardUserDefaults] setValue:@(YES) forKey:@"notifications"];
-        [AppDelegate enableNotifications];
-    }
-    else {
-        [[NSUserDefaults standardUserDefaults] setValue:@(NO) forKey:@"notifications"];
-        [AppDelegate disableNotifications];
-    }
-}
-
-- (void)updateStarsBySpeed:(int)speed {
-    float numberOfStars = [AppDelegate numberOfStarsBySpeed:speed];
+- (void)updateStarsBySpeed:(int)speed
+{
+    float numberOfStars = [APP.data numberOfStarsBySpeed:speed];
     int numberOfFullStars = (int)numberOfStars;
     BOOL halfStar = (numberOfStars-numberOfFullStars > 0);
     NSArray *stars = @[_starView1, _starView2, _starView3, _starView4, _starView5];
@@ -171,80 +123,39 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-- (IBAction)onShareButtonPressed:(UIButton *)sender {
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+- (IBAction)onShareButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
     
-    NSMutableArray *results = [[NSUserDefaults standardUserDefaults] objectForKey:@"results"];
+    NSMutableArray *results = [NSUserDefaults.standardUserDefaults objectForKey:@"results"];
     NSDictionary *level = [results lastObject][@"level"];
     
-    TFShareView *shareView = [[NSBundle mainBundle] loadNibNamed:@"TFShareView" owner:self options:nil][0];
-    shareView.frame = self.view.frame;
-    [shareView updateWithText:level[@"text"] author:level[@"author"] andSpeed:[AppDelegate bestResult]];
-    UIImage *image = [shareView renderImage];
-    
-    NSString *text = @"Я увеличил свою скорость печати с приложением #ПечатайБыстрее";
+    NSString *text = level[@"text"];
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/id1013588476"];
     
-    UIActivityViewController *controller =
-    [[UIActivityViewController alloc]
-     initWithActivityItems:@[text, url, image]
-     applicationActivities:nil];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text, url] applicationActivities:nil];
     
-    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
-
-    NSNumber *contentId = @([AppDelegate levelIdentifierByText:level[@"text"]]);
-    NSInteger firstNewLine = [level[@"text"] rangeOfString:@"\n"].location;
-    NSString *contentName = [level[@"text"] substringToIndex:MIN(30, firstNewLine)];
-    
-    [Flurry logEvent:@"ShareButton Clicked" withParameters:@{@"author": level[@"author"], @"text": level[@"text"], @"category": level[@"category"]}];
-    [Answers logCustomEventWithName:@"ShareButton Clicked" customAttributes:@{@"name": contentName, @"type": level[@"category"], @"id": contentId}];
-    
-    [controller setCompletionHandler:^(NSString *activityType, BOOL completed) {
-        [Flurry logEvent:@"ContentShared" withParameters:@{@"share-method": activityType, @"name": contentName, @"type": level[@"category"], @"id": contentId, @"completed": @(completed)}];
-        [Answers logShareWithMethod:activityType contentName:@"" contentType:level[@"category"] contentId:[contentId stringValue] customAttributes:@{@"completed": @(completed)}];
-    }];
+    controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
     
     [self presentViewController:controller animated:YES completion:nil];
 }
 
-- (IBAction)onRateButtonPressed:(UIButton *)sender {
-    [Flurry logEvent:@"RateButton clicked"];
-    [Answers logCustomEventWithName:@"RateButton clicked" customAttributes:nil];
-    
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-    NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+- (IBAction)onRateButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
+    NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1013588476"];
+    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
 
-- (IBAction)onContinueButtonPressed:(UIButton *)sender {
-    [Flurry logEvent:@"ContinueButton clicked"];
-    [Answers logCustomEventWithName:@"ContinueButton clicked" customAttributes:nil];
-    
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+- (IBAction)onContinueButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)onSettingsButtonPressed:(UIButton *)sender {
-    [Flurry logEvent:@"SettingsButton clicked"];
-    [Answers logCustomEventWithName:@"SettingsButton clicked" customAttributes:nil];
-    
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+- (IBAction)onSettingsButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
     [self performSegueWithIdentifier:@"resultsToSettings" sender:self];
 }
 

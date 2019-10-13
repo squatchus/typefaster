@@ -6,78 +6,57 @@
 //  Copyright (c) 2015 Suricatum. All rights reserved.
 //
 
-#import "MenuViewController.h"
+#import "TFMenuVC.h"
+
 #import "UIColor+HexColor.h"
-#import "AppDelegate.h"
-#import "Flurry.h"
-#import <Crashlytics/Crashlytics.h>
-#import "Sentry.h"
+#import "TFAppDelegate.h"
+#import "UIAlertController+Alerts.h"
 
-@interface MenuViewController ()
+@implementation TFMenuVC
 
-@end
-
-@implementation MenuViewController
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     _rateButton.layer.cornerRadius = _rateButton.frame.size.height/2.0;
     _settingsButton.layer.cornerRadius = _settingsButton.frame.size.height/2.0;
     _gameCenterButton.layer.cornerRadius = _gameCenterButton.frame.size.height/2.0;
     _startTypingButton.layer.cornerRadius = _startTypingButton.frame.size.height/2.0;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(viewWillAppear:) name:@"bestScoreUpdated" object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(viewWillAppear:) name:@"bestScoreUpdated" object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     
-    int bestResult = [AppDelegate bestResult];
+    int bestResult = [APP.data bestResult];
     [self updateStarsBySpeed:bestResult];
     _signsPerMinLabel.text = [NSString stringWithFormat:@"%d", bestResult];
     int lastDigit = bestResult % 10;
     NSString *ending = (lastDigit == 1)?@"":((lastDigit > 1 && lastDigit < 5)?@"а":@"ов");
     _signsPerMinTitleLabel.text = [NSString stringWithFormat:@"знак%@ в минуту", ending];
     
-    int firstResult = [AppDelegate firstResult];
-    if (firstResult > 0) {
+    int firstResult = [APP.data firstResult];
+    if (firstResult > 0)
+    {
         if (firstResult == bestResult)
-            _firstResultLabel.text = @"продолжайте тренироваться";
+            _firstResultLabel.text = NSLocalizedString(@"продолжайте тренироваться", nil);
         else
-            _firstResultLabel.text = [NSString stringWithFormat:@"а начинали со скорости %d", firstResult];
-    }
-    
-    if (IS_IPHONE_6 || IS_IPHONE_6P) {
-        _yourSpeedLabel.font = [_yourSpeedLabel.font fontWithSize:16];
-        _signsPerMinTitleLabel.font = [_signsPerMinTitleLabel.font fontWithSize:16];
-        _firstResultLabel.font = [_firstResultLabel.font fontWithSize:16];
-        _rankHintLabel.font = [_rankHintLabel.font fontWithSize:16];
-        _gameCenterButton.titleLabel.font = [_gameCenterButton.titleLabel.font fontWithSize:16];
-        _rateButton.titleLabel.font = [_rateButton.titleLabel.font fontWithSize:14];
-        _settingsButton.titleLabel.font = [_settingsButton.titleLabel.font fontWithSize:14];
-        _starWidthConstraint.constant = 35;
-        _starHeightConstraint.constant = 32;
-        _rankTopSpaceConstraint.constant = 16;
-        _rankBottomSpaceConstraint.constant = 16;
-        _leaderboardWidthConstraint.constant = 64;
-        [_settingsButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
+            _firstResultLabel.text = [NSString stringWithFormat:NSLocalizedString(@"а начинали со скорости %d", nil), firstResult];
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)updateStarsBySpeed:(int)speed {
-    NSString *rankString = [AppDelegate currentRank];
+- (void)updateStarsBySpeed:(int)speed
+{
+    NSString *rankString = [APP.data currentRank];
     NSString *buttonTitle = [NSString stringWithFormat:@"Ранг - %@", rankString];
     [_gameCenterButton setTitle:buttonTitle forState:UIControlStateNormal];
-    float numberOfStars = [AppDelegate numberOfStarsBySpeed:speed];
+    float numberOfStars = [APP.data numberOfStarsBySpeed:speed];
     int numberOfFullStars = (int)numberOfStars;
     BOOL halfStar = (numberOfStars-numberOfFullStars > 0);
     NSArray *stars = @[_starView1, _starView2, _starView3, _starView4, _starView5];
-    for (UIImageView *starView in stars) {
+    for (UIImageView *starView in stars)
+    {
         if (numberOfFullStars > 0)
             starView.image = [UIImage imageNamed:@"star_gold.png"];
         else if (numberOfFullStars==0 && halfStar)
@@ -87,61 +66,49 @@
         numberOfFullStars--;
     }
     
-    NSString *nextRank = [AppDelegate rankAfterRank:rankString];
-    if (nextRank) {
-        int nextMinValue = [AppDelegate minValueForRank:nextRank];
-        int nextMaxValue = [AppDelegate maxValueForRank:nextRank];
+    NSString *nextRank = [APP.data rankAfterRank:rankString];
+    if (nextRank)
+    {
+        int nextMinValue = [APP.data minValueForRank:nextRank];
+        int nextMaxValue = [APP.data maxValueForRank:nextRank];
         _rankHintLabel.text = [NSString stringWithFormat:@"Следующая цель: %d знаков/мин.", (speed < nextMinValue)?nextMinValue:nextMaxValue];
     }
-    else {
-        _rankHintLabel.text = @"Вы бесподобны :)";
+    else
+    {
+        _rankHintLabel.text = NSLocalizedString(@"Вы бесподобны :)", nil);
     }
 }
 
-- (IBAction)onRateButtonPressed:(UIButton *)sender {
-    [Flurry logEvent:@"RateButton clicked"];
-    [Answers logCustomEventWithName:@"RateButton clicked" customAttributes:nil];
-
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-    NSString *urlString = @"itms-apps://itunes.apple.com/app/id1013588476";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+- (IBAction)onRateButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
+    NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1013588476"];
+    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
 }
 
-- (IBAction)onGameCenterButtonPressed:(UIButton *)sender {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [delegate playButtonClickSound];
-    if (delegate.gameCenterEnabled && delegate.leaderboardIdentifier) {
-        GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
-        gcViewController.gameCenterDelegate = self;
-        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
-        gcViewController.leaderboardIdentifier = delegate.leaderboardIdentifier;
-        [self presentViewController:gcViewController animated:YES completion:nil];
+- (IBAction)onGameCenterButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
+    if ([APP.leaderboards canShowLeaderboard])
+    {
+        [APP.leaderboards showLeaderboard];
     }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Таблица рекордов" message:@"Для доступа к таблице рекордов, необходимо войти в Game Center. Откройте 'Настройки' -> 'Game Center' и введите данные своей учётной записи" delegate:nil cancelButtonTitle:@"Ок" otherButtonTitles:nil];
-        [alert show];
+    else
+    {
+        [UIAlertController showLoginToGameCenterAlert];
     }
 }
 
-- (IBAction)onSettingsButtonPressed:(UIButton *)sender {
-    [Flurry logEvent:@"SettingsButton clicked"];
-    [Answers logCustomEventWithName:@"SettingsButton clicked" customAttributes:nil];
-    
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
+- (IBAction)onSettingsButtonPressed:(UIButton *)sender
+{
+    [APP.sounds playButtonClickSound];
     [self performSegueWithIdentifier:@"menuToSettings" sender:self];
 }
 
-- (IBAction)onPlayButtonPressed:(UIButton *)sender {
-    [Flurry logEvent:@"PlayButton clicked"];
-    [Answers logCustomEventWithName:@"PlayButton clicked" customAttributes:nil];
-    
-    [((AppDelegate *)[[UIApplication sharedApplication] delegate]) playButtonClickSound];
-    [self performSegueWithIdentifier:@"menuToGame" sender:self];
-}
-
--(void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+- (IBAction)onPlayButtonPressed:(UIButton *)sender
 {
-    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+    [APP.sounds playButtonClickSound];
+    [self performSegueWithIdentifier:@"menuToGame" sender:self];
 }
 
 @end
