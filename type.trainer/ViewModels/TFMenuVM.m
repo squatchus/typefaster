@@ -16,31 +16,31 @@
     {
         int first = [results firstSpeed];
         int best = [results bestSpeed];
-        _bestResultTitle = NSLocalizedString(@"menu.vm.best.result", @"Ваш лучший результат");
+        _bestResultTitle = NSLocalizedString(@"menu.vm.best.result", nil);
         _signsPerMin = @(best).stringValue;
         
         NSString *chars = [NSString localizedStringWithFormat:NSLocalizedString(@"%d char(s)", nil), best];
-        _signsPerMinTitle = [NSString stringWithFormat:@"%@ %@", chars, NSLocalizedString(@"common.per.minute", @"в минуту")];
+        _signsPerMinTitle = [NSString stringWithFormat:@"%@ %@", chars, NSLocalizedString(@"common.per.minute", nil)];
         
         if (first == 0 && best == 0) {
-            _firstResultTitle = NSLocalizedString(@"menu.vm.complete.first", @"пройдите первую тренировку");
+            _firstResultTitle = NSLocalizedString(@"menu.vm.complete.first", nil);
         } else if (first > 0 && best > first) {
-            _firstResultTitle = [NSString localizedStringWithFormat:@"%@ %d", NSLocalizedString(@"menu.vm.began.with", @"а начинали со скорости"), first];
+            _firstResultTitle = [NSString localizedStringWithFormat:@"%@ %d", NSLocalizedString(@"menu.vm.began.with", nil), first];
         } else {
-            _firstResultTitle = NSLocalizedString(@"menu.vm.keep.training", @"продолжайте тренироваться");
+            _firstResultTitle = NSLocalizedString(@"menu.vm.keep.training", nil);
         }
         _stars = [results starsBySpeed:best];
         
-        NSString *rank = NSLocalizedString(@"menu.vm.rank", @"Ранг");
+        NSString *rank = NSLocalizedString(@"menu.vm.rank", nil);
         NSString *rankLevel = [results rankTitleBySpeed:best];
         _rankTitle = [NSString stringWithFormat:@"%@ - %@", rank, rankLevel];
         
         int goal = [results nextGoalBySpeed:best];
         _rankSubtitle = [self rankSubtitleByGoal:goal];
         
-        _typeFasterTitle = NSLocalizedString(@"menu.vm.type.faster", @"Печатать быстрее!");
-        _settingsTitle = NSLocalizedString(@"common.settings", @"Настройки");
-        _rateTitle = NSLocalizedString(@"common.rate", @"Оценить");
+        _typeFasterTitle = NSLocalizedString(@"menu.vm.type.faster", nil);
+        _settingsTitle = NSLocalizedString(@"common.settings", nil);
+        _rateTitle = NSLocalizedString(@"common.rate", nil);
     }
     return self;
 }
@@ -50,14 +50,14 @@
     if (goal > 0)
     {
         NSString *chars = [NSString localizedStringWithFormat:NSLocalizedString(@"%d char(s)", nil), goal];
-        NSString *perMin = NSLocalizedString(@"menu.vm.min", @"мин.");
-        NSString *nextGoal = NSLocalizedString(@"menu.vm.next.goal", @"Следующая цель:");
+        NSString *perMin = NSLocalizedString(@"menu.vm.min", nil);
+        NSString *nextGoal = NSLocalizedString(@"menu.vm.next.goal", nil);
         NSString *signsPerMin = [NSString localizedStringWithFormat:@"%d %@/%@", goal, chars, perMin];
         return [NSString stringWithFormat:@"%@ %@", nextGoal, signsPerMin];
     }
     else
     {
-        return NSLocalizedString(@"menu.vm.incredible", @"Вы бесподобны :)");
+        return NSLocalizedString(@"menu.vm.incredible", nil);
     }
 }
 

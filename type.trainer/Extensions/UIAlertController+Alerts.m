@@ -12,9 +12,9 @@
 
 + (void)showLoginToGameCenterAlert
 {
-    NSString *title = NSLocalizedString(@"alert.leaderboard.title", @"Таблица рекордов");
-    NSString *message = NSLocalizedString(@"alert.leaderboard.message", @"Для доступа к таблице рекордов, необходимо войти в Game Center. Откройте 'Настройки' -> 'Game Center' и введите данные своей учётной записи");
-    NSString *buttonTitle = NSLocalizedString(@"alert.button.ok", @"Ок");
+    NSString *title = NSLocalizedString(@"alert.leaderboard.title", nil);
+    NSString *message = NSLocalizedString(@"alert.leaderboard.message", nil);
+    NSString *buttonTitle = NSLocalizedString(@"alert.button.ok", nil);
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:buttonTitle style:UIAlertActionStyleDefault handler:nil]];
@@ -23,10 +23,10 @@
 
 + (void)showReminMeAlertWithHandler:(void(^)(BOOL remind))handler
 {
-    NSString *title = NSLocalizedString(@"common.reminders", @"Напоминания");
-    NSString *message = NSLocalizedString(@"alert.reminder.message", @"Регулярные тренировки помогут быстрее развить скорость печати. Напоминать о них\n1 раз в день?");
-    NSString *cancelTitle = NSLocalizedString(@"alert.button.no", @"Нет");
-    NSString *buttonTitle = NSLocalizedString(@"alert.button.remind", @"Напоминать");
+    NSString *title = NSLocalizedString(@"common.reminders", nil);
+    NSString *message = NSLocalizedString(@"alert.reminder.message", nil);
+    NSString *cancelTitle = NSLocalizedString(@"alert.button.no", nil);
+    NSString *buttonTitle = NSLocalizedString(@"alert.button.remind", nil);
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {

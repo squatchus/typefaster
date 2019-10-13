@@ -16,9 +16,9 @@
     if (one.length > 0)
     {
         unichar c = [one characterAtIndex:0];
-        BOOL isSymbol = [NSCharacterSet.symbolCharacterSet characterIsMember:c];
+        BOOL isLetter = [NSCharacterSet.letterCharacterSet characterIsMember:c];
         BOOL isUppercase = [one isEqualToString:one.uppercaseString];
-        return isSymbol && isUppercase;
+        return isLetter && isUppercase;
     }
     return NO;
 }

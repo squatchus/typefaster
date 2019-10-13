@@ -42,12 +42,12 @@
         
         [NSUserDefaults.standardUserDefaults synchronize];
         
-        _settingsTitle = NSLocalizedString(@"common.settings", @"Настройки");
+        _settingsTitle = NSLocalizedString(@"common.settings", nil);
         
-        _notificationsTitle = NSLocalizedString(@"common.reminders", @"Напоминания");
-        _strictTypingTitle = NSLocalizedString(@"settings.vm.strict.typing", @"Строгий режим набора");
-        _notificationsInfo = NSLocalizedString(@"settings.vm.reminders.info", @"Если хотите заниматься регулярно, мы можем напоминать вам раз в день о предстоящей тренировке");
-        _strictTypingInfo = NSLocalizedString(@"settings.vm.strict.typing.info", @"Не позволяет Вам набирать текст, пока не исправлена ошибка. По началу  раздражает, но очень дисциплинирует");
+        _notificationsTitle = NSLocalizedString(@"common.reminders", nil);
+        _strictTypingTitle = NSLocalizedString(@"settings.vm.strict.typing", nil);
+        _notificationsInfo = NSLocalizedString(@"settings.vm.reminders.info", nil);
+        _strictTypingInfo = NSLocalizedString(@"settings.vm.strict.typing.info", nil);
         _doneTitle = NSLocalizedString(@"button.done", nil);
     }
     return self;

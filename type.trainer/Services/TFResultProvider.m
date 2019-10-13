@@ -131,17 +131,17 @@
 - (NSString *)rankTitleBySpeed:(int)speed
 {
     TFRank rank = [self rankBySpeed:speed];
-    NSString *rankTitle = @[NSLocalizedString(@"rank.lvl.0", @"Новичек"),
-                            NSLocalizedString(@"rank.lvl.1", @"Ученик"),
-                            NSLocalizedString(@"rank.lvl.2", @"Освоившийся"),
-                            NSLocalizedString(@"rank.lvl.3", @"Уверенный"),
-                            NSLocalizedString(@"rank.lvl.4", @"Опытный"),
-                            NSLocalizedString(@"rank.lvl.5", @"Бывалый"),
-                            NSLocalizedString(@"rank.lvl.6", @"Продвинутый"),
-                            NSLocalizedString(@"rank.lvl.7", @"Мастер"),
-                            NSLocalizedString(@"rank.lvl.8", @"Гуру"),
-                            NSLocalizedString(@"rank.lvl.9", @"Запредельный"),
-                            NSLocalizedString(@"rank.lvl.10", @"Ну очень быстрый")][rank];
+    NSString *rankTitle = @[NSLocalizedString(@"rank.lvl.0", nil),
+                            NSLocalizedString(@"rank.lvl.1", nil),
+                            NSLocalizedString(@"rank.lvl.2", nil),
+                            NSLocalizedString(@"rank.lvl.3", nil),
+                            NSLocalizedString(@"rank.lvl.4", nil),
+                            NSLocalizedString(@"rank.lvl.5", nil),
+                            NSLocalizedString(@"rank.lvl.6", nil),
+                            NSLocalizedString(@"rank.lvl.7", nil),
+                            NSLocalizedString(@"rank.lvl.8", nil),
+                            NSLocalizedString(@"rank.lvl.9", nil),
+                            NSLocalizedString(@"rank.lvl.10", nil)][rank];
     return rankTitle;
 }
 

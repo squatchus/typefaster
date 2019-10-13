@@ -29,8 +29,8 @@
                  UNMutableNotificationContent *content = [UNMutableNotificationContent new];
                  content.badge = @(1);
                  content.sound = UNNotificationSound.defaultSound;
-                 content.title = NSLocalizedString(@"reminder.title", @"Печатай быстрее");
-                 content.body = NSLocalizedString(@"reminder.message", @"Потренируйтесь в скорости печати!");
+                 content.title = NSLocalizedString(@"reminder.title", nil);
+                 content.body = NSLocalizedString(@"reminder.message", nil);
                  
                  UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:components repeats:NO];
                  UNNotificationRequest *requset = [UNNotificationRequest requestWithIdentifier:@"local.notification" content:content trigger:trigger];

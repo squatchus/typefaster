@@ -32,10 +32,10 @@
 "common.settings" = "Settings";
 
 /* а начинали со скорости */
-"menu.vm.began.with" = "and began with a speed:";
+"menu.vm.began.with" = "and you began with";
 
 /* Ваш лучший результат */
-"menu.vm.best.result" = "Your best result";
+"menu.vm.best.result" = "Best result";
 
 /* пройдите первую тренировку */
 "menu.vm.complete.first" = "complete the first training";
@@ -104,7 +104,7 @@
 "results.vm.continue" = "Continue";
 
 /* процент\nошибок */
-"results.vm.mistakes" = "typo\npercentage";
+"results.vm.mistakes" = "wrong\nletters";
 
 /* Новый ранг */
 "results.vm.new.rank" = "New rank";
