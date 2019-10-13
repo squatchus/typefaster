@@ -20,12 +20,6 @@
         _signsPerMin = @(best).stringValue;
         
         NSString *chars = [NSString localizedStringWithFormat:NSLocalizedString(@"%d char(s)", nil), best];
-        
-        for (int i=0; i<30; i++)
-        {
-            NSLog(@"i:%d - %@", i, [NSString localizedStringWithFormat:NSLocalizedString(@"%d char(s)", nil), i]);
-        }
-        
         _signsPerMinTitle = [NSString stringWithFormat:@"%@ %@", chars, NSLocalizedString(@"common.per.minute", @"в минуту")];
         
         if (first == 0 && best == 0) {

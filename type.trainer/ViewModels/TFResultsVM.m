@@ -35,7 +35,7 @@
         
         _signsPerMin = @(result.signsPerMin).stringValue;
         
-        NSString *chars = [NSString localizedStringWithFormat:@"%d char(s)", result.signsPerMin];
+        NSString *chars = [NSString localizedStringWithFormat:NSLocalizedString(@"%d char(s)", nil), result.signsPerMin];
         _signsPerMinTitle = [NSString stringWithFormat:@"%@\n%@", chars, NSLocalizedString(@"common.per.minute", @"в минуту")];
         
         int mistakesPercent = result.mistakes * 100 / (level.text.length - ([level.text componentsSeparatedByString:@"\n"].count-1));

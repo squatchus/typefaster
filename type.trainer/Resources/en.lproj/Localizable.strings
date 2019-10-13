@@ -20,7 +20,7 @@
 "button.done" = "Done";
 
 /* в минуту */
-"common.per.minute" = "per minute ";
+"common.per.minute" = "per minute";
 
 /* Оценить */
 "common.rate" = "Rate";
@@ -32,19 +32,19 @@
 "common.settings" = "Settings";
 
 /* а начинали со скорости */
-"menu.vm.began.with" = "and began with a speed: ";
+"menu.vm.began.with" = "and began with a speed:";
 
 /* Ваш лучший результат */
 "menu.vm.best.result" = "Your best result";
 
 /* пройдите первую тренировку */
-"menu.vm.complete.first" = "complete the first training ";
+"menu.vm.complete.first" = "complete the first training";
 
 /* Вы бесподобны :) */
 "menu.vm.incredible" = "You are incredible :)";
 
 /* продолжайте тренироваться */
-"menu.vm.keep.training" = "keep training ";
+"menu.vm.keep.training" = "keep training";
 
 /* мин. */
 "menu.vm.min" = "min.";
@@ -98,13 +98,13 @@
 "reminder.title" = "Type faster";
 
 /* лучший\nрезультат */
-"results.vm.best.result" = "best\\nresult";
+"results.vm.best.result" = "best\nresult";
 
 /* Продолжить */
 "results.vm.continue" = "Continue";
 
 /* процент\nошибок */
-"results.vm.mistakes" = "typo\\npercentage";
+"results.vm.mistakes" = "typo\npercentage";
 
 /* Новый ранг */
 "results.vm.new.rank" = "New rank";
