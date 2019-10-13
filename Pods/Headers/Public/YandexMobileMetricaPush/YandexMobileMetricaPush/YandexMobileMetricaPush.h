@@ -1,1 +1,0 @@
-../../../../YandexMobileMetricaPush/static/YandexMobileMetricaPush.framework/Versions/A/Headers/YandexMobileMetricaPush.h
