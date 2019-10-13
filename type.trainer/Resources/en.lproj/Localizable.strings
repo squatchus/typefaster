@@ -124,3 +124,6 @@
 /* Не позволяет Вам набирать текст, пока не исправлена ошибка. По началу  раздражает, но очень дисциплинирует */
 "settings.vm.strict.typing.info" = "If there is a typo you won't be able to keep typing until you fix it. It can be frustrating at the beginning but will speed up your progress.";
 
+/* No comment provided by engineer. */
+"typing.vm.complete" = "Complete";
+

@@ -15,6 +15,7 @@
 {
     if (self = [super init])
     {
+        _completeTitle = NSLocalizedString(@"typing.vm.complete", nil);
         _level = level;
         _result = [TFSessionResult new];
         _strictTyping = strictTyping;

@@ -24,6 +24,7 @@
 
 @property (nonatomic, strong, readonly) TFTypingVM *viewModel;
 
+@property (weak, nonatomic) IBOutlet UIButton *completeButton;
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statsLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -65,6 +66,8 @@
 - (void)updateWithViewModel:(TFTypingVM *)viewModel
 {
     _viewModel = viewModel;
+    
+    [self.completeButton setTitle:self.viewModel.completeTitle forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,7 +112,7 @@
 
     NSMutableAttributedString *sourceText = [[NSMutableAttributedString alloc] initWithString:self.viewModel.level.text];
     [sourceText addAttribute:NSFontAttributeName
-                       value:[UIFont fontWithName:kBaseFontName size:_textFontSize]
+                       value:self.textViewFont
                        range:NSMakeRange(0, sourceText.length)];
     [sourceText addAttribute:NSForegroundColorAttributeName
                        value:UIColor.tf_dark
@@ -279,7 +282,7 @@
     
     // Базовый стиль текста в textView
     [text addAttribute:NSFontAttributeName
-                 value:[UIFont fontWithName:kBaseFontName size:_textFontSize]
+                 value:self.textViewFont
                  range:NSMakeRange(0, text.length)];
     [text addAttribute:NSForegroundColorAttributeName
                  value:UIColor.tf_dark
@@ -471,6 +474,20 @@
 - (IBAction)onDoneButtonPressed:(UIButton *)sender
 {
     self.onDonePressed ? self.onDonePressed() : nil;
+}
+
+#pragma mark - Helpers
+
+- (UIFont *)textViewFont
+{
+    if (@available(iOS 12.0, *))
+    {
+        return [UIFont monospacedSystemFontOfSize:kBaseFontSize weight:UIFontWeightRegular];
+    }
+    else
+    {
+        return [UIFont fontWithName:kBaseFontName size:kBaseFontSize];
+    }
 }
 
 @end

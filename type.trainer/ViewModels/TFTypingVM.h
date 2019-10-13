@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TFTypingVM : NSObject
 
+@property (nonatomic, strong, readonly) NSString *completeTitle;
 @property (nonatomic, strong, readonly) TFLevel *level;
 @property (nonatomic, strong, readonly) TFSessionResult *result;
 @property (readonly) BOOL strictTyping;
