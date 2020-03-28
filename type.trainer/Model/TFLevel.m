@@ -28,7 +28,7 @@
         NSMutableArray *tokens = [NSMutableArray new];
         NSString *curTokenString = @"";
         int curTokenStart=-1, curTokenEnd=-1;
-        NSCharacterSet *letters = [self cyrillicLetters];
+        NSCharacterSet *letters = NSCharacterSet.letterCharacterSet;
         for (int i=0; i<self.text.length; i++) {
             unichar c = [self.text characterAtIndex:i];
             NSString *cString = [NSString stringWithCharacters:&c length:1];
@@ -55,14 +55,6 @@
         _tokens = tokens.copy;
     }
     return self;
-}
-
-- (NSCharacterSet *)cyrillicLetters
-{
-    NSString *string = @"абвгдеёжзийклмнопрстуфхцчшщьыъэюя";
-    string = [string stringByAppendingString:[string uppercaseString]];
-    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:string];
-    return set;
 }
 
 - (nullable TFToken *)tokenByPosition:(int)position

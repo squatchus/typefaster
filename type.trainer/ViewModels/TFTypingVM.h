@@ -11,9 +11,19 @@
 #import "TFLevel.h"
 #import "TFSessionResult.h"
 
+typedef NS_ENUM(NSUInteger, InputResult) {
+    InputImpossible,
+    InputMistaken,
+    InputCorrect,
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFTypingVM : NSObject
+
+@property (nonatomic, copy) void (^onSessionStarted)(void);
+@property (nonatomic, copy) void (^onSessionEnded)(void);
+@property (nonatomic, copy) void (^onTimerUpdated)(int min, int sec);
 
 @property (nonatomic, strong, readonly) NSString *completeTitle;
 @property (nonatomic, strong, readonly) TFLevel *level;
@@ -22,6 +32,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithLevel:(TFLevel *)level
                  strictTyping:(BOOL)strictTyping;
+
+- (InputResult)processInput:(NSString *)text;
+
+- (BOOL)shiftHidden;
+- (BOOL)backspaceHidden;
+
+- (NSString *)symbolsEnteredString;
+- (NSRange)getCursorRange;
+- (NSAttributedString *)getText;
+- (NSAttributedString *)getCurrentWord;
 
 @end
 

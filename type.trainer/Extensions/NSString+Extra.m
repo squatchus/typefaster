@@ -23,4 +23,21 @@
     return NO;
 }
 
+- (BOOL)newLineAtIndex:(NSUInteger)index
+{
+    if (index < self.length) {
+        unichar c = [self characterAtIndex:index];
+        BOOL newLine = [NSCharacterSet.newlineCharacterSet characterIsMember:c];
+        return newLine;
+    }
+    return NO;
+}
+
+- (NSString *)trimmedSpacesAndNewlines
+{
+    NSCharacterSet *set = NSCharacterSet.whitespaceAndNewlineCharacterSet;
+    NSString *result = [self stringByTrimmingCharactersInSet:set];
+    return result;
+}
+
 @end

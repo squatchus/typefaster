@@ -21,6 +21,7 @@
         _resultsProvider = [TFResultProvider new];
         _sounds = [TFSoundService new];
         _settings = [TFSettingsVM new];
+        _reminder = [TFNotificationService new];
         
         __weak typeof(self) weakSelf = self;
         _leaderboards = [TFLeaderboardService new];
@@ -120,9 +121,9 @@
     };
     settingsVC.onDonePressed = ^{
         [self.sounds playButtonClickSound];
-        [weakSettingsVC.navigationController popViewControllerAnimated:YES];
+        [weakSettingsVC dismissViewControllerAnimated:YES completion:nil];
     };
-    [self.rootNC pushViewController:settingsVC animated:YES];
+    [self.rootNC.topViewController presentViewController:settingsVC animated:YES completion:nil];
 }
 
 - (void)showResultsWithViewModel:(TFResultsVM *)viewModel;
@@ -189,12 +190,10 @@
 
 - (void)shareText:(NSString *)text
 {
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/app/id1013588476"];
-    
-    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text, url] applicationActivities:nil];
-    
+    NSString *urlString = @"https://apps.apple.com/app/id1013588476";
+    text = [text stringByAppendingFormat:@"\n\n%@", urlString];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
     controller.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo, UIActivityTypeAirDrop];
-    
     [self.rootNC presentViewController:controller animated:YES completion:nil];
 }
 

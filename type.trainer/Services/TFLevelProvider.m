@@ -15,15 +15,16 @@
 - (TFLevel *)nextLevelForSettings:(TFSettingsVM *)settings;
 {
     NSMutableArray *disabledCategories = [NSMutableArray new];
-    if (!settings.categoryClassic) [disabledCategories addObject:@"categoryClassic"];
-    if (!settings.categoryCookies) [disabledCategories addObject:@"categoryCookies"];
-    if (!settings.categoryQuotes) [disabledCategories addObject:@"categoryQuotes"];
-    if (!settings.categoryHokku) [disabledCategories addObject:@"categoryHokku"];
+    if (!settings.categoryClassic) [disabledCategories addObject:kCategoryClassic];
+    if (!settings.categoryCookies) [disabledCategories addObject:kCategoryCookies];
+    if (!settings.categoryQuotes) [disabledCategories addObject:kCategoryQuotes];
+    if (!settings.categoryHokku) [disabledCategories addObject:kCategoryHokku];
+    if (!settings.categoryEnglish) [disabledCategories addObject:kCategoryEnglish];
     
     NSMutableArray<TFLevel *> *allowedLevels = [NSMutableArray new];
     for (TFLevel *level in [self levels]) {
         BOOL allowed = ([disabledCategories containsObject:level.category] == NO);
-        if (allowed || disabledCategories.count == 4)
+        if (allowed || disabledCategories.count == 5)
         {
             [allowedLevels addObject:level];
         }

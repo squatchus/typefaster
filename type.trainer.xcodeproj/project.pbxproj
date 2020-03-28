@@ -11,10 +11,12 @@
 		B4066EC2235376D50068954C /* launch_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4066EC0235376D50068954C /* launch_bg@2x.png */; };
 		B4066EC3235376D50068954C /* launch_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4066EC1235376D50068954C /* launch_logo@2x.png */; };
 		B4066EC5235377EC0068954C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4066EC4235377EC0068954C /* Launch Screen.storyboard */; };
+		B422984B2353A393006AC356 /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = B422984A2353A393006AC356 /* Levels.plist */; };
+		B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = B43E4E05242EB7D000050E19 /* NSMutableString+Extra.m */; };
+		B43E4E08242F921000050E19 /* CurrentWordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43E4E07242F921000050E19 /* CurrentWordView.xib */; };
+		B43E4E0E242F943700050E19 /* CurrentWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = B43E4E0D242F943700050E19 /* CurrentWordView.m */; };
+		B43E4E11242F94E200050E19 /* UINib+TFViews.m in Sources */ = {isa = PBXBuildFile; fileRef = B43E4E10242F94E200050E19 /* UINib+TFViews.m */; };
 		B4457CB61B56BFA6003C27A9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */; };
-		B449FAD21B4EED93000EEF4B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */; };
-		B449FAD41B4EED99000EEF4B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B449FAD31B4EED99000EEF4B /* Security.framework */; };
-		B4504F1E2353476A002F9C7D /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4504EBF2353476A002F9C7D /* Levels.plist */; };
 		B4504F1F2353476A002F9C7D /* TFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC02353476A002F9C7D /* TFToken.m */; };
 		B4504F202353476A002F9C7D /* TFLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC12353476A002F9C7D /* TFLevel.m */; };
 		B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC22353476A002F9C7D /* TFSessionResult.m */; };
@@ -69,13 +71,19 @@
 		B4066EC0235376D50068954C /* launch_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch_bg@2x.png"; sourceTree = "<group>"; };
 		B4066EC1235376D50068954C /* launch_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "launch_logo@2x.png"; sourceTree = "<group>"; };
 		B4066EC4235377EC0068954C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		B422984A2353A393006AC356 /* Levels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Levels.plist; path = ../Model/Levels.plist; sourceTree = "<group>"; };
+		B43E4E04242EB7D000050E19 /* NSMutableString+Extra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+Extra.h"; sourceTree = "<group>"; };
+		B43E4E05242EB7D000050E19 /* NSMutableString+Extra.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+Extra.m"; sourceTree = "<group>"; };
+		B43E4E07242F921000050E19 /* CurrentWordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWordView.xib; sourceTree = "<group>"; };
+		B43E4E09242F940400050E19 /* type.trainer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "type.trainer-Bridging-Header.h"; sourceTree = "<group>"; };
+		B43E4E0C242F943700050E19 /* CurrentWordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentWordView.h; sourceTree = "<group>"; };
+		B43E4E0D242F943700050E19 /* CurrentWordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentWordView.m; sourceTree = "<group>"; };
+		B43E4E0F242F94E200050E19 /* UINib+TFViews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINib+TFViews.h"; sourceTree = "<group>"; };
+		B43E4E10242F94E200050E19 /* UINib+TFViews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINib+TFViews.m"; sourceTree = "<group>"; };
 		B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		B449FAD31B4EED99000EEF4B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B4504EBC2353476A002F9C7D /* TFToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFToken.h; sourceTree = "<group>"; };
 		B4504EBD2353476A002F9C7D /* TFSessionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSessionResult.h; sourceTree = "<group>"; };
 		B4504EBE2353476A002F9C7D /* TFLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLevel.h; sourceTree = "<group>"; };
-		B4504EBF2353476A002F9C7D /* Levels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Levels.plist; sourceTree = "<group>"; };
 		B4504EC02353476A002F9C7D /* TFToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFToken.m; sourceTree = "<group>"; };
 		B4504EC12353476A002F9C7D /* TFLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLevel.m; sourceTree = "<group>"; };
 		B4504EC22353476A002F9C7D /* TFSessionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSessionResult.m; sourceTree = "<group>"; };
@@ -141,8 +149,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4457CB61B56BFA6003C27A9 /* AVFoundation.framework in Frameworks */,
-				B449FAD41B4EED99000EEF4B /* Security.framework in Frameworks */,
-				B449FAD21B4EED93000EEF4B /* SystemConfiguration.framework in Frameworks */,
 				B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,8 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				B45E7A4E1B504090006C3A67 /* GameKit.framework */,
-				B449FAD31B4EED99000EEF4B /* Security.framework */,
-				B449FAD11B4EED93000EEF4B /* SystemConfiguration.framework */,
 				B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
@@ -195,10 +199,10 @@
 				B4504EE12353476A002F9C7D /* TFAppCoordinator.h */,
 				B4504EE92353476A002F9C7D /* TFAppCoordinator.m */,
 				B4504EDE2353476A002F9C7D /* Services */,
-				B4504ED52353476A002F9C7D /* Controllers */,
 				B4504EBB2353476A002F9C7D /* Model */,
 				B4504EED2353476A002F9C7D /* View */,
 				B4504ECC2353476A002F9C7D /* ViewModels */,
+				B4504ED52353476A002F9C7D /* Controllers */,
 				B4504EC32353476A002F9C7D /* Extensions */,
 				B4504EF02353476A002F9C7D /* Resources */,
 			);
@@ -231,7 +235,6 @@
 				B4504EC02353476A002F9C7D /* TFToken.m */,
 				B4504EBD2353476A002F9C7D /* TFSessionResult.h */,
 				B4504EC22353476A002F9C7D /* TFSessionResult.m */,
-				B4504EBF2353476A002F9C7D /* Levels.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -241,12 +244,16 @@
 			children = (
 				B4504EC82353476A002F9C7D /* NSString+Extra.h */,
 				B4504EC42353476A002F9C7D /* NSString+Extra.m */,
+				B43E4E04242EB7D000050E19 /* NSMutableString+Extra.h */,
+				B43E4E05242EB7D000050E19 /* NSMutableString+Extra.m */,
 				B4504EC92353476A002F9C7D /* UIAlertController+Alerts.h */,
 				B4504EC52353476A002F9C7D /* UIAlertController+Alerts.m */,
 				B4504EC62353476A002F9C7D /* UIColor+TFColors.h */,
 				B4504ECA2353476A002F9C7D /* UIColor+TFColors.m */,
 				B4504ECB2353476A002F9C7D /* UIStoryboard+TFControllers.h */,
 				B4504EC72353476A002F9C7D /* UIStoryboard+TFControllers.m */,
+				B43E4E0F242F94E200050E19 /* UINib+TFViews.h */,
+				B43E4E10242F94E200050E19 /* UINib+TFViews.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -301,8 +308,11 @@
 		B4504EED2353476A002F9C7D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B43E4E0C242F943700050E19 /* CurrentWordView.h */,
+				B43E4E0D242F943700050E19 /* CurrentWordView.m */,
 				B4504EEF2353476A002F9C7D /* Main.storyboard */,
 				B4066EC4235377EC0068954C /* Launch Screen.storyboard */,
+				B43E4E07242F921000050E19 /* CurrentWordView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +320,8 @@
 		B4504EF02353476A002F9C7D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B43E4E09242F940400050E19 /* type.trainer-Bridging-Header.h */,
+				B422984A2353A393006AC356 /* Levels.plist */,
 				B4066EC0235376D50068954C /* launch_bg@2x.png */,
 				B4066EC1235376D50068954C /* launch_logo@2x.png */,
 				B4504EF12353476A002F9C7D /* Localizable.strings */,
@@ -385,6 +397,7 @@
 					B4010C631B3E08C5000DF339 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = HVARA599XL;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -431,9 +444,10 @@
 				B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */,
 				B4066EC5235377EC0068954C /* Launch Screen.storyboard in Resources */,
 				B4066EC3235376D50068954C /* launch_logo@2x.png in Resources */,
-				B4504F1E2353476A002F9C7D /* Levels.plist in Resources */,
 				B4504F562353476A002F9C7D /* click.wav in Resources */,
 				B4504F592353476A002F9C7D /* new_rank.wav in Resources */,
+				B422984B2353A393006AC356 /* Levels.plist in Resources */,
+				B43E4E08242F921000050E19 /* CurrentWordView.xib in Resources */,
 				B4504F572353476A002F9C7D /* error.wav in Resources */,
 				B4504F582353476A002F9C7D /* new_result.wav in Resources */,
 				B4504F382353476A002F9C7D /* InfoPlist.strings in Resources */,
@@ -457,6 +471,8 @@
 				B4504F302353476A002F9C7D /* TFNotificationService.m in Sources */,
 				B4504F202353476A002F9C7D /* TFLevel.m in Sources */,
 				B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */,
+				B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */,
+				B43E4E11242F94E200050E19 /* UINib+TFViews.m in Sources */,
 				B4504F2D2353476A002F9C7D /* TFMenuVC.m in Sources */,
 				B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */,
 				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
@@ -464,6 +480,7 @@
 				B4504F2C2353476A002F9C7D /* TFTypingVC.m in Sources */,
 				B4504F252353476A002F9C7D /* UIColor+TFColors.m in Sources */,
 				B4504F222353476A002F9C7D /* NSString+Extra.m in Sources */,
+				B43E4E0E242F943700050E19 /* CurrentWordView.m in Sources */,
 				B4504F5A2353476A002F9C7D /* main.m in Sources */,
 				B4504F282353476A002F9C7D /* TFResultsVM.m in Sources */,
 				B4504F272353476A002F9C7D /* TFSettingsVM.m in Sources */,
@@ -639,9 +656,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -649,7 +668,7 @@
 					"$(PROJECT_DIR)/type.trainer",
 				);
 				INFOPLIST_FILE = type.trainer/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
@@ -657,6 +676,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/View/type.trainer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -666,9 +688,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -676,13 +700,15 @@
 					"$(PROJECT_DIR)/type.trainer",
 				);
 				INFOPLIST_FILE = type.trainer/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.suricatum.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/View/type.trainer-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

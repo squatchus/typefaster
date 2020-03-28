@@ -8,6 +8,12 @@
 
 @import Foundation;
 
+#define kCategoryClassic @"categoryClassic"
+#define kCategoryQuotes @"categoryQuotes"
+#define kCategoryHokku @"categoryHokku"
+#define kCategoryCookies @"categoryCookies"
+#define kCategoryEnglish @"categoryQuotesEn"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TFSettingsVM : NSObject
@@ -26,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL categoryQuotes;
 @property BOOL categoryHokku;
 @property BOOL categoryCookies;
+@property BOOL categoryEnglish;
 
 @end
 

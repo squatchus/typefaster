@@ -28,6 +28,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *categoryQuotesButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryHokkuButton;
 @property (weak, nonatomic) IBOutlet UIButton *categoryCookiesButton;
+@property (weak, nonatomic) IBOutlet UIButton *categoryEnglishButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+
 
 @end
 
@@ -58,11 +62,15 @@
     self.categoryQuotesButton.selected = self.viewModel.categoryQuotes;
     self.categoryHokkuButton.selected = self.viewModel.categoryHokku;
     self.categoryCookiesButton.selected = self.viewModel.categoryCookies;
+    self.categoryEnglishButton.selected = self.viewModel.categoryEnglish;
     
     [self updateCategoryButton:_categoryClassicButton];
     [self updateCategoryButton:_categoryQuotesButton];
     [self updateCategoryButton:_categoryHokkuButton];
     [self updateCategoryButton:_categoryCookiesButton];
+    [self updateCategoryButton:_categoryEnglishButton];
+    
+    [self.doneButton setTitle:self.viewModel.doneTitle forState:UIControlStateNormal];
     
     for (UIView *subview in self.view.subviews)
     {
@@ -116,7 +124,12 @@
     if (sender == self.categoryCookiesButton)
     {
         self.viewModel.categoryCookies = self.categoryCookiesButton.selected;
-    }    
+    }
+    if (sender == self.categoryEnglishButton)
+    {
+        self.viewModel.categoryEnglish = self.categoryEnglishButton.selected;
+    }
+    
     [self updateCategoryButton:sender];
     self.onCategorySettingChanged ? self.onCategorySettingChanged() : nil;
 }

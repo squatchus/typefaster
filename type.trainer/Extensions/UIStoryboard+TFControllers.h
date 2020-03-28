@@ -6,7 +6,7 @@
 //  Copyright © 2019 Suricatum. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 #import "TFMenuVC.h"
 #import "TFSettingsVC.h"

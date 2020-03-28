@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSString (Extra)
 
 - (BOOL)isUppercaseAtIndex:(NSUInteger)index;
+- (BOOL)newLineAtIndex:(NSUInteger)index;
+- (NSString *)trimmedSpacesAndNewlines;
 
 @end
 

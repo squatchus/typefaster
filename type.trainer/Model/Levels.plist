@@ -21,8 +21,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Не бросай то, что ты по-настоящему хочешь делать.
-Когда есть любовь и вдохновение, ты вряд ли сделаешь что-то не то.</string>
+		<string>Не бросай то, что ты по-настоящему хочешь делать. Когда есть любовь и вдохновение, ты вряд ли сделаешь что-то не то.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -130,8 +129,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Самый верный признак истины - это простота и ясность.
-Ложь всегда бывает сложна, вычурна и многословна.</string>
+		<string>Самый верный признак истины - это простота и ясность. Ложь всегда бывает сложна, вычурна и многословна.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -153,9 +151,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Нужно знать что потерял за день.
-Тогда не забудешь то, чем овладел за месяц.
-Только это можно назвать любовью к учебе.</string>
+		<string>Нужно знать что потерял за день. Тогда не забудешь то, чем овладел за месяц. Только это можно назвать любовью к учебе.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -334,8 +330,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Я не боюсь смерти.
-Я был мёртв уже миллиарды и миллиарды лет, прежде чем я родился, и не испытывал ни малейшего неудобства от этого.</string>
+		<string>Я не боюсь смерти. Я был мёртв уже миллиарды и миллиарды лет, прежде чем я родился, и не испытывал ни малейшего неудобства от этого.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -378,8 +373,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Протяните руку над бездною.
-Нет страха над бездною, ибо духу страшнее комната и ковер.</string>
+		<string>Протяните руку над бездною. Нет страха над бездною, ибо духу страшнее комната и ковер.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -655,8 +649,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Когда ты родился, ты плакал, а мир смеялся.
-Живи так, чтобы, умирая, ты смеялся, а мир плакал.</string>
+		<string>Когда ты родился, ты плакал, а мир смеялся. Живи так, чтобы, умирая, ты смеялся, а мир плакал.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -1150,8 +1143,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Аскетизм не в том , чтобы ничем не владеть.
-Аскетизм в том, чтобы ничто не владело тобой.</string>
+		<string>Аскетизм не в том, чтобы ничем не владеть. Аскетизм в том, чтобы ничто не владело тобой.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -1237,8 +1229,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Есть только два способа прожить свою жизнь.
-Так, будто никаких чудес не бывает, и так, будто все на свете является чудом.</string>
+		<string>Есть только два способа прожить свою жизнь. Так, будто никаких чудес не бывает, и так, будто все на свете является чудом.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -1344,9 +1335,7 @@
 		<key>category</key>
 		<string>categoryQuotes</string>
 		<key>text</key>
-		<string>Люби землю.
-Она не унаследована тобой у твоих родителей.
-Она одолжена тобой у твоих детей.</string>
+		<string>Люби землю. Она не унаследована тобой у твоих родителей. Она одолжена тобой у твоих детей.</string>
 		<key>title</key>
 		<string>Цитаты</string>
 	</dict>
@@ -1460,6 +1449,218 @@
 Весной зацветет.</string>
 		<key>title</key>
 		<string>Хокку</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Bob Marley</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Emancipate yourselves from mental slavery
+None but ourselves can free our minds
+Have no fear for atomic energy
+Cause none of them can stop the time</string>
+		<key>title</key>
+		<string>Redemption Song</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Sonny Rhodes</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Take my love, take my land
+Take me where I cannot stand
+I don&apos;t care, I&apos;m still free
+You can&apos;t take the sky from me</string>
+		<key>title</key>
+		<string>Ballad of Serenity</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Ralph Waldo Emerson</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>We do not inherit the earth from our ancestors, we borrow it from our children</string>
+		<key>title</key>
+		<string>Indian poverb</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Unknown author</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>You&apos;re a ghost driving a meat coated skeleton made from stardust. What do you have to be afraid of?</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Mark Twain</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>I do not fear death. I had been dead for billions of years before I was born, and had not suffered the slightest inconvenience from it.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>John Lennon</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>If everyone demanded peace instead of another television set, then there&apos;d be peace.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Sri Nisargadatta Maharaj</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>You will receive everything you need when you stop asking for what you do not need</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Albert Einstein</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Albert Einstein</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Two things are infinite: the universe and human stupidity; and I&apos;m not sure about the universe.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Bernard M. Baruch</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Be who you are and say what you feel, because those who mind don&apos;t matter, and those who matter don&apos;t mind.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Mahatma Gandhi</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Live as if you were to die tomorrow. Learn as if you were to live forever.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Martin Luther King Jr.</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Ralph Waldo Emerson</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Rob Siltanen</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>People who are crazy enough to think they can change the world, are the ones who do.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>H. Jackson Brown Jr.</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Twenty years from now you will be more disappointed by the things that you didn&apos;t do than by the ones you did do.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>J.R.R. Tolkien</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>All that is gold does not glitter,
+Not all those who wander are lost;
+The old that is strong does not wither,
+Deep roots are not reached by the frost.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>J.R.R. Tolkien</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>From the ashes a fire shall be woken,
+A light from the shadows shall spring;
+Renewed shall be blade that was broken,
+The crownless again shall be king.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Neil Gaiman</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Fairy tales are more than true: not because they tell us that dragons exist, but because they tell us that dragons can be beaten.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Bill Keane</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>Yesterday is history, tomorrow is a mystery, today is a gift of God, which is why we call it the present.</string>
+		<key>title</key>
+		<string>Quotes</string>
+	</dict>
+	<dict>
+		<key>author</key>
+		<string>Thomas A. Edison</string>
+		<key>category</key>
+		<string>categoryQuotesEn</string>
+		<key>text</key>
+		<string>I have not failed. I&apos;ve just found 10000 ways that won&apos;t work.</string>
+		<key>title</key>
+		<string>Quotes</string>
 	</dict>
 </array>
 </plist>

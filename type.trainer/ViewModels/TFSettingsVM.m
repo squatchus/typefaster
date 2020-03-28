@@ -11,11 +11,6 @@
 #define kNotifications @"notifications"
 #define kStrictTyping @"strictTyping"
 
-#define kCategoryClassic @"categoryClassic"
-#define kCategoryQuotes @"categoryQuotes"
-#define kCategoryHokku @"categoryHokku"
-#define kCategoryCookies @"categoryCookies"
-
 @implementation TFSettingsVM
 
 - (instancetype)init
@@ -28,17 +23,22 @@
             [NSUserDefaults.standardUserDefaults setValue:@(NO) forKey:kNotifications];
         if (![NSUserDefaults.standardUserDefaults valueForKey:kStrictTyping])
             [NSUserDefaults.standardUserDefaults setValue:@(YES) forKey:kStrictTyping];
-                
+        
         // Update button's settings in UserDefaults
         //
+        NSString *langCode = NSBundle.mainBundle.preferredLocalizations.firstObject;
+        BOOL showEngTexts = [langCode isEqualToString:@"en"];
+
         if (![NSUserDefaults.standardUserDefaults valueForKey:kCategoryClassic])
-            [NSUserDefaults.standardUserDefaults setValue:@(YES) forKey:kCategoryClassic];
+            [NSUserDefaults.standardUserDefaults setValue:@(showEngTexts ? NO : YES) forKey:kCategoryClassic];
         if (![NSUserDefaults.standardUserDefaults valueForKey:kCategoryQuotes])
-            [NSUserDefaults.standardUserDefaults setValue:@(YES) forKey:kCategoryQuotes];
+            [NSUserDefaults.standardUserDefaults setValue:@(showEngTexts ? NO : YES) forKey:kCategoryQuotes];
         if (![NSUserDefaults.standardUserDefaults valueForKey:kCategoryHokku])
-            [NSUserDefaults.standardUserDefaults setValue:@(YES) forKey:kCategoryHokku];
+            [NSUserDefaults.standardUserDefaults setValue:@(showEngTexts ? NO : YES) forKey:kCategoryHokku];
         if (![NSUserDefaults.standardUserDefaults valueForKey:kCategoryCookies])
-            [NSUserDefaults.standardUserDefaults setValue:@(YES) forKey:kCategoryCookies];
+            [NSUserDefaults.standardUserDefaults setValue:@(showEngTexts ? NO : YES) forKey:kCategoryCookies];
+        if (![NSUserDefaults.standardUserDefaults valueForKey:kCategoryEnglish])
+        [NSUserDefaults.standardUserDefaults setValue:@(showEngTexts ? YES : NO) forKey:kCategoryEnglish];
         
         [NSUserDefaults.standardUserDefaults synchronize];
         
@@ -117,6 +117,17 @@
 - (BOOL)categoryCookies
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:kCategoryCookies];
+}
+
+- (void)setCategoryEnglish:(BOOL)categoryEnglish
+{
+    [NSUserDefaults.standardUserDefaults setBool:categoryEnglish forKey:kCategoryEnglish];
+    [NSUserDefaults.standardUserDefaults synchronize];
+}
+
+- (BOOL)categoryEnglish
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCategoryEnglish];
 }
 
 @end
