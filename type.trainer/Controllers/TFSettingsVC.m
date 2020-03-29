@@ -79,7 +79,7 @@
         if ([subview isKindOfClass:[UISwitch class]])
         {
             UISwitch *switcher = (UISwitch *)subview;
-            switcher.onTintColor = UIColor.tf_purple;
+            switcher.onTintColor = UIColor.tf_purple_button;
         }
     }
 }
@@ -143,7 +143,7 @@
 
 - (void)updateCategoryButton:(UIButton *)sender
 {
-    UIColor *color = sender.selected ? UIColor.tf_purple : UIColor.tf_light;
+    UIColor *color = sender.selected ? UIColor.tf_purple_button : UIColor.tf_gray_button;
     sender.backgroundColor = color;
 }
 

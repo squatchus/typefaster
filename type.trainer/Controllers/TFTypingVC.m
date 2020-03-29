@@ -64,7 +64,7 @@
     _viewModel = viewModel;
     __weak typeof(self) weakSelf = self;
     _viewModel.onSessionStarted = ^{
-        weakSelf.secondsLabel.textColor = UIColor.tf_purple;
+        weakSelf.secondsLabel.textColor = UIColor.tf_purple_text;
     };
     _viewModel.onTimerUpdated = ^(int min, int sec) {
         weakSelf.secondsLabel.text = [NSString stringWithFormat:@"%d:%02d", min, sec];
@@ -144,10 +144,10 @@
 - (void)pulseTextViewBackgroundColor
 {
     [UIView animateWithDuration:0.15 animations:^{
-        self.view.backgroundColor = UIColor.tf_pink;
+        self.view.backgroundColor = UIColor.tf_background_red;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.15 animations:^{
-            self.view.backgroundColor = [UIColor whiteColor];
+            self.view.backgroundColor = UIColor.tf_background;
         }];
     }];
 }

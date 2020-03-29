@@ -243,11 +243,11 @@
                  value:self.textViewFont
                  range:NSMakeRange(0, text.length)];
     [text addAttribute:NSForegroundColorAttributeName
-                 value:UIColor.tf_dark
+                 value:UIColor.tf_gray_text
                  range:NSMakeRange(0, text.length)];
     // style for printed part
     [text addAttribute:NSForegroundColorAttributeName
-                 value:UIColor.blackColor
+                 value:UIColor.tf_dark_text
                  range:NSMakeRange(0, self.typed_string.length)];
     
     for (int i=0; i<self.typed_string.length; i++)
@@ -286,7 +286,7 @@
                         value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24]
                         range:NSMakeRange(0, currentWord.length)];
     [currentWord addAttribute:NSForegroundColorAttributeName
-                        value:UIColor.blackColor
+                        value:UIColor.tf_dark_text
                         range:NSMakeRange(0, currentWord.length)];
     [currentWord addAttribute:NSForegroundColorAttributeName
                         value:UIColor.tf_green

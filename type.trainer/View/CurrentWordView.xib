@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,7 +36,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="39" height="39"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.70519423479999999" green="0.70517313479999999" blue="0.70518505570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="tf_gray_button"/>
                     <constraints>
                         <constraint firstItem="oN0-t2-1TW" firstAttribute="top" secondItem="aVb-mb-g3A" secondAttribute="top" id="8h7-kW-hsN"/>
                         <constraint firstAttribute="trailing" secondItem="oN0-t2-1TW" secondAttribute="trailing" id="IXe-c7-BZC"/>
@@ -57,7 +58,7 @@
                             </userDefinedRuntimeAttributes>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.70519423479999999" green="0.70517313479999999" blue="0.70518505570000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="tf_gray_button"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="39" id="6Er-fa-tXn"/>
                         <constraint firstAttribute="bottom" secondItem="8dr-bb-bZc" secondAttribute="bottom" id="7y1-Ub-lIw"/>
@@ -68,7 +69,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" name="tf_background"/>
             <constraints>
                 <constraint firstItem="2ld-iF-nUe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="11L-3s-EKc"/>
                 <constraint firstItem="2ld-iF-nUe" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.772947" id="AnY-66-PHe"/>
@@ -95,5 +96,11 @@
     <resources>
         <image name="backspaceIcon" width="25" height="21"/>
         <image name="shiftIcon" width="25" height="21"/>
+        <namedColor name="tf_background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="tf_gray_button">
+            <color white="0.69999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
     </resources>
 </document>

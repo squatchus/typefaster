@@ -20,14 +20,39 @@
     return [UIColor colorWithHexString:@"009900"];
 }
 
-+ (UIColor *)tf_pink
++ (UIColor *)tf_background_red
 {
-    return [UIColor colorWithHexString:@"FFDEDE"];
+    return [UIColor colorNamed:@"tf_background_red"];
 }
 
-+ (UIColor *)tf_purple
++ (UIColor *)tf_background
 {
-    return [UIColor colorWithHexString:@"A54466"];
+    return [UIColor colorNamed:@"tf_background"];
+}
+
++ (UIColor *)tf_gray_button
+{
+    return [UIColor colorNamed:@"tf_gray_button"];
+}
+
++ (UIColor *)tf_purple_button
+{
+    return [UIColor colorNamed:@"tf_purple_button"];
+}
+
++ (UIColor *)tf_gray_text
+{
+    return [UIColor colorNamed:@"tf_text"];
+}
+
++ (UIColor *)tf_dark_text
+{
+    return [UIColor colorNamed:@"tf_dark_text"];
+}
+
++ (UIColor *)tf_purple_text
+{
+    return [UIColor colorNamed:@"tf_purple_text"];
 }
 
 + (UIColor *)tf_dark

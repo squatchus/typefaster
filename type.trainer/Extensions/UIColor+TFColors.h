@@ -14,10 +14,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIColor *)tf_red;
 + (UIColor *)tf_green;
-+ (UIColor *)tf_pink;
-+ (UIColor *)tf_purple;
++ (UIColor *)tf_background_red;
 + (UIColor *)tf_dark;
 + (UIColor *)tf_light;
+
+// match colors from assets
++ (UIColor *)tf_background;
++ (UIColor *)tf_gray_button;
++ (UIColor *)tf_purple_button;
++ (UIColor *)tf_gray_text;
++ (UIColor *)tf_dark_text;
++ (UIColor *)tf_purple_text;
+
+
 
 @end
 

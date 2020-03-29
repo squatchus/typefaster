@@ -51,6 +51,7 @@
 		B4504F5B2353476A002F9C7D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4504F192353476A002F9C7D /* Images.xcassets */; };
 		B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45E7A4E1B504090006C3A67 /* GameKit.framework */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
+		B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4C4CED224301EAA00D38688 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		B45E7A4E1B504090006C3A67 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		B4B7D2CE23534B6900CE09DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		B4C4CED224301EAA00D38688 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +332,7 @@
 				B4504F122353476A002F9C7D /* Sounds */,
 				B4504F182353476A002F9C7D /* main.m */,
 				B4504F192353476A002F9C7D /* Images.xcassets */,
+				B4C4CED224301EAA00D38688 /* Colors.xcassets */,
 				B4504F1D2353476A002F9C7D /* Info.plist */,
 			);
 			path = Resources;
@@ -449,6 +452,7 @@
 				B422984B2353A393006AC356 /* Levels.plist in Resources */,
 				B43E4E08242F921000050E19 /* CurrentWordView.xib in Resources */,
 				B4504F572353476A002F9C7D /* error.wav in Resources */,
+				B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */,
 				B4504F582353476A002F9C7D /* new_result.wav in Resources */,
 				B4504F382353476A002F9C7D /* InfoPlist.strings in Resources */,
 			);
@@ -660,7 +664,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -692,7 +696,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
