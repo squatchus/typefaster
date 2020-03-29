@@ -8,8 +8,12 @@
 
 #import "TFAppCoordinator.h"
 
+#import "type_trainer-Swift.h"
+
 #import "UIStoryboard+TFControllers.h"
 #import "UIAlertController+Alerts.h"
+
+#import "TFMenuVM.h"
 
 @implementation TFAppCoordinator
 
@@ -41,7 +45,7 @@
 
 - (void)showMenu
 {
-    TFMenuVC *menuVC = UIStoryboard.menuVC;
+    MenuVC *menuVC = UIStoryboard.menuVC;
     __weak typeof(menuVC) weakMenuVC = menuVC;
     menuVC.onViewWillAppear = ^{
         TFMenuVM *menuVM = [[TFMenuVM alloc] initWithResultProvider:self.resultsProvider];
@@ -157,9 +161,9 @@
 - (void)reloadBestScoreIfNeeded
 {
     UIViewController *topVC = self.rootNC.topViewController;
-    if ([topVC isKindOfClass:TFMenuVC.class])
+    if ([topVC isKindOfClass:MenuVC.class])
     {
-        TFMenuVC *menuVC = (TFMenuVC *)topVC;
+        MenuVC *menuVC = (MenuVC *)topVC;
         [menuVC reloadViewModel];
     }
     else if ([topVC isKindOfClass:TFResultsVC.class])

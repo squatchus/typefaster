@@ -31,7 +31,6 @@
 		B4504F2A2353476A002F9C7D /* TFSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED62353476A002F9C7D /* TFSettingsVC.m */; };
 		B4504F2B2353476A002F9C7D /* TFResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED72353476A002F9C7D /* TFResultsVC.m */; };
 		B4504F2C2353476A002F9C7D /* TFTypingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED82353476A002F9C7D /* TFTypingVC.m */; };
-		B4504F2D2353476A002F9C7D /* TFMenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED92353476A002F9C7D /* TFMenuVC.m */; };
 		B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE02353476A002F9C7D /* TFLeaderboardService.m */; };
 		B4504F2F2353476A002F9C7D /* TFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE32353476A002F9C7D /* TFAppDelegate.m */; };
 		B4504F302353476A002F9C7D /* TFNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE42353476A002F9C7D /* TFNotificationService.m */; };
@@ -50,6 +49,7 @@
 		B4504F5A2353476A002F9C7D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504F182353476A002F9C7D /* main.m */; };
 		B4504F5B2353476A002F9C7D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4504F192353476A002F9C7D /* Images.xcassets */; };
 		B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45E7A4E1B504090006C3A67 /* GameKit.framework */; };
+		B47742232430FE9B00E1062A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47742222430FE9B00E1062A /* MenuVC.swift */; };
 		B49D0F572430A78B003CA6E2 /* UIScreen+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D0F562430A78B003CA6E2 /* UIScreen+Extra.m */; };
 		B49D0F5A2430CE68003CA6E2 /* TFTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D0F592430CE68003CA6E2 /* TFTextView.m */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
@@ -109,11 +109,9 @@
 		B4504ED62353476A002F9C7D /* TFSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettingsVC.m; sourceTree = "<group>"; };
 		B4504ED72353476A002F9C7D /* TFResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFResultsVC.m; sourceTree = "<group>"; };
 		B4504ED82353476A002F9C7D /* TFTypingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTypingVC.m; sourceTree = "<group>"; };
-		B4504ED92353476A002F9C7D /* TFMenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFMenuVC.m; sourceTree = "<group>"; };
 		B4504EDA2353476A002F9C7D /* TFTypingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTypingVC.h; sourceTree = "<group>"; };
 		B4504EDB2353476A002F9C7D /* TFResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFResultsVC.h; sourceTree = "<group>"; };
 		B4504EDC2353476A002F9C7D /* TFSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSettingsVC.h; sourceTree = "<group>"; };
-		B4504EDD2353476A002F9C7D /* TFMenuVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFMenuVC.h; sourceTree = "<group>"; };
 		B4504EDF2353476A002F9C7D /* TFLevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLevelProvider.h; sourceTree = "<group>"; };
 		B4504EE02353476A002F9C7D /* TFLeaderboardService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLeaderboardService.m; sourceTree = "<group>"; };
 		B4504EE12353476A002F9C7D /* TFAppCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAppCoordinator.h; sourceTree = "<group>"; };
@@ -142,6 +140,7 @@
 		B4504F1B2353476A002F9C7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4504F1D2353476A002F9C7D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B45E7A4E1B504090006C3A67 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		B47742222430FE9B00E1062A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		B49D0F552430A78B003CA6E2 /* UIScreen+Extra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScreen+Extra.h"; sourceTree = "<group>"; };
 		B49D0F562430A78B003CA6E2 /* UIScreen+Extra.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+Extra.m"; sourceTree = "<group>"; };
 		B49D0F582430CE68003CA6E2 /* TFTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFTextView.h; sourceTree = "<group>"; };
@@ -286,8 +285,7 @@
 		B4504ED52353476A002F9C7D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B4504EDD2353476A002F9C7D /* TFMenuVC.h */,
-				B4504ED92353476A002F9C7D /* TFMenuVC.m */,
+				B47742222430FE9B00E1062A /* MenuVC.swift */,
 				B4504EDC2353476A002F9C7D /* TFSettingsVC.h */,
 				B4504ED62353476A002F9C7D /* TFSettingsVC.m */,
 				B4504EDA2353476A002F9C7D /* TFTypingVC.h */,
@@ -488,10 +486,10 @@
 				B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */,
 				B43E4E11242F94E200050E19 /* UINib+TFViews.m in Sources */,
 				B49D0F5A2430CE68003CA6E2 /* TFTextView.m in Sources */,
-				B4504F2D2353476A002F9C7D /* TFMenuVC.m in Sources */,
 				B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */,
 				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
 				B4504F242353476A002F9C7D /* UIStoryboard+TFControllers.m in Sources */,
+				B47742232430FE9B00E1062A /* MenuVC.swift in Sources */,
 				B49D0F572430A78B003CA6E2 /* UIScreen+Extra.m in Sources */,
 				B4504F2C2353476A002F9C7D /* TFTypingVC.m in Sources */,
 				B4504F252353476A002F9C7D /* UIColor+TFColors.m in Sources */,
@@ -677,6 +675,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -692,7 +691,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/View/type.trainer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/Resources/type.trainer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -709,6 +708,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -723,7 +723,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/View/type.trainer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/Resources/type.trainer-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -732,6 +732,7 @@
 		B4010C8B1B3E08C5000DF339 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -752,6 +753,7 @@
 		B4010C8C1B3E08C5000DF339 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

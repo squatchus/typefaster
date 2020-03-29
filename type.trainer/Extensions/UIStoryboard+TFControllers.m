@@ -8,9 +8,11 @@
 
 #import "UIStoryboard+TFControllers.h"
 
+#import "type_trainer-Swift.h"
+
 @implementation UIStoryboard (TFControllers)
 
-+ (TFMenuVC *)menuVC
++ (MenuVC *)menuVC
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     return [storyboard instantiateViewControllerWithIdentifier:@"menu.vc"];

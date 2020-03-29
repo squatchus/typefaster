@@ -8,16 +8,17 @@
 
 @import UIKit;
 
-#import "TFMenuVC.h"
 #import "TFSettingsVC.h"
 #import "TFResultsVC.h"
 #import "TFTypingVC.h"
+
+@class MenuVC;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIStoryboard (TFControllers)
 
-+ (TFMenuVC *)menuVC;
++ (MenuVC *)menuVC;
 + (TFSettingsVC *)settingsVC;
 + (TFTypingVC *)typingVC;
 + (TFResultsVC *)resultsVC;

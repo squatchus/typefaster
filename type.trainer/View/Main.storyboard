@@ -26,7 +26,7 @@
         <!--MenuVC-->
         <scene sceneID="Gah-p5-dvT">
             <objects>
-                <viewController storyboardIdentifier="menu.vc" id="mxu-bG-8Jk" customClass="TFMenuVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="menu.vc" id="mxu-bG-8Jk" customClass="MenuVC" customModule="type_trainer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y2K-wh-KiE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,7 +228,7 @@
                                     <color key="titleColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onRateButtonPressed:" destination="mxu-bG-8Jk" eventType="touchUpInside" id="R9B-Dj-qMp"/>
+                                    <action selector="onRateButtonPressed:" destination="mxu-bG-8Jk" eventType="touchUpInside" id="UNY-OQ-xeq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Z1-Sq-wmu">
@@ -365,7 +365,7 @@
                         <outlet property="starWidthConstraint" destination="Qfh-1l-2za" id="Gc6-Fl-WSP"/>
                         <outlet property="startTypingButton" destination="3t7-TJ-0iS" id="0uB-4i-tob"/>
                         <outlet property="topMargin" destination="EoP-t4-HKY" id="GOo-v0-hJl"/>
-                        <outlet property="yourSpeedLabel" destination="n5V-XX-98H" id="G84-Tv-W3u"/>
+                        <outlet property="yourSpeedLabel" destination="n5V-XX-98H" id="2js-kX-hpj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKa-44-YTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1231,7 +1231,7 @@
             <color red="0.6470000147819519" green="0.2669999897480011" blue="0.40000000596046448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="tf_text">
-            <color red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
