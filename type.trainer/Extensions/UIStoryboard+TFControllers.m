@@ -12,12 +12,6 @@
 
 @implementation UIStoryboard (TFControllers)
 
-+ (MenuVC *)menuVC
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"menu.vc"];
-}
-
 + (TFSettingsVC *)settingsVC
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

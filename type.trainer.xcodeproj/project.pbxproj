@@ -27,7 +27,6 @@
 		B4504F262353476A002F9C7D /* TFTypingVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECD2353476A002F9C7D /* TFTypingVM.m */; };
 		B4504F272353476A002F9C7D /* TFSettingsVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECE2353476A002F9C7D /* TFSettingsVM.m */; };
 		B4504F282353476A002F9C7D /* TFResultsVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECF2353476A002F9C7D /* TFResultsVM.m */; };
-		B4504F292353476A002F9C7D /* TFMenuVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED02353476A002F9C7D /* TFMenuVM.m */; };
 		B4504F2A2353476A002F9C7D /* TFSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED62353476A002F9C7D /* TFSettingsVC.m */; };
 		B4504F2B2353476A002F9C7D /* TFResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED72353476A002F9C7D /* TFResultsVC.m */; };
 		B4504F2C2353476A002F9C7D /* TFTypingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED82353476A002F9C7D /* TFTypingVC.m */; };
@@ -53,6 +52,8 @@
 		B49D0F572430A78B003CA6E2 /* UIScreen+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D0F562430A78B003CA6E2 /* UIScreen+Extra.m */; };
 		B49D0F5A2430CE68003CA6E2 /* TFTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D0F592430CE68003CA6E2 /* TFTextView.m */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
+		B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5324314990004C6C54 /* MenuVM.swift */; };
+		B4C34E56243154A4004C6C54 /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C34E55243154A4004C6C54 /* MenuVC.xib */; };
 		B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4C4CED224301EAA00D38688 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -101,11 +102,9 @@
 		B4504ECD2353476A002F9C7D /* TFTypingVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTypingVM.m; sourceTree = "<group>"; };
 		B4504ECE2353476A002F9C7D /* TFSettingsVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettingsVM.m; sourceTree = "<group>"; };
 		B4504ECF2353476A002F9C7D /* TFResultsVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFResultsVM.m; sourceTree = "<group>"; };
-		B4504ED02353476A002F9C7D /* TFMenuVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFMenuVM.m; sourceTree = "<group>"; };
 		B4504ED12353476A002F9C7D /* TFResultsVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFResultsVM.h; sourceTree = "<group>"; };
 		B4504ED22353476A002F9C7D /* TFSettingsVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSettingsVM.h; sourceTree = "<group>"; };
 		B4504ED32353476A002F9C7D /* TFTypingVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTypingVM.h; sourceTree = "<group>"; };
-		B4504ED42353476A002F9C7D /* TFMenuVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFMenuVM.h; sourceTree = "<group>"; };
 		B4504ED62353476A002F9C7D /* TFSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettingsVC.m; sourceTree = "<group>"; };
 		B4504ED72353476A002F9C7D /* TFResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFResultsVC.m; sourceTree = "<group>"; };
 		B4504ED82353476A002F9C7D /* TFTypingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTypingVC.m; sourceTree = "<group>"; };
@@ -147,6 +146,8 @@
 		B49D0F592430CE68003CA6E2 /* TFTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFTextView.m; sourceTree = "<group>"; };
 		B4B7D2CE23534B6900CE09DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		B4C34E5324314990004C6C54 /* MenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVM.swift; sourceTree = "<group>"; };
+		B4C34E55243154A4004C6C54 /* MenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
 		B4C4CED224301EAA00D38688 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -270,8 +271,7 @@
 		B4504ECC2353476A002F9C7D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B4504ED42353476A002F9C7D /* TFMenuVM.h */,
-				B4504ED02353476A002F9C7D /* TFMenuVM.m */,
+				B4C34E5324314990004C6C54 /* MenuVM.swift */,
 				B4504ED22353476A002F9C7D /* TFSettingsVM.h */,
 				B4504ECE2353476A002F9C7D /* TFSettingsVM.m */,
 				B4504ED32353476A002F9C7D /* TFTypingVM.h */,
@@ -316,6 +316,7 @@
 		B4504EED2353476A002F9C7D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B4C34E55243154A4004C6C54 /* MenuVC.xib */,
 				B43E4E0C242F943700050E19 /* CurrentWordView.h */,
 				B43E4E0D242F943700050E19 /* CurrentWordView.m */,
 				B4504EEF2353476A002F9C7D /* Main.storyboard */,
@@ -402,7 +403,7 @@
 		B4010C5C1B3E08C4000DF339 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = Suricatum;
 				TargetAttributes = {
 					B4010C631B3E08C5000DF339 = {
@@ -459,6 +460,7 @@
 				B4504F592353476A002F9C7D /* new_rank.wav in Resources */,
 				B422984B2353A393006AC356 /* Levels.plist in Resources */,
 				B43E4E08242F921000050E19 /* CurrentWordView.xib in Resources */,
+				B4C34E56243154A4004C6C54 /* MenuVC.xib in Resources */,
 				B4504F572353476A002F9C7D /* error.wav in Resources */,
 				B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */,
 				B4504F582353476A002F9C7D /* new_result.wav in Resources */,
@@ -506,8 +508,8 @@
 				B4504F2F2353476A002F9C7D /* TFAppDelegate.m in Sources */,
 				B4504F2A2353476A002F9C7D /* TFSettingsVC.m in Sources */,
 				B4504F332353476A002F9C7D /* TFResultProvider.m in Sources */,
-				B4504F292353476A002F9C7D /* TFMenuVM.m in Sources */,
 				B4504F262353476A002F9C7D /* TFTypingVM.m in Sources */,
+				B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +662,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

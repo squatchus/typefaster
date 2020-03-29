@@ -13,8 +13,6 @@
 #import "UIStoryboard+TFControllers.h"
 #import "UIAlertController+Alerts.h"
 
-#import "TFMenuVM.h"
-
 @implementation TFAppCoordinator
 
 - (instancetype)init
@@ -45,12 +43,8 @@
 
 - (void)showMenu
 {
-    MenuVC *menuVC = UIStoryboard.menuVC;
-    __weak typeof(menuVC) weakMenuVC = menuVC;
-    menuVC.onViewWillAppear = ^{
-        TFMenuVM *menuVM = [[TFMenuVM alloc] initWithResultProvider:self.resultsProvider];
-        [weakMenuVC updateWithViewModel:menuVM];
-    };
+    MenuVM *menuVM = [[MenuVM alloc] initWithResultProvider:self.resultsProvider];
+    MenuVC *menuVC = [[MenuVC alloc] initWithViewModel:menuVM];
     menuVC.onLeaderboardPressed = ^{
         [self.sounds playButtonClickSound];
         if ([self.leaderboards canShowLeaderboard]) {

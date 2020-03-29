@@ -10,19 +10,17 @@ import UIKit
 
 class MenuVC: UIViewController {
 
-    @objc var onViewWillAppear: (()->())!
+    @objc var viewModel: MenuVM
+
     @objc var onLeaderboardPressed: (()->())!
     @objc var onPlayPressed: (()->())!
     @objc var onRatePressed: (()->())!
     @objc var onSetttingsPressed: (()->())!
     
-    @objc var viewModel: TFMenuVM!
-    
     @IBOutlet weak var yourSpeedLabel: UILabel!
     @IBOutlet weak var signsPerMinLabel: UILabel!
     @IBOutlet weak var signsPerMinTitleLabel: UILabel!
     @IBOutlet weak var firstResultLabel: UILabel!
-
     @IBOutlet weak var rankHintLabel: UILabel!
 
     @IBOutlet weak var starView1: UIImageView!
@@ -30,12 +28,12 @@ class MenuVC: UIViewController {
     @IBOutlet weak var starView3: UIImageView!
     @IBOutlet weak var starView4: UIImageView!
     @IBOutlet weak var starView5: UIImageView!
+    
     @IBOutlet weak var starHeightConstraint: NSLayoutConstraint!;
     @IBOutlet weak var starWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var leaderboardWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var rankTopSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var rankBottomSpaceConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var topMargin: NSLayoutConstraint!
     @IBOutlet weak var bottomMargin: NSLayoutConstraint!
 
@@ -44,50 +42,44 @@ class MenuVC: UIViewController {
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
 
+    @objc init(viewModel: MenuVM) {
+        self.viewModel = viewModel
+        super.init(nibName: "MenuVC", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        onViewWillAppear?()
-        self.topMargin.constant = UIScreen.verticalMarginForDevice()
-        self.bottomMargin.constant = UIScreen.verticalMarginForDevice();
+        topMargin.constant = UIScreen.verticalMarginForDevice()
+        bottomMargin.constant = UIScreen.verticalMarginForDevice();
+        reloadViewModel()
     }
     
     @objc func reloadViewModel() {
-        self.updateWith(viewModel: self.viewModel)
-    }
+        yourSpeedLabel.text = viewModel.bestResultTitle;
+        signsPerMinLabel.text = viewModel.signsPerMin;
+        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle;
+        firstResultLabel.text = viewModel.firstResultTitle;
+        rankHintLabel.text = viewModel.rankSubtitle;
 
-    @objc func updateWith(viewModel: TFMenuVM) {
-        self.viewModel = viewModel;
-        
-        self.yourSpeedLabel.text = self.viewModel.bestResultTitle;
-        self.signsPerMinLabel.text = self.viewModel.signsPerMin;
-        self.signsPerMinTitleLabel.text = self.viewModel.signsPerMinTitle;
-        self.firstResultLabel.text = self.viewModel.firstResultTitle;
-        
-        var numberOfFullStars = self.viewModel.stars
-        let halfStar = (self.viewModel.stars-numberOfFullStars > 0)
-        let stars = [self.starView1, self.starView2, self.starView3, self.starView4, self.starView5]
-        for starView in stars {
-            if numberOfFullStars > 0 {
-                starView?.image = UIImage(named: "star_gold.png")
-            } else if numberOfFullStars == 0 && halfStar {
-                starView?.image = UIImage(named: "star_goldgray.png")
-            } else {
-                starView?.image = UIImage(named: "star_gray.png")
-            }
-            numberOfFullStars -= 1;
+        let starViews = [starView1, starView2, starView3, starView4, starView5]
+        let starNames = viewModel.starImageNames()
+        for (i, starView) in starViews.enumerated() {
+            starView?.image = UIImage(named: starNames[i])
         }
-        
-        self.gameCenterButton.setTitle(self.viewModel.rankTitle, for: .normal)
-        self.rankHintLabel.text = self.viewModel.rankSubtitle;
 
-        self.startTypingButton.setTitle(self.viewModel.typeFasterTitle, for: .normal)
-        self.settingsButton.setTitle(self.viewModel.settingsTitle, for: .normal)
-        self.rateButton.setTitle(self.viewModel.rateTitle, for: .normal)
+        gameCenterButton.setTitle(viewModel.rankTitle, for: .normal)
+        startTypingButton.setTitle(viewModel.typeFasterTitle, for: .normal)
+        settingsButton.setTitle(viewModel.settingsTitle, for: .normal)
+        rateButton.setTitle(viewModel.rateTitle, for: .normal)
 
-        self.rateButton.layer.cornerRadius = self.rateButton.frame.size.height/2.0;
-        self.settingsButton.layer.cornerRadius = self.settingsButton.frame.size.height/2.0;
-        self.gameCenterButton.layer.cornerRadius = self.gameCenterButton.frame.size.height/2.0;
-        self.startTypingButton.layer.cornerRadius = self.startTypingButton.frame.size.height/2.0;
+        rateButton.layer.cornerRadius = rateButton.frame.size.height/2.0;
+        settingsButton.layer.cornerRadius = settingsButton.frame.size.height/2.0;
+        gameCenterButton.layer.cornerRadius = gameCenterButton.frame.size.height/2.0;
+        startTypingButton.layer.cornerRadius = startTypingButton.frame.size.height/2.0;
     }
     
     // MARK: Actions
