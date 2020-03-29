@@ -51,6 +51,7 @@
 		B4504F5B2353476A002F9C7D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4504F192353476A002F9C7D /* Images.xcassets */; };
 		B45E7A4F1B504090006C3A67 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B45E7A4E1B504090006C3A67 /* GameKit.framework */; };
 		B49D0F572430A78B003CA6E2 /* UIScreen+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D0F562430A78B003CA6E2 /* UIScreen+Extra.m */; };
+		B49D0F5A2430CE68003CA6E2 /* TFTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B49D0F592430CE68003CA6E2 /* TFTextView.m */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
 		B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4C4CED224301EAA00D38688 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
@@ -143,6 +144,8 @@
 		B45E7A4E1B504090006C3A67 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		B49D0F552430A78B003CA6E2 /* UIScreen+Extra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScreen+Extra.h"; sourceTree = "<group>"; };
 		B49D0F562430A78B003CA6E2 /* UIScreen+Extra.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+Extra.m"; sourceTree = "<group>"; };
+		B49D0F582430CE68003CA6E2 /* TFTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TFTextView.h; sourceTree = "<group>"; };
+		B49D0F592430CE68003CA6E2 /* TFTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TFTextView.m; sourceTree = "<group>"; };
 		B4B7D2CE23534B6900CE09DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4C4CED224301EAA00D38688 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -320,6 +323,8 @@
 				B4504EEF2353476A002F9C7D /* Main.storyboard */,
 				B4066EC4235377EC0068954C /* Launch Screen.storyboard */,
 				B43E4E07242F921000050E19 /* CurrentWordView.xib */,
+				B49D0F582430CE68003CA6E2 /* TFTextView.h */,
+				B49D0F592430CE68003CA6E2 /* TFTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */,
 				B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */,
 				B43E4E11242F94E200050E19 /* UINib+TFViews.m in Sources */,
+				B49D0F5A2430CE68003CA6E2 /* TFTextView.m in Sources */,
 				B4504F2D2353476A002F9C7D /* TFMenuVC.m in Sources */,
 				B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */,
 				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
@@ -670,7 +676,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -702,7 +708,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

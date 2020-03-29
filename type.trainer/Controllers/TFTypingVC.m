@@ -10,6 +10,7 @@
 
 #import "UIColor+TFColors.h"
 #import "UINib+TFViews.h"
+#import "TFTextView.h"
 
 #pragma mark - Controller
 
@@ -20,10 +21,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statsLabel;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet TFTextView *textView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMargin;
 
 @property (strong, nonatomic) CurrentWordView *currentWord;
+@property CGFloat maxKeyboardHeight;
 
 @end
 
@@ -73,6 +75,7 @@
         weakSelf.secondsLabel.textColor = UIColor.tf_light;
         weakSelf.onLevelCompleted ? weakSelf.onLevelCompleted(weakSelf.viewModel) : nil;
     };
+    self.textView.viewModel = _viewModel;
     [self.completeButton setTitle:self.viewModel.completeTitle forState:UIControlStateNormal];
     [self update];
     [self updateTextViewLayout];
@@ -102,10 +105,7 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    // ignore smart keyboard behaviour (like double space / '.')
-    if (text.length > 1) return NO;
-    // process input
-    InputResult result = [self.viewModel processInput:text];
+    InputResult result = [self.viewModel processInput:text range:range];
     // show results
     [self update];
     // respond to results
@@ -158,10 +158,13 @@
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardFrame = [keyboardFrameBegin CGRectValue];
     NSTimeInterval duration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    if (keyboardFrame.size.height > self.maxKeyboardHeight) {
+        self.maxKeyboardHeight = keyboardFrame.size.height;
+    }
     
     [self.view layoutIfNeeded];
     [UIView animateWithDuration:duration animations:^{
-        self.bottomMargin.constant = keyboardFrame.size.height;
+        self.bottomMargin.constant = self.maxKeyboardHeight;
         [self.view layoutIfNeeded];
     }];
 }

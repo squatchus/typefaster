@@ -75,23 +75,56 @@
     self.onTimerUpdated ? self.onTimerUpdated(min, sec) : nil;
 }
 
-- (InputResult)processInput:(NSString *)text
+- (InputResult)processInput:(NSString *)input range:(NSRange)range
 {
-    if ([self keyCanBeTyped:text])
+    BOOL impossibleOccured = NO;
+    BOOL mistakeOccured = NO;
+    
+    // process backspaces
+    NSInteger backspacesNeeded = self.typed_string.length - range.location;
+    for (int i=0; i<backspacesNeeded; i++) {
+        NSString *backspace = @"";
+        InputResult result = [self processKey:backspace];
+        if (result == InputImpossible) impossibleOccured = YES;
+        if (result == InputMistaken) mistakeOccured = YES;
+    }
+    
+    // process typed text
+    for (int i=0; i<input.length; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *key = (input.length > 0) ? [input substringWithRange:range] : input;
+        // process input
+        InputResult result = [self processKey:key];
+        if (result == InputImpossible) impossibleOccured = YES;
+        if (result == InputMistaken) mistakeOccured = YES;
+    }
+    
+    if (impossibleOccured) {
+        return InputImpossible;
+    } else if (mistakeOccured) {
+        return InputMistaken;
+    } else {
+        return InputCorrect;
+    }
+}
+
+- (InputResult)processKey:(NSString *)key
+{
+    if ([self keyCanBeTyped:key])
     {
         long typedLength = self.typed_string.length;
         BOOL newLineExpceted = [self.level.text newLineAtIndex:typedLength];
-        if (newLineExpceted && [text isEqualToString:@" "]) {
-            text = @"\n";
+        if (newLineExpceted && [key isEqualToString:@" "]) {
+            key = @"\n";
         }
         // start session if key was typed for the first time
         if (!self.timer) [self startSession];
         // perform input
-        BOOL backspaceTyped = (text && text.length == 0);
+        BOOL backspaceTyped = (key && key.length == 0);
         if (backspaceTyped) {
             [self.typed_string deleteLastCharacter];
         } else {
-            [self.typed_string appendString:text];
+            [self.typed_string appendString:key];
         }
         // update awaited key
         self.awaited_key = [self nextAwaitedKey];
@@ -141,8 +174,8 @@
 {
     long typedLength = self.typed_string.length;
     
-    BOOL backspaceOnStart = (keyString.length == 0 && typedLength == 0);
-    BOOL notBackspace = (keyString.length != 0);
+    BOOL backspace = (keyString.length == 0);
+    BOOL backspaceOnStart = (backspace && typedLength == 0);
     BOOL typedToEnd = (typedLength == self.level.text.length);
     BOOL newLineTyped = [keyString isEqualToString:@"\n"];
     BOOL newLineExpceted = [self.awaited_key isEqualToString:@"\n"];
@@ -151,7 +184,7 @@
     // restrictions
     if (backspaceOnStart)
         return NO;
-    if (notBackspace && typedToEnd)
+    if (!backspace && typedToEnd)
         return NO;
     if (newLineTyped && !newLineExpceted)
         return NO;
@@ -159,14 +192,15 @@
         return NO;
     
     if (self.strictTyping) {
-        BOOL matchAwaited = [keyString isSmartEqualToKey:self.awaited_key];
-        if (matchAwaited) {
+        if ([keyString isSmartEqualToKey:self.awaited_key]) {
             return YES; // backspace or key match
-        } else if (notBackspace && symbolExpected)
+        } else if (!backspace && symbolExpected) {
             return YES; // type 1 wrong key
-        else return NO;
+        } else {
+            return NO;
+        }
     }
-    else {
+    else { // non strict typing
         return YES;
     }
 }

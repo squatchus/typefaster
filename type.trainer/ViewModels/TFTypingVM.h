@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithLevel:(TFLevel *)level
                  strictTyping:(BOOL)strictTyping;
 
-- (InputResult)processInput:(NSString *)text;
+- (InputResult)processInput:(NSString *)input range:(NSRange)range;
 
 - (BOOL)shiftHidden;
 - (BOOL)backspaceHidden;
