@@ -8,6 +8,8 @@
 
 #import "TFResultsVC.h"
 
+#import "UIScreen+Extra.h"
+
 @interface TFResultsVC ()
 
 @property (strong, nonatomic, readonly) TFResultsVM *viewModel;
@@ -28,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *starView5;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *starHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *starWidthConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topMargin;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMargin;
 
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
@@ -89,6 +94,9 @@
 {
     [super viewWillAppear:animated];
     self.onViewWillAppear ? self.onViewWillAppear() : nil;
+    
+    self.topMargin.constant = UIScreen.verticalMarginForDevice;
+    self.bottomMargin.constant = UIScreen.verticalMarginForDevice;
 }
 
 #pragma mark - IBActions

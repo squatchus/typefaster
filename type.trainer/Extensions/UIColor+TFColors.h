@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIColor *)tf_background;
 + (UIColor *)tf_gray_button;
 + (UIColor *)tf_purple_button;
-+ (UIColor *)tf_gray_text;
++ (UIColor *)tf_light_text;
 + (UIColor *)tf_dark_text;
 + (UIColor *)tf_purple_text;
 

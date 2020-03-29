@@ -8,6 +8,8 @@
 
 #import "TFMenuVC.h"
 
+#import "UIScreen+Extra.h"
+
 @interface TFMenuVC()
 
 @property (strong, nonatomic, readonly) TFMenuVM *viewModel;
@@ -29,6 +31,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leaderboardWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankTopSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rankBottomSpaceConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topMargin;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMargin;
 
 @property (weak, nonatomic) IBOutlet UIButton *startTypingButton;
 @property (weak, nonatomic) IBOutlet UIButton *gameCenterButton;
@@ -84,6 +89,9 @@
 {
     [super viewWillAppear:animated];
     self.onViewWillAppear ? self.onViewWillAppear() : nil;
+    
+    self.topMargin.constant = UIScreen.verticalMarginForDevice;
+    self.bottomMargin.constant = UIScreen.verticalMarginForDevice;
 }
 
 #pragma mark - IBActions

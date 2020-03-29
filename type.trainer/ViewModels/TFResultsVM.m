@@ -23,7 +23,7 @@
         {
             NSString *newRank = NSLocalizedString(@"results.vm.new.rank", nil);
             NSString *rankTitle = [provider rankTitleBySpeed:best];
-            _resultTitle = [NSString stringWithFormat:@"%@ - %@!", newRank, rankTitle];
+            _resultTitle = [NSString stringWithFormat:@"%@:\n%@!", newRank, rankTitle];
         }
         else if (event == TFResultEventNewRecord)
             _resultTitle = NSLocalizedString(@"results.vm.new.record", nil);

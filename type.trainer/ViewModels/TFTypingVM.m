@@ -13,6 +13,7 @@
 #import "UIColor+TFColors.h"
 #import "NSString+Extra.h"
 #import "NSMutableString+Extra.h"
+#import "UIScreen+Extra.h"
 
 #define kBaseFontSize 16
 #define kBaseFontName @"HelveticaNeue"
@@ -240,10 +241,10 @@
     
     // style for original text
     [text addAttribute:NSFontAttributeName
-                 value:self.textViewFont
+                 value:UIScreen.textFontForDevice
                  range:NSMakeRange(0, text.length)];
     [text addAttribute:NSForegroundColorAttributeName
-                 value:UIColor.tf_gray_text
+                 value:UIColor.tf_light_text
                  range:NSMakeRange(0, text.length)];
     // style for printed part
     [text addAttribute:NSForegroundColorAttributeName
@@ -306,21 +307,6 @@
 - (void)dealloc
 {
     self.timer.isValid ? [self.timer invalidate] : nil;
-}
-
-- (UIFont *)textViewFont
-{
-    int screenHeight = UIScreen.mainScreen.bounds.size.height;
-    NSDictionary *fontSizes = @{
-        @"896": @(18), // 11, 11 pro max
-        @"812": @(17), // 11 pro
-        @"736": @(18), // 6+/7+/8+
-        @"667": @(17), // 6/7/8
-        @"568": @(16), // SE
-    };
-    NSNumber *sizeNumber = fontSizes[@(screenHeight).stringValue];
-    CGFloat size = sizeNumber ? sizeNumber.floatValue : 16.0;
-    return [UIFont monospacedSystemFontOfSize:size weight:UIFontWeightRegular];
 }
 
 @end

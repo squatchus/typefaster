@@ -9,12 +9,16 @@
 #import "TFSettingsVC.h"
 
 #import "UIColor+TFColors.h"
+#import "UIScreen+Extra.h"
 
 @interface TFSettingsVC ()
 
 @property (strong, nonatomic, readonly) TFSettingsVM *viewModel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *doneWidthConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topMargin;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomMargin;
 
 @property (weak, nonatomic) IBOutlet UILabel *settingsTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *notificationTitleLabel;
@@ -88,6 +92,9 @@
 {
     [super viewWillAppear:animated];
     self.onViewWillAppear ? self.onViewWillAppear() : nil;
+    
+    self.topMargin.constant = UIScreen.verticalMarginForDevice;
+    self.bottomMargin.constant = UIScreen.verticalMarginForDevice;
 }
 
 #pragma mark - IBActions

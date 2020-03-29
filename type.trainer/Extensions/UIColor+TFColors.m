@@ -40,9 +40,9 @@
     return [UIColor colorNamed:@"tf_purple_button"];
 }
 
-+ (UIColor *)tf_gray_text
++ (UIColor *)tf_light_text
 {
-    return [UIColor colorNamed:@"tf_text"];
+    return [UIColor colorNamed:@"tf_light_text"];
 }
 
 + (UIColor *)tf_dark_text
