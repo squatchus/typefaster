@@ -33,11 +33,30 @@
     return NO;
 }
 
-- (NSString *)trimmedSpacesAndNewlines
+- (BOOL)isSmartEqualToKey:(NSString *)awaitedKey
 {
-    NSCharacterSet *set = NSCharacterSet.whitespaceAndNewlineCharacterSet;
-    NSString *result = [self stringByTrimmingCharactersInSet:set];
-    return result;
+    NSString *typedKey = self;
+    if ([awaitedKey isEqualToString:@"ё"] && [typedKey isEqualToString:@"е"])
+        return YES;
+    if ([awaitedKey isEqualToString:@"Ё"] && [typedKey isEqualToString:@"Е"])
+        return YES;
+    if ([awaitedKey isEqualToString:@"\n"] && [typedKey isEqualToString:@" "])
+        return YES;
+    return [typedKey isEqualToString:awaitedKey];
+}
+
+- (BOOL)hasSmartPrefix:(NSString *)typedPart
+{
+    NSString *fullWord = self;
+    for (int i=0; i<typedPart.length; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *typedKey = [typedPart substringWithRange:range];
+        NSString *wordKey = [fullWord substringWithRange:range];
+        if ([typedKey isSmartEqualToKey:wordKey] == NO) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 @end

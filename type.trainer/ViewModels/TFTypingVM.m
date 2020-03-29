@@ -127,25 +127,14 @@
             for (int i=0; i<typedSubstring.length; i++) {
                 NSString *typedKey = [typedSubstring substringWithRange:NSMakeRange(i, 1)];
                 NSString *supposedKey = [token.string substringWithRange:NSMakeRange(i, 1)];
-                if ([self key:typedKey isEqualToKey:supposedKey] == NO) mistakes++;
+                if ([typedKey isSmartEqualToKey:supposedKey] == NO) mistakes++;
             }
-            if ([token.string hasPrefix:typedSubstring]) {
+            if ([token.string hasSmartPrefix:typedSubstring]) {
                 self.result.symbols += length;
             }
         }
         self.result.mistakes = mistakes;
     }
-}
-
-- (BOOL)key:(NSString *)typedKey isEqualToKey:(NSString *)awaitedKey
-{
-    if ([awaitedKey isEqualToString:@"ё"] && [typedKey isEqualToString:@"е"])
-        return YES;
-    if ([awaitedKey isEqualToString:@"Ё"] && [typedKey isEqualToString:@"Е"])
-        return YES;
-    if ([awaitedKey isEqualToString:@"\n"] && [typedKey isEqualToString:@" "])
-        return YES;
-    return [typedKey isEqualToString:awaitedKey];
 }
 
 - (BOOL)keyCanBeTyped:(NSString *)keyString
@@ -170,7 +159,7 @@
         return NO;
     
     if (self.strictTyping) {
-        BOOL matchAwaited = [self key:keyString isEqualToKey:self.awaited_key];
+        BOOL matchAwaited = [keyString isSmartEqualToKey:self.awaited_key];
         if (matchAwaited) {
             return YES; // backspace or key match
         } else if (notBackspace && symbolExpected)
@@ -212,7 +201,7 @@
     }
     NSString *lastTypedKey = [self.typed_string substringWithRange:NSMakeRange(self.typed_string.length-1, 1)];
     NSString *supposedKey = [self.level.text substringWithRange:NSMakeRange(self.typed_string.length-1, 1)];
-    BOOL lastCorrect = [self key:lastTypedKey isEqualToKey:supposedKey];
+    BOOL lastCorrect = [lastTypedKey isSmartEqualToKey:supposedKey];
     BOOL typedToEnd = (self.typed_string.length == self.level.text.length);
     if (lastCorrect) {
         if (typedToEnd) {
@@ -256,7 +245,7 @@
         NSRange range = NSMakeRange(i, 1);
         NSString *typedLetter = [self.typed_string substringWithRange:range];
         NSString *textLetter = [self.level.text substringWithRange:range];
-        if ([typedLetter isEqualToString:textLetter] == NO) {
+        if ([typedLetter isSmartEqualToKey:textLetter] == NO) {
             [text addAttribute:NSForegroundColorAttributeName value:UIColor.tf_red range:range];
         }
     }
@@ -295,7 +284,7 @@
     for (int i=0; i<typed.length; i++) {
         NSString *typpedKey = [typed substringWithRange:NSMakeRange(i, 1)];
         NSString *supposedKey = [string substringWithRange:NSMakeRange(i, 1)];
-        if ([self key:typpedKey isEqualToKey:supposedKey] == NO) {
+        if ([typpedKey isSmartEqualToKey:supposedKey] == NO) {
             [currentWord addAttribute:NSForegroundColorAttributeName
                                 value:UIColor.tf_red
                                 range:NSMakeRange(i, 1)];

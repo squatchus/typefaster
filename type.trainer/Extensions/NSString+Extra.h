@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isUppercaseAtIndex:(NSUInteger)index;
 - (BOOL)newLineAtIndex:(NSUInteger)index;
-- (NSString *)trimmedSpacesAndNewlines;
+- (BOOL)isSmartEqualToKey:(NSString *)string;
+- (BOOL)hasSmartPrefix:(NSString *)string;
 
 @end
 
