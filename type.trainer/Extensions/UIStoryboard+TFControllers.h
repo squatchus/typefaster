@@ -8,18 +8,13 @@
 
 @import UIKit;
 
-#import "TFResultsVC.h"
 #import "TFTypingVC.h"
-
-@class MenuVC;
-@class MenuVM;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIStoryboard (TFControllers)
 
 + (TFTypingVC *)typingVC;
-+ (TFResultsVC *)resultsVC;
 
 @end
 

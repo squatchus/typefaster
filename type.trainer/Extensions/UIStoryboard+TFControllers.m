@@ -18,10 +18,4 @@
     return [storyboard instantiateViewControllerWithIdentifier:@"typing.vc"];
 }
 
-+ (TFResultsVC *)resultsVC
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"results.vc"];
-}
-
 @end

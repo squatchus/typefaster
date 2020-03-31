@@ -96,7 +96,7 @@
         }
         [self showRemindMeAlertIfNeeded];
         
-        TFResultsVM *resultsVM = [[TFResultsVM alloc] initWithLevel:viewModel.level result:viewModel.result event:event provider:self.resultsProvider];
+        ResultsVM *resultsVM = [[ResultsVM alloc] initWithLevel:viewModel.level result:viewModel.result event:event provider:self.resultsProvider];
         [self showResultsWithViewModel:resultsVM];
     };
     [self.rootNC pushViewController:typingVC animated:NO];
@@ -122,13 +122,10 @@
     [self.rootNC.topViewController presentViewController:settingsVC animated:YES completion:nil];
 }
 
-- (void)showResultsWithViewModel:(TFResultsVM *)viewModel;
+- (void)showResultsWithViewModel:(ResultsVM *)viewModel;
 {
-    TFResultsVC *resultsVC = UIStoryboard.resultsVC;
+    ResultsVC *resultsVC = [[ResultsVC alloc] initWithViewModel:viewModel];
     __weak typeof(resultsVC) weakResultsVC = resultsVC;
-    resultsVC.onViewWillAppear = ^{
-        [weakResultsVC updateWithViewModel:viewModel];
-    };
     resultsVC.onSharePressed = ^(NSString *text) {
         [self.sounds playButtonClickSound];
         [self shareText:text];
@@ -158,9 +155,9 @@
         MenuVC *menuVC = (MenuVC *)topVC;
         [menuVC reloadViewModel];
     }
-    else if ([topVC isKindOfClass:TFResultsVC.class])
+    else if ([topVC isKindOfClass:ResultsVC.class])
     {
-        TFResultsVC *resultsVC = (TFResultsVC *)topVC;
+        ResultsVC *resultsVC = (ResultsVC *)topVC;
         [resultsVC reloadViewModel];
     }
 }
