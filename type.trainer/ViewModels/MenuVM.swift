@@ -37,7 +37,7 @@ class MenuVM: NSObject {
         } else {
             firstResultTitle = NSLocalizedString("menu.vm.keep.training", comment: "")
         }
-        stars = resultProvider.stars(bySpeed: best);
+        stars = resultProvider.stars(bySpeed: best)
 
         let rank = NSLocalizedString("menu.vm.rank", comment: "")
         let rankLevel = resultProvider.rankTitle(bySpeed: best)
@@ -48,7 +48,7 @@ class MenuVM: NSObject {
             let chars = String.localizedStringWithFormat(NSLocalizedString("%d char(s)", comment: ""), goal)
             let perMin = NSLocalizedString("menu.vm.min", comment: "")
             let nextGoal = NSLocalizedString("menu.vm.next.goal", comment: "")
-            let signsPerMin = String.localizedStringWithFormat("%d %@/%@", goal, chars, perMin);
+            let signsPerMin = String.localizedStringWithFormat("%d %@/%@", goal, chars, perMin)
             rankSubtitle = "\(nextGoal) \(signsPerMin)"
         } else {
             rankSubtitle = NSLocalizedString("menu.vm.incredible", comment: "")
@@ -70,7 +70,7 @@ class MenuVM: NSObject {
             } else {
                 names.append("star_gray.png")
             }
-            numberOfFullStars -= 1;
+            numberOfFullStars -= 1
         }
         return names
     }

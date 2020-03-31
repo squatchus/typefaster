@@ -46,26 +46,26 @@ class SettingsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topMargin.constant = UIScreen.verticalMarginForDevice()
-        bottomMargin.constant = UIScreen.verticalMarginForDevice();
+        bottomMargin.constant = UIScreen.verticalMarginForDevice()
         reloadViewModel()
     }
     
     @objc func reloadViewModel() {
-        notificationSwitch.isOn  = viewModel.defaults.notifications;
-        strictTypingSwitch.isOn = viewModel.defaults.strictTyping;
+        notificationSwitch.isOn  = viewModel.defaults.notifications
+        strictTypingSwitch.isOn = viewModel.defaults.strictTyping
 
-        settingsTitleLabel.text = viewModel.settingsTitle;
-        notificationTitleLabel.text = viewModel.notificationsTitle;
-        strictTypingTitleLabel.text = viewModel.strictTypingTitle;
+        settingsTitleLabel.text = viewModel.settingsTitle
+        notificationTitleLabel.text = viewModel.notificationsTitle
+        strictTypingTitleLabel.text = viewModel.strictTypingTitle
 
         notificationDescriptionLabel.attributedText = viewModel.notificationsInfo
         strictTypingDescriptionLabel.attributedText = viewModel.strictTypingInfo
 
-        categoryClassicButton.isSelected = viewModel.defaults.classicEnabled;
-        categoryQuotesButton.isSelected = viewModel.defaults.quotesEnabled;
-        categoryHokkuButton.isSelected = viewModel.defaults.hokkuEnabled;
-        categoryCookiesButton.isSelected = viewModel.defaults.cookiesEnabled;
-        categoryEnglishButton.isSelected = viewModel.defaults.englishEnabled;
+        categoryClassicButton.isSelected = viewModel.defaults.classicEnabled
+        categoryQuotesButton.isSelected = viewModel.defaults.quotesEnabled
+        categoryHokkuButton.isSelected = viewModel.defaults.hokkuEnabled
+        categoryCookiesButton.isSelected = viewModel.defaults.cookiesEnabled
+        categoryEnglishButton.isSelected = viewModel.defaults.englishEnabled
 
         updateCategoryButton(categoryClassicButton)
         updateCategoryButton(categoryQuotesButton)
@@ -77,9 +77,9 @@ class SettingsVC: UIViewController {
 
         for subview in view.subviews {
             if subview is UIButton {
-                subview.layer.cornerRadius = subview.frame.size.height/2.0;
+                subview.layer.cornerRadius = subview.frame.size.height/2.0
             } else if let switcher = subview as? UISwitch {
-                switcher.onTintColor = UIColor.tf_purple_button();
+                switcher.onTintColor = UIColor.tf_purple_button()
             }
         }
     }
@@ -88,28 +88,28 @@ class SettingsVC: UIViewController {
     
     @IBAction func onSwitchValueChanged(_ sender: UISwitch) {
         if sender == notificationSwitch {
-            let notifications = notificationSwitch.isOn;
-            viewModel.defaults.notifications = notifications;
+            let notifications = notificationSwitch.isOn
+            viewModel.defaults.notifications = notifications
             onNotificationsSettingChanged?(notifications)
         } else if sender == strictTypingSwitch {
-            viewModel.defaults.strictTyping = strictTypingSwitch.isOn;
+            viewModel.defaults.strictTyping = strictTypingSwitch.isOn
         }
     }
 
     @IBAction func onCategoryButtonPressed(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected;
+        sender.isSelected = !sender.isSelected
         if (sender == categoryClassicButton) {
-            viewModel.defaults.classicEnabled = categoryClassicButton.isSelected;
+            viewModel.defaults.classicEnabled = categoryClassicButton.isSelected
         } else if (sender == categoryQuotesButton) {
-            viewModel.defaults.quotesEnabled = categoryQuotesButton.isSelected;
+            viewModel.defaults.quotesEnabled = categoryQuotesButton.isSelected
         } else if (sender == categoryHokkuButton) {
-            viewModel.defaults.hokkuEnabled = categoryHokkuButton.isSelected;
+            viewModel.defaults.hokkuEnabled = categoryHokkuButton.isSelected
         } else if (sender == categoryCookiesButton) {
-            viewModel.defaults.cookiesEnabled = categoryCookiesButton.isSelected;
+            viewModel.defaults.cookiesEnabled = categoryCookiesButton.isSelected
         } else if (sender == categoryEnglishButton) {
-            viewModel.defaults.englishEnabled = categoryEnglishButton.isSelected;
+            viewModel.defaults.englishEnabled = categoryEnglishButton.isSelected
         }
-        updateCategoryButton(sender);
+        updateCategoryButton(sender)
         onCategorySettingChanged?()
     }
 
@@ -121,7 +121,7 @@ class SettingsVC: UIViewController {
 
     func updateCategoryButton(_ sender: UIButton)
     {
-        let color = sender.isSelected ? UIColor.tf_purple_button() : UIColor.tf_gray_button();
+        let color = sender.isSelected ? UIColor.tf_purple_button() : UIColor.tf_gray_button()
         sender.backgroundColor = color
     }
     

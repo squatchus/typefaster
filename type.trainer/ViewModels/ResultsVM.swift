@@ -25,7 +25,7 @@ class ResultsVM: NSObject {
     @objc let rateTitle: String
     
     @objc init(level: TFLevel, result:TFSessionResult, event: TFResultEvent, provider: TFResultProvider) {
-        let best = provider.bestSpeed();
+        let best = provider.bestSpeed()
         let spm = result.signsPerMin()
         
         if (event == .none) {
@@ -47,12 +47,12 @@ class ResultsVM: NSObject {
         signsPerMinTitle = "\(chars)\n\(NSLocalizedString("common.per.minute", comment: ""))"
         
         let linesCount = level.text.components(separatedBy: "\n").count
-        let mistakesPercent = Int(result.mistakes) * 100 / (level.text.count - (linesCount-1));
+        let mistakesPercent = Int(result.mistakes) * 100 / (level.text.count - (linesCount-1))
         mistakes = "\(mistakesPercent)%"
         mistakesTitle = NSLocalizedString("results.vm.mistakes", comment: "")
         
         stars = provider.stars(bySpeed: best)
-        text = level.text;
+        text = level.text
         author = "\(level.title)\n\(level.author)"
         
         continueTitle = NSLocalizedString("results.vm.continue", comment: "")
@@ -72,7 +72,7 @@ class ResultsVM: NSObject {
             } else {
                 names.append("star_gray.png")
             }
-            numberOfFullStars -= 1;
+            numberOfFullStars -= 1
         }
         return names
     }

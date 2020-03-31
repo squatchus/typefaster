@@ -29,7 +29,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var starView4: UIImageView!
     @IBOutlet weak var starView5: UIImageView!
     
-    @IBOutlet weak var starHeightConstraint: NSLayoutConstraint!;
+    @IBOutlet weak var starHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var starWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var leaderboardWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var rankTopSpaceConstraint: NSLayoutConstraint!
@@ -54,16 +54,16 @@ class MenuVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topMargin.constant = UIScreen.verticalMarginForDevice()
-        bottomMargin.constant = UIScreen.verticalMarginForDevice();
+        bottomMargin.constant = UIScreen.verticalMarginForDevice()
         reloadViewModel()
     }
     
     @objc func reloadViewModel() {
-        yourSpeedLabel.text = viewModel.bestResultTitle;
-        signsPerMinLabel.text = viewModel.signsPerMin;
-        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle;
-        firstResultLabel.text = viewModel.firstResultTitle;
-        rankHintLabel.text = viewModel.rankSubtitle;
+        yourSpeedLabel.text = viewModel.bestResultTitle
+        signsPerMinLabel.text = viewModel.signsPerMin
+        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle
+        firstResultLabel.text = viewModel.firstResultTitle
+        rankHintLabel.text = viewModel.rankSubtitle
 
         let starViews = [starView1, starView2, starView3, starView4, starView5]
         let starNames = viewModel.starImageNames()
@@ -76,10 +76,10 @@ class MenuVC: UIViewController {
         settingsButton.setTitle(viewModel.settingsTitle, for: .normal)
         rateButton.setTitle(viewModel.rateTitle, for: .normal)
 
-        rateButton.layer.cornerRadius = rateButton.frame.size.height/2.0;
-        settingsButton.layer.cornerRadius = settingsButton.frame.size.height/2.0;
-        gameCenterButton.layer.cornerRadius = gameCenterButton.frame.size.height/2.0;
-        startTypingButton.layer.cornerRadius = startTypingButton.frame.size.height/2.0;
+        rateButton.layer.cornerRadius = rateButton.frame.size.height/2.0
+        settingsButton.layer.cornerRadius = settingsButton.frame.size.height/2.0
+        gameCenterButton.layer.cornerRadius = gameCenterButton.frame.size.height/2.0
+        startTypingButton.layer.cornerRadius = startTypingButton.frame.size.height/2.0
     }
     
     // MARK: Actions

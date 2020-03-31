@@ -58,7 +58,7 @@ extension UserDefaults {
     private var showEngTexts: Bool {
         get {
             let langCode = Bundle.main.preferredLocalizations.first!
-            let showEngTexts = (langCode == "en");
+            let showEngTexts = (langCode == "en")
             return showEngTexts
         }
     }

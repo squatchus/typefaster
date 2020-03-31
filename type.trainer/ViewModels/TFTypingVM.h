@@ -12,9 +12,9 @@
 #import "TFSessionResult.h"
 
 typedef NS_ENUM(NSUInteger, InputResult) {
-    InputImpossible,
-    InputMistaken,
-    InputCorrect,
+    InputResultImpossible,
+    InputResultMistaken,
+    InputResultCorrect,
 };
 
 NS_ASSUME_NONNULL_BEGIN

@@ -53,18 +53,18 @@ class ResultsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         topMargin.constant = UIScreen.verticalMarginForDevice()
-        bottomMargin.constant = UIScreen.verticalMarginForDevice();
+        bottomMargin.constant = UIScreen.verticalMarginForDevice()
         reloadViewModel()
     }
     
     @objc func reloadViewModel() {
-        resultTitleLabel.text = viewModel.resultTitle;
-        bestResultLabel.text = viewModel.bestResult;
-        bestResultTitleLabel.text = viewModel.bestResultTitle;
-        signsPerMinLabel.text = viewModel.signsPerMin;
-        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle;
-        mistakesPercentLabel.text = viewModel.mistakes;
-        mistakesPercentTitleLabel.text = viewModel.mistakesTitle;
+        resultTitleLabel.text = viewModel.resultTitle
+        bestResultLabel.text = viewModel.bestResult
+        bestResultTitleLabel.text = viewModel.bestResultTitle
+        signsPerMinLabel.text = viewModel.signsPerMin
+        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle
+        mistakesPercentLabel.text = viewModel.mistakes
+        mistakesPercentTitleLabel.text = viewModel.mistakesTitle
         
         let starViews = [starView1, starView2, starView3, starView4, starView5]
         let starNames = viewModel.starImageNames()
@@ -72,17 +72,17 @@ class ResultsVC: UIViewController {
             starView?.image = UIImage(named: starNames[i])
         }
         
-        textLabel.text = viewModel.text;
-        authorLabel.text = viewModel.author;
+        textLabel.text = viewModel.text
+        authorLabel.text = viewModel.author
         
         continueButton.setTitle(viewModel.continueTitle, for: .normal)
         settingsButton.setTitle(viewModel.settingsTitle, for: .normal)
         rateButton.setTitle(viewModel.rateTitle, for: .normal)
         
-        shareButton.layer.cornerRadius = shareButton.frame.size.height/2.0;
-        continueButton.layer.cornerRadius = continueButton.frame.size.height/2.0;
-        rateButton.layer.cornerRadius = rateButton.frame.size.height/2.0;
-        settingsButton.layer.cornerRadius = settingsButton.frame.size.height/2.0;
+        shareButton.layer.cornerRadius = shareButton.frame.size.height/2.0
+        continueButton.layer.cornerRadius = continueButton.frame.size.height/2.0
+        rateButton.layer.cornerRadius = rateButton.frame.size.height/2.0
+        settingsButton.layer.cornerRadius = settingsButton.frame.size.height/2.0
     }
 
     @IBAction func onShareButtonPressed(sender: UIButton) {

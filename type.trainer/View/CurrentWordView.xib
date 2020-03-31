@@ -7,9 +7,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrentWordView" customModule="type_trainer" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CurrentWordView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CurrentWordView" customModule="type_trainer" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -86,8 +86,8 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="backspace" destination="aVb-mb-g3A" id="gbk-3Q-zEh"/>
-                <outlet property="label" destination="2ld-iF-nUe" id="b7U-xy-wUZ"/>
+                <outlet property="backspace" destination="aVb-mb-g3A" id="vAk-lN-ZxJ"/>
+                <outlet property="label" destination="2ld-iF-nUe" id="Be5-CQ-btj"/>
                 <outlet property="shift" destination="kSV-mB-bmu" id="Mg8-z2-sFm"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="-183.81696428571428"/>

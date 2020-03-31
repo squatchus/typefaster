@@ -6,3 +6,4 @@
 #import "TFResultProvider.h"
 #import "UIColor+TFColors.h"
 #import "TFLevel.h"
+#import "TFTypingVM.h"

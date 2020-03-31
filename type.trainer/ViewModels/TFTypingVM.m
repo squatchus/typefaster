@@ -85,8 +85,8 @@
     for (int i=0; i<backspacesNeeded; i++) {
         NSString *backspace = @"";
         InputResult result = [self processKey:backspace];
-        if (result == InputImpossible) impossibleOccured = YES;
-        if (result == InputMistaken) mistakeOccured = YES;
+        if (result == InputResultImpossible) impossibleOccured = YES;
+        if (result == InputResultMistaken) mistakeOccured = YES;
     }
     
     // process typed text
@@ -95,16 +95,16 @@
         NSString *key = (input.length > 0) ? [input substringWithRange:range] : input;
         // process input
         InputResult result = [self processKey:key];
-        if (result == InputImpossible) impossibleOccured = YES;
-        if (result == InputMistaken) mistakeOccured = YES;
+        if (result == InputResultImpossible) impossibleOccured = YES;
+        if (result == InputResultMistaken) mistakeOccured = YES;
     }
     
     if (impossibleOccured) {
-        return InputImpossible;
+        return InputResultImpossible;
     } else if (mistakeOccured) {
-        return InputMistaken;
+        return InputResultMistaken;
     } else {
-        return InputCorrect;
+        return InputResultCorrect;
     }
 }
 
@@ -134,9 +134,9 @@
         BOOL newMistakes = (self.result.mistakes > prevMistakes);
         // end session if needed
         if ([self shouldEndSession]) [self endSession];
-        return newMistakes ? InputMistaken : InputCorrect;
+        return newMistakes ? InputResultMistaken : InputResultCorrect;
     }
-    return InputImpossible;
+    return InputResultImpossible;
 }
 
 - (void)updateResults

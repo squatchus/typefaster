@@ -10,7 +10,6 @@
 
 #import "type_trainer-Swift.h"
 
-#import "UIStoryboard+TFControllers.h"
 #import "UIAlertController+Alerts.h"
 
 @implementation TFAppCoordinator
@@ -71,16 +70,11 @@
 
 - (void)showGame
 {
-    TFTypingVC *typingVC = UIStoryboard.typingVC;
-    __weak typeof(typingVC) weakTypingVC = typingVC;
-    typingVC.onViewWillAppear = ^{
-        TFLevel *nextLevel = [self.levelProvider nextLevelFor:self.settings];
-        TFTypingVM *typingVM = [[TFTypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.defaults.strictTyping];
-        [weakTypingVC updateWithViewModel:typingVM];
-    };
+    TFLevel *nextLevel = [self.levelProvider nextLevelFor:self.settings];
+    TFTypingVM *typingVM = [[TFTypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.defaults.strictTyping];
+    TypingVC *typingVC = [[TypingVC alloc] initWithViewModel:typingVM];
     typingVC.onDonePressed = ^{
         [self.sounds playButtonClickSound];
-        [weakTypingVC.navigationController popViewControllerAnimated:YES];
     };
     typingVC.onMistake = ^{
         [self.sounds playErrorSound];
