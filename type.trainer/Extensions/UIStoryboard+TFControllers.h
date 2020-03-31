@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-#import "TFSettingsVC.h"
 #import "TFResultsVC.h"
 #import "TFTypingVC.h"
 
@@ -19,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIStoryboard (TFControllers)
 
-+ (TFSettingsVC *)settingsVC;
 + (TFTypingVC *)typingVC;
 + (TFResultsVC *)resultsVC;
 

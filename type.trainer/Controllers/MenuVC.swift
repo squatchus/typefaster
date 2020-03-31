@@ -12,10 +12,10 @@ class MenuVC: UIViewController {
 
     @objc var viewModel: MenuVM
 
-    @objc var onLeaderboardPressed: (()->())!
-    @objc var onPlayPressed: (()->())!
-    @objc var onRatePressed: (()->())!
-    @objc var onSetttingsPressed: (()->())!
+    @objc var onLeaderboardPressed: (()->())?
+    @objc var onPlayPressed: (()->())?
+    @objc var onRatePressed: (()->())?
+    @objc var onSetttingsPressed: (()->())?
     
     @IBOutlet weak var yourSpeedLabel: UILabel!
     @IBOutlet weak var signsPerMinLabel: UILabel!

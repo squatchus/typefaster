@@ -25,16 +25,13 @@
 		B4504F242353476A002F9C7D /* UIStoryboard+TFControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC72353476A002F9C7D /* UIStoryboard+TFControllers.m */; };
 		B4504F252353476A002F9C7D /* UIColor+TFColors.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECA2353476A002F9C7D /* UIColor+TFColors.m */; };
 		B4504F262353476A002F9C7D /* TFTypingVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECD2353476A002F9C7D /* TFTypingVM.m */; };
-		B4504F272353476A002F9C7D /* TFSettingsVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECE2353476A002F9C7D /* TFSettingsVM.m */; };
 		B4504F282353476A002F9C7D /* TFResultsVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECF2353476A002F9C7D /* TFResultsVM.m */; };
-		B4504F2A2353476A002F9C7D /* TFSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED62353476A002F9C7D /* TFSettingsVC.m */; };
 		B4504F2B2353476A002F9C7D /* TFResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED72353476A002F9C7D /* TFResultsVC.m */; };
 		B4504F2C2353476A002F9C7D /* TFTypingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ED82353476A002F9C7D /* TFTypingVC.m */; };
 		B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE02353476A002F9C7D /* TFLeaderboardService.m */; };
 		B4504F2F2353476A002F9C7D /* TFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE32353476A002F9C7D /* TFAppDelegate.m */; };
 		B4504F302353476A002F9C7D /* TFNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE42353476A002F9C7D /* TFNotificationService.m */; };
 		B4504F312353476A002F9C7D /* TFSoundService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE52353476A002F9C7D /* TFSoundService.m */; };
-		B4504F322353476A002F9C7D /* TFLevelProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE62353476A002F9C7D /* TFLevelProvider.m */; };
 		B4504F332353476A002F9C7D /* TFResultProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE82353476A002F9C7D /* TFResultProvider.m */; };
 		B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE92353476A002F9C7D /* TFAppCoordinator.m */; };
 		B4504F362353476A002F9C7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B4504EEF2353476A002F9C7D /* Main.storyboard */; };
@@ -54,6 +51,11 @@
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
 		B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5324314990004C6C54 /* MenuVM.swift */; };
 		B4C34E56243154A4004C6C54 /* MenuVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C34E55243154A4004C6C54 /* MenuVC.xib */; };
+		B4C34E5924315F81004C6C54 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5724315F81004C6C54 /* SettingsVC.swift */; };
+		B4C34E5A24315F81004C6C54 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C34E5824315F81004C6C54 /* SettingsVC.xib */; };
+		B4C34E5C243248FB004C6C54 /* SettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5B243248FB004C6C54 /* SettingsVM.swift */; };
+		B4C34E5E243254ED004C6C54 /* UserDefaults+Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5D243254ED004C6C54 /* UserDefaults+Settings.swift */; };
+		B4C34E602433583C004C6C54 /* LevelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5F2433583C004C6C54 /* LevelProvider.swift */; };
 		B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4C4CED224301EAA00D38688 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -100,25 +102,19 @@
 		B4504ECA2353476A002F9C7D /* UIColor+TFColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TFColors.m"; sourceTree = "<group>"; };
 		B4504ECB2353476A002F9C7D /* UIStoryboard+TFControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIStoryboard+TFControllers.h"; sourceTree = "<group>"; };
 		B4504ECD2353476A002F9C7D /* TFTypingVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTypingVM.m; sourceTree = "<group>"; };
-		B4504ECE2353476A002F9C7D /* TFSettingsVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettingsVM.m; sourceTree = "<group>"; };
 		B4504ECF2353476A002F9C7D /* TFResultsVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFResultsVM.m; sourceTree = "<group>"; };
 		B4504ED12353476A002F9C7D /* TFResultsVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFResultsVM.h; sourceTree = "<group>"; };
-		B4504ED22353476A002F9C7D /* TFSettingsVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSettingsVM.h; sourceTree = "<group>"; };
 		B4504ED32353476A002F9C7D /* TFTypingVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTypingVM.h; sourceTree = "<group>"; };
-		B4504ED62353476A002F9C7D /* TFSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSettingsVC.m; sourceTree = "<group>"; };
 		B4504ED72353476A002F9C7D /* TFResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFResultsVC.m; sourceTree = "<group>"; };
 		B4504ED82353476A002F9C7D /* TFTypingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTypingVC.m; sourceTree = "<group>"; };
 		B4504EDA2353476A002F9C7D /* TFTypingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTypingVC.h; sourceTree = "<group>"; };
 		B4504EDB2353476A002F9C7D /* TFResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFResultsVC.h; sourceTree = "<group>"; };
-		B4504EDC2353476A002F9C7D /* TFSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSettingsVC.h; sourceTree = "<group>"; };
-		B4504EDF2353476A002F9C7D /* TFLevelProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLevelProvider.h; sourceTree = "<group>"; };
 		B4504EE02353476A002F9C7D /* TFLeaderboardService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLeaderboardService.m; sourceTree = "<group>"; };
 		B4504EE12353476A002F9C7D /* TFAppCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAppCoordinator.h; sourceTree = "<group>"; };
 		B4504EE22353476A002F9C7D /* TFResultProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFResultProvider.h; sourceTree = "<group>"; };
 		B4504EE32353476A002F9C7D /* TFAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAppDelegate.m; sourceTree = "<group>"; };
 		B4504EE42353476A002F9C7D /* TFNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFNotificationService.m; sourceTree = "<group>"; };
 		B4504EE52353476A002F9C7D /* TFSoundService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSoundService.m; sourceTree = "<group>"; };
-		B4504EE62353476A002F9C7D /* TFLevelProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLevelProvider.m; sourceTree = "<group>"; };
 		B4504EE72353476A002F9C7D /* TFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAppDelegate.h; sourceTree = "<group>"; };
 		B4504EE82353476A002F9C7D /* TFResultProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFResultProvider.m; sourceTree = "<group>"; };
 		B4504EE92353476A002F9C7D /* TFAppCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAppCoordinator.m; sourceTree = "<group>"; };
@@ -148,6 +144,11 @@
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4C34E5324314990004C6C54 /* MenuVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVM.swift; sourceTree = "<group>"; };
 		B4C34E55243154A4004C6C54 /* MenuVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuVC.xib; sourceTree = "<group>"; };
+		B4C34E5724315F81004C6C54 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		B4C34E5824315F81004C6C54 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
+		B4C34E5B243248FB004C6C54 /* SettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM.swift; sourceTree = "<group>"; };
+		B4C34E5D243254ED004C6C54 /* UserDefaults+Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Settings.swift"; sourceTree = "<group>"; };
+		B4C34E5F2433583C004C6C54 /* LevelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProvider.swift; sourceTree = "<group>"; };
 		B4C4CED224301EAA00D38688 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +265,7 @@
 				B43E4E10242F94E200050E19 /* UINib+TFViews.m */,
 				B49D0F552430A78B003CA6E2 /* UIScreen+Extra.h */,
 				B49D0F562430A78B003CA6E2 /* UIScreen+Extra.m */,
+				B4C34E5D243254ED004C6C54 /* UserDefaults+Settings.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,8 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				B4C34E5324314990004C6C54 /* MenuVM.swift */,
-				B4504ED22353476A002F9C7D /* TFSettingsVM.h */,
-				B4504ECE2353476A002F9C7D /* TFSettingsVM.m */,
+				B4C34E5B243248FB004C6C54 /* SettingsVM.swift */,
 				B4504ED32353476A002F9C7D /* TFTypingVM.h */,
 				B4504ECD2353476A002F9C7D /* TFTypingVM.m */,
 				B4504ED12353476A002F9C7D /* TFResultsVM.h */,
@@ -286,8 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				B47742222430FE9B00E1062A /* MenuVC.swift */,
-				B4504EDC2353476A002F9C7D /* TFSettingsVC.h */,
-				B4504ED62353476A002F9C7D /* TFSettingsVC.m */,
+				B4C34E5724315F81004C6C54 /* SettingsVC.swift */,
 				B4504EDA2353476A002F9C7D /* TFTypingVC.h */,
 				B4504ED82353476A002F9C7D /* TFTypingVC.m */,
 				B4504EDB2353476A002F9C7D /* TFResultsVC.h */,
@@ -299,8 +299,7 @@
 		B4504EDE2353476A002F9C7D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B4504EDF2353476A002F9C7D /* TFLevelProvider.h */,
-				B4504EE62353476A002F9C7D /* TFLevelProvider.m */,
+				B4C34E5F2433583C004C6C54 /* LevelProvider.swift */,
 				B4504EE22353476A002F9C7D /* TFResultProvider.h */,
 				B4504EE82353476A002F9C7D /* TFResultProvider.m */,
 				B4504EEA2353476A002F9C7D /* TFLeaderboardService.h */,
@@ -317,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				B4C34E55243154A4004C6C54 /* MenuVC.xib */,
+				B4C34E5824315F81004C6C54 /* SettingsVC.xib */,
 				B43E4E0C242F943700050E19 /* CurrentWordView.h */,
 				B43E4E0D242F943700050E19 /* CurrentWordView.m */,
 				B4504EEF2353476A002F9C7D /* Main.storyboard */,
@@ -463,6 +463,7 @@
 				B4C34E56243154A4004C6C54 /* MenuVC.xib in Resources */,
 				B4504F572353476A002F9C7D /* error.wav in Resources */,
 				B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */,
+				B4C34E5A24315F81004C6C54 /* SettingsVC.xib in Resources */,
 				B4504F582353476A002F9C7D /* new_result.wav in Resources */,
 				B4504F382353476A002F9C7D /* InfoPlist.strings in Resources */,
 			);
@@ -487,6 +488,7 @@
 				B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */,
 				B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */,
 				B43E4E11242F94E200050E19 /* UINib+TFViews.m in Sources */,
+				B4C34E5E243254ED004C6C54 /* UserDefaults+Settings.swift in Sources */,
 				B49D0F5A2430CE68003CA6E2 /* TFTextView.m in Sources */,
 				B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */,
 				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
@@ -496,18 +498,18 @@
 				B4504F2C2353476A002F9C7D /* TFTypingVC.m in Sources */,
 				B4504F252353476A002F9C7D /* UIColor+TFColors.m in Sources */,
 				B4504F222353476A002F9C7D /* NSString+Extra.m in Sources */,
+				B4C34E602433583C004C6C54 /* LevelProvider.swift in Sources */,
+				B4C34E5C243248FB004C6C54 /* SettingsVM.swift in Sources */,
 				B43E4E0E242F943700050E19 /* CurrentWordView.m in Sources */,
 				B4504F5A2353476A002F9C7D /* main.m in Sources */,
 				B4504F282353476A002F9C7D /* TFResultsVM.m in Sources */,
-				B4504F272353476A002F9C7D /* TFSettingsVM.m in Sources */,
 				B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */,
 				B4504F232353476A002F9C7D /* UIAlertController+Alerts.m in Sources */,
-				B4504F322353476A002F9C7D /* TFLevelProvider.m in Sources */,
 				B4504F2B2353476A002F9C7D /* TFResultsVC.m in Sources */,
 				B4504F312353476A002F9C7D /* TFSoundService.m in Sources */,
 				B4504F2F2353476A002F9C7D /* TFAppDelegate.m in Sources */,
-				B4504F2A2353476A002F9C7D /* TFSettingsVC.m in Sources */,
 				B4504F332353476A002F9C7D /* TFResultProvider.m in Sources */,
+				B4C34E5924315F81004C6C54 /* SettingsVC.swift in Sources */,
 				B4504F262353476A002F9C7D /* TFTypingVM.m in Sources */,
 				B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */,
 			);

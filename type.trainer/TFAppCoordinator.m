@@ -19,10 +19,11 @@
 {
     if (self = [super init])
     {
-        _levelProvider = [TFLevelProvider new];
+        NSString *levelsPath = [NSBundle.mainBundle pathForResource:@"Levels" ofType:@"plist"];
+        _levelProvider = [[LevelProvider alloc] initWithLevelsPath:levelsPath];
         _resultsProvider = [TFResultProvider new];
         _sounds = [TFSoundService new];
-        _settings = [TFSettingsVM new];
+        _settings = [[SettingsVM alloc] initWithUserDefaults:NSUserDefaults.standardUserDefaults];
         _reminder = [TFNotificationService new];
         
         __weak typeof(self) weakSelf = self;
@@ -73,8 +74,8 @@
     TFTypingVC *typingVC = UIStoryboard.typingVC;
     __weak typeof(typingVC) weakTypingVC = typingVC;
     typingVC.onViewWillAppear = ^{
-        TFLevel *nextLevel = [self.levelProvider nextLevelForSettings:self.settings];
-        TFTypingVM *typingVM = [[TFTypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.strictTyping];
+        TFLevel *nextLevel = [self.levelProvider nextLevelFor:self.settings];
+        TFTypingVM *typingVM = [[TFTypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.defaults.strictTyping];
         [weakTypingVC updateWithViewModel:typingVM];
     };
     typingVC.onDonePressed = ^{
@@ -103,11 +104,8 @@
 
 - (void)showSettings
 {
-    TFSettingsVC *settingsVC = UIStoryboard.settingsVC;
+    SettingsVC *settingsVC = [[SettingsVC alloc] initWithViewModel:self.settings];
     __weak typeof(settingsVC) weakSettingsVC = settingsVC;
-    settingsVC.onViewWillAppear = ^{
-        [weakSettingsVC updateWithViewModel:self.settings];
-    };
     settingsVC.onNotificationsSettingChanged = ^(BOOL enabled) {
         if (enabled)
             [self.reminder enableNotifications];
@@ -169,17 +167,17 @@
 
 - (void)showRemindMeAlertIfNeeded
 {
-    if (self.resultsProvider.results.count == 3 && !self.settings.notifications)
+    if (self.resultsProvider.results.count == 3 && !self.settings.defaults.notifications)
     {
         [UIAlertController showReminMeAlertWithHandler:^(BOOL remind) {
             if (remind)
             {
-                self.settings.notifications = YES;
+                self.settings.defaults.notifications = YES;
                 [self.reminder enableNotifications];
             }
             else
             {
-                self.settings.notifications = NO;
+                self.settings.defaults.notifications = NO;
                 [self.reminder disableNotifications];
             }
         }];

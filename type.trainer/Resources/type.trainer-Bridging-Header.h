@@ -4,3 +4,5 @@
 
 #import "UIScreen+Extra.h"
 #import "TFResultProvider.h"
+#import "UIColor+TFColors.h"
+#import "TFLevel.h"

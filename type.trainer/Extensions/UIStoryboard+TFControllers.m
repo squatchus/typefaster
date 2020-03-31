@@ -12,12 +12,6 @@
 
 @implementation UIStoryboard (TFControllers)
 
-+ (TFSettingsVC *)settingsVC
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"settings.vc"];
-}
-
 + (TFTypingVC *)typingVC
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
