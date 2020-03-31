@@ -10,7 +10,7 @@ import UIKit
 
 class TextView: UITextView {
 
-    weak var viewModel: TFTypingVM? {
+    weak var viewModel: TypingVM? {
         didSet {
             reloadViewModel()
         }

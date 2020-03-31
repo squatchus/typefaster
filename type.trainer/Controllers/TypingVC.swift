@@ -10,12 +10,12 @@ import UIKit
 
 class TypingVC: UIViewController, UITextViewDelegate {
 
-    @objc var viewModel: TFTypingVM
+    @objc var viewModel: TypingVM!
     
     @objc var onViewWillAppear: (()->())?
     @objc var onMistake: (()->())?
     @objc var onDonePressed: (()->())?
-    @objc var onLevelCompleted: ((_ viewModel: TFTypingVM)->())?
+    @objc var onLevelCompleted: ((_ viewModel: TypingVM)->())?
     
     @IBOutlet weak var completeButton: UIButton!
     @IBOutlet weak var secondsLabel: UILabel!
@@ -25,8 +25,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     var maxKeyboardHeight: CGFloat = 0
     
-    @objc init(viewModel: TFTypingVM) {
-        self.viewModel = viewModel
+    @objc init() {
         super.init(nibName: "TypingVC", bundle: nil)
     }
     
@@ -42,6 +41,9 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // will update view model
+        onViewWillAppear?()
         
         let currentWord = Bundle.main.loadNibNamed("CurrentWordView", owner: self, options: nil)?.first as! CurrentWordView
         currentWord.shift.layer.cornerRadius = 4
@@ -82,7 +84,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
     // MARK: - UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let result = viewModel.processInput(text, range: range)
+        let result = viewModel.process(input: text, in: range)
         // show results
         statsLabel.text = viewModel.symbolsEnteredString()
         levelTextView.reloadViewModel()

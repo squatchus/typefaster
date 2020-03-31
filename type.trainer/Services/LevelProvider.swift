@@ -16,7 +16,7 @@ extension Data {
 
 class LevelProvider: NSObject {
     
-    let levels: [TFLevel]
+    @objc let levels: [TFLevel]
     
     @objc init(levelsPath: String) {
         let levelsURL = URL(fileURLWithPath: levelsPath)

@@ -70,16 +70,20 @@
 
 - (void)showGame
 {
-    TFLevel *nextLevel = [self.levelProvider nextLevelFor:self.settings];
-    TFTypingVM *typingVM = [[TFTypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.defaults.strictTyping];
-    TypingVC *typingVC = [[TypingVC alloc] initWithViewModel:typingVM];
+
+    TypingVC *typingVC = [TypingVC new];
+    __weak typeof(typingVC) weakVC = typingVC;
+    typingVC.onViewWillAppear = ^{
+        TFLevel *nextLevel = [self.levelProvider nextLevelFor:self.settings];
+        weakVC.viewModel = [[TypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.defaults.strictTyping];
+    };
     typingVC.onDonePressed = ^{
         [self.sounds playButtonClickSound];
     };
     typingVC.onMistake = ^{
         [self.sounds playErrorSound];
     };
-    typingVC.onLevelCompleted = ^(TFTypingVM *viewModel) {
+    typingVC.onLevelCompleted = ^(TypingVM *viewModel) {
         TFResultEvent event = [self.resultsProvider saveResult:viewModel.result];
         if (event == TFResultEventNewRank) {
             [self.sounds playNewRankSound];

@@ -16,16 +16,15 @@
 		B4388EFD2433910A0082E406 /* TypingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4388EFB2433910A0082E406 /* TypingVC.xib */; };
 		B4388EFF2433A4810082E406 /* CurrentWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4388EFE2433A4810082E406 /* CurrentWordView.swift */; };
 		B4388F042433A9ED0082E406 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4388F032433A9ED0082E406 /* TextView.swift */; };
-		B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = B43E4E05242EB7D000050E19 /* NSMutableString+Extra.m */; };
+		B4388F062433B2C80082E406 /* TypingVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4388F052433B2C80082E406 /* TypingVM.swift */; };
+		B4388F082433C07D0082E406 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4388F072433C07D0082E406 /* String+Extra.swift */; };
 		B43E4E08242F921000050E19 /* CurrentWordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43E4E07242F921000050E19 /* CurrentWordView.xib */; };
 		B4457CB61B56BFA6003C27A9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */; };
 		B4504F1F2353476A002F9C7D /* TFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC02353476A002F9C7D /* TFToken.m */; };
 		B4504F202353476A002F9C7D /* TFLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC12353476A002F9C7D /* TFLevel.m */; };
 		B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC22353476A002F9C7D /* TFSessionResult.m */; };
-		B4504F222353476A002F9C7D /* NSString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC42353476A002F9C7D /* NSString+Extra.m */; };
 		B4504F232353476A002F9C7D /* UIAlertController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC52353476A002F9C7D /* UIAlertController+Alerts.m */; };
 		B4504F252353476A002F9C7D /* UIColor+TFColors.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECA2353476A002F9C7D /* UIColor+TFColors.m */; };
-		B4504F262353476A002F9C7D /* TFTypingVM.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504ECD2353476A002F9C7D /* TFTypingVM.m */; };
 		B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE02353476A002F9C7D /* TFLeaderboardService.m */; };
 		B4504F2F2353476A002F9C7D /* TFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE32353476A002F9C7D /* TFAppDelegate.m */; };
 		B4504F302353476A002F9C7D /* TFNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE42353476A002F9C7D /* TFNotificationService.m */; };
@@ -82,8 +81,8 @@
 		B4388EFB2433910A0082E406 /* TypingVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TypingVC.xib; sourceTree = "<group>"; };
 		B4388EFE2433A4810082E406 /* CurrentWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWordView.swift; sourceTree = "<group>"; };
 		B4388F032433A9ED0082E406 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
-		B43E4E04242EB7D000050E19 /* NSMutableString+Extra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+Extra.h"; sourceTree = "<group>"; };
-		B43E4E05242EB7D000050E19 /* NSMutableString+Extra.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+Extra.m"; sourceTree = "<group>"; };
+		B4388F052433B2C80082E406 /* TypingVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingVM.swift; sourceTree = "<group>"; };
+		B4388F072433C07D0082E406 /* String+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extra.swift"; sourceTree = "<group>"; };
 		B43E4E07242F921000050E19 /* CurrentWordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWordView.xib; sourceTree = "<group>"; };
 		B43E4E09242F940400050E19 /* type.trainer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "type.trainer-Bridging-Header.h"; sourceTree = "<group>"; };
 		B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -93,14 +92,10 @@
 		B4504EC02353476A002F9C7D /* TFToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFToken.m; sourceTree = "<group>"; };
 		B4504EC12353476A002F9C7D /* TFLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLevel.m; sourceTree = "<group>"; };
 		B4504EC22353476A002F9C7D /* TFSessionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSessionResult.m; sourceTree = "<group>"; };
-		B4504EC42353476A002F9C7D /* NSString+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extra.m"; sourceTree = "<group>"; };
 		B4504EC52353476A002F9C7D /* UIAlertController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Alerts.m"; sourceTree = "<group>"; };
 		B4504EC62353476A002F9C7D /* UIColor+TFColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TFColors.h"; sourceTree = "<group>"; };
-		B4504EC82353476A002F9C7D /* NSString+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extra.h"; sourceTree = "<group>"; };
 		B4504EC92353476A002F9C7D /* UIAlertController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Alerts.h"; sourceTree = "<group>"; };
 		B4504ECA2353476A002F9C7D /* UIColor+TFColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TFColors.m"; sourceTree = "<group>"; };
-		B4504ECD2353476A002F9C7D /* TFTypingVM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFTypingVM.m; sourceTree = "<group>"; };
-		B4504ED32353476A002F9C7D /* TFTypingVM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFTypingVM.h; sourceTree = "<group>"; };
 		B4504EE02353476A002F9C7D /* TFLeaderboardService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLeaderboardService.m; sourceTree = "<group>"; };
 		B4504EE12353476A002F9C7D /* TFAppCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAppCoordinator.h; sourceTree = "<group>"; };
 		B4504EE22353476A002F9C7D /* TFResultProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFResultProvider.h; sourceTree = "<group>"; };
@@ -244,10 +239,7 @@
 		B4504EC32353476A002F9C7D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B4504EC82353476A002F9C7D /* NSString+Extra.h */,
-				B4504EC42353476A002F9C7D /* NSString+Extra.m */,
-				B43E4E04242EB7D000050E19 /* NSMutableString+Extra.h */,
-				B43E4E05242EB7D000050E19 /* NSMutableString+Extra.m */,
+				B4388F072433C07D0082E406 /* String+Extra.swift */,
 				B4504EC92353476A002F9C7D /* UIAlertController+Alerts.h */,
 				B4504EC52353476A002F9C7D /* UIAlertController+Alerts.m */,
 				B4504EC62353476A002F9C7D /* UIColor+TFColors.h */,
@@ -264,8 +256,7 @@
 			children = (
 				B4C34E5324314990004C6C54 /* MenuVM.swift */,
 				B4C34E5B243248FB004C6C54 /* SettingsVM.swift */,
-				B4504ED32353476A002F9C7D /* TFTypingVM.h */,
-				B4504ECD2353476A002F9C7D /* TFTypingVM.m */,
+				B4388F052433B2C80082E406 /* TypingVM.swift */,
 				B4C34E6724337B71004C6C54 /* ResultsVM.swift */,
 			);
 			path = ViewModels;
@@ -307,9 +298,9 @@
 				B4C34E5824315F81004C6C54 /* SettingsVC.xib */,
 				B4C34E642433738D004C6C54 /* ResultsVC.xib */,
 				B4388EFB2433910A0082E406 /* TypingVC.xib */,
+				B4388F032433A9ED0082E406 /* TextView.swift */,
 				B4388EFE2433A4810082E406 /* CurrentWordView.swift */,
 				B43E4E07242F921000050E19 /* CurrentWordView.xib */,
-				B4388F032433A9ED0082E406 /* TextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -474,7 +465,6 @@
 				B4504F302353476A002F9C7D /* TFNotificationService.m in Sources */,
 				B4504F202353476A002F9C7D /* TFLevel.m in Sources */,
 				B4504F2E2353476A002F9C7D /* TFLeaderboardService.m in Sources */,
-				B43E4E06242EB7D000050E19 /* NSMutableString+Extra.m in Sources */,
 				B4C34E5E243254ED004C6C54 /* UserDefaults+Settings.swift in Sources */,
 				B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */,
 				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
@@ -483,20 +473,20 @@
 				B49D0F572430A78B003CA6E2 /* UIScreen+Extra.m in Sources */,
 				B4C34E652433738D004C6C54 /* ResultsVC.swift in Sources */,
 				B4504F252353476A002F9C7D /* UIColor+TFColors.m in Sources */,
-				B4504F222353476A002F9C7D /* NSString+Extra.m in Sources */,
 				B4C34E602433583C004C6C54 /* LevelProvider.swift in Sources */,
 				B4C34E5C243248FB004C6C54 /* SettingsVM.swift in Sources */,
 				B4504F5A2353476A002F9C7D /* main.m in Sources */,
 				B4388F042433A9ED0082E406 /* TextView.swift in Sources */,
 				B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */,
 				B4504F232353476A002F9C7D /* UIAlertController+Alerts.m in Sources */,
+				B4388F062433B2C80082E406 /* TypingVM.swift in Sources */,
 				B4504F312353476A002F9C7D /* TFSoundService.m in Sources */,
 				B4504F2F2353476A002F9C7D /* TFAppDelegate.m in Sources */,
 				B4504F332353476A002F9C7D /* TFResultProvider.m in Sources */,
+				B4388F082433C07D0082E406 /* String+Extra.swift in Sources */,
 				B4388EFF2433A4810082E406 /* CurrentWordView.swift in Sources */,
 				B4C34E5924315F81004C6C54 /* SettingsVC.swift in Sources */,
 				B4388EFC2433910A0082E406 /* TypingVC.swift in Sources */,
-				B4504F262353476A002F9C7D /* TFTypingVM.m in Sources */,
 				B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
