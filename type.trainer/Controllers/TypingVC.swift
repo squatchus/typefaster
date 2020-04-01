@@ -102,7 +102,6 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     @IBAction func onDoneButtonPressed(sender: UIButton) {
         onDonePressed?()
-        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Helpers

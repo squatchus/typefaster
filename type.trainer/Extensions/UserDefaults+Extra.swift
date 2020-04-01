@@ -59,8 +59,11 @@ extension UserDefaults {
     
     var results: [TFSessionResult] {
         get {
-            let dictArray = value(forKey: .results) as! [Dictionary<String, Any>]
-            return dictArray.map { TFSessionResult(dict: $0) }
+            if let array = value(forKey: .results) as? [Dictionary<String, Any>] {
+                return array.map { TFSessionResult(dict: $0) }
+            } else {
+                return [TFSessionResult]()
+            }
         } set (newValue) {
             let dictArray = newValue.map { $0.dict() }
             setValue(dictArray, forKey: .results)

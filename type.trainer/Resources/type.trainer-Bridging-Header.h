@@ -3,5 +3,4 @@
 //
 
 #import "TFLevel.h"
-#import "TFAppCoordinator.h"
 #import "TFSessionResult.h"

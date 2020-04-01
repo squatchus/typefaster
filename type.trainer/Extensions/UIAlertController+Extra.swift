@@ -20,7 +20,7 @@ extension UIAlertController {
         alert.show()
     }
     
-    @objc static func showReminMeAlertWith(handler: @escaping (_ remind: Bool)->()) {
+    @objc static func showRemindMeAlertWith(handler: @escaping (_ remind: Bool)->()) {
         let title = NSLocalizedString("common.reminders", comment: "")
         let message = NSLocalizedString("alert.reminder.message", comment: "")
         let cancelTitle = NSLocalizedString("alert.button.no", comment: "")

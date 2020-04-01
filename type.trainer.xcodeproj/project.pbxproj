@@ -27,7 +27,6 @@
 		B4504F1F2353476A002F9C7D /* TFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC02353476A002F9C7D /* TFToken.m */; };
 		B4504F202353476A002F9C7D /* TFLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC12353476A002F9C7D /* TFLevel.m */; };
 		B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC22353476A002F9C7D /* TFSessionResult.m */; };
-		B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EE92353476A002F9C7D /* TFAppCoordinator.m */; };
 		B4504F372353476A002F9C7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4504EF12353476A002F9C7D /* Localizable.strings */; };
 		B4504F382353476A002F9C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4504EF32353476A002F9C7D /* InfoPlist.strings */; };
 		B4504F552353476A002F9C7D /* Tock.caf in Resources */ = {isa = PBXBuildFile; fileRef = B4504F132353476A002F9C7D /* Tock.caf */; };
@@ -41,6 +40,7 @@
 		B46D69632434D6520088F1B7 /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D69622434D6520088F1B7 /* ReminderService.swift */; };
 		B46D69652434DAE50088F1B7 /* LeaderboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D69642434DAE50088F1B7 /* LeaderboardService.swift */; };
 		B46D69672434E5190088F1B7 /* ResultProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D69662434E5190088F1B7 /* ResultProvider.swift */; };
+		B46D6969243515500088F1B7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D6968243515500088F1B7 /* AppCoordinator.swift */; };
 		B47742232430FE9B00E1062A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47742222430FE9B00E1062A /* MenuVC.swift */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
 		B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5324314990004C6C54 /* MenuVM.swift */; };
@@ -94,8 +94,6 @@
 		B4504EC02353476A002F9C7D /* TFToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFToken.m; sourceTree = "<group>"; };
 		B4504EC12353476A002F9C7D /* TFLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLevel.m; sourceTree = "<group>"; };
 		B4504EC22353476A002F9C7D /* TFSessionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSessionResult.m; sourceTree = "<group>"; };
-		B4504EE12353476A002F9C7D /* TFAppCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFAppCoordinator.h; sourceTree = "<group>"; };
-		B4504EE92353476A002F9C7D /* TFAppCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFAppCoordinator.m; sourceTree = "<group>"; };
 		B4504EF22353476A002F9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4504EF42353476A002F9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4504F132353476A002F9C7D /* Tock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tock.caf; sourceTree = "<group>"; };
@@ -112,6 +110,7 @@
 		B46D69622434D6520088F1B7 /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		B46D69642434DAE50088F1B7 /* LeaderboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardService.swift; sourceTree = "<group>"; };
 		B46D69662434E5190088F1B7 /* ResultProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultProvider.swift; sourceTree = "<group>"; };
+		B46D6968243515500088F1B7 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B47742222430FE9B00E1062A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		B4B7D2CE23534B6900CE09DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -180,8 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				B4388F0F2434C28C0082E406 /* AppDelegate.swift */,
-				B4504EE12353476A002F9C7D /* TFAppCoordinator.h */,
-				B4504EE92353476A002F9C7D /* TFAppCoordinator.m */,
+				B46D6968243515500088F1B7 /* AppCoordinator.swift */,
 				B4504EDE2353476A002F9C7D /* Services */,
 				B4504EBB2353476A002F9C7D /* Model */,
 				B4504EED2353476A002F9C7D /* View */,
@@ -441,8 +439,8 @@
 			files = (
 				B4388F0E2434BBFE0082E406 /* UIAlertController+Extra.swift in Sources */,
 				B4504F202353476A002F9C7D /* TFLevel.m in Sources */,
+				B46D6969243515500088F1B7 /* AppCoordinator.swift in Sources */,
 				B4C34E5E243254ED004C6C54 /* UserDefaults+Extra.swift in Sources */,
-				B4504F342353476A002F9C7D /* TFAppCoordinator.m in Sources */,
 				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
 				B4C34E6824337B71004C6C54 /* ResultsVM.swift in Sources */,
 				B4388F0C2434B96B0082E406 /* UIColor+Extra.swift in Sources */,

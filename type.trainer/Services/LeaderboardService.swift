@@ -12,7 +12,8 @@ import GameKit
 class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
 
     @objc var onScoreReceived: ((_ score: Int)->())?
-    @objc var onShouldPresent: ((_ authVC: UIViewController)->())?
+    @objc var onShouldPresentAuthVC: ((_ authVC: UIViewController)->())?
+    @objc var onShouldDismissVC: ((_ vc: UIViewController)->())?
     
     var leaderboardId: String?
     var gameCenterEnabled: Bool = false
@@ -21,7 +22,7 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
     @objc func authenticateLocalPlayer() {
         GKLocalPlayer.local.authenticateHandler = { [weak self] (vc : UIViewController?, error : Error?) -> Void in
             if let authVC = vc { // not authenticated
-                self?.onShouldPresent?(authVC)
+                self?.onShouldPresentAuthVC?(authVC)
             } else if GKLocalPlayer.local.isAuthenticated {
                 self?.gameCenterEnabled = true
                 GKLocalPlayer.local.loadDefaultLeaderboardIdentifier { (id, error) in
@@ -40,7 +41,7 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
         }
     }
     
-    @objc func canShowLeaderboard() -> Bool {
+    @objc var canShowLeaderboard: Bool {
         if let _ = leaderboardId, gameCenterEnabled {
             return true
         } else {
@@ -48,7 +49,7 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
         }
     }
     
-    @objc func controller() -> UIViewController {
+    @objc var controller: UIViewController {
         let leaderboardVC = GKGameCenterViewController()
         leaderboardVC.gameCenterDelegate = self
         leaderboardVC.viewState = .leaderboards
@@ -67,7 +68,7 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
     // MARK: - GKGameCenterControllerDelegate
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismiss(animated: true)
+        onShouldDismissVC?(gameCenterViewController)
     }
         
 }

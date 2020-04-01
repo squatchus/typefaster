@@ -13,6 +13,7 @@ extension String {
     subscript(i: Int) -> String {
         return String(self[index(startIndex, offsetBy: i)])
     }
+    
     subscript(range: NSRange) -> String {
         let loc = range.location
         let len = range.length
@@ -23,7 +24,11 @@ extension String {
     }
     
     func isNewLine(at index: Int) -> Bool {
-        self[index] == "\n"
+        if index < self.count {
+            return self[index] == "\n"
+        } else {
+            return false
+        }
     }
 
     func isUppercased() -> Bool {
