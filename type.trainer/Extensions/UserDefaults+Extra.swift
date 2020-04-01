@@ -13,6 +13,9 @@ enum DefaultsKey: String {
     case strictTyping = "strictTyping"
     
     case prevLevel = "prevLevel"
+    case results = "results"
+    case migrations = "migratedTo"
+    case score = "gameCenterScore"
     
     case classic = "categoryClassic"
     case quotes = "categoryQuotes"
@@ -51,6 +54,32 @@ extension UserDefaults {
             value(forKey: .prevLevel) as? Int
         } set (newValue) {
             setValue(newValue, forKey: .prevLevel)
+        }
+    }
+    
+    var results: [TFSessionResult] {
+        get {
+            let dictArray = value(forKey: .results) as! [Dictionary<String, Any>]
+            return dictArray.map { TFSessionResult(dict: $0) }
+        } set (newValue) {
+            let dictArray = newValue.map { $0.dict() }
+            setValue(dictArray, forKey: .results)
+        }
+    }
+    
+    var migrations: [String]? {
+        get {
+            value(forKey: .migrations) as? [String]
+        } set (newValue) {
+            setValue(newValue, forKey: .migrations)
+        }
+    }
+    
+    var score: Int {
+        get {
+            value(forKey: .score) as? Int ?? 0
+        } set (newValue) {
+            setValue(newValue, forKey: .score)
         }
     }
     
@@ -105,6 +134,23 @@ extension UserDefaults {
         }
         set(enabled) {
             setValue(enabled, forKey: .english)
+        }
+    }
+    
+    func migrateResultsIfNeeded() {
+        var versions = migrations ?? [String]()
+        if versions.contains("1.1") {
+            if let results = value(forKey: .results) as? [Dictionary<String, Any>] {
+                var newResults = [Dictionary<String, Any>]()
+                for dict in results {
+                    var newDict =  dict
+                    newDict.removeValue(forKey: "level")
+                    newResults.append(newDict)
+                }
+                setValue(newResults, forKey: .results)
+                versions.append("1.1")
+                migrations = versions
+            }
         }
     }
 }

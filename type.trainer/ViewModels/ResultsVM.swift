@@ -17,20 +17,20 @@ class ResultsVM: NSObject {
     @objc let signsPerMinTitle: String
     @objc let mistakes: String
     @objc let mistakesTitle: String
-    @objc let stars: Float
+    @objc let stars: Double
     @objc let text: String
     @objc let author: String
     @objc let continueTitle: String
     @objc let settingsTitle: String
     @objc let rateTitle: String
     
-    @objc init(level: TFLevel, result:TFSessionResult, event: TFResultEvent, provider: TFResultProvider) {
-        let best = provider.bestSpeed()
+    @objc init(level: TFLevel, result:TFSessionResult, event: ResultEvent, provider: ResultProvider) {
+        let bestSpeed = provider.bestSpeed
         let spm = result.signsPerMin()
         
         if (event == .none) {
             let newRank = NSLocalizedString("results.vm.new.rank", comment: "")
-            let rankTitle = provider.rankTitle(bySpeed: best)
+            let rankTitle = provider.rankTitle(by: bestSpeed)
             resultTitle = "\(newRank):\n\(rankTitle)!"
         } else if (event == .newRecord) {
             resultTitle = NSLocalizedString("results.vm.new.record", comment: "")
@@ -38,7 +38,7 @@ class ResultsVM: NSObject {
             resultTitle = NSLocalizedString("results.vm.your.result", comment: "")
         }
         
-        bestResult = "\(best)"
+        bestResult = "\(bestSpeed)"
         bestResultTitle = NSLocalizedString("results.vm.best.result", comment: "")
         
         signsPerMin = "\(spm)"
@@ -51,7 +51,7 @@ class ResultsVM: NSObject {
         mistakes = "\(mistakesPercent)%"
         mistakesTitle = NSLocalizedString("results.vm.mistakes", comment: "")
         
-        stars = provider.stars(bySpeed: best)
+        stars = provider.stars(by: bestSpeed)
         text = level.text
         author = "\(level.title)\n\(level.author)"
         

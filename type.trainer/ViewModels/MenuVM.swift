@@ -14,36 +14,36 @@ class MenuVM: NSObject {
     let signsPerMin: String
     let signsPerMinTitle: String
     let firstResultTitle: String
-    let stars: Float
+    let stars: Double
     let rankTitle: String
     let rankSubtitle: String
     let typeFasterTitle: String
     let settingsTitle: String
     let rateTitle: String
     
-    @objc init(resultProvider: TFResultProvider) {
-        let first = resultProvider.firstSpeed()
-        let best = resultProvider.bestSpeed()
+    @objc init(resultProvider: ResultProvider) {
+        let firstSpeed = resultProvider.firstSpeed
+        let bestSpeed = resultProvider.bestSpeed
         bestResultTitle = NSLocalizedString("menu.vm.best.result", comment: "")
         
-        signsPerMin = "\(best)"
-        let chars = String.localizedStringWithFormat(NSLocalizedString("%d char(s)", comment: ""), best)
+        signsPerMin = "\(bestSpeed)"
+        let chars = String.localizedStringWithFormat(NSLocalizedString("%d char(s)", comment: ""), bestSpeed)
         signsPerMinTitle = "\(chars) \(NSLocalizedString("common.per.minute", comment: ""))"
 
-        if first == 0 && best == 0 {
+        if firstSpeed == 0 && bestSpeed == 0 {
             firstResultTitle = NSLocalizedString("menu.vm.complete.first", comment: "")
-        } else if (first > 0 && best > first) {
-            firstResultTitle = String.localizedStringWithFormat("%@ %d", NSLocalizedString("menu.vm.began.with", comment: ""), first)
+        } else if (firstSpeed > 0 && bestSpeed > firstSpeed) {
+            firstResultTitle = String.localizedStringWithFormat("%@ %d", NSLocalizedString("menu.vm.began.with", comment: ""), firstSpeed)
         } else {
             firstResultTitle = NSLocalizedString("menu.vm.keep.training", comment: "")
         }
-        stars = resultProvider.stars(bySpeed: best)
+        stars = resultProvider.stars(by: bestSpeed)
 
         let rank = NSLocalizedString("menu.vm.rank", comment: "")
-        let rankLevel = resultProvider.rankTitle(bySpeed: best)
+        let rankLevel = resultProvider.rankTitle(by: bestSpeed)
         rankTitle = "\(rank) - \(rankLevel)"
 
-        let goal = resultProvider.nextGoal(bySpeed: best)
+        let goal = resultProvider.nextGoal(by: bestSpeed)
         if goal > 0 {
             let chars = String.localizedStringWithFormat(NSLocalizedString("%d char(s)", comment: ""), goal)
             let perMin = NSLocalizedString("menu.vm.min", comment: "")

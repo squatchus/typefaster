@@ -74,7 +74,7 @@ class TypingVM: NSObject {
         var impossibleOccured = false
         var mistakeOccured = false
         // process backspaces
-        let backspaces = typedString.count - range.location + (input=="" ? 1 : 0)
+        let backspaces = typedString.count - range.location
         for _ in 0..<backspaces {
             let result = process(key: "") // backspace
             if result == .impossible { impossibleOccured = true }

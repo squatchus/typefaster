@@ -9,6 +9,13 @@
 #import "TFAppCoordinator.h"
 
 #import "type_trainer-Swift.h"
+#import "TFSessionResult.h"
+
+@interface TFAppCoordinator()
+
+@property (nonatomic, weak) UINavigationController *rootNC;
+
+@end
 
 @implementation TFAppCoordinator
 
@@ -18,15 +25,15 @@
     {
         NSString *levelsPath = [NSBundle.mainBundle pathForResource:@"Levels" ofType:@"plist"];
         _levelProvider = [[LevelProvider alloc] initWithLevelsPath:levelsPath];
-        _resultsProvider = [TFResultProvider new];
-        _sounds = [TFSoundService new];
+        _resultsProvider = [[ResultProvider alloc] initWithUserDefaults:NSUserDefaults.standardUserDefaults];
+        _sounds = [SoundService new];
         _settings = [[SettingsVM alloc] initWithUserDefaults:NSUserDefaults.standardUserDefaults];
-        _reminder = [TFNotificationService new];
+        _reminder = [ReminderService new];
         
         __weak typeof(self) weakSelf = self;
-        _leaderboards = [TFLeaderboardService new];
-        _leaderboards.onScoreReceived = ^(int score) {
-            [weakSelf.resultsProvider saveScore:score];
+        _leaderboards = [LeaderboardService new];
+        _leaderboards.onScoreReceived = ^(NSInteger score) {
+            [weakSelf.resultsProvider saveWithScore:score];
             [weakSelf reloadBestScoreIfNeeded];
         };
         [_leaderboards authenticateLocalPlayer];
@@ -34,8 +41,9 @@
     return self;
 }
 
-- (void)start
+- (void)start:(UINavigationController *)rootNC
 {
+    _rootNC = rootNC;
     [self showMenu];
 }
 
@@ -43,24 +51,25 @@
 {
     MenuVM *menuVM = [[MenuVM alloc] initWithResultProvider:self.resultsProvider];
     MenuVC *menuVC = [[MenuVC alloc] initWithViewModel:menuVM];
+    __weak typeof(self) weakSelf = self;
     menuVC.onLeaderboardPressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         if ([self.leaderboards canShowLeaderboard]) {
-            [self.leaderboards showLeaderboard];
+            [weakSelf.rootNC presentViewController:self.leaderboards.controller animated:YES completion:nil];
         } else {
             [UIAlertController showLoginToGameCenterAlert];
         }
     };
     menuVC.onPlayPressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [self showGame];
     };
     menuVC.onRatePressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [self rateApp];
     };
     menuVC.onSetttingsPressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [self showSettings];
     };
     [self.rootNC pushViewController:menuVC animated:NO];
@@ -68,7 +77,6 @@
 
 - (void)showGame
 {
-
     TypingVC *typingVC = [TypingVC new];
     __weak typeof(typingVC) weakVC = typingVC;
     typingVC.onViewWillAppear = ^{
@@ -76,19 +84,19 @@
         weakVC.viewModel = [[TypingVM alloc] initWithLevel:nextLevel strictTyping:self.settings.defaults.strictTyping];
     };
     typingVC.onDonePressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
     };
     typingVC.onMistake = ^{
-        [self.sounds playErrorSound];
+        [self.sounds play:SoundMistake];
     };
     typingVC.onLevelCompleted = ^(TypingVM *viewModel) {
-        TFResultEvent event = [self.resultsProvider saveResult:viewModel.result];
-        if (event == TFResultEventNewRank) {
-            [self.sounds playNewRankSound];
-            [self.leaderboards reportScore:viewModel.result.signsPerMin];
-        } else if (event == TFResultEventNewRecord) {
-            [self.sounds playNewRecordSound];
-            [self.leaderboards reportScore:viewModel.result.signsPerMin];
+        ResultEvent event = [self.resultsProvider saveWithResult:viewModel.result];
+        if (event == ResultEventNewRank) {
+            [self.sounds play:SoundNewRank];
+            [self.leaderboards reportWithScore:viewModel.result.signsPerMin];
+        } else if (event == ResultEventNewRecord) {
+            [self.sounds play:SoundNewRecord];
+            [self.leaderboards reportWithScore:viewModel.result.signsPerMin];
         }
         [self showRemindMeAlertIfNeeded];
         
@@ -104,15 +112,15 @@
     __weak typeof(settingsVC) weakSettingsVC = settingsVC;
     settingsVC.onNotificationsSettingChanged = ^(BOOL enabled) {
         if (enabled)
-            [self.reminder enableNotifications];
+            [self.reminder enableReminders];
         else
-            [self.reminder disableNotifications];
+            [self.reminder disableReminders];
     };
     settingsVC.onCategorySettingChanged = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
     };
     settingsVC.onDonePressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [weakSettingsVC dismissViewControllerAnimated:YES completion:nil];
     };
     [self.rootNC.topViewController presentViewController:settingsVC animated:YES completion:nil];
@@ -123,19 +131,19 @@
     ResultsVC *resultsVC = [[ResultsVC alloc] initWithViewModel:viewModel];
     __weak typeof(resultsVC) weakResultsVC = resultsVC;
     resultsVC.onSharePressed = ^(NSString *text) {
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [self shareText:text];
     };
     resultsVC.onContinuePressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [weakResultsVC.navigationController popViewControllerAnimated:YES];
     };
     resultsVC.onSettingsPressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [self showSettings];
     };
     resultsVC.onRatePressed = ^{
-        [self.sounds playButtonClickSound];
+        [self.sounds play:SoundButtonClick];
         [self rateApp];
     };
     [self.rootNC pushViewController:resultsVC animated:YES];
@@ -166,12 +174,12 @@
             if (remind)
             {
                 self.settings.defaults.notifications = YES;
-                [self.reminder enableNotifications];
+                [self.reminder enableReminders];
             }
             else
             {
                 self.settings.defaults.notifications = NO;
-                [self.reminder disableNotifications];
+                [self.reminder disableReminders];
             }
         }];
     }
@@ -190,11 +198,6 @@
 {
     NSURL *url = [NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id1013588476"];
     [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
-}
-
-- (UINavigationController *)rootNC
-{
-    return (UINavigationController *) UIApplication.sharedApplication.delegate.window.rootViewController;
 }
 
 @end
