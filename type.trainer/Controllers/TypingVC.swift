@@ -65,13 +65,13 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     @objc func reloadViewModel() {
         viewModel.onSessionStarted = { [weak self] in
-            self?.secondsLabel.textColor = UIColor.tf_purple_text()
+            self?.secondsLabel.textColor = UIColor.tf_purple_text
         }
         viewModel.onTimerUpdated = { [weak self] (min, sec) in
             self?.secondsLabel.text = String(format: "%d:%02d", min, sec)
         }
         viewModel.onSessionEnded = { [weak self] in
-            self?.secondsLabel.textColor = UIColor.tf_light()
+            self?.secondsLabel.textColor = UIColor.tf_light_text
             self?.onLevelCompleted?(self!.viewModel)
         }
         completeButton.setTitle(viewModel.completeTitle, for: .normal)
@@ -133,10 +133,10 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     func pulseTextViewBackgroundColor() {
         UIView.animate(withDuration: 0.15, animations: {
-            self.view.backgroundColor = UIColor.tf_background_red()
+            self.view.backgroundColor = UIColor.tf_background_red
         }) { (finished) in
             UIView.animate(withDuration: 0.15) {
-                self.view.backgroundColor = UIColor.tf_background()
+                self.view.backgroundColor = UIColor.tf_background
             }
         }
     }

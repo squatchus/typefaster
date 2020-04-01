@@ -79,7 +79,7 @@ class SettingsVC: UIViewController {
             if subview is UIButton {
                 subview.layer.cornerRadius = subview.frame.size.height/2.0
             } else if let switcher = subview as? UISwitch {
-                switcher.onTintColor = UIColor.tf_purple_button()
+                switcher.onTintColor = UIColor.tf_purple_button
             }
         }
     }
@@ -121,7 +121,7 @@ class SettingsVC: UIViewController {
 
     func updateCategoryButton(_ sender: UIButton)
     {
-        let color = sender.isSelected ? UIColor.tf_purple_button() : UIColor.tf_gray_button()
+        let color = sender.isSelected ? UIColor.tf_purple_button : UIColor.tf_gray_button
         sender.backgroundColor = color
     }
     

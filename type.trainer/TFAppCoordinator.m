@@ -10,8 +10,6 @@
 
 #import "type_trainer-Swift.h"
 
-#import "UIAlertController+Alerts.h"
-
 @implementation TFAppCoordinator
 
 - (instancetype)init

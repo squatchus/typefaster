@@ -241,16 +241,16 @@ class TypingVM: NSObject {
         let joined = "\(typedString)\(trail)"
         let text = NSMutableAttributedString(string: joined)
         text.addAttribute(.font, value: UIScreen.textFontForDevice(), range: NSMakeRange(0, text.length))
-        text.addAttribute(.foregroundColor, value: UIColor.tf_light_text(), range: NSMakeRange(0, text.length))
+        text.addAttribute(.foregroundColor, value: UIColor.tf_light_text, range: NSMakeRange(0, text.length))
         // style for typed part
-        text.addAttribute(.foregroundColor, value: UIColor.tf_dark_text(), range: NSMakeRange(0, typedString.count))
+        text.addAttribute(.foregroundColor, value: UIColor.tf_dark_text, range: NSMakeRange(0, typedString.count))
         
         for i in 0..<typedString.count {
             let range = NSMakeRange(i, 1)
             let typedLetter = typedString[range]
             let textLetter = level.text[range]
             if typedLetter.hasSmartMatch(with: textLetter) == false {
-                text.addAttribute(.foregroundColor, value: UIColor.tf_red(), range: range)
+                text.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
             }
         }
         return text
@@ -270,14 +270,14 @@ class TypingVM: NSObject {
 
         let currentWord = NSMutableAttributedString(string: word)
         currentWord.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: NSMakeRange(0, currentWord.length))
-        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_dark_text(), range: NSMakeRange(0, currentWord.length))
-        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_green(), range: NSMakeRange(0, typedPart.count))
+        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_dark_text, range: NSMakeRange(0, currentWord.length))
+        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_green, range: NSMakeRange(0, typedPart.count))
         for i in 0..<typedPart.count {
             let range = NSMakeRange(i, 1)
             let typedLetter = typedPart[range]
             let textLetter = token.string[range]
             if typedLetter.hasSmartMatch(with: textLetter) == false {
-                currentWord.addAttribute(.foregroundColor, value: UIColor.tf_red(), range: range)
+                currentWord.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
             }
         }
         return currentWord;
