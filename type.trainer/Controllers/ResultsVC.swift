@@ -10,11 +10,11 @@ import UIKit
 
 class ResultsVC: UIViewController {
 
-    @objc var onViewWillAppear: (()->())?
-    @objc var onSharePressed: ((_ text: String)->())?
-    @objc var onContinuePressed: (()->())?
-    @objc var onSettingsPressed: (()->())?
-    @objc var onRatePressed: (()->())?
+    var onViewWillAppear: (()->())?
+    var onSharePressed: ((_ text: String)->())?
+    var onContinuePressed: (()->())?
+    var onSettingsPressed: (()->())?
+    var onRatePressed: (()->())?
     
     var viewModel: ResultsVM
     
@@ -41,7 +41,7 @@ class ResultsVC: UIViewController {
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var rateButton: UIButton!
     
-    @objc init(viewModel: ResultsVM) {
+    init(viewModel: ResultsVM) {
         self.viewModel = viewModel
         super.init(nibName: "ResultsVC", bundle: nil)
     }
@@ -57,7 +57,7 @@ class ResultsVC: UIViewController {
         reloadViewModel()
     }
     
-    @objc func reloadViewModel() {
+    func reloadViewModel() {
         resultTitleLabel.text = viewModel.resultTitle
         bestResultLabel.text = viewModel.bestResult
         bestResultTitleLabel.text = viewModel.bestResultTitle

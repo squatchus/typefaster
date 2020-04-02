@@ -17,23 +17,9 @@ class SettingsVM: NSObject {
     let strictTypingInfo: NSAttributedString
     let doneTitle: String
     
-    @objc let defaults: UserDefaults
-    
-    @objc var allCategories: [String] {
-        let all: [DefaultsKey] = [.classic, .cookies, .quotes, .hokku, .english]
-        return all.map { $0.rawValue }
-    }
-    @objc var disabledCategories: [String] {
-        var disabled = [DefaultsKey]()
-        if (!defaults.classicEnabled) { disabled.append(.classic) }
-        if (!defaults.cookiesEnabled) { disabled.append(.cookies) }
-        if (!defaults.quotesEnabled) { disabled.append(.quotes) }
-        if (!defaults.hokkuEnabled) { disabled.append(.hokku) }
-        if (!defaults.englishEnabled) { disabled.append(.english) }
-        return disabled.map { $0.rawValue }
-    }
-    
-    @objc init(userDefaults: UserDefaults = .standard) {
+    let defaults: UserDefaults
+
+    init(userDefaults: UserDefaults = .standard) {
         defaults = userDefaults
         
         settingsTitle = NSLocalizedString("common.settings", comment: "")
@@ -48,5 +34,20 @@ class SettingsVM: NSObject {
         notificationsInfo = NSAttributedString(string: NSLocalizedString("settings.vm.reminders.info", comment: ""), attributes: attributes)
         strictTypingInfo = NSAttributedString(string: NSLocalizedString("settings.vm.strict.typing.info", comment: ""), attributes: attributes)
     }
-   
+
+    var allCategories: [String] {
+        let all: [DefaultsKey] = [.classic, .cookies, .quotes, .hokku, .english]
+        return all.map { $0.rawValue }
+    }
+    
+    var disabledCategories: [String] {
+        var disabled = [DefaultsKey]()
+        if (!defaults.classicEnabled) { disabled.append(.classic) }
+        if (!defaults.cookiesEnabled) { disabled.append(.cookies) }
+        if (!defaults.quotesEnabled) { disabled.append(.quotes) }
+        if (!defaults.hokkuEnabled) { disabled.append(.hokku) }
+        if (!defaults.englishEnabled) { disabled.append(.english) }
+        return disabled.map { $0.rawValue }
+    }
+    
 }

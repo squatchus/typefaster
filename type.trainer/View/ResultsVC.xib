@@ -123,11 +123,11 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="U5o-1q-ryG"/>
                             <exclude reference="JKe-AY-6uS"/>
-                            <exclude reference="yvC-ZT-k0a"/>
+                            <exclude reference="U5o-1q-ryG"/>
                             <exclude reference="8d6-Oa-bsr"/>
                             <exclude reference="Qsy-HS-MQv"/>
+                            <exclude reference="yvC-ZT-k0a"/>
                         </mask>
                     </variation>
                 </view>
@@ -424,15 +424,15 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="lxh-dz-8FI"/>
+                    <exclude reference="6p7-sr-pfg"/>
                     <exclude reference="XeU-3k-F7w"/>
                     <exclude reference="e2A-Pg-NTb"/>
-                    <exclude reference="6p7-sr-pfg"/>
-                    <exclude reference="tjK-dG-NIb"/>
                     <exclude reference="t7T-ed-siY"/>
+                    <exclude reference="tjK-dG-NIb"/>
                     <exclude reference="FfC-dT-mu5"/>
                     <exclude reference="90Z-gQ-AWc"/>
-                    <exclude reference="LKF-uh-Sha"/>
                     <exclude reference="45S-8o-A1v"/>
+                    <exclude reference="LKF-uh-Sha"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="135" y="-255"/>

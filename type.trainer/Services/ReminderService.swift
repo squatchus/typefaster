@@ -10,7 +10,7 @@ import UIKit
 
 class ReminderService: NSObject {
     
-    @objc func enableReminders() {
+    func enableReminders() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
             DispatchQueue.main.async {
                 if granted {
@@ -33,7 +33,7 @@ class ReminderService: NSObject {
         }
     }
     
-    @objc func disableReminders() {
+    func disableReminders() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }

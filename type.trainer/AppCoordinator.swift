@@ -95,10 +95,10 @@ class AppCoordinator: NSObject {
             let result = self.resultsProvider.save(result: viewModel.result)
             if (result == .newRank) {
                 self.sounds.play(.newRank)
-                self.leaderboards.report(score: Int(viewModel.result.signsPerMin()))
+                self.leaderboards.report(score: viewModel.result.signsPerMin)
             } else if (result == .newRecord) {
                 self.sounds.play(.newRecord)
-                self.leaderboards.report(score: Int(viewModel.result.signsPerMin()))
+                self.leaderboards.report(score: viewModel.result.signsPerMin)
             }
             self.showRemindMeAlertIfNeeded()
             let resultsVM = ResultsVM(level: viewModel.level, result: viewModel.result, event: result, provider: self.resultsProvider)
@@ -187,7 +187,7 @@ class AppCoordinator: NSObject {
         let urlString = "https://apps.apple.com/app/id1013588476"
         let message = "\(text)\n\n\(urlString)"
         let controller = UIActivityViewController(activityItems: [message], applicationActivities: nil)
-        controller.excludedActivityTypes = [.postToWeibo, .print, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToVimeo, .postToTencentWeibo, .airDrop];
+        controller.excludedActivityTypes = [.postToWeibo, .print, .assignToContact, .saveToCameraRoll, .addToReadingList, .postToVimeo, .postToTencentWeibo, .airDrop]
         rootNC.present(controller, animated: true)
     }
     

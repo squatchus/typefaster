@@ -16,16 +16,16 @@ extension Data {
 
 class LevelProvider: NSObject {
     
-    @objc let levels: [TFLevel]
+    let levels: [Level]
     
-    @objc init(levelsPath: String) {
+    init(levelsPath: String) {
         let levelsURL = URL(fileURLWithPath: levelsPath)
         let levelsData = try! Data(contentsOf: levelsURL)
         let dictArray = levelsData.asPlistArray
-        levels = dictArray.map { TFLevel(dict: $0) }
+        levels = dictArray.map { Level(dict: $0) }
     }
     
-    @objc func nextLevel(for settings: SettingsVM) -> TFLevel {
+    func nextLevel(for settings: SettingsVM) -> Level {
         // filter available levels
         let disabledCategories = settings.disabledCategories
         let allDisabled = (disabledCategories.count == settings.allCategories.count)

@@ -10,12 +10,12 @@ import UIKit
 
 class SettingsVC: UIViewController {
 
-    @objc var viewModel: SettingsVM
+    var viewModel: SettingsVM
     
-    @objc var onViewWillAppear: (()->())?
-    @objc var onNotificationsSettingChanged: ((_ enabled: Bool)->())?
-    @objc var onCategorySettingChanged: (()->())?
-    @objc var onDonePressed: (()->())?
+    var onViewWillAppear: (()->())?
+    var onNotificationsSettingChanged: ((_ enabled: Bool)->())?
+    var onCategorySettingChanged: (()->())?
+    var onDonePressed: (()->())?
 
     @IBOutlet weak var doneWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var topMargin: NSLayoutConstraint!
@@ -34,7 +34,7 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var categoryEnglishButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
-    @objc init(viewModel: SettingsVM) {
+    init(viewModel: SettingsVM) {
         self.viewModel = viewModel
         super.init(nibName: "SettingsVC", bundle: nil)
     }
@@ -50,7 +50,7 @@ class SettingsVC: UIViewController {
         reloadViewModel()
     }
     
-    @objc func reloadViewModel() {
+    func reloadViewModel() {
         notificationSwitch.isOn  = viewModel.defaults.notifications
         strictTypingSwitch.isOn = viewModel.defaults.strictTyping
 

@@ -6,29 +6,29 @@
 //  Copyright © 2020 Suricatum. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class ResultsVM: NSObject {
 
-    @objc let resultTitle: String
-    @objc let bestResult: String
-    @objc let bestResultTitle: String
-    @objc let signsPerMin: String
-    @objc let signsPerMinTitle: String
-    @objc let mistakes: String
-    @objc let mistakesTitle: String
-    @objc let stars: Double
-    @objc let text: String
-    @objc let author: String
-    @objc let continueTitle: String
-    @objc let settingsTitle: String
-    @objc let rateTitle: String
+    let resultTitle: String
+    let bestResult: String
+    let bestResultTitle: String
+    let signsPerMin: String
+    let signsPerMinTitle: String
+    let mistakes: String
+    let mistakesTitle: String
+    let stars: Float
+    let text: String
+    let author: String
+    let continueTitle: String
+    let settingsTitle: String
+    let rateTitle: String
     
-    @objc init(level: TFLevel, result:TFSessionResult, event: ResultEvent, provider: ResultProvider) {
+    init(level: Level, result:LevelResult, event: ResultEvent, provider: ResultProvider) {
         let bestSpeed = provider.bestSpeed
-        let spm = result.signsPerMin()
+        let spm = result.signsPerMin
         
-        if (event == .none) {
+        if (event == .newRank) {
             let newRank = NSLocalizedString("results.vm.new.rank", comment: "")
             let rankTitle = provider.rankTitle(by: bestSpeed)
             resultTitle = "\(newRank):\n\(rankTitle)!"
@@ -47,7 +47,7 @@ class ResultsVM: NSObject {
         signsPerMinTitle = "\(chars)\n\(NSLocalizedString("common.per.minute", comment: ""))"
         
         let linesCount = level.text.components(separatedBy: "\n").count
-        let mistakesPercent = Int(result.mistakes) * 100 / (level.text.count - (linesCount-1))
+        let mistakesPercent = result.mistakes * 100 / (level.text.count - (linesCount-1))
         mistakes = "\(mistakesPercent)%"
         mistakesTitle = NSLocalizedString("results.vm.mistakes", comment: "")
         

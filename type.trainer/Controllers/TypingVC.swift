@@ -10,12 +10,12 @@ import UIKit
 
 class TypingVC: UIViewController, UITextViewDelegate {
 
-    @objc var viewModel: TypingVM!
+    var viewModel: TypingVM!
     
-    @objc var onViewWillAppear: (()->())?
-    @objc var onMistake: (()->())?
-    @objc var onDonePressed: (()->())?
-    @objc var onLevelCompleted: ((_ viewModel: TypingVM)->())?
+    var onViewWillAppear: (()->())?
+    var onMistake: (()->())?
+    var onDonePressed: (()->())?
+    var onLevelCompleted: ((_ viewModel: TypingVM)->())?
     
     @IBOutlet weak var completeButton: UIButton!
     @IBOutlet weak var secondsLabel: UILabel!
@@ -25,7 +25,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     var maxKeyboardHeight: CGFloat = 0
     
-    @objc init() {
+    init() {
         super.init(nibName: "TypingVC", bundle: nil)
     }
     
@@ -63,7 +63,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     // MARK: - View Model Management
     
-    @objc func reloadViewModel() {
+    func reloadViewModel() {
         viewModel.onSessionStarted = { [weak self] in
             self?.secondsLabel.textColor = UIColor.tf_purple_text
         }
@@ -144,7 +144,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
         let frameKey = UIResponder.keyboardFrameEndUserInfoKey
         let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
         let frameEnd = notification.userInfo![frameKey] as! NSValue
-        let duration = notification.userInfo![durationKey] as! Double
+        let duration = notification.userInfo![durationKey] as! TimeInterval
         let keyboardFrame = frameEnd.cgRectValue
         if (keyboardFrame.size.height > maxKeyboardHeight) {
             maxKeyboardHeight = keyboardFrame.size.height
@@ -156,7 +156,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     @objc func keyboardWillHide(notification: Notification) {
         let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
-        let duration = notification.userInfo![durationKey] as! Double
+        let duration = notification.userInfo![durationKey] as! TimeInterval
         UIView.animate(withDuration: duration) {
             self.bottomMargin.constant = 0
         }

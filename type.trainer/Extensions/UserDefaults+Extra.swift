@@ -33,7 +33,7 @@ extension UserDefaults {
     }
     
     // settings
-    @objc var notifications: Bool {
+    var notifications: Bool {
         get {
             let defValue = false
             return value(forKey: .notifications) as? Bool ?? defValue
@@ -41,7 +41,7 @@ extension UserDefaults {
             setValue(newValue, forKey: .notifications)
         }
     }
-    @objc var strictTyping: Bool {
+    var strictTyping: Bool {
         get {
             let defValue = true
             return value(forKey: .strictTyping) as? Bool ?? defValue
@@ -57,15 +57,15 @@ extension UserDefaults {
         }
     }
     
-    var results: [TFSessionResult] {
+    var results: [LevelResult] {
         get {
-            if let array = value(forKey: .results) as? [Dictionary<String, Any>] {
-                return array.map { TFSessionResult(dict: $0) }
+            if let array = value(forKey: .results) as? [Dictionary<String, Int>] {
+                return array.map { LevelResult(dict: $0) }
             } else {
-                return [TFSessionResult]()
+                return [LevelResult]()
             }
         } set (newValue) {
-            let dictArray = newValue.map { $0.dict() }
+            let dictArray = newValue.map { $0.dict }
             setValue(dictArray, forKey: .results)
         }
     }
@@ -94,7 +94,7 @@ extension UserDefaults {
             return showEngTexts
         }
     }
-    @objc var classicEnabled: Bool {
+    var classicEnabled: Bool {
         get {
             let defValue = showEngTexts ? false : true
             return value(forKey: .classic) as? Bool ?? defValue
@@ -103,7 +103,7 @@ extension UserDefaults {
             setValue(enabled, forKey: .classic)
         }
     }
-    @objc var quotesEnabled: Bool {
+    var quotesEnabled: Bool {
         get {
             let defValue = showEngTexts ? false : true
             return value(forKey: .quotes) as? Bool ?? defValue
@@ -112,7 +112,7 @@ extension UserDefaults {
             setValue(enabled, forKey: .quotes)
         }
     }
-    @objc var hokkuEnabled: Bool {
+    var hokkuEnabled: Bool {
         get {
             let defValue = showEngTexts ? false : true
             return value(forKey: .hokku) as? Bool ?? defValue
@@ -121,7 +121,7 @@ extension UserDefaults {
             setValue(enabled, forKey: .hokku)
         }
     }
-    @objc var cookiesEnabled: Bool {
+    var cookiesEnabled: Bool {
         get {
             let defValue = showEngTexts ? false : true
             return value(forKey: .cookies) as? Bool ?? defValue
@@ -130,7 +130,7 @@ extension UserDefaults {
             setValue(enabled, forKey: .cookies)
         }
     }
-    @objc var englishEnabled: Bool {
+    var englishEnabled: Bool {
         get {
             let defValue = showEngTexts ? true : false
             return value(forKey: .english) as? Bool ?? defValue

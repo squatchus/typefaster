@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-@objc enum Sound: Int {
+enum Sound: Int {
     case keyboardClick, buttonClick, mistake, newRecord, newRank
 }
 
@@ -40,7 +40,7 @@ class SoundService: NSObject {
         newRankPlayer = AVAudioPlayer.playerFor(filename: "new_rank.wav")
     }
     
-    @objc func play(_ sound: Sound) {
+    func play(_ sound: Sound) {
         let soundPlayer = player(for: sound)
         if soundPlayer.isPlaying {
             soundPlayer.currentTime = 0

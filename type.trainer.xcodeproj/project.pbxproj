@@ -24,9 +24,6 @@
 		B4388F102434C28C0082E406 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4388F0F2434C28C0082E406 /* AppDelegate.swift */; };
 		B43E4E08242F921000050E19 /* CurrentWordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43E4E07242F921000050E19 /* CurrentWordView.xib */; };
 		B4457CB61B56BFA6003C27A9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */; };
-		B4504F1F2353476A002F9C7D /* TFToken.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC02353476A002F9C7D /* TFToken.m */; };
-		B4504F202353476A002F9C7D /* TFLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC12353476A002F9C7D /* TFLevel.m */; };
-		B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B4504EC22353476A002F9C7D /* TFSessionResult.m */; };
 		B4504F372353476A002F9C7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4504EF12353476A002F9C7D /* Localizable.strings */; };
 		B4504F382353476A002F9C7D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4504EF32353476A002F9C7D /* InfoPlist.strings */; };
 		B4504F552353476A002F9C7D /* Tock.caf in Resources */ = {isa = PBXBuildFile; fileRef = B4504F132353476A002F9C7D /* Tock.caf */; };
@@ -41,6 +38,8 @@
 		B46D69652434DAE50088F1B7 /* LeaderboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D69642434DAE50088F1B7 /* LeaderboardService.swift */; };
 		B46D69672434E5190088F1B7 /* ResultProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D69662434E5190088F1B7 /* ResultProvider.swift */; };
 		B46D6969243515500088F1B7 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D6968243515500088F1B7 /* AppCoordinator.swift */; };
+		B46D696B2435510B0088F1B7 /* LevelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D696A2435510B0088F1B7 /* LevelResult.swift */; };
+		B46D696F243554910088F1B7 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D696E243554910088F1B7 /* Level.swift */; };
 		B47742232430FE9B00E1062A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47742222430FE9B00E1062A /* MenuVC.swift */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
 		B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E5324314990004C6C54 /* MenuVM.swift */; };
@@ -86,14 +85,7 @@
 		B4388F0D2434BBFE0082E406 /* UIAlertController+Extra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extra.swift"; sourceTree = "<group>"; };
 		B4388F0F2434C28C0082E406 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B43E4E07242F921000050E19 /* CurrentWordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentWordView.xib; sourceTree = "<group>"; };
-		B43E4E09242F940400050E19 /* type.trainer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "type.trainer-Bridging-Header.h"; sourceTree = "<group>"; };
 		B4457CB51B56BFA6003C27A9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		B4504EBC2353476A002F9C7D /* TFToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFToken.h; sourceTree = "<group>"; };
-		B4504EBD2353476A002F9C7D /* TFSessionResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFSessionResult.h; sourceTree = "<group>"; };
-		B4504EBE2353476A002F9C7D /* TFLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFLevel.h; sourceTree = "<group>"; };
-		B4504EC02353476A002F9C7D /* TFToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFToken.m; sourceTree = "<group>"; };
-		B4504EC12353476A002F9C7D /* TFLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFLevel.m; sourceTree = "<group>"; };
-		B4504EC22353476A002F9C7D /* TFSessionResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFSessionResult.m; sourceTree = "<group>"; };
 		B4504EF22353476A002F9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B4504EF42353476A002F9C7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4504F132353476A002F9C7D /* Tock.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tock.caf; sourceTree = "<group>"; };
@@ -111,6 +103,8 @@
 		B46D69642434DAE50088F1B7 /* LeaderboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardService.swift; sourceTree = "<group>"; };
 		B46D69662434E5190088F1B7 /* ResultProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultProvider.swift; sourceTree = "<group>"; };
 		B46D6968243515500088F1B7 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		B46D696A2435510B0088F1B7 /* LevelResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelResult.swift; sourceTree = "<group>"; };
+		B46D696E243554910088F1B7 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		B47742222430FE9B00E1062A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		B4B7D2CE23534B6900CE09DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -211,12 +205,8 @@
 		B4504EBB2353476A002F9C7D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				B4504EBE2353476A002F9C7D /* TFLevel.h */,
-				B4504EC12353476A002F9C7D /* TFLevel.m */,
-				B4504EBC2353476A002F9C7D /* TFToken.h */,
-				B4504EC02353476A002F9C7D /* TFToken.m */,
-				B4504EBD2353476A002F9C7D /* TFSessionResult.h */,
-				B4504EC22353476A002F9C7D /* TFSessionResult.m */,
+				B46D696E243554910088F1B7 /* Level.swift */,
+				B46D696A2435510B0088F1B7 /* LevelResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,7 +275,6 @@
 			isa = PBXGroup;
 			children = (
 				B4066EC4235377EC0068954C /* Launch Screen.storyboard */,
-				B43E4E09242F940400050E19 /* type.trainer-Bridging-Header.h */,
 				B422984A2353A393006AC356 /* Levels.plist */,
 				B4066EC0235376D50068954C /* launch_bg@2x.png */,
 				B4066EC1235376D50068954C /* launch_logo@2x.png */,
@@ -438,10 +427,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4388F0E2434BBFE0082E406 /* UIAlertController+Extra.swift in Sources */,
-				B4504F202353476A002F9C7D /* TFLevel.m in Sources */,
 				B46D6969243515500088F1B7 /* AppCoordinator.swift in Sources */,
+				B46D696F243554910088F1B7 /* Level.swift in Sources */,
 				B4C34E5E243254ED004C6C54 /* UserDefaults+Extra.swift in Sources */,
-				B4504F1F2353476A002F9C7D /* TFToken.m in Sources */,
 				B4C34E6824337B71004C6C54 /* ResultsVM.swift in Sources */,
 				B4388F0C2434B96B0082E406 /* UIColor+Extra.swift in Sources */,
 				B46D69652434DAE50088F1B7 /* LeaderboardService.swift in Sources */,
@@ -451,13 +439,13 @@
 				B4C34E602433583C004C6C54 /* LevelProvider.swift in Sources */,
 				B4C34E5C243248FB004C6C54 /* SettingsVM.swift in Sources */,
 				B4388F042433A9ED0082E406 /* TextView.swift in Sources */,
-				B4504F212353476A002F9C7D /* TFSessionResult.m in Sources */,
 				B46D69612434CF280088F1B7 /* SoundService.swift in Sources */,
 				B4388F062433B2C80082E406 /* TypingVM.swift in Sources */,
 				B4388F082433C07D0082E406 /* String+Extra.swift in Sources */,
 				B4388F102434C28C0082E406 /* AppDelegate.swift in Sources */,
 				B4388EFF2433A4810082E406 /* CurrentWordView.swift in Sources */,
 				B4C34E5924315F81004C6C54 /* SettingsVC.swift in Sources */,
+				B46D696B2435510B0088F1B7 /* LevelResult.swift in Sources */,
 				B4388EFC2433910A0082E406 /* TypingVC.swift in Sources */,
 				B4C34E5424314990004C6C54 /* MenuVM.swift in Sources */,
 				B4388F0A243408C00082E406 /* UIScreen+Extra.swift in Sources */,
@@ -646,7 +634,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/Resources/type.trainer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -678,7 +666,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "type.trainer/Resources/type.trainer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

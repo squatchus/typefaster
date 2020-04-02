@@ -18,21 +18,21 @@ class TypingVM: NSObject {
 
     var onSessionStarted: (()->())?
     var onSessionEnded: (()->())?
-    var onTimerUpdated: ((_ min: Int32, _ sec: Int32)->())?
+    var onTimerUpdated: ((_ min: Int, _ sec: Int)->())?
 
     let completeTitle: String
-    @objc let level: TFLevel
-    @objc var result: TFSessionResult
+    let level: Level
+    var result: LevelResult
     let strictTyping: Bool
     
     fileprivate var typedString = ""
     fileprivate var awaitedKey: String?
     fileprivate var timer: Timer?
     
-    @objc init(level: TFLevel, strictTyping: Bool) {
+    init(level: Level, strictTyping: Bool) {
         completeTitle = NSLocalizedString("typing.vm.complete", comment: "")
         self.level = level
-        self.result = TFSessionResult()
+        self.result = LevelResult()
         self.strictTyping = strictTyping
         self.awaitedKey = String(level.text.first!)
     }
@@ -183,7 +183,7 @@ class TypingVM: NSObject {
     func updateResults() {
         let backspaceAwaited = (awaitedKey != nil && awaitedKey?.count == 0)
         if strictTyping {
-            result.symbols = Int32(typedString.count)
+            result.symbols = typedString.count
             if (backspaceAwaited) {
                 result.mistakes += 1
             }
@@ -194,8 +194,8 @@ class TypingVM: NSObject {
             var mistakes = 0
             for token in level.tokens {
                 if token.startIndex >= typedString.count { break }
-                let length = min(typedString.count-Int(token.startIndex), Int(token.endIndex-token.startIndex)+1)
-                let typedRange = NSMakeRange(Int(token.startIndex), length)
+                let length = min(typedString.count-token.startIndex, token.endIndex-token.startIndex+1)
+                let typedRange = NSMakeRange(token.startIndex, length)
                 let typedSubstring = typedString[typedRange]
                 for i in 0..<typedSubstring.count {
                     let typedKey = typedSubstring[NSMakeRange(i, 1)]
@@ -203,10 +203,10 @@ class TypingVM: NSObject {
                     if typedKey.hasSmartMatch(with: supposedKey) == false { mistakes += 1 }
                 }
                 if token.string.hasSmartPrefix(typedSubstring) {
-                    result.symbols += Int32(length)
+                    result.symbols += length
                 }
             }
-            result.mistakes = Int32(mistakes)
+            result.mistakes = mistakes
         }
     }
     
@@ -232,7 +232,7 @@ class TypingVM: NSObject {
     }
     
     func getCursorRange() -> NSRange {
-        return NSMakeRange(typedString.count, 0);
+        return NSMakeRange(typedString.count, 0)
     }
     
     func getText() -> NSAttributedString {
@@ -259,10 +259,10 @@ class TypingVM: NSObject {
     func getCurrentWord() -> NSAttributedString {
         let backspaceAwaited = (awaitedKey != nil && awaitedKey!.count == 0)
         let tokenPosOffset = backspaceAwaited ? 1 : 0
-        let tokenPosition = Int32(typedString.count - tokenPosOffset)
-        let token = level.token(byPosition: tokenPosition) ?? level.tokens.last!
-        let typedLength = min(typedString.count-Int(token.startIndex), Int(token.endIndex-token.startIndex)+1)
-        let typedRange = NSMakeRange(Int(token.startIndex), typedLength)
+        let tokenPosition = typedString.count - tokenPosOffset
+        let token = level.token(by: tokenPosition) ?? level.tokens.last!
+        let typedLength = min(typedString.count-token.startIndex, token.endIndex-token.startIndex+1)
+        let typedRange = NSMakeRange(token.startIndex, typedLength)
         let typedPart = typedString[typedRange].replacingOccurrences(of: " ", with: "_")
         let trail = String(token.string.dropFirst(typedPart.count))
         var word = "\(typedPart)\(trail)"
@@ -280,7 +280,7 @@ class TypingVM: NSObject {
                 currentWord.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
             }
         }
-        return currentWord;
+        return currentWord
     }
     
     deinit {

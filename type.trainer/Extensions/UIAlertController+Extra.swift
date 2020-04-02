@@ -10,7 +10,7 @@ import UIKit
 
 extension UIAlertController {
     
-    @objc static func showLoginToGameCenterAlert() {
+    static func showLoginToGameCenterAlert() {
         let title = NSLocalizedString("alert.leaderboard.title", comment: "")
         let message = NSLocalizedString("alert.leaderboard.message", comment: "")
         let buttonTitle = NSLocalizedString("alert.button.ok", comment: "")
@@ -20,7 +20,7 @@ extension UIAlertController {
         alert.show()
     }
     
-    @objc static func showRemindMeAlertWith(handler: @escaping (_ remind: Bool)->()) {
+    static func showRemindMeAlertWith(handler: @escaping (_ remind: Bool)->()) {
         let title = NSLocalizedString("common.reminders", comment: "")
         let message = NSLocalizedString("alert.reminder.message", comment: "")
         let cancelTitle = NSLocalizedString("alert.button.no", comment: "")

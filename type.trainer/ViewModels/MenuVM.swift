@@ -6,22 +6,21 @@
 //  Copyright © 2020 Suricatum. All rights reserved.
 //
 
+import Foundation
 
-// we declared VM as class temporary to expose it to objc
-// TODO: - change class to struct later
 class MenuVM: NSObject {
     let bestResultTitle: String
     let signsPerMin: String
     let signsPerMinTitle: String
     let firstResultTitle: String
-    let stars: Double
+    let stars: Float
     let rankTitle: String
     let rankSubtitle: String
     let typeFasterTitle: String
     let settingsTitle: String
     let rateTitle: String
     
-    @objc init(resultProvider: ResultProvider) {
+    init(resultProvider: ResultProvider) {
         let firstSpeed = resultProvider.firstSpeed
         let bestSpeed = resultProvider.bestSpeed
         bestResultTitle = NSLocalizedString("menu.vm.best.result", comment: "")

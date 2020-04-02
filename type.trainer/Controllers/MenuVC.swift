@@ -10,12 +10,12 @@ import UIKit
 
 class MenuVC: UIViewController {
 
-    @objc var viewModel: MenuVM
+    var viewModel: MenuVM
 
-    @objc var onLeaderboardPressed: (()->())?
-    @objc var onPlayPressed: (()->())?
-    @objc var onRatePressed: (()->())?
-    @objc var onSetttingsPressed: (()->())?
+    var onLeaderboardPressed: (()->())?
+    var onPlayPressed: (()->())?
+    var onRatePressed: (()->())?
+    var onSetttingsPressed: (()->())?
     
     @IBOutlet weak var yourSpeedLabel: UILabel!
     @IBOutlet weak var signsPerMinLabel: UILabel!
@@ -42,7 +42,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var rateButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
 
-    @objc init(viewModel: MenuVM) {
+    init(viewModel: MenuVM) {
         self.viewModel = viewModel
         super.init(nibName: "MenuVC", bundle: nil)
     }
@@ -58,7 +58,7 @@ class MenuVC: UIViewController {
         reloadViewModel()
     }
     
-    @objc func reloadViewModel() {
+    func reloadViewModel() {
         yourSpeedLabel.text = viewModel.bestResultTitle
         signsPerMinLabel.text = viewModel.signsPerMin
         signsPerMinTitleLabel.text = viewModel.signsPerMinTitle

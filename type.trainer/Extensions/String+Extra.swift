@@ -53,7 +53,7 @@ extension String {
     func hasSmartPrefix(_ typedPrefix: String) -> Bool {
         let fullWord = self
         for i in 0..<typedPrefix.count {
-            let range = NSMakeRange(i, 1);
+            let range = NSMakeRange(i, 1)
             let typedKey = typedPrefix[range]
             let wordKey = fullWord[range]
             if !typedKey.hasSmartMatch(with: wordKey) {
