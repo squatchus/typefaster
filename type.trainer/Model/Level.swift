@@ -52,30 +52,6 @@ struct Level: Codable {
         var curTokenStart = -1
         var curTokenEnd = -1
         var i = 0
-//        let appendTokenIfNeeded = { (_ charString: String) in
-//            if word.count > 0 {
-//                end = index-1
-//                let token = Token(string: word, startIndex: start, endIndex: end)
-//                parsedTokens.append(token)
-//
-//            }
-//        }
-//        for character in text {
-//            let charString = String(character)
-//            if character.isLetter {
-//                if word.count == 0 { start = index }
-//                word.append(character)
-//            } else { // not letter
-//                appendTokenIfNeeded(charString)
-//            }
-//            index += 1
-//        }
-//        // and repeat 1 more time for the last word
-//        appendTokenIfNeeded()
-//        tokens = parsedTokens
-        
-        
-
         for character in text {
             let cString = String(character)
             if character.isLetter {
