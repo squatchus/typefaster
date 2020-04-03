@@ -6,7 +6,7 @@
 //  Copyright © 2020 Suricatum. All rights reserved.
 //
 
-struct LevelResult  {
+struct LevelResult: Equatable  {
     var seconds: Int
     var symbols: Int
     var mistakes: Int
@@ -27,7 +27,15 @@ struct LevelResult  {
         ["seconds": seconds, "symbols": symbols, "mistakes": mistakes]
     }
     
-    var signsPerMin: Int {
-        Int(Float(symbols) / Float(seconds) * 60.0)
+    var isVaild: Bool {
+        seconds > 0 && symbols > 0 && mistakes < symbols
+    }
+    
+    var charsPerMin: Int {
+        if seconds != 0 {
+            return Int(Float(symbols) / Float(seconds) * 60.0)
+        } else {
+            return 0
+        }
     }
 }

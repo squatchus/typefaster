@@ -30,7 +30,7 @@ class ResultProvider: NSObject {
     }
     
     var firstSpeed: Int {
-        if let first = defaults.results.first?.signsPerMin {
+        if let first = defaults.results.first?.charsPerMin {
             return Int (first)
         }
         return 0
@@ -39,8 +39,8 @@ class ResultProvider: NSObject {
     var bestSpeed: Int {
         var maxSpeed = 0
         for result in defaults.results {
-            if result.signsPerMin > maxSpeed {
-                maxSpeed = result.signsPerMin
+            if result.charsPerMin > maxSpeed {
+                maxSpeed = result.charsPerMin
             }
         }
         return max(maxSpeed, defaults.score)
@@ -54,7 +54,7 @@ class ResultProvider: NSObject {
         prevResults.append(result)
         defaults.results = prevResults
         
-        let newRecord = (result.signsPerMin > prevRecord)
+        let newRecord = (result.charsPerMin > prevRecord)
         let newRankAchieved = (currentRank.rawValue > prevRank.rawValue)
         if (newRecord && newRankAchieved) {
             return .newRank

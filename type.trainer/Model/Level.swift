@@ -20,10 +20,10 @@ struct Level: Codable {
     var tokens = [Token]()
     
     init(dict: Dictionary<String, String>) {
-        title = dict["title"]!
-        author = dict["author"]!
-        text = dict["text"]!
-        category = dict["category"]!
+        title = dict["title"] ?? ""
+        author = dict["author"] ?? ""
+        text = dict["text"] ?? ""
+        category = dict["category"] ?? ""
         buildTokens()
     }
     
@@ -36,6 +36,11 @@ struct Level: Codable {
         ]
     }
     
+    var isValid: Bool {
+        // all properties must be not empty
+        (title.count * author.count * text.count * category.count * tokens.count) != 0
+    }
+    
     func token(by position: Int) -> Token? {
         for token in tokens {
             let range = token.startIndex...token.endIndex
@@ -46,7 +51,7 @@ struct Level: Codable {
         return nil
     }
     
-    mutating func buildTokens() {
+    fileprivate mutating func buildTokens() {
         var parsedTokens = [Token]()
         var curTokenString = ""
         var curTokenStart = -1

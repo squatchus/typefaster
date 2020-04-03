@@ -142,7 +142,7 @@ extension UserDefaults {
     
     func migrateResultsIfNeeded() {
         var versions = migrations ?? [String]()
-        if versions.contains("1.1") {
+        if versions.contains("1.1") == false {
             if let results = value(forKey: .results) as? [Dictionary<String, Any>] {
                 var newResults = [Dictionary<String, Any>]()
                 for dict in results {

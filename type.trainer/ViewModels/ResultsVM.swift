@@ -26,7 +26,7 @@ class ResultsVM: NSObject {
     
     init(level: Level, result:LevelResult, event: ResultEvent, provider: ResultProvider) {
         let bestSpeed = provider.bestSpeed
-        let spm = result.signsPerMin
+        let spm = result.charsPerMin
         
         if (event == .newRank) {
             let newRank = NSLocalizedString("results.vm.new.rank", comment: "")

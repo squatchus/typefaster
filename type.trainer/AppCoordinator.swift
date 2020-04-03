@@ -95,10 +95,10 @@ class AppCoordinator: NSObject {
             let result = self.resultsProvider.save(result: viewModel.result)
             if (result == .newRank) {
                 self.sounds.play(.newRank)
-                self.leaderboards.report(score: viewModel.result.signsPerMin)
+                self.leaderboards.report(score: viewModel.result.charsPerMin)
             } else if (result == .newRecord) {
                 self.sounds.play(.newRecord)
-                self.leaderboards.report(score: viewModel.result.signsPerMin)
+                self.leaderboards.report(score: viewModel.result.charsPerMin)
             }
             self.showRemindMeAlertIfNeeded()
             let resultsVM = ResultsVM(level: viewModel.level, result: viewModel.result, event: result, provider: self.resultsProvider)
