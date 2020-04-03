@@ -13,7 +13,7 @@ class AppCoordinator: NSObject {
     let levelProvider: LevelProvider
     let resultsProvider: ResultProvider
     let sounds: SoundService
-    let settings: SettingsVM
+    let settings: UserDefaults
     let reminder: ReminderService
     let leaderboards: LeaderboardService
     weak var rootNC: UINavigationController!
@@ -22,7 +22,7 @@ class AppCoordinator: NSObject {
         let levelsPath = Bundle.main.path(forResource: "Levels", ofType: "plist")!
         levelProvider = LevelProvider(levelsPath: levelsPath)
         resultsProvider = ResultProvider(userDefaults: .standard)
-        settings = SettingsVM(userDefaults: .standard)
+        settings = UserDefaults.standard
         sounds = SoundService()
         reminder = ReminderService()
         leaderboards = LeaderboardService()
@@ -84,7 +84,7 @@ class AppCoordinator: NSObject {
         typingVC.onViewWillAppear = { [weak self] in
             guard let self = self else { return }
             let level = self.levelProvider.nextLevel(for: self.settings)
-            let strict = self.settings.defaults.strictTyping
+            let strict = self.settings.strictTyping
             typingVC.viewModel = TypingVM(level: level, strictTyping: strict)
         }
         typingVC.onMistake = { [weak self] in
@@ -113,7 +113,8 @@ class AppCoordinator: NSObject {
     }
     
     func showSettings() {
-        let settingsVC = SettingsVC(viewModel: settings)
+        let settingsVM = SettingsVM(settings: self.settings)
+        let settingsVC = SettingsVC(viewModel: settingsVM)
         settingsVC.onNotificationsSettingChanged = { [weak self] (enabled) in
             guard let self = self else { return }
             if (enabled) {
@@ -168,15 +169,15 @@ class AppCoordinator: NSObject {
     
     func showRemindMeAlertIfNeeded() {
         let thirdLevelFinished = (resultsProvider.results.count == 3)
-        let remindersDisabled = (settings.defaults.notifications == false)
+        let remindersDisabled = (settings.notifications == false)
         if (thirdLevelFinished && remindersDisabled) {
             UIAlertController.showRemindMeAlertWith { [weak self] (remind) in
                 guard let self = self else { return }
                 if (remind) {
-                    self.settings.defaults.notifications = true
+                    self.settings.notifications = true
                     self.reminder.enableReminders()
                 } else {
-                    self.settings.defaults.notifications = false
+                    self.settings.notifications = false
                     self.reminder.disableReminders()
                 }
             }

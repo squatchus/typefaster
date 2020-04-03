@@ -18,14 +18,14 @@ class LevelProvider: NSObject {
     
     let levels: [Level]
     
-    init(levelsPath: String) {
+    init(levelsPath: String = Bundle.main.path(forResource: "Levels", ofType: "plist")!) {
         let levelsURL = URL(fileURLWithPath: levelsPath)
         let levelsData = try! Data(contentsOf: levelsURL)
         let dictArray = levelsData.asPlistArray
         levels = dictArray.map { Level(dict: $0) }
     }
     
-    func nextLevel(for settings: SettingsVM) -> Level {
+    func nextLevel(for settings: UserDefaults) -> Level {
         // filter available levels
         let disabledCategories = settings.disabledCategories
         let allDisabled = (disabledCategories.count == settings.allCategories.count)
@@ -35,13 +35,13 @@ class LevelProvider: NSObject {
         }
         // update level index
         var levelIndex = 0
-        if let prevIndex = settings.defaults.prevLevelIndex {
+        if let prevIndex = settings.prevLevelIndex {
             let newIndex = prevIndex + 1
             if (newIndex < allowedLevels.count) {
                 levelIndex = newIndex
             }
         }
-        settings.defaults.prevLevelIndex = levelIndex
+        settings.prevLevelIndex = levelIndex
         return allowedLevels[levelIndex]
     }
     

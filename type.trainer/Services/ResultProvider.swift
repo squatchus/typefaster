@@ -46,6 +46,24 @@ class ResultProvider: NSObject {
         return max(maxSpeed, defaults.score)
     }
     
+    var starImageNames: [String] {
+        let currentStars = stars(by: bestSpeed)
+        var numberOfFullStars = Int(currentStars)
+        let hasHalfStar = (currentStars - Float(numberOfFullStars) > 0)
+        var names = [String]()
+        for _ in 1...5 {
+            if numberOfFullStars > 0 {
+                names.append("star_gold.png")
+            } else if numberOfFullStars == 0 && hasHalfStar {
+                names.append("star_goldgray.png")
+            } else {
+                names.append("star_gray.png")
+            }
+            numberOfFullStars -= 1
+        }
+        return names
+    }
+    
     func save(result: LevelResult) -> ResultEvent {
         let prevRecord = bestSpeed
         let prevRank = currentRank
@@ -80,7 +98,6 @@ class ResultProvider: NSObject {
             return goal
         }
         return 0
-
     }
     
     func rankTitle(by speed: Int) -> String {
@@ -99,9 +116,9 @@ class ResultProvider: NSObject {
         return rankTitle
     }
     
-    func stars(by speed: Int) -> Float {
+    fileprivate func stars(by speed: Int) -> Float {
         let starRatings = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5] // 11
-        let maxSpeedForRank = maxSpeed(for: rank(by: speed))
+        let maxSpeedForRank = maxSpeed(for: currentRank)
         let percent = min(100.0, Float(speed) * 100.0 / Float(maxSpeedForRank))
         let index = Int(percent/10)
         let numberOfStars = starRatings[index]

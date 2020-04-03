@@ -17,10 +17,10 @@ class SettingsVM: NSObject {
     let strictTypingInfo: NSAttributedString
     let doneTitle: String
     
-    let defaults: UserDefaults
+    let settings: UserDefaults
 
-    init(userDefaults: UserDefaults = .standard) {
-        defaults = userDefaults
+    init(settings: UserDefaults = .standard) {
+        self.settings = settings
         
         settingsTitle = NSLocalizedString("common.settings", comment: "")
         notificationsTitle = NSLocalizedString("common.reminders", comment: "")
@@ -35,19 +35,4 @@ class SettingsVM: NSObject {
         strictTypingInfo = NSAttributedString(string: NSLocalizedString("settings.vm.strict.typing.info", comment: ""), attributes: attributes)
     }
 
-    var allCategories: [String] {
-        let all: [DefaultsKey] = [.classic, .cookies, .quotes, .hokku, .english]
-        return all.map { $0.rawValue }
-    }
-    
-    var disabledCategories: [String] {
-        var disabled = [DefaultsKey]()
-        if (!defaults.classicEnabled) { disabled.append(.classic) }
-        if (!defaults.cookiesEnabled) { disabled.append(.cookies) }
-        if (!defaults.quotesEnabled) { disabled.append(.quotes) }
-        if (!defaults.hokkuEnabled) { disabled.append(.hokku) }
-        if (!defaults.englishEnabled) { disabled.append(.english) }
-        return disabled.map { $0.rawValue }
-    }
-    
 }

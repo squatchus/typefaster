@@ -140,6 +140,21 @@ extension UserDefaults {
         }
     }
     
+    var allCategories: [String] {
+        let all: [DefaultsKey] = [.classic, .cookies, .quotes, .hokku, .english]
+        return all.map { $0.rawValue }
+    }
+    
+    var disabledCategories: [String] {
+        var disabled = [DefaultsKey]()
+        if (!classicEnabled) { disabled.append(.classic) }
+        if (!cookiesEnabled) { disabled.append(.cookies) }
+        if (!quotesEnabled) { disabled.append(.quotes) }
+        if (!hokkuEnabled) { disabled.append(.hokku) }
+        if (!englishEnabled) { disabled.append(.english) }
+        return disabled.map { $0.rawValue }
+    }
+    
     func migrateResultsIfNeeded() {
         var versions = migrations ?? [String]()
         if versions.contains("1.1") == false {

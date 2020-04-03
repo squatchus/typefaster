@@ -51,8 +51,8 @@ class SettingsVC: UIViewController {
     }
     
     func reloadViewModel() {
-        notificationSwitch.isOn  = viewModel.defaults.notifications
-        strictTypingSwitch.isOn = viewModel.defaults.strictTyping
+        notificationSwitch.isOn  = viewModel.settings.notifications
+        strictTypingSwitch.isOn = viewModel.settings.strictTyping
 
         settingsTitleLabel.text = viewModel.settingsTitle
         notificationTitleLabel.text = viewModel.notificationsTitle
@@ -61,11 +61,11 @@ class SettingsVC: UIViewController {
         notificationDescriptionLabel.attributedText = viewModel.notificationsInfo
         strictTypingDescriptionLabel.attributedText = viewModel.strictTypingInfo
 
-        categoryClassicButton.isSelected = viewModel.defaults.classicEnabled
-        categoryQuotesButton.isSelected = viewModel.defaults.quotesEnabled
-        categoryHokkuButton.isSelected = viewModel.defaults.hokkuEnabled
-        categoryCookiesButton.isSelected = viewModel.defaults.cookiesEnabled
-        categoryEnglishButton.isSelected = viewModel.defaults.englishEnabled
+        categoryClassicButton.isSelected = viewModel.settings.classicEnabled
+        categoryQuotesButton.isSelected = viewModel.settings.quotesEnabled
+        categoryHokkuButton.isSelected = viewModel.settings.hokkuEnabled
+        categoryCookiesButton.isSelected = viewModel.settings.cookiesEnabled
+        categoryEnglishButton.isSelected = viewModel.settings.englishEnabled
 
         updateCategoryButton(categoryClassicButton)
         updateCategoryButton(categoryQuotesButton)
@@ -89,25 +89,25 @@ class SettingsVC: UIViewController {
     @IBAction func onSwitchValueChanged(_ sender: UISwitch) {
         if sender == notificationSwitch {
             let notifications = notificationSwitch.isOn
-            viewModel.defaults.notifications = notifications
+            viewModel.settings.notifications = notifications
             onNotificationsSettingChanged?(notifications)
         } else if sender == strictTypingSwitch {
-            viewModel.defaults.strictTyping = strictTypingSwitch.isOn
+            viewModel.settings.strictTyping = strictTypingSwitch.isOn
         }
     }
 
     @IBAction func onCategoryButtonPressed(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if (sender == categoryClassicButton) {
-            viewModel.defaults.classicEnabled = categoryClassicButton.isSelected
+            viewModel.settings.classicEnabled = categoryClassicButton.isSelected
         } else if (sender == categoryQuotesButton) {
-            viewModel.defaults.quotesEnabled = categoryQuotesButton.isSelected
+            viewModel.settings.quotesEnabled = categoryQuotesButton.isSelected
         } else if (sender == categoryHokkuButton) {
-            viewModel.defaults.hokkuEnabled = categoryHokkuButton.isSelected
+            viewModel.settings.hokkuEnabled = categoryHokkuButton.isSelected
         } else if (sender == categoryCookiesButton) {
-            viewModel.defaults.cookiesEnabled = categoryCookiesButton.isSelected
+            viewModel.settings.cookiesEnabled = categoryCookiesButton.isSelected
         } else if (sender == categoryEnglishButton) {
-            viewModel.defaults.englishEnabled = categoryEnglishButton.isSelected
+            viewModel.settings.englishEnabled = categoryEnglishButton.isSelected
         }
         updateCategoryButton(sender)
         onCategorySettingChanged?()
@@ -119,8 +119,7 @@ class SettingsVC: UIViewController {
 
     // MARK: - Helper
 
-    func updateCategoryButton(_ sender: UIButton)
-    {
+    func updateCategoryButton(_ sender: UIButton) {
         let color = sender.isSelected ? UIColor.tf_purple_button : UIColor.tf_gray_button
         sender.backgroundColor = color
     }

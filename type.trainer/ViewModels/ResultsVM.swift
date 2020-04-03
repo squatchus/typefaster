@@ -17,14 +17,14 @@ class ResultsVM: NSObject {
     let signsPerMinTitle: String
     let mistakes: String
     let mistakesTitle: String
-    let stars: Float
+    let starImageNames: [String]
     let text: String
     let author: String
     let continueTitle: String
     let settingsTitle: String
     let rateTitle: String
     
-    init(level: Level, result:LevelResult, event: ResultEvent, provider: ResultProvider) {
+    init(level: Level, result: LevelResult, event: ResultEvent, provider: ResultProvider) {
         let bestSpeed = provider.bestSpeed
         let spm = result.charsPerMin
         
@@ -51,30 +51,13 @@ class ResultsVM: NSObject {
         mistakes = "\(mistakesPercent)%"
         mistakesTitle = NSLocalizedString("results.vm.mistakes", comment: "")
         
-        stars = provider.stars(by: bestSpeed)
+        starImageNames = provider.starImageNames
         text = level.text
         author = "\(level.title)\n\(level.author)"
         
         continueTitle = NSLocalizedString("results.vm.continue", comment: "")
         settingsTitle = NSLocalizedString("common.settings", comment: "")
         rateTitle = NSLocalizedString("common.rate", comment: "")
-    }
-    
-    func starImageNames() -> [String] {
-        var names = [String]()
-        var numberOfFullStars = stars
-        let halfStar = (stars-numberOfFullStars > 0)
-        for _ in 1...5 {
-            if numberOfFullStars > 0 {
-                names.append("star_gold.png")
-            } else if numberOfFullStars == 0 && halfStar {
-                names.append("star_goldgray.png")
-            } else {
-                names.append("star_gray.png")
-            }
-            numberOfFullStars -= 1
-        }
-        return names
     }
     
 }

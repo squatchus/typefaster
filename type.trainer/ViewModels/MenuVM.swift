@@ -13,7 +13,7 @@ class MenuVM: NSObject {
     let signsPerMin: String
     let signsPerMinTitle: String
     let firstResultTitle: String
-    let stars: Float
+    let starImageNames: [String]
     let rankTitle: String
     let rankSubtitle: String
     let typeFasterTitle: String
@@ -36,7 +36,7 @@ class MenuVM: NSObject {
         } else {
             firstResultTitle = NSLocalizedString("menu.vm.keep.training", comment: "")
         }
-        stars = resultProvider.stars(by: bestSpeed)
+        starImageNames = resultProvider.starImageNames
 
         let rank = NSLocalizedString("menu.vm.rank", comment: "")
         let rankLevel = resultProvider.rankTitle(by: bestSpeed)
@@ -55,23 +55,6 @@ class MenuVM: NSObject {
         typeFasterTitle = NSLocalizedString("menu.vm.type.faster", comment: "")
         settingsTitle = NSLocalizedString("common.settings", comment: "")
         rateTitle = NSLocalizedString("common.rate", comment: "")
-    }
-    
-    func starImageNames() -> [String] {
-        var names = [String]()
-        var numberOfFullStars = stars
-        let halfStar = (stars-numberOfFullStars > 0)
-        for _ in 1...5 {
-            if numberOfFullStars > 0 {
-                names.append("star_gold.png")
-            } else if numberOfFullStars == 0 && halfStar {
-                names.append("star_goldgray.png")
-            } else {
-                names.append("star_gray.png")
-            }
-            numberOfFullStars -= 1
-        }
-        return names
     }
     
 }

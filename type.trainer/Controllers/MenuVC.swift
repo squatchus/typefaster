@@ -66,7 +66,7 @@ class MenuVC: UIViewController {
         rankHintLabel.text = viewModel.rankSubtitle
 
         let starViews = [starView1, starView2, starView3, starView4, starView5]
-        let starNames = viewModel.starImageNames()
+        let starNames = viewModel.starImageNames
         for (i, starView) in starViews.enumerated() {
             starView?.image = UIImage(named: starNames[i])
         }

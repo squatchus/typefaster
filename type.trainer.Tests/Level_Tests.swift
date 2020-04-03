@@ -18,7 +18,7 @@ class Level_Tests: XCTestCase {
         validDict = [
             "title": "Fight Club",
             "author": "Chuck Palahniuk",
-            "category": "categoryEnglish",
+            "category": "categoryQuotesEn",
             "text": "Losing all hope was freedom."
         ]
         validLevel = Level(dict: validDict)
@@ -73,31 +73,6 @@ class Level_Tests: XCTestCase {
         let token = validLevel.token(by: text.count-1)
         // then
         XCTAssertEqual(token?.string, ".")
-    }
-    
-    func testRealLevelsExistInBundle() {
-        XCTAssertNotNil(Bundle.main.path(forResource: "Levels", ofType: "plist"))
-    }
-    
-    func testRealLevelsFromPlist() throws {
-        XCTAssertNil(invalidLevels())
-    }
-
-    func appLevels() -> [Level] {
-        let path = Bundle.main.path(forResource: "Levels", ofType: "plist")!
-        let levelsURL = URL(fileURLWithPath: path)
-        let levelsData = try! Data(contentsOf: levelsURL)
-        let dictArray = levelsData.asPlistArray
-        return dictArray.map { Level(dict: $0) }
-    }
-    
-    func invalidLevels() -> [Level]? {
-        let levels = appLevels()
-        let invalidLevels = levels.filter { !($0.isValid) }
-        if invalidLevels.count > 0 {
-            return invalidLevels
-        }
-        return nil
     }
     
 }
