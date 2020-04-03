@@ -1,4 +1,7 @@
+![Bitrise status](https://app.bitrise.io/app/ecf330d4413bcbef.svg?token=mkeSPrlDTxCmQg5AqAaG8Q)
+
 # typefaster
+
 This repo contains the sources of the [Type Faster app](https://apps.apple.com/app/id1013588476) - a typing trainer app, where users can check their typing speed, compete with each other through GameCenter Leaderboards and practice with small texts on two languages:
 - English
 - Russian
