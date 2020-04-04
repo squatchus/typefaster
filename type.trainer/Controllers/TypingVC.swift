@@ -12,7 +12,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
 
     var viewModel: TypingVM!
     
-    var onViewWillAppear: (()->())?
+    var onViewWillAppear: ((_ vc: TypingVC)->())?
     var onMistake: (()->())?
     var onDonePressed: (()->())?
     var onLevelCompleted: ((_ viewModel: TypingVM)->())?
@@ -43,7 +43,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
         super.viewWillAppear(animated)
         
         // will update view model
-        onViewWillAppear?()
+        onViewWillAppear?(self)
         
         let currentWord = Bundle.main.loadNibNamed("CurrentWordView", owner: self, options: nil)?.first as! CurrentWordView
         currentWord.shift.layer.cornerRadius = 4
@@ -125,11 +125,6 @@ class TypingVC: UIViewController, UITextViewDelegate {
         view.layoutIfNeeded()
     }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     func pulseTextViewBackgroundColor() {
         UIView.animate(withDuration: 0.15, animations: {
             self.view.backgroundColor = UIColor.tf_background_red
@@ -161,4 +156,10 @@ class TypingVC: UIViewController, UITextViewDelegate {
             self.bottomMargin.constant = 0
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
 }

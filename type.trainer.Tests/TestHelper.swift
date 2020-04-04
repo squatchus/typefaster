@@ -14,14 +14,14 @@ class TestHelper {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
         if let data = try? encoder.encode(object) {
-            let folderName = "\(Locale.current.identifier).lproj"
+            let folderName = "\(Locale.current.languageCode!).lproj"
             let url = URL(fileURLWithPath: path).deletingLastPathComponent().appendingPathComponent(folderName).appendingPathComponent(name)
             try? data.write(to: url)
         }
     }
     
     static func load<T: Codable>(_ type: T.Type, from path: String, name: String) -> T {
-        let folderName = "\(Locale.current.identifier).lproj"
+        let folderName = "\(Locale.current.languageCode!).lproj"
         let url = URL(fileURLWithPath: path).deletingLastPathComponent().appendingPathComponent(folderName).appendingPathComponent(name)
         let data = try! Data(contentsOf: url)
         return try! JSONDecoder().decode(type, from: data)

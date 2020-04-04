@@ -15,7 +15,7 @@ class SettingsVC: UIViewController {
     var onViewWillAppear: (()->())?
     var onNotificationsSettingChanged: ((_ enabled: Bool)->())?
     var onCategorySettingChanged: (()->())?
-    var onDonePressed: (()->())?
+    var onShouldDismissVC: ((_ vc: UIViewController)->())?
 
     @IBOutlet weak var doneWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var topMargin: NSLayoutConstraint!
@@ -114,7 +114,7 @@ class SettingsVC: UIViewController {
     }
 
     @IBAction func onDoneButtonPressed(_ sender: Any) {
-        onDonePressed?()
+        onShouldDismissVC?(self)
     }
 
     // MARK: - Helper

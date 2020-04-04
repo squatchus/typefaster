@@ -87,11 +87,11 @@ class AppCoordinator: NSObject {
     
     func showGame() {
         let typingVC = TypingVC()
-        typingVC.onViewWillAppear = { [weak self] in
+        typingVC.onViewWillAppear = { [weak self] (vc) in
             guard let self = self else { return }
             let level = self.levelProvider.nextLevel(for: self.settings)
             let strict = self.settings.strictTyping
-            typingVC.viewModel = TypingVM(level: level, strictTyping: strict)
+            vc.viewModel = TypingVM(level: level, strictTyping: strict)
         }
         typingVC.onMistake = { [weak self] in
             self?.sounds.play(.mistake)
@@ -132,9 +132,9 @@ class AppCoordinator: NSObject {
         settingsVC.onCategorySettingChanged = { [weak self] in
             self?.sounds.play(.buttonClick)
         }
-        settingsVC.onDonePressed = { [weak self] in
+        settingsVC.onShouldDismissVC = { [weak self] (vc) in
             self?.sounds.play(.buttonClick)
-            settingsVC.dismiss(animated: true)
+            vc.dismiss(animated: true)
         }
         rootNC.topViewController?.present(settingsVC, animated: true)
     }
