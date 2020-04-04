@@ -63,4 +63,12 @@ extension String {
         return true
     }
     
+    var justified: NSAttributedString {
+        let style = NSMutableParagraphStyle()
+        style.alignment = .justified
+        style.firstLineHeadIndent = 1.0
+        let attributes = [NSAttributedString.Key.paragraphStyle: style]
+        return NSAttributedString(string: self, attributes: attributes)
+    }
+    
 }

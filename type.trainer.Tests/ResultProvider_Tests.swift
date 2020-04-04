@@ -25,8 +25,10 @@ class ResultProvider_Tests: XCTestCase {
     ]
     
     override func tearDownWithError() throws {
-        defaults.removePersistentDomain(forName: #file)
-        defaults = nil
+        if (defaults != nil) {
+            defaults.removePersistentDomain(forName: #file)
+            defaults = nil
+        }
     }
         
     func testInitWithDefaultsVersion_1_0() throws {
@@ -98,16 +100,6 @@ class ResultProvider_Tests: XCTestCase {
         let resultEvent = provider.save(result: result)
         // then
         XCTAssertEqual(resultEvent, ResultEvent.newRank)
-    }
-    
-    func testSaveScore() throws {
-        // given
-        defaults = UserDefaults(suiteName: #file)
-        let provider = ResultProvider(userDefaults: defaults)
-        // when
-        provider.save(score: 42)
-        // then
-        XCTAssertEqual(defaults.integer(forKey: DefaultsKey.score.rawValue), 42)
     }
     
     func testNextGoalWithLowSpeed() throws {

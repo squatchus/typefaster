@@ -8,8 +8,7 @@
 
 import Foundation
 
-class ResultsVM: NSObject {
-
+struct ResultsModel: Codable, Equatable {
     let resultTitle: String
     let bestResult: String
     let bestResultTitle: String
@@ -23,11 +22,21 @@ class ResultsVM: NSObject {
     let continueTitle: String
     let settingsTitle: String
     let rateTitle: String
+}
+
+struct ResultsVM: Codable {
+
+    let data: ResultsModel
+    
+    init(dataModel: ResultsModel) {
+        self.data = dataModel
+    }
     
     init(level: Level, result: LevelResult, event: ResultEvent, provider: ResultProvider) {
         let bestSpeed = provider.bestSpeed
         let spm = result.charsPerMin
         
+        let resultTitle: String
         if (event == .newRank) {
             let newRank = NSLocalizedString("results.vm.new.rank", comment: "")
             let rankTitle = provider.rankTitle(by: bestSpeed)
@@ -38,26 +47,40 @@ class ResultsVM: NSObject {
             resultTitle = NSLocalizedString("results.vm.your.result", comment: "")
         }
         
-        bestResult = "\(bestSpeed)"
-        bestResultTitle = NSLocalizedString("results.vm.best.result", comment: "")
+        let bestResult = "\(bestSpeed)"
+        let bestResultTitle = NSLocalizedString("results.vm.best.result", comment: "")
         
-        signsPerMin = "\(spm)"
+        let signsPerMin = "\(spm)"
         
         let chars = String.localizedStringWithFormat(NSLocalizedString("%d char(s)", comment: ""), spm)
-        signsPerMinTitle = "\(chars)\n\(NSLocalizedString("common.per.minute", comment: ""))"
+        let signsPerMinTitle = "\(chars)\n\(NSLocalizedString("common.per.minute", comment: ""))"
         
         let linesCount = level.text.components(separatedBy: "\n").count
         let mistakesPercent = result.mistakes * 100 / (level.text.count - (linesCount-1))
-        mistakes = "\(mistakesPercent)%"
-        mistakesTitle = NSLocalizedString("results.vm.mistakes", comment: "")
+        let mistakes = "\(mistakesPercent)%"
+        let mistakesTitle = NSLocalizedString("results.vm.mistakes", comment: "")
         
-        starImageNames = provider.starImageNames
-        text = level.text
-        author = "\(level.title)\n\(level.author)"
+        let starImageNames = provider.starImageNames
+        let text = level.text
+        let author = "\(level.title)\n\(level.author)"
         
-        continueTitle = NSLocalizedString("results.vm.continue", comment: "")
-        settingsTitle = NSLocalizedString("common.settings", comment: "")
-        rateTitle = NSLocalizedString("common.rate", comment: "")
+        let continueTitle = NSLocalizedString("results.vm.continue", comment: "")
+        let settingsTitle = NSLocalizedString("common.settings", comment: "")
+        let rateTitle = NSLocalizedString("common.rate", comment: "")
+        
+        self.data = ResultsModel(resultTitle: resultTitle,
+                                 bestResult: bestResult,
+                                 bestResultTitle: bestResultTitle,
+                                 signsPerMin: signsPerMin,
+                                 signsPerMinTitle: signsPerMinTitle,
+                                 mistakes: mistakes,
+                                 mistakesTitle: mistakesTitle,
+                                 starImageNames: starImageNames,
+                                 text: text,
+                                 author: author,
+                                 continueTitle: continueTitle,
+                                 settingsTitle: settingsTitle,
+                                 rateTitle: rateTitle)
     }
     
 }

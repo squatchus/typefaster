@@ -58,26 +58,26 @@ class ResultsVC: UIViewController {
     }
     
     func reloadViewModel() {
-        resultTitleLabel.text = viewModel.resultTitle
-        bestResultLabel.text = viewModel.bestResult
-        bestResultTitleLabel.text = viewModel.bestResultTitle
-        signsPerMinLabel.text = viewModel.signsPerMin
-        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle
-        mistakesPercentLabel.text = viewModel.mistakes
-        mistakesPercentTitleLabel.text = viewModel.mistakesTitle
+        resultTitleLabel.text = viewModel.data.resultTitle
+        bestResultLabel.text = viewModel.data.bestResult
+        bestResultTitleLabel.text = viewModel.data.bestResultTitle
+        signsPerMinLabel.text = viewModel.data.signsPerMin
+        signsPerMinTitleLabel.text = viewModel.data.signsPerMinTitle
+        mistakesPercentLabel.text = viewModel.data.mistakes
+        mistakesPercentTitleLabel.text = viewModel.data.mistakesTitle
         
         let starViews = [starView1, starView2, starView3, starView4, starView5]
-        let starNames = viewModel.starImageNames
+        let starNames = viewModel.data.starImageNames
         for (i, starView) in starViews.enumerated() {
             starView?.image = UIImage(named: starNames[i])
         }
         
-        textLabel.text = viewModel.text
-        authorLabel.text = viewModel.author
+        textLabel.text = viewModel.data.text
+        authorLabel.text = viewModel.data.author
         
-        continueButton.setTitle(viewModel.continueTitle, for: .normal)
-        settingsButton.setTitle(viewModel.settingsTitle, for: .normal)
-        rateButton.setTitle(viewModel.rateTitle, for: .normal)
+        continueButton.setTitle(viewModel.data.continueTitle, for: .normal)
+        settingsButton.setTitle(viewModel.data.settingsTitle, for: .normal)
+        rateButton.setTitle(viewModel.data.rateTitle, for: .normal)
         
         shareButton.layer.cornerRadius = shareButton.frame.size.height/2.0
         continueButton.layer.cornerRadius = continueButton.frame.size.height/2.0
@@ -86,7 +86,7 @@ class ResultsVC: UIViewController {
     }
 
     @IBAction func onShareButtonPressed(sender: UIButton) {
-        onSharePressed?(viewModel.text)
+        onSharePressed?(viewModel.data.text)
     }
 
     @IBAction func onRateButtonPressed(sender: UIButton) {

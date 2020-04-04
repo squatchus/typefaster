@@ -6,33 +6,41 @@
 //  Copyright © 2020 Suricatum. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class SettingsVM: NSObject {
+struct SettingsModel: Codable, Equatable {
+    var settingsTitle: String
+    var notificationsTitle: String
+    var notificationsInfo: String
+    var strictTypingTitle: String
+    var strictTypingInfo: String
+    var doneTitle: String
+}
 
-    let settingsTitle: String
-    let notificationsTitle: String
-    let notificationsInfo: NSAttributedString
-    let strictTypingTitle: String
-    let strictTypingInfo: NSAttributedString
-    let doneTitle: String
-    
+struct SettingsVM {
+
+    let data: SettingsModel
     let settings: UserDefaults
 
+    init(dataModel: SettingsModel, settings: UserDefaults = .standard) {
+        self.data = dataModel
+        self.settings = settings
+    }
+    
     init(settings: UserDefaults = .standard) {
         self.settings = settings
-        
-        settingsTitle = NSLocalizedString("common.settings", comment: "")
-        notificationsTitle = NSLocalizedString("common.reminders", comment: "")
-        strictTypingTitle = NSLocalizedString("settings.vm.strict.typing", comment: "")
-        doneTitle = NSLocalizedString("button.done", comment: "")
-        
-        let style = NSMutableParagraphStyle()
-        style.alignment = .justified
-        style.firstLineHeadIndent = 1.0
-        let attributes = [NSAttributedString.Key.paragraphStyle: style]
-        notificationsInfo = NSAttributedString(string: NSLocalizedString("settings.vm.reminders.info", comment: ""), attributes: attributes)
-        strictTypingInfo = NSAttributedString(string: NSLocalizedString("settings.vm.strict.typing.info", comment: ""), attributes: attributes)
+        let settingsTitle = NSLocalizedString("common.settings", comment: "")
+        let notificationsTitle = NSLocalizedString("common.reminders", comment: "")
+        let strictTypingTitle = NSLocalizedString("settings.vm.strict.typing", comment: "")
+        let doneTitle = NSLocalizedString("button.done", comment: "")
+        let notificationsInfo = NSLocalizedString("settings.vm.reminders.info", comment: "")
+        let strictTypingInfo = NSLocalizedString("settings.vm.strict.typing.info", comment: "")
+        data = SettingsModel(settingsTitle: settingsTitle,
+                             notificationsTitle: notificationsTitle,
+                             notificationsInfo: notificationsInfo,
+                             strictTypingTitle: strictTypingTitle,
+                             strictTypingInfo: strictTypingInfo,
+                             doneTitle: doneTitle)
     }
 
 }

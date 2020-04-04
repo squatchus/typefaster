@@ -43,7 +43,7 @@ class ResultProvider: NSObject {
                 maxSpeed = result.charsPerMin
             }
         }
-        return max(maxSpeed, defaults.score)
+        return max(maxSpeed, defaults.gameCenterScore)
     }
     
     var starImageNames: [String] {
@@ -81,10 +81,6 @@ class ResultProvider: NSObject {
         } else {
             return .none
         }
-    }
-    
-    func save(score: Int) {
-        defaults.score = score
     }
     
     func nextGoal(by speed: Int) -> Int {

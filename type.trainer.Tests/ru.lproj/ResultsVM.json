@@ -1,0 +1,21 @@
+{
+  "settingsTitle" : "Настройки",
+  "resultTitle" : "Ваш результат",
+  "rateTitle" : "Оценить",
+  "author" : "Пирожки\nkarim-abdul",
+  "bestResultTitle" : "лучший\nрезультат",
+  "continueTitle" : "Продолжить",
+  "bestResult" : "100",
+  "mistakesTitle" : "процент\nошибок",
+  "signsPerMinTitle" : "знаков\nв минуту",
+  "text" : "илья старается скорее\nуравновесить зло добром\nувидел парни бьют мальчишку\nкрасиво рядом станцевал",
+  "mistakes" : "0%",
+  "starImageNames" : [
+    "star_gold.png",
+    "star_gold.png",
+    "star_gold.png",
+    "star_goldgray.png",
+    "star_gray.png"
+  ],
+  "signsPerMin" : "100"
+}

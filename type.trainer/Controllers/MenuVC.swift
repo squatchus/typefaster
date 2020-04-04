@@ -20,7 +20,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var yourSpeedLabel: UILabel!
     @IBOutlet weak var signsPerMinLabel: UILabel!
     @IBOutlet weak var signsPerMinTitleLabel: UILabel!
-    @IBOutlet weak var firstResultLabel: UILabel!
+    @IBOutlet weak var resultStatusLabel: UILabel!
     @IBOutlet weak var rankHintLabel: UILabel!
 
     @IBOutlet weak var starView1: UIImageView!
@@ -59,22 +59,26 @@ class MenuVC: UIViewController {
     }
     
     func reloadViewModel() {
-        yourSpeedLabel.text = viewModel.bestResultTitle
-        signsPerMinLabel.text = viewModel.signsPerMin
-        signsPerMinTitleLabel.text = viewModel.signsPerMinTitle
-        firstResultLabel.text = viewModel.firstResultTitle
-        rankHintLabel.text = viewModel.rankSubtitle
+        reload(viewModel: self.viewModel)
+    }
+    
+    func reload(viewModel: MenuVM) {
+        yourSpeedLabel.text = viewModel.data.bestResultTitle
+        signsPerMinLabel.text = viewModel.data.charsPerMin
+        signsPerMinTitleLabel.text = viewModel.data.charsPerMinTitle
+        resultStatusLabel.text = viewModel.data.resultStatusTitle
+        rankHintLabel.text = viewModel.data.rankSubtitle
 
         let starViews = [starView1, starView2, starView3, starView4, starView5]
-        let starNames = viewModel.starImageNames
+        let starNames = viewModel.data.starImageNames
         for (i, starView) in starViews.enumerated() {
             starView?.image = UIImage(named: starNames[i])
         }
 
-        gameCenterButton.setTitle(viewModel.rankTitle, for: .normal)
-        startTypingButton.setTitle(viewModel.typeFasterTitle, for: .normal)
-        settingsButton.setTitle(viewModel.settingsTitle, for: .normal)
-        rateButton.setTitle(viewModel.rateTitle, for: .normal)
+        gameCenterButton.setTitle(viewModel.data.rankTitle, for: .normal)
+        startTypingButton.setTitle(viewModel.data.typeFasterTitle, for: .normal)
+        settingsButton.setTitle(viewModel.data.settingsTitle, for: .normal)
+        rateButton.setTitle(viewModel.data.rateTitle, for: .normal)
 
         rateButton.layer.cornerRadius = rateButton.frame.size.height/2.0
         settingsButton.layer.cornerRadius = settingsButton.frame.size.height/2.0
@@ -87,13 +91,17 @@ class MenuVC: UIViewController {
     @IBAction func onRateButtonPressed(_ sender: Any) {
         onRatePressed?()
     }
+    
     @IBAction func onGameCenterButtonPressed(_ sender: Any) {
         onLeaderboardPressed?()
     }
+    
     @IBAction func onSettingsButtonPressed(_ sender: Any) {
         onSetttingsPressed?()
     }
+    
     @IBAction func onPlayButtonPressed(_ sender: Any) {
         onPlayPressed?()
     }
+    
 }

@@ -11,13 +11,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuVC" customModule="type_trainer" customModuleProvider="target">
             <connections>
                 <outlet property="bottomMargin" destination="AWc-bx-pIU" id="1bN-aw-xJB"/>
-                <outlet property="firstResultLabel" destination="JeW-96-ONa" id="ro2-eo-XUg"/>
                 <outlet property="gameCenterButton" destination="iD6-nd-yJu" id="FDj-gl-eg3"/>
                 <outlet property="leaderboardWidthConstraint" destination="T5c-Ou-BUx" id="fVR-KQ-1fG"/>
                 <outlet property="rankBottomSpaceConstraint" destination="Iot-Io-LdK" id="ISa-gT-vSg"/>
                 <outlet property="rankHintLabel" destination="T4g-wV-rNH" id="n6D-Kg-x2C"/>
                 <outlet property="rankTopSpaceConstraint" destination="Rp8-G7-Env" id="JsO-vj-DAx"/>
                 <outlet property="rateButton" destination="HHh-s6-PUR" id="xDK-EK-P1V"/>
+                <outlet property="resultStatusLabel" destination="JeW-96-ONa" id="ro2-eo-XUg"/>
                 <outlet property="settingsButton" destination="4TY-i5-xpF" id="dlD-zc-MtY"/>
                 <outlet property="signsPerMinLabel" destination="HSY-sA-ZCC" id="6qR-RT-UyH"/>
                 <outlet property="signsPerMinTitleLabel" destination="fh9-as-hLA" id="Qvj-Kp-dVr"/>

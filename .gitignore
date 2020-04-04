@@ -1,6 +1,9 @@
 # Mac OS X
 .DS_Store
 
+type.trainer.Tests/*.plist
+!type.trainer.Tests/Info.plist
+
 ## Various settings
 *.pbxuser
 !default.pbxuser

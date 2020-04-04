@@ -56,6 +56,12 @@
 		B4C34E662433738D004C6C54 /* ResultsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4C34E642433738D004C6C54 /* ResultsVC.xib */; };
 		B4C34E6824337B71004C6C54 /* ResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C34E6724337B71004C6C54 /* ResultsVM.swift */; };
 		B4C4CED324301EAA00D38688 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4C4CED224301EAA00D38688 /* Colors.xcassets */; };
+		B4E64FE92437EBA30042D0EA /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E64FE82437EBA30042D0EA /* TestHelper.swift */; };
+		B4E64FEC2437F44E0042D0EA /* MenuVM.json in Resources */ = {isa = PBXBuildFile; fileRef = B4E64FEE2437F44E0042D0EA /* MenuVM.json */; };
+		B4E64FF12437FDB80042D0EA /* ResultsVM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E64FF02437FDB80042D0EA /* ResultsVM_Tests.swift */; };
+		B4E64FF4243801610042D0EA /* ResultsVM.json in Resources */ = {isa = PBXBuildFile; fileRef = B4E64FF6243801610042D0EA /* ResultsVM.json */; };
+		B4E64FF9243803AB0042D0EA /* SettingsVM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E64FF8243803AB0042D0EA /* SettingsVM_Tests.swift */; };
+		B4E64FFC2438063F0042D0EA /* SettingsVM.json in Resources */ = {isa = PBXBuildFile; fileRef = B4E64FFE2438063F0042D0EA /* SettingsVM.json */; };
 		B4F11B6D2437512700DD3A8C /* ResultProvider_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F11B6C2437512700DD3A8C /* ResultProvider_Tests.swift */; };
 		B4F3A4672437A0230088C167 /* LevelProvider_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F3A4662437A0230088C167 /* LevelProvider_Tests.swift */; };
 /* End PBXBuildFile section */
@@ -136,6 +142,15 @@
 		B4C34E642433738D004C6C54 /* ResultsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResultsVC.xib; sourceTree = "<group>"; };
 		B4C34E6724337B71004C6C54 /* ResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVM.swift; sourceTree = "<group>"; };
 		B4C4CED224301EAA00D38688 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		B4E64FE82437EBA30042D0EA /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
+		B4E64FED2437F44E0042D0EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/MenuVM.json; sourceTree = "<group>"; };
+		B4E64FEF2437F4560042D0EA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/MenuVM.json; sourceTree = "<group>"; };
+		B4E64FF02437FDB80042D0EA /* ResultsVM_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVM_Tests.swift; sourceTree = "<group>"; };
+		B4E64FF5243801610042D0EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/ResultsVM.json; sourceTree = "<group>"; };
+		B4E64FF7243801660042D0EA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/ResultsVM.json; sourceTree = "<group>"; };
+		B4E64FF8243803AB0042D0EA /* SettingsVM_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVM_Tests.swift; sourceTree = "<group>"; };
+		B4E64FFD2438063F0042D0EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = en; path = en.lproj/SettingsVM.json; sourceTree = "<group>"; };
+		B4E64FFF2438064F0042D0EA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = ru; path = ru.lproj/SettingsVM.json; sourceTree = "<group>"; };
 		B4F11B6C2437512700DD3A8C /* ResultProvider_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultProvider_Tests.swift; sourceTree = "<group>"; };
 		B4F3A4662437A0230088C167 /* LevelProvider_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProvider_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -329,7 +344,13 @@
 				B4C07C3E243630D9004EEDE1 /* LevelResult_Tests.swift */,
 				B4C07C342435FBF8004EEDE1 /* Level_Tests.swift */,
 				B4C07C3C24361ACD004EEDE1 /* MenuVM_Tests.swift */,
+				B4E64FF02437FDB80042D0EA /* ResultsVM_Tests.swift */,
+				B4E64FF8243803AB0042D0EA /* SettingsVM_Tests.swift */,
+				B4E64FE82437EBA30042D0EA /* TestHelper.swift */,
 				B4C07C362435FBF8004EEDE1 /* Info.plist */,
+				B4E64FEE2437F44E0042D0EA /* MenuVM.json */,
+				B4E64FF6243801610042D0EA /* ResultsVM.json */,
+				B4E64FFE2438063F0042D0EA /* SettingsVM.json */,
 			);
 			path = type.trainer.Tests;
 			sourceTree = "<group>";
@@ -484,6 +505,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E64FEC2437F44E0042D0EA /* MenuVM.json in Resources */,
+				B4E64FFC2438063F0042D0EA /* SettingsVM.json in Resources */,
+				B4E64FF4243801610042D0EA /* ResultsVM.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,8 +560,11 @@
 				B4C07C3F243630D9004EEDE1 /* LevelResult_Tests.swift in Sources */,
 				B4F11B6D2437512700DD3A8C /* ResultProvider_Tests.swift in Sources */,
 				B4F3A4672437A0230088C167 /* LevelProvider_Tests.swift in Sources */,
+				B4E64FE92437EBA30042D0EA /* TestHelper.swift in Sources */,
+				B4E64FF12437FDB80042D0EA /* ResultsVM_Tests.swift in Sources */,
 				B4C07C352435FBF8004EEDE1 /* Level_Tests.swift in Sources */,
 				B4C07C3D24361ACD004EEDE1 /* MenuVM_Tests.swift in Sources */,
+				B4E64FF9243803AB0042D0EA /* SettingsVM_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +609,33 @@
 				B4B7D2D023534B7200CE09DB /* ru */,
 			);
 			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+		B4E64FEE2437F44E0042D0EA /* MenuVM.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4E64FED2437F44E0042D0EA /* en */,
+				B4E64FEF2437F4560042D0EA /* ru */,
+			);
+			name = MenuVM.json;
+			sourceTree = "<group>";
+		};
+		B4E64FF6243801610042D0EA /* ResultsVM.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4E64FF5243801610042D0EA /* en */,
+				B4E64FF7243801660042D0EA /* ru */,
+			);
+			name = ResultsVM.json;
+			sourceTree = "<group>";
+		};
+		B4E64FFE2438063F0042D0EA /* SettingsVM.json */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B4E64FFD2438063F0042D0EA /* en */,
+				B4E64FFF2438064F0042D0EA /* ru */,
+			);
+			name = SettingsVM.json;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -702,7 +756,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
@@ -736,7 +790,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;

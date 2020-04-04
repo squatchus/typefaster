@@ -14,33 +14,7 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
     var onScoreReceived: ((_ score: Int)->())?
     var onShouldPresentAuthVC: ((_ authVC: UIViewController)->())?
     var onShouldDismissVC: ((_ vc: UIViewController)->())?
-    
-    var leaderboardId: String?
-    var gameCenterEnabled: Bool = false
-    var score: Int = 0
 
-    func authenticateLocalPlayer() {
-        GKLocalPlayer.local.authenticateHandler = { [weak self] (vc : UIViewController?, error : Error?) -> Void in
-            if let authVC = vc { // not authenticated
-                self?.onShouldPresentAuthVC?(authVC)
-            } else if GKLocalPlayer.local.isAuthenticated {
-                self?.gameCenterEnabled = true
-                GKLocalPlayer.local.loadDefaultLeaderboardIdentifier { (id, error) in
-                    if error != nil { return }
-                    self?.leaderboardId = id
-                    let leaderboard = GKLeaderboard()
-                    leaderboard.identifier = id
-                    leaderboard.loadScores { (scores, error) in
-                        if error != nil { return }
-                        let playerScore = Int(leaderboard.localPlayerScore!.value)
-                        self?.score = playerScore
-                        self?.onScoreReceived?(playerScore)
-                    }
-                }
-            }
-        }
-    }
-    
     var canShowLeaderboard: Bool {
         if let _ = leaderboardId, gameCenterEnabled {
             return true
@@ -55,6 +29,37 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
         leaderboardVC.viewState = .leaderboards
         leaderboardVC.leaderboardIdentifier = self.leaderboardId
         return leaderboardVC
+    }
+    
+    fileprivate var leaderboardId: String?
+    fileprivate var gameCenterEnabled: Bool = false
+    fileprivate let defaults: UserDefaults
+    
+    init(userDefaults: UserDefaults = .standard) {
+        defaults = userDefaults
+        defaults.migrateResultsIfNeeded()
+    }
+    
+    func authenticateLocalPlayer() {
+        GKLocalPlayer.local.authenticateHandler = { (vc : UIViewController?, error : Error?) -> Void in
+            if let authVC = vc { // not authenticated
+                self.onShouldPresentAuthVC?(authVC)
+            } else if GKLocalPlayer.local.isAuthenticated {
+                self.gameCenterEnabled = true
+                GKLocalPlayer.local.loadDefaultLeaderboardIdentifier { (id, error) in
+                    if error != nil { return }
+                    self.leaderboardId = id
+                    let leaderboard = GKLeaderboard()
+                    leaderboard.identifier = id
+                    leaderboard.loadScores { (scores, error) in
+                        if error != nil { return }
+                        let playerScore = Int(leaderboard.localPlayerScore!.value)
+                        self.defaults.gameCenterScore = playerScore
+                        self.onScoreReceived?(playerScore)
+                    }
+                }
+            }
+        }
     }
     
     func report(score: Int) {

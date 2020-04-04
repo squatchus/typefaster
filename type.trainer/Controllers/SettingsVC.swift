@@ -51,15 +51,15 @@ class SettingsVC: UIViewController {
     }
     
     func reloadViewModel() {
-        notificationSwitch.isOn  = viewModel.settings.notifications
+        notificationSwitch.isOn = viewModel.settings.notifications
         strictTypingSwitch.isOn = viewModel.settings.strictTyping
 
-        settingsTitleLabel.text = viewModel.settingsTitle
-        notificationTitleLabel.text = viewModel.notificationsTitle
-        strictTypingTitleLabel.text = viewModel.strictTypingTitle
+        settingsTitleLabel.text = viewModel.data.settingsTitle
+        notificationTitleLabel.text = viewModel.data.notificationsTitle
+        strictTypingTitleLabel.text = viewModel.data.strictTypingTitle
 
-        notificationDescriptionLabel.attributedText = viewModel.notificationsInfo
-        strictTypingDescriptionLabel.attributedText = viewModel.strictTypingInfo
+        notificationDescriptionLabel.attributedText = viewModel.data.notificationsInfo.justified
+        strictTypingDescriptionLabel.attributedText = viewModel.data.strictTypingInfo.justified
 
         categoryClassicButton.isSelected = viewModel.settings.classicEnabled
         categoryQuotesButton.isSelected = viewModel.settings.quotesEnabled
@@ -73,7 +73,7 @@ class SettingsVC: UIViewController {
         updateCategoryButton(categoryCookiesButton)
         updateCategoryButton(categoryEnglishButton)
 
-        doneButton.setTitle(viewModel.doneTitle, for: .normal)
+        doneButton.setTitle(viewModel.data.doneTitle, for: .normal)
 
         for subview in view.subviews {
             if subview is UIButton {

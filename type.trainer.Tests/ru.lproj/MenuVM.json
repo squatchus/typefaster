@@ -1,0 +1,18 @@
+{
+  "rankSubtitle" : "Следующая цель: 130 знаков\/мин.",
+  "rateTitle" : "Оценить",
+  "settingsTitle" : "Настройки",
+  "starImageNames" : [
+    "star_gold.png",
+    "star_gold.png",
+    "star_gold.png",
+    "star_goldgray.png",
+    "star_gray.png"
+  ],
+  "charsPerMin" : "100",
+  "rankTitle" : "Ранг - Бывалый",
+  "typeFasterTitle" : "Печатать быстрее!",
+  "bestResultTitle" : "Лучший результат",
+  "charsPerMinTitle" : "знаков в минуту",
+  "resultStatusTitle" : "продолжайте тренироваться"
+}

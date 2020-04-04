@@ -78,7 +78,7 @@ extension UserDefaults {
         }
     }
     
-    var score: Int {
+    var gameCenterScore: Int {
         get {
             value(forKey: .score) as? Int ?? 0
         } set (newValue) {

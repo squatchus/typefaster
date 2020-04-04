@@ -34,6 +34,11 @@ class AppCoordinator: NSObject {
         rootNC.navigationBar.isHidden = true
         window.rootViewController = rootNC
         self.rootNC = rootNC
+        setupLeaderboards()
+        showMenu()
+    }
+    
+    func setupLeaderboards() {
         leaderboards.onShouldPresentAuthVC = { [weak self] (authVC) in
             self?.rootNC.present(authVC, animated: true)
         }
@@ -42,11 +47,12 @@ class AppCoordinator: NSObject {
         }
         leaderboards.onScoreReceived = { [weak self] (score) in
             guard let self = self else { return }
-            self.resultsProvider.save(score: score)
-            self.reloadBestScoreIfNeeded()
+            if let menuVC = self.rootNC.topViewController as? MenuVC {
+                let menuVM = MenuVM(resultProvider: self.resultsProvider)
+                menuVC.reload(viewModel: menuVM)
+            }
         }
         leaderboards.authenticateLocalPlayer()
-        showMenu()
     }
     
     func showMenu() {
@@ -92,16 +98,16 @@ class AppCoordinator: NSObject {
         }
         typingVC.onLevelCompleted = { [weak self] (viewModel) in
             guard let self = self else { return }
-            let result = self.resultsProvider.save(result: viewModel.result)
-            if (result == .newRank) {
+            let event = self.resultsProvider.save(result: viewModel.result)
+            if (event == .newRank) {
                 self.sounds.play(.newRank)
                 self.leaderboards.report(score: viewModel.result.charsPerMin)
-            } else if (result == .newRecord) {
+            } else if (event == .newRecord) {
                 self.sounds.play(.newRecord)
                 self.leaderboards.report(score: viewModel.result.charsPerMin)
             }
             self.showRemindMeAlertIfNeeded()
-            let resultsVM = ResultsVM(level: viewModel.level, result: viewModel.result, event: result, provider: self.resultsProvider)
+            let resultsVM = ResultsVM(level: viewModel.level, result: viewModel.result, event: event, provider: self.resultsProvider)
             self.showResultsWithViewModel(viewModel: resultsVM)
         }
         typingVC.onDonePressed = { [weak self] in
@@ -156,15 +162,6 @@ class AppCoordinator: NSObject {
             self.rootNC.popViewController(animated: true)
         }
         rootNC.pushViewController(resultsVC, animated: true)
-    }
-    
-    func reloadBestScoreIfNeeded() {
-        let topVC = rootNC.topViewController
-        if let menuVC = topVC as? MenuVC {
-            menuVC.reloadViewModel()
-        } else if let resultsVC = topVC as? ResultsVC {
-            resultsVC.reloadViewModel()
-        }
     }
     
     func showRemindMeAlertIfNeeded() {

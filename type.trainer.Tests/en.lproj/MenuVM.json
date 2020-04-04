@@ -1,0 +1,18 @@
+{
+  "rankSubtitle" : "Next goal: 130 chars\/min.",
+  "rateTitle" : "Rate",
+  "settingsTitle" : "Settings",
+  "starImageNames" : [
+    "star_gold.png",
+    "star_gold.png",
+    "star_gold.png",
+    "star_goldgray.png",
+    "star_gray.png"
+  ],
+  "charsPerMin" : "100",
+  "rankTitle" : "Rank - Rock star",
+  "typeFasterTitle" : "Type faster!",
+  "bestResultTitle" : "Best result",
+  "charsPerMinTitle" : "chars per minute",
+  "resultStatusTitle" : "keep training"
+}
