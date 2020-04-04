@@ -37,7 +37,6 @@ class LeaderboardService: NSObject, GKGameCenterControllerDelegate {
     
     init(userDefaults: UserDefaults = .standard) {
         defaults = userDefaults
-        defaults.migrateResultsIfNeeded()
     }
     
     func authenticateLocalPlayer() {

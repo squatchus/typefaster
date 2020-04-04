@@ -14,7 +14,7 @@ extension Data {
     }
 }
 
-class LevelProvider: NSObject {
+class LevelProvider {
     
     let levels: [Level]
     

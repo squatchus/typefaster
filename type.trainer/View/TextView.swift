@@ -22,11 +22,11 @@ class TextView: UITextView {
     
     func reloadViewModel() {
         if let viewModel = self.viewModel {
-            attributedText = viewModel.getText()
-            selectedRange = viewModel.getCursorRange()
-            currentWordView.label.attributedText = viewModel.getCurrentWord()
-            currentWordView.backspace.isHidden = viewModel.backspaceHidden()
-            currentWordView.shift.isHidden = viewModel.shiftHidden()
+            attributedText = viewModel.currentText
+            selectedRange = viewModel.cursorRange
+            currentWordView.label.attributedText = viewModel.currentWord
+            currentWordView.backspace.isHidden = viewModel.backspaceHidden
+            currentWordView.shift.isHidden = viewModel.shiftHidden
         }
     }
     
@@ -36,7 +36,7 @@ class TextView: UITextView {
         get {
             super.selectedRange
         } set(newValue) {
-            let range = viewModel?.getCursorRange() ?? newValue
+            let range = viewModel?.cursorRange ?? newValue
             super.selectedRange = range
         }
     }
@@ -45,7 +45,7 @@ class TextView: UITextView {
         get {
             super.selectedTextRange
         } set(newValue) {
-            if let range = viewModel?.getCursorRange() {
+            if let range = viewModel?.cursorRange {
                 let beginning = beginningOfDocument
                 if let start = position(from: beginning, offset: range.location) {
                     if let end = position(from: start, offset: range.length) {

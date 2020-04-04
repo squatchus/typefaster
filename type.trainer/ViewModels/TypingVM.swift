@@ -14,7 +14,7 @@ enum InputResult {
     case correct
 }
 
-class TypingVM: NSObject {
+class TypingVM {
 
     var onSessionStarted: (()->())?
     var onSessionEnded: (()->())?
@@ -23,11 +23,13 @@ class TypingVM: NSObject {
     let completeTitle: String
     let level: Level
     var result: LevelResult
-    let strictTyping: Bool
     
+    fileprivate let strictTyping: Bool
     fileprivate var typedString = ""
     fileprivate var awaitedKey: String?
     fileprivate var timer: Timer?
+    
+    // MARK: Public methods
     
     init(level: Level, strictTyping: Bool) {
         completeTitle = NSLocalizedString("typing.vm.complete", comment: "")
@@ -37,44 +39,11 @@ class TypingVM: NSObject {
         self.awaitedKey = String(level.text.first!)
     }
     
-    func startSession()
-    {
-        awaitedKey = nextAwaitedKey()
-        result.seconds = 0
-        result.symbols = 0
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-    }
-
-    func endSession() {
-        timer?.invalidate()
-        timer = nil
-        onSessionEnded?()
-    }
-
-    func shouldEndSession() -> Bool
-    {
-        if typedString.count == level.text.count {
-            let mistakeOnLastChar = (awaitedKey == "")
-            let strictTypingEnd = (strictTyping && !mistakeOnLastChar)
-            if (strictTypingEnd || !strictTyping) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    @objc func updateTimer() {
-        result.seconds += 1
-        let min = result.seconds / 60
-        let sec = result.seconds % 60
-        onTimerUpdated?(min, sec)
-    }
-    
-    func process(input: String, in range:NSRange) -> InputResult {
+    func input(_ input: String, in range:NSRange) -> InputResult {
         var impossibleOccured = false
         var mistakeOccured = false
         // process backspaces
-        let backspaces = typedString.count - range.location
+        let backspaces = max(0, typedString.count - range.location)
         for _ in 0..<backspaces {
             let result = process(key: "") // backspace
             if result == .impossible { impossibleOccured = true }
@@ -94,8 +63,120 @@ class TypingVM: NSObject {
             return .correct
         }
     }
+   
+    var enteredCharsNumber: String {
+        return "\(result.symbols)"
+    }
+
+    var shiftHidden: Bool {
+        if let awaitedKey = awaitedKey {
+            let backspaceAwaited = (awaitedKey.count == 0)
+            let hidden = (backspaceAwaited || awaitedKey.isUppercased() == false)
+            return hidden
+        }
+        return true
+    }
+
+    var backspaceHidden: Bool {
+        if let awaitedKey = awaitedKey {
+            let backspaceAwaited = (awaitedKey.count == 0)
+            return !backspaceAwaited
+        }
+        return true
+    }
     
-    func process(key: String) -> InputResult {
+    var cursorRange: NSRange {
+        return NSMakeRange(typedString.count, 0)
+    }
+    
+    var currentText: NSAttributedString {
+        // join result string
+        let trail = String(level.text.dropFirst(typedString.count))
+        let joined = "\(typedString)\(trail)"
+        let text = NSMutableAttributedString(string: joined)
+        text.addAttribute(.font, value: UIScreen.textFontForDevice(), range: NSMakeRange(0, text.length))
+        text.addAttribute(.foregroundColor, value: UIColor.tf_light_text, range: NSMakeRange(0, text.length))
+        // style for typed part
+        text.addAttribute(.foregroundColor, value: UIColor.tf_dark_text, range: NSMakeRange(0, typedString.count))
+        
+        for i in 0..<typedString.count {
+            let range = NSMakeRange(i, 1)
+            let typedLetter = typedString[range]
+            let textLetter = level.text[range]
+            if typedLetter.hasSmartMatch(with: textLetter) == false {
+                text.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
+            }
+        }
+        return text
+    }
+
+    var currentWord: NSAttributedString {
+        let (tokenString, word, typedPart) = currentWordTupleBy(awaitedKey, typedString: typedString)
+
+        let currentWord = NSMutableAttributedString(string: word)
+        currentWord.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: NSMakeRange(0, currentWord.length))
+        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_dark_text, range: NSMakeRange(0, currentWord.length))
+        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_green, range: NSMakeRange(0, typedPart.count))
+        for i in 0..<typedPart.count {
+            let range = NSMakeRange(i, 1)
+            let typedLetter = typedPart[range]
+            let textLetter = tokenString[range]
+            if typedLetter.hasSmartMatch(with: textLetter) == false {
+                currentWord.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
+            }
+        }
+        return currentWord
+    }
+
+    // MARK: - Private methods
+    
+    fileprivate func currentWordTupleBy(_ awaitedKey: String?, typedString: String) -> (String, String, String) {
+        let backspaceAwaited = (awaitedKey != nil && awaitedKey!.count == 0)
+        let tokenPosOffset = backspaceAwaited ? 1 : 0
+        let tokenPosition = typedString.count - tokenPosOffset
+        let token = level.token(by: tokenPosition) ?? level.tokens.last!
+        let typedLength = min(typedString.count-token.startIndex, token.endIndex-token.startIndex+1)
+        let typedRange = NSMakeRange(token.startIndex, typedLength)
+        let typedPart = typedString[typedRange].replacingOccurrences(of: " ", with: "_")
+        let trail = String(token.string.dropFirst(typedPart.count))
+        var word = "\(typedPart)\(trail)"
+        if (word == " " || word == "\n") { word = "\" \"" }
+        return (token.string, word, typedPart)
+    }
+    
+    fileprivate func startSession() {
+        awaitedKey = nextAwaitedKey()
+        result.seconds = 0
+        result.symbols = 0
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        onSessionStarted?()
+    }
+
+    fileprivate func endSession() {
+        timer?.invalidate()
+        timer = nil
+        onSessionEnded?()
+    }
+
+    fileprivate func shouldEndSession() -> Bool {
+        if typedString.count == level.text.count {
+            let mistakeOnLastChar = (awaitedKey == "")
+            let strictTypingEnd = (strictTyping && !mistakeOnLastChar)
+            if (strictTypingEnd || !strictTyping) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    @objc fileprivate func updateTimer() {
+        result.seconds += 1
+        let min = result.seconds / 60
+        let sec = result.seconds % 60
+        onTimerUpdated?(min, sec)
+    }
+    
+    fileprivate func process(key: String) -> InputResult {
         if keyCanBeTyped(key) {
             var typedKey = key
             let typedLength = typedString.count
@@ -125,7 +206,7 @@ class TypingVM: NSObject {
         return .impossible
     }
     
-    func keyCanBeTyped(_ key: String) -> Bool {
+    fileprivate func keyCanBeTyped(_ key: String) -> Bool {
         guard let awaitedKey = awaitedKey else {
             return false
         }
@@ -159,7 +240,7 @@ class TypingVM: NSObject {
         }
     }
         
-    func nextAwaitedKey() -> String? {
+    fileprivate func nextAwaitedKey() -> String? {
         if typedString.count == 0 {
             return String(level.text.first!)
         }
@@ -180,7 +261,7 @@ class TypingVM: NSObject {
         }
     }
     
-    func updateResults() {
+    fileprivate func updateResults() {
         let backspaceAwaited = (awaitedKey != nil && awaitedKey?.count == 0)
         if strictTyping {
             result.symbols = typedString.count
@@ -208,79 +289,6 @@ class TypingVM: NSObject {
             }
             result.mistakes = mistakes
         }
-    }
-    
-    func symbolsEnteredString() -> String {
-        return "\(result.symbols)"
-    }
-
-    func shiftHidden() -> Bool {
-        if let awaitedKey = awaitedKey {
-            let backspaceAwaited = (awaitedKey.count == 0)
-            let hidden = (backspaceAwaited || awaitedKey.isUppercased() == false)
-            return hidden
-        }
-        return true
-    }
-
-    func backspaceHidden() -> Bool {
-        if let awaitedKey = awaitedKey {
-            let backspaceAwaited = (awaitedKey.count == 0)
-            return !backspaceAwaited
-        }
-        return true
-    }
-    
-    func getCursorRange() -> NSRange {
-        return NSMakeRange(typedString.count, 0)
-    }
-    
-    func getText() -> NSAttributedString {
-        // join result string
-        let trail = String(level.text.dropFirst(typedString.count))
-        let joined = "\(typedString)\(trail)"
-        let text = NSMutableAttributedString(string: joined)
-        text.addAttribute(.font, value: UIScreen.textFontForDevice(), range: NSMakeRange(0, text.length))
-        text.addAttribute(.foregroundColor, value: UIColor.tf_light_text, range: NSMakeRange(0, text.length))
-        // style for typed part
-        text.addAttribute(.foregroundColor, value: UIColor.tf_dark_text, range: NSMakeRange(0, typedString.count))
-        
-        for i in 0..<typedString.count {
-            let range = NSMakeRange(i, 1)
-            let typedLetter = typedString[range]
-            let textLetter = level.text[range]
-            if typedLetter.hasSmartMatch(with: textLetter) == false {
-                text.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
-            }
-        }
-        return text
-    }
-
-    func getCurrentWord() -> NSAttributedString {
-        let backspaceAwaited = (awaitedKey != nil && awaitedKey!.count == 0)
-        let tokenPosOffset = backspaceAwaited ? 1 : 0
-        let tokenPosition = typedString.count - tokenPosOffset
-        let token = level.token(by: tokenPosition) ?? level.tokens.last!
-        let typedLength = min(typedString.count-token.startIndex, token.endIndex-token.startIndex+1)
-        let typedRange = NSMakeRange(token.startIndex, typedLength)
-        let typedPart = typedString[typedRange].replacingOccurrences(of: " ", with: "_")
-        let trail = String(token.string.dropFirst(typedPart.count))
-        var word = "\(typedPart)\(trail)"
-        if (word == " " || word == "\n") { word = "\" \"" }
-
-        let currentWord = NSMutableAttributedString(string: word)
-        currentWord.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: NSMakeRange(0, currentWord.length))
-        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_dark_text, range: NSMakeRange(0, currentWord.length))
-        currentWord.addAttribute(.foregroundColor, value: UIColor.tf_green, range: NSMakeRange(0, typedPart.count))
-        for i in 0..<typedPart.count {
-            let range = NSMakeRange(i, 1)
-            let typedLetter = typedPart[range]
-            let textLetter = token.string[range]
-            if typedLetter.hasSmartMatch(with: textLetter) == false {
-                currentWord.addAttribute(.foregroundColor, value: UIColor.tf_red, range: range)
-            }
-        }
-        return currentWord
     }
     
     deinit {

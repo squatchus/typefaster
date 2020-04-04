@@ -17,7 +17,7 @@ struct SettingsModel: Codable, Equatable {
     var doneTitle: String
 }
 
-struct SettingsVM {
+class SettingsVM {
 
     let data: SettingsModel
     let settings: UserDefaults

@@ -40,6 +40,7 @@
 		B46D696B2435510B0088F1B7 /* LevelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D696A2435510B0088F1B7 /* LevelResult.swift */; };
 		B46D696F243554910088F1B7 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46D696E243554910088F1B7 /* Level.swift */; };
 		B47742232430FE9B00E1062A /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47742222430FE9B00E1062A /* MenuVC.swift */; };
+		B47D36B92438902500604EA6 /* TypingVM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47D36B82438902500604EA6 /* TypingVM_Tests.swift */; };
 		B4B7D2CD23534B6900CE09DB /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = B4B7D2CF23534B6900CE09DB /* Localizable.stringsdict */; };
 		B4C07C272435FBCC004EEDE1 /* type_trainer_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C07C262435FBCC004EEDE1 /* type_trainer_UITests.swift */; };
 		B4C07C352435FBF8004EEDE1 /* Level_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4C07C342435FBF8004EEDE1 /* Level_Tests.swift */; };
@@ -121,6 +122,7 @@
 		B46D696A2435510B0088F1B7 /* LevelResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelResult.swift; sourceTree = "<group>"; };
 		B46D696E243554910088F1B7 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		B47742222430FE9B00E1062A /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		B47D36B82438902500604EA6 /* TypingVM_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingVM_Tests.swift; sourceTree = "<group>"; };
 		B4B7D2CE23534B6900CE09DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4B7D2D023534B7200CE09DB /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		B4C07C242435FBCC004EEDE1 /* type.trainer.UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = type.trainer.UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,6 +341,7 @@
 		B4C07C332435FBF8004EEDE1 /* type.trainer.Tests */ = {
 			isa = PBXGroup;
 			children = (
+				B47D36B82438902500604EA6 /* TypingVM_Tests.swift */,
 				B4F3A4662437A0230088C167 /* LevelProvider_Tests.swift */,
 				B4F11B6C2437512700DD3A8C /* ResultProvider_Tests.swift */,
 				B4C07C3E243630D9004EEDE1 /* LevelResult_Tests.swift */,
@@ -559,6 +562,7 @@
 			files = (
 				B4C07C3F243630D9004EEDE1 /* LevelResult_Tests.swift in Sources */,
 				B4F11B6D2437512700DD3A8C /* ResultProvider_Tests.swift in Sources */,
+				B47D36B92438902500604EA6 /* TypingVM_Tests.swift in Sources */,
 				B4F3A4672437A0230088C167 /* LevelProvider_Tests.swift in Sources */,
 				B4E64FE92437EBA30042D0EA /* TestHelper.swift in Sources */,
 				B4E64FF12437FDB80042D0EA /* ResultsVM_Tests.swift in Sources */,
@@ -756,7 +760,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;
@@ -790,7 +794,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = HVARA599XL;
 				ENABLE_BITCODE = NO;

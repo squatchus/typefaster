@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReminderService: NSObject {
+class ReminderService {
     
     func enableReminders() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in

@@ -21,7 +21,7 @@ struct MenuModel: Codable, Equatable {
     let rateTitle: String
 }
 
-struct MenuVM {
+class MenuVM {
     let data: MenuModel
 
     init(dataModel: MenuModel) {

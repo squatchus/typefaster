@@ -24,7 +24,7 @@ struct ResultsModel: Codable, Equatable {
     let rateTitle: String
 }
 
-struct ResultsVM: Codable {
+class ResultsVM {
 
     let data: ResultsModel
     

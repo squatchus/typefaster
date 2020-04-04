@@ -24,7 +24,7 @@ fileprivate extension AVAudioPlayer {
     }
 }
 
-class SoundService: NSObject {
+class SoundService {
 
     let keyClickPlayer: AVAudioPlayer
     let buttonClickPlayer: AVAudioPlayer
@@ -32,7 +32,7 @@ class SoundService: NSObject {
     let newRecordPlayer: AVAudioPlayer
     let newRankPlayer: AVAudioPlayer
     
-    override init() {
+    init() {
         keyClickPlayer = AVAudioPlayer.playerFor(filename: "Tock.caf", volume: 0.1)
         buttonClickPlayer = AVAudioPlayer.playerFor(filename: "click.wav")
         mistakePlayer = AVAudioPlayer.playerFor(filename: "error.wav")

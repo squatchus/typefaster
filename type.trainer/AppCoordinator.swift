@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppCoordinator: NSObject {
+class AppCoordinator {
 
     let levelProvider: LevelProvider
     let resultsProvider: ResultProvider
@@ -18,7 +18,7 @@ class AppCoordinator: NSObject {
     let leaderboards: LeaderboardService
     weak var rootNC: UINavigationController!
     
-    override init() {
+    init() {
         let levelsPath = Bundle.main.path(forResource: "Levels", ofType: "plist")!
         levelProvider = LevelProvider(levelsPath: levelsPath)
         resultsProvider = ResultProvider(userDefaults: .standard)
@@ -26,7 +26,6 @@ class AppCoordinator: NSObject {
         sounds = SoundService()
         reminder = ReminderService()
         leaderboards = LeaderboardService()
-        super.init()
     }
     
     func start(with window: UIWindow) {

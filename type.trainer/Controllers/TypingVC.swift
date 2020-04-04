@@ -53,7 +53,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
         statsLabel.text = "0"
         secondsLabel.text = "0:00"
         levelTextView.becomeFirstResponder()
-        reloadViewModel()
+        setupViewModel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,7 +63,7 @@ class TypingVC: UIViewController, UITextViewDelegate {
     
     // MARK: - View Model Management
     
-    func reloadViewModel() {
+    func setupViewModel() {
         viewModel.onSessionStarted = { [weak self] in
             self?.secondsLabel.textColor = UIColor.tf_purple_text
         }
@@ -75,18 +75,17 @@ class TypingVC: UIViewController, UITextViewDelegate {
             self?.onLevelCompleted?(self!.viewModel)
         }
         completeButton.setTitle(viewModel.completeTitle, for: .normal)
-        statsLabel.text = viewModel.symbolsEnteredString()
+        statsLabel.text = viewModel.enteredCharsNumber
         levelTextView.viewModel = viewModel
         updateTextViewLayout()
     }
     
-    
     // MARK: - UITextViewDelegate
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let result = viewModel.process(input: text, in: range)
+        let result = viewModel.input(text, in: range)
         // show results
-        statsLabel.text = viewModel.symbolsEnteredString()
+        statsLabel.text = viewModel.enteredCharsNumber
         levelTextView.reloadViewModel()
         // respond to results
         if result == .impossible {
